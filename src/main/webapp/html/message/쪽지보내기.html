@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쪽지 보내기</title>
+    <link rel="stylesheet" href="../../resources/css/message/side-menu.css">
+    <link rel="stylesheet" href="../../resources/css/message/쪽지보내기-style.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <section class="entire">
+        <section class="left-side">
+            <ul class="list-group">
+                <p>쪽지</p>
+                <li> <a href="#">쪽지 보내기</a> </li>
+                <li> <a href="#">받은 쪽지함</a> </li>
+                <li> <a href="#">보낸 쪽지함</a> </li> 
+            </ul>
+        </section>
+    
+        <section class="right-side">
+    
+            <h1 class="name">쪽지 보내기</h1>
+            <form action="sendMessage-area" id="sendMessage-area">
+                <div class="search-area">
+                    <!-- form 내부 input 태그 값을 서버 또는 페이지로 전달 -->
+                    <form action="#" name="search-form">
+                        <!--  filedset: form 내부에서 input을 종류별로 묶는 용도로 많이 사용 -->
+                        <fieldset>
+                            <span>받는사람</span>
+                            <input type="search" id="receiver" autocomplete="off" placeholder="닉네임을 입력하세요">
+                            <button type="submit" id="search-btn" class="fa-solid fa-magnifying-glass"></button>
+                        </fieldset>
+                    </form>
+                </div>
+            </form>
+            
+    
+    
+    
+            <!-- <div id="top">
+                <span>받는사람</span>
+                <input type="search" id="receiver" autocomplete="off" placeholder="닉네임을 입력하세요">
+                <button type="submit" id="search-btn" class="fa-solid fa-magnifying-glass"></button>
+            </div> -->
+            <div id="middle">
+                <textarea name="" id="inputMessage" cols="70" rows="10"></textarea>
+            </div>
+            
+            <div id="bottom">
+                <div id="bottom2">
+                    <input type="checkbox">
+                    <span id="saveMessage">보낸 쪽지함에 저장</span>
+                </div>
+
+                <div id="buttons">
+                    <button type="submit" id="sendBtn" class="btns">보내기</button>
+                    <button type="submit" id="cancelBtn" class="btns">취소</button>
+                </div>
+            </div>
+    
+    
+        </section>
+
+    </section>
+    
+
+    <script src="https://kit.fontawesome.com/9de911222f.js" crossorigin="anonymous"></script>
+    <script src="js/sendingMessage.js"></script>
+</body>
+</html>
