@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>member-sql.xml</comment>
+<entry key="login">
+SELECT 머시기머시기 
+FROM MEMBER
+WHERE SECESSION_FL = 'N'
+AND MEMBER_ID = ?
+AND MEMBER_PW = ?
+</entry>
+
+</properties>

@@ -7,7 +7,7 @@
    <title>보낸 쪽지함</title>
    <link rel="stylesheet" href="">
    <link rel="stylesheet" href="../../resources/css/message/side-menu.css">
-   <link rel="stylesheet" href="../../resources/css/message/보낸쪽지함-style.css">
+   <link rel="stylesheet" href="../../resources/css/message/받은쪽지함-style.css">
 
 </head>
 <body>
@@ -40,7 +40,6 @@
                             <th id="sender">받은 사람</th>
                             <th>내용</th>
                             <th>날짜</th>
-                            <th>수신확인</th>
                         </tr>
                     </thead>
     
@@ -50,8 +49,7 @@
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td><a href="#">내용</a></td>
-                            <td>2022년 05월 01일</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
                         </tr>
                         <tr>
@@ -59,121 +57,55 @@
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td>내용</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
-                            <td>읽지않음</td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td>내용</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
-                            <td>읽지않음</td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td>내용</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
-                            <td>읽지않음</td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td>내용</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td>내용</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
-                            <td>읽지않음</td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="checkbox">
                             </td>
                             <td>성태킴</td>
-                            <td>내용</td>
+                            <td>바보입니까</td>
                             <td>2022년 05월 01일</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>성태킴</td>
-                            <td>내용</td>
-                            <td>2022년 05월 01일</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>성태킴</td>
-                            <td>내용</td>
-                            <td>2022년 05월 01일</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>성태킴</td>
-                            <td>내용</td>
-                            <td>2022년 05월 01일</td>
-                            <td></td>
                         </tr>
                     </tbody>
-                </table>
-            </div>
-
-            <div class="pagination-area">
-
-                <!-- 페이지네이션 a태그에 사용될 공통 주소를 저장한 변수 선언 -->
-                <c:set var="url" value="list?type=${param.type}&cp="/>
+                     
     
-    
-                <ul class="pagination">
-                    <!-- 첫 페이지로 이동 -->
-                    <li><a href="${url}1">&lt;&lt;</a></li>
-    
-                    <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="${url}${pagination.prevPage}">&lt;</a></li>
-    
-                    <!-- 범위가 정해진 일반 for문 사용 -->
-                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
-    
-                        <c:choose>
-                            <c:when test="${i == pagination.currentPage}">
-                                <li><a class="current">${i}</a></li>
-                            </c:when>
-    
-                            <c:otherwise>
-                                <li><a href="${url}${i}">${i}</a></li>        
-                            </c:otherwise>
-                        </c:choose>
-    
-                    </c:forEach>
                     
-                    <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="${url}${pagination.nextPage}">&gt;</a></li>
     
-                    <!-- 끝 페이지로 이동 -->
-                    <li><a href="${url}${pagination.maxPage}">&gt;&gt;</a></li>
-    
-                </ul>
+                </table>
             </div>
         </section>
         
