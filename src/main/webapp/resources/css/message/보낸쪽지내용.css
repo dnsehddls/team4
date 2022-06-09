@@ -1,0 +1,22 @@
+.entire{
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    border: 1px solid #ddd;
+}
+
+textarea{
+    resize: none;
+}
+
+.right-side>div{
+    padding: 10px 10px;
+    margin: 10px 10px;
+    font-size: 20px;
+}
+
+.btn-area > div > btn{
+    display: inline-block;
+
+
+}
