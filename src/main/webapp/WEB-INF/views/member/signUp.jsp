@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,8 +105,15 @@
         </form>
         <div class="line"></div>
     </section>
+    <!-- jQuery 라이브러리 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script src="../../resources/js/myPage/signUp.js"></script>
+    <!-- js -->
+    <script src="../../../resources/js/myPage/signUp.js"></script>
+    <script>
+        alert("${message}");
+    </script>
+    <c:remove var="message" scope="session"/>
         
 </body>
 </html>

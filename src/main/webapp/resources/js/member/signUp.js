@@ -157,7 +157,7 @@ const emailMessage = document.getElementById("emailMessage");
 
 memberEmail.addEventListener("input", function(){
 
-    if(memberEmail.value.length == 0){
+    if(memberEmail.value.length == 0){ // 입력되지 않은 경우
         emailMessage.innerText = "메일을 받을 수 있는 이메일을 입력해주세요.";
         emailMessage.classList.remove("confirm", "error");
         checkObj.memberEmail = false;
@@ -172,6 +172,31 @@ memberEmail.addEventListener("input", function(){
         emailMessage.classList.add("confirm");
         emailMessage.classList.remove("error");
         checkObj.memberEmail = true;
+
+        $.ajax({
+            url : "emailDupCheck",
+            data : {"memberEmail" : memberEmail.value},
+            type : "GET",
+            seccess : function(result){
+                if(result == 1){ // 중복O
+                    emailMessage.innerText = "이미 사용중인 이메일입니다.";
+                    emailMessage.classList.remove("confirm");
+                    emailMessage.classList.add("error");
+                    checkObj.memberEmail = false; 
+                }else{ // 중복 X
+                    emailMessage.innerText = "사용 가능한 이메일입니다.";
+                    emailMessage.classList.add("confirm");
+                    emailMessage.classList.remove("error");
+                    checkObj.memberEmail = true; 
+                }
+            },
+            error : function(){
+                console.log("에러발생");
+            }
+        });
+
+
+
     }else{ // 유효하지 않은 경우
         emailMessage.innerText = "이메일 형식이 유효하지 않습니다.";
         emailMessage.classList.add("error");
