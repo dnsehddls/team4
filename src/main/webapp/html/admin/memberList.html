@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원목록 관리</title>
+
+    <link rel="stylesheet" href="../resources/css/main-style.css">
+    
+    <link rel="stylesheet" href="../resources/css/memberList.css">
+
+</head>
+<body>
+
+    <main>
+        <header>
+            <!-- 클릭 시 메인페이로 이동하는 로고 -->
+            <section>
+                <a href="#">
+                    <img src="../resources/images/main_logo.jpg" id="main-logo">
+                </a>
+            </section>
+             
+            <section>
+                <img src="../resources/images/banner_logo.jpg" id="banner-logo">
+            </section>
+                
+
+            <section></section>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#">공지사항</a>                
+                <li><a href="#">인기 게시판</a>                
+                <li><a href="#">운동 게시판</a>                
+                <li><a href="#">자유 게시판</a>                
+                <li><a href="#">정모 게시판</a>                
+                <li><a href="#">관리자 페이지</a>                
+            </ul>
+        </nav>
+
+        <section class="adminPage-content">
+            <section class="left-side">
+            
+                <ul class="list-group">
+                    <li><a href="#">프로필</a></li>
+                    <li><a href="#">관리자 정보</a></li>
+                    <li><a href="#">비밀번호 변경</a></li>
+                    <li><a href="#">회원 목록 관리</a></li>
+                    <li><a href="#">신고된 게시글</a></li>
+                    <li><a href="#">회원 탈퇴</a></li>
+                </ul>
+            </section>
+
+            <section class="memberList">
+                <section class="member-list">
+
+                    <h1 class="member-name">회원목록 조회</h1>
+        
+                    <div class="list-wrapper">
+                        <table class="list-table">                   
+                            <thead>
+                                <tr>
+                                    <th>회원번호</th>
+                                    <th>아이디</th>
+                                    <th>가입날짜</th>
+                                    <th>게시글 작성 수</th>
+                                    <th>탈퇴여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <a href="#">user01@kh.or.kr</a>
+                                    </td>
+                                    <td>2022-5-23</td>
+                                    <td>10</td>
+                                    <td>N</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <a href="#">user01@kh.or.kr</a>
+                                    </td>
+                                    <td>2022-5-23</td>
+                                    <td>10</td>
+                                    <td>N</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <a href="#">user01@kh.or.kr</a>
+                                    </td>
+                                    <td>2022-5-23</td>
+                                    <td>10</td>
+                                    <td>N</td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+        
+        
+                    <div class="pagination-area">
+                        <ul class="pagination">
+                            <li><a href="#">&lt;&lt;</a></li>
+                            <li><a href="#">&lt;</a></li>
+                            
+                            <li><a class="current">1</a></li>
+        
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>       
+        
+                            <li><a href="#">&gt;</a></li>
+                            <li><a href="#">&gt;&gt;</a></li>
+                        </ul>
+                    </div>
+        
+                    <form action="#" method="get" id="memberSearch">
+                        <select name="key">
+                            <option value="id">아이디</option>
+                            <option value="no">회원번호</option>
+                            <option value="joinDate">가입 날짜</option>
+                            <option value="secession">탈퇴여부</option>
+                        </select>
+        
+                        <input type="text" name="query" placeholder="검색어를 입력해주세요.">
+        
+                        <button>검색</button>
+                    </form>
+            </section>
+
+        </section>
+    </main>
+    
+    <footer>
+        <p>Copyright © KH Information Educational Institute A-Class Group4 UndongIn</p>
+
+        <article>
+            <a href="#">프로젝트 소개</a>
+            <span>|</span>
+
+            <a href="#">이용약관</a>
+            <span>|</span>
+
+            <a href="#">개인정보처리방침</a>
+            <span>|</span>
+
+            <a href="#">고객센터</a>
+        </article>
+    </footer>
+
+</body>
+</html>
