@@ -27,7 +27,6 @@ public class MemberService {
 		return result;
 	}
 	
-
 	/** 회원 목록 조회 Service
 	 * @return list
 	 * @throws Exception
@@ -114,7 +113,6 @@ public class MemberService {
 		
 		return result;
 	}
-	
 	
 	/**
 	 * 회원가입 Service
@@ -229,7 +227,5 @@ public class MemberService {
 		
 		return result;
 	}
-
-	
 
 }

@@ -12,8 +12,9 @@ import javax.servlet.http.HttpSession;
 import Semi.member.model.service.MemberService;
 import Semi.member.model.vo.Member;
 
+
 @WebServlet("/member/signUp")
-public class SignUpServlet extends HttpServlet{
+public class signUpServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,5 +62,5 @@ public class SignUpServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-
+		
 }

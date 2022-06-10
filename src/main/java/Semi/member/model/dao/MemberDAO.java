@@ -22,15 +22,13 @@ public class MemberDAO {
 	
 	private Properties prop;
 	
-	
 	public MemberDAO() {
 		try {
-			
 			prop = new Properties();
 			
-			String filePath = MemberDAO.class.getResource("/Semi/community/sql/member-sql.xml").getPath();  
+			String filePath = MemberDAO.class.getResource
+					("/Semi/community/sql/member-sql.xml").getPath();  
 			
-
 			prop.loadFromXML(new FileInputStream(filePath));
 			
 		}catch(Exception e) {
@@ -280,38 +278,6 @@ public class MemberDAO {
 	      
 	      return result;
 	}
-	
-	
-
-	public Member login(Connection conn, Member user) throws Exception {
-		Member result = null;
-		try {
-			pstmt = conn.prepareStatement(prop.getProperty("login"));
-			pstmt.setString(1, user.getMemberId());
-			pstmt.setString(2, user.getMemberId());
-			rs = pstmt.executeQuery();
-			
-			//vo에 데이터 저장할 애들
-			if(rs.next()) {
-				result = new Member();
-				result.setMemberNo(rs.getInt(1));
-				result.setMemberId(rs.getString(2));
-				result.setMemberEmail(rs.getString(3));
-				result.setMemberName(rs.getString(4));
-				result.setMemberTel(rs.getString(5));
-				result.setMemberProfile(rs.getString(6));
-				result.setGrade(rs.getString(7));
-				result.setPoint(rs.getInt(8));
-				result.setRegistDate(rs.getString(9));
-			}
-			
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return result;
-	}
-
 
 	/** 회원 목록 조회 DAO
 	 * @param conn
@@ -484,7 +450,6 @@ public class MemberDAO {
 		
 		return result;
 	}
-
 
 
 

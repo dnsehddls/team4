@@ -30,7 +30,6 @@ public class IDDupCheckServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-
 	
 	
 
