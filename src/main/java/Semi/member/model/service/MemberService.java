@@ -1,8 +1,6 @@
 package Semi.member.model.service;
 
 import static Semi.common.JDBCTemplate.*;
-<<<<<<< HEAD
-=======
 
 import java.sql.Connection;
 
@@ -13,6 +11,19 @@ public class MemberService {
 	
 	private MemberDAO dao = new MemberDAO();
 
+	/** 로그인 
+	 * @param user
+	 * @return 
+	 * @throws Exception
+	 */
+	public Member login(Member user) throws Exception{
+		Connection conn = getConnection();
+		Member result = dao.login(conn,user);
+		close(conn);
+		return result;
+	}
+	
+	
 	/**
 	 * 회원가입 Service
 	 * @param mem
@@ -92,7 +103,7 @@ public class MemberService {
 	 */
 	public int insertCertification(String inputEmail, String cNumber) throws Exception{
 		
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		// 1) 입력한 이메일과 일치하는 값이 있으면 수정 (UPDATE)
 		int result = dao.updateCertification(conn, inputEmail, cNumber);
@@ -128,23 +139,5 @@ Connection conn = getConnection();
 	}
 
 	
->>>>>>> origin/BSH
 
-import java.sql.Connection;
-
-import Semi.member.model.dao.MemberDAO;
-import Semi.member.model.vo.Member;
-
-public class MemberService {
-	
-	private MemberDAO dao = new MemberDAO();
-
-	public Member login(Member user) throws Exception{
-		Connection conn = getConnection();
-		Member result = dao.login(conn,user);
-		close(conn);
-		return result;
-	}
-	
-	
 }
