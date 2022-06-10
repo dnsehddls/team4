@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Semi.member.model.service.MemberService;
 
-@WebServlet("/member/emailDupCheck")
+@WebServlet("/member/IDDupCheck")
 public class IDDupCheckServlet extends HttpServlet{
 	
 	@Override
@@ -30,6 +30,7 @@ public class IDDupCheckServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
+
 	
 	
 
