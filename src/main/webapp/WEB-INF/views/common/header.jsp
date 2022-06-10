@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
 <!DOCTYPE html>
     
     <header>
         <section class="logo">
-            <a href="#"><img src="resources/images/updatelogo.jpg" alt="logo" class="logo"></a>
+            <a href="${contextPath}"><img src="${contextPath}/resources/images/updatelogo.jpg" alt="logo" class="logo"></a>
         </section>
         <section class="main-title">
-        	<a href="#"><img src="resources/images/title-banner.jpg" alt="banner" id="title-banner"></a>
+        	<a href="${contextPath}"><img src="${contextPath}/resources/images/title-banner.jpg" alt="banner" id="title-banner"></a>
         </section>
     </header>
 
@@ -23,8 +24,8 @@
         </div>
         <div>
             <img src="" alt="등급이미지">
-            <a href="#"><img src="resources/images/letter-removebg-preview_negative.png" alt=""></a>
-            <a href="#"><img src="resources/images/pngwing.com.png" alt="" id="people"></a>
+            <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
+            <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
             <input type="text" name="search-area" id="search" >
             <button type="button" class="fa-solid fa-magnifying-glass"></button>
         </div>

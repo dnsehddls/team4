@@ -1,4 +1,5 @@
 *{box-sizing:border-box}
+
 html input,button{border: none;}
 @font-face {
     font-family: '수성돋움체';
@@ -12,7 +13,7 @@ html input,button{border: none;}
 body{
     padding-left: 65px;
     padding-right: 65px;
-    width: 1440px;
+    width: 1600px;
 }
 header{
     display: flex;
@@ -196,13 +197,21 @@ nav>div:last-child>button:hover{
     width: 100px;
 }
 
-.announcement>div:last-child>a{
+.announcement>div:last-child>a>span{
     line-height: 70px;
     width: 60%;
     text-align: center;
     font-size: 22px;
     font-family: '수성돋움체';
 }   
+
+.announcement>div>div{
+    line-height: 70px;
+    width: 60%;
+    text-align: center;
+    font-size: 22px;
+    font-family: '수성돋움체';
+}
 
 
 
@@ -213,7 +222,6 @@ nav>div:last-child>button:hover{
     padding: 0;
 }
 .hot-board>div:first-child{
-    font-family: '잘난체';
     color:white;    
     background-color: #f1a40c;
     padding: 12px 5px 12px;
@@ -240,7 +248,19 @@ nav>div:last-child>button:hover{
     font-family: '수성돋움체';
     font-size: 18px;
 }
-
+.hot-board>div:last-child{
+    display: flex;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+.hot-board>div:last-child>div{
+    line-height: 70px;
+    width: 60%;
+    text-align: center;
+    font-size: 22px;
+    font-family: '수성돋움체';
+}
 
 
 .new-board,.new-board *{
@@ -249,7 +269,6 @@ nav>div:last-child>button:hover{
     padding: 0;
 }
 .new-board>div:first-child{
-    font-family: '잘난체';
     color:white;    
     background-color: #f1a40c;
     padding: 12px 5px 12px;
@@ -276,6 +295,19 @@ nav>div:last-child>button:hover{
     font-family: '수성돋움체';
     font-size: 18px;
 }
+.new-board>div:last-child{
+    display: flex;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+.new-board>div:last-child>div{
+    line-height: 70px;
+    width: 60%;
+    text-align: center;
+    font-size: 22px;
+    font-family: '수성돋움체';
+}
 
 
 
@@ -285,7 +317,6 @@ nav>div:last-child>button:hover{
     padding: 0;
 }
 .exercise-board>div:first-child{
-    font-family: '잘난체';
     color:white;    
     background-color: #f1a40c;
     padding: 12px 5px 12px;
@@ -312,7 +343,19 @@ nav>div:last-child>button:hover{
     font-family: '수성돋움체';
     font-size: 18px;
 }
-
+.exercise-board>div:last-child{
+    display: flex;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+.exercise-board>div:last-child>div{
+    line-height: 70px;
+    width: 60%;
+    text-align: center;
+    font-size: 22px;
+    font-family: '수성돋움체';
+}
 
 
 .free-board,.free-board *{
@@ -321,7 +364,6 @@ nav>div:last-child>button:hover{
     padding: 0;
 }
 .free-board>div:first-child{
-    font-family: '잘난체';
     color:white;    
     background-color: #f1a40c;
     padding: 12px 5px 12px;
@@ -348,6 +390,20 @@ nav>div:last-child>button:hover{
     font-family: '수성돋움체';
     font-size: 18px;
 }
+.free-board>div:last-child{
+    display: flex;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+.free-board>div:last-child>div{
+    line-height: 70px;
+    width: 60%;
+    text-align: center;
+    font-size: 22px;
+    font-family: '수성돋움체';
+}
+
 .hot-board,.exercise-board{border-right: 1px solid #ccc;}
 
 .met-board{
@@ -382,6 +438,19 @@ nav>div:last-child>button:hover{
 .met-board>div:last-child>ul>li>a{
     font-family: '수성돋움체';
     font-size: 16px;
+}
+.met-board>div:last-child{
+    display: flex;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+.met-board>div:last-child>div{
+    line-height: 70px;
+    width: 60%;
+    text-align: center;
+    font-size: 22px;
+    font-family: '수성돋움체';
 }
 
 .container{

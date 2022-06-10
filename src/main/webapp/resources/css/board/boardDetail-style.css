@@ -1,0 +1,134 @@
+.board-detail{
+    width: 1000px;
+    min-height: 700px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+
+.title-box{
+    background-color: #eaeaea;
+    border-top: 3px solid #CCC;
+}
+
+.board-title{
+    margin : 0;
+    padding: 20px 0;
+    padding-left: 20px;
+    font-size: 2em;
+    border-bottom : 3px solid #ccc;
+}
+
+.board-title > span{
+    font-size: 16px;
+    color: gray;
+}
+
+
+.board-header{
+    padding: 20px 0;
+    border-bottom : 3px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.board-writer{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+
+.board-writer > img{
+    width: 40px;
+    height: 40px;
+}
+
+
+.board-writer > span{
+    font-weight: bold;
+    margin-left : 10px;
+}
+
+
+.board-info > span {
+    margin-right: 30px;
+}
+
+.board-writeDate > span {
+    font-weight: bold;
+}
+
+
+.img-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.board-content{
+    padding: 30px 0;
+    margin: 30px 0;
+    margin-bottom: 5px;
+    border-bottom : 2px solid #ccc;
+
+    font-size: 18px;
+}
+
+.board-sub {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid#CCC;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.board-sub a{
+    text-decoration: none;
+}
+
+.sub-location > a{
+    color: #68b4e7;
+    font-weight: bold;
+}
+
+.board-sub p {
+    margin: 0;
+}
+
+.sub-scrap > a{
+    color: #000;
+    padding-right: 7px;
+}
+
+.sub-declare > a{
+    color: red;
+}
+
+
+.board-btn-area{
+    text-align: right;
+    /* border-bottom: 2px solid #ccc; */
+    padding: 15px 0;
+}
+
+.board-btn-area button{
+    width: 80px;
+    height: 30px;
+
+    font-weight: bold;
+    border: 0;
+    background-color: #FEC85C;
+    color : white;
+
+    cursor: pointer;
+}
+
+.board-btn-area button:hover{
+    background-color: white;
+    color : #FEC85C;
+    border: 2px solid #FEC85C;
+}
