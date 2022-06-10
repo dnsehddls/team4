@@ -21,6 +21,6 @@ public class Member {
 	private int point;
 	private String grade;
 	private String registDate;
-	private String secession_Flag;
+	private char secessionFlag;
 	
 }
