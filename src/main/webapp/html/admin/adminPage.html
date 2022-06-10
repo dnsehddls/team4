@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+
+    <link rel="stylesheet" href="../resources/css/adminPage.css">
+
+    <link rel="stylesheet" href="../resources/css/main-style.css">
+</head>
+<body>
+
+    <main>
+        <header>
+            <!-- 클릭 시 메인페이로 이동하는 로고 -->
+            <section>
+                <a href="#">
+                    <img src="../resources/images/main_logo.jpg" id="main-logo">
+                </a>
+            </section>
+             
+            <section>
+                <img src="../resources/images/banner_logo.jpg" id="banner-logo">
+            </section>
+                
+
+            <section></section>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#">공지사항</a>                
+                <li><a href="#">인기 게시판</a>                
+                <li><a href="#">운동 게시판</a>                
+                <li><a href="#">자유 게시판</a>                
+                <li><a href="#">정모 게시판</a>                
+                <li><a href="#">관리자 페이지</a>                
+            </ul>
+        </nav>
+
+        <section class="adminPage-content">
+            
+            <!-- 왼쪽 사이드 메뉴 -->
+            <section class="left-side">
+            
+                <ul class="list-group">
+                    <li><a href="#">프로필</a></li>
+                    <li><a href="#">관리자 정보</a></li>
+                    <li><a href="#">비밀번호 변경</a></li>
+                    <li><a href="#">회원 목록 관리</a></li>
+                    <li><a href="#">신고된 게시글</a></li>
+                    <li><a href="#">회원 탈퇴</a></li>
+                </ul>
+            </section>
+
+            <section class="adminPage-main">
+
+                <h1 class="adminPage-title">관리자 정보</h1>
+                <span class="adminPage-explanation">원하는 관리자 정보를 수정할 수 있습니다</span>
+
+                <form action="#" method="POST" name="profile-form">
+
+                    <div class="adminPage-row">
+                        <label>닉네임</label>
+                        <input type="text" name="memberNickname" value="로그인 회원 별명" maxlength="10">
+                    </div>
+
+                    <div class="adminPage-row">
+                        <label>전화번호</label>
+                        <input type="text" name="memberTel" value="0101234" maxlength="11">
+                    </div>
+
+                    <!-- 주소 -->
+                    <div class="adminPage-row info-title">
+                        <span>주소</span>
+                    </div>
+
+                    <div class="adminPage-row info-address">
+                        <input type="text" name="memberAddress" value="우편번호" maxlength="6">
+
+                        <button type="button" id="info-address-btn">검색</button>
+                    </div>
+
+                    <div class="adminPage-row info-address">
+                        <input type="text" name="memberAddress" value="도로명주소">
+                    </div>
+
+                    <div class="adminPage-row info-address">
+                        <input type="text" name="memberAddress" value="상세주소">
+                    </div>
+
+                    <button id="info-update-btn">수정하기</button>
+
+                </form>
+
+            </section>           
+
+        </section>
+
+        
+    </main>
+
+
+
+    <footer>
+        <p>Copyright © KH Information Educational Institute A-Class Group4 UndongIn</p>
+
+        <article>
+            <a href="#">프로젝트 소개</a>
+            <span>|</span>
+
+            <a href="#">이용약관</a>
+            <span>|</span>
+
+            <a href="#">개인정보처리방침</a>
+            <span>|</span>
+
+            <a href="#">고객센터</a>
+        </article>
+    </footer>
+
+    
+</body>
+</html>
