@@ -41,7 +41,7 @@ public class BoardDAO {
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setInt(1, 0);
 //			rs = pstmt.executeQuery();
-//			ê´€ë¦¬ì í˜ì´ì§€ì— ê¸°ëŠ¥ì„ ì¶”ê°€í•  ì‹œ pstmt
+//			°ü¸®ÀÚ ÆäÀÌÁö¿¡ ±â´ÉÀ» Ãß°¡ÇÒ ½Ã pstmt
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
