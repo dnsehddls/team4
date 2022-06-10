@@ -1,4 +1,5 @@
 *{box-sizing:border-box}
+
 html input,button{border: none;}
 @font-face {
     font-family: '수성돋움체';
@@ -12,7 +13,7 @@ html input,button{border: none;}
 body{
     padding-left: 65px;
     padding-right: 65px;
-    width: 1440px;
+    width: 1600px;
 }
 header{
     display: flex;
