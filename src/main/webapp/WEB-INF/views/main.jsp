@@ -14,7 +14,6 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title> undongin </title>
-   <link rel="stylesheet" href="resources/css/main-style.css">
    <script src="https://kit.fontawesome.com/381a5c9f75.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -161,7 +160,7 @@
                             <button>로그인</button>
                         </form>
                         <div>
-                            <a href="user/join">회원가입</a>
+                            <a href="member/signUp">회원가입</a>
                             <a href="user/accountQuery">아이디/비밀번호 찾기</a>
                         </div>
                     </c:if>

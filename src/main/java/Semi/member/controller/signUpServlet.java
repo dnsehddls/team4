@@ -56,18 +56,11 @@ public class signUpServlet extends HttpServlet{
 				session.setAttribute("message", "회원 가입 성공!");
 			}else { // 실패
 				session.setAttribute("message", "회원 가입 실패");
-				
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 }

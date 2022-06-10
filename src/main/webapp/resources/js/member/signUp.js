@@ -1,4 +1,10 @@
 // 유효성 검사 여부를 기록할 객체 생성
+document.getElementById("cancel").addEventListener("click",function(){
+    if(confirm("가입을 취소하시겠습니까?")){
+        return location.href = "http://localhost:8080/team4";
+    }
+});
+
 const checkObj = {
     "memberId"       : false,
     "memberPw"       : false,
@@ -10,7 +16,7 @@ const checkObj = {
 };
 
 // 아이디
-const memberId = document.getElementById("memberId)");
+const memberId = document.getElementById("memberId");
 const idMessage = document.getElementById("idMessage");
 const idBtn = document.getElementById("idBtn");
 
@@ -52,7 +58,6 @@ memberId.addEventListener("input", function(){
                     console.log("에러 발생");
                 }
             });
-
         });
         
     }else{
@@ -175,13 +180,13 @@ memberNickname.addEventListener("input", function(){
 
 
 // 전화번호
-const memberTel = document.getElementById("memberTel");
+const memberTel = document.getElementById("memberHp");
 const telMessage = document.getElementById("telMessage");
 
-memberTel.addEventListener("input", function(){
+memberHp.addEventListener("input", function(){
 
     // 전화번호 입력X 경우
-    if(memberTel.value.length == 0){
+    if(memberHp.value.length == 0){
         telMessage.innerText = "전화번호를 입력해주세요.(-제외)";
         telMessage.classList.remove("confirm", "error");
         checkObj.memberTel = false;
@@ -191,7 +196,7 @@ memberTel.addEventListener("input", function(){
     // 전화번호 유효성 검사
     const regExp = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/; // 전화번호 정규식
     
-    if(regExp.text(memberTel.value)){ // 유효한 경우
+    if(regExp.text(memberHp.value)){ // 유효한 경우
         telMessage.innerText = "유효한 전화번호 형식입니다.";
         telMessage.classList.add("confirm");
         telMessage.classList.remove("error");
@@ -278,7 +283,6 @@ function signUpValidate(){
             document.getElementById(key).focus();
             return false; // form태그 기본 이벤트 제거
         }
-
     }
     return true; // false결과가 없을 때 form태그 기본이벤트 수행
 }
@@ -396,3 +400,4 @@ cBtn.addEventListener("click", function(){
         alert("인증번호 받기 버튼을 먼저 클릭해주세요.");
     }
 });
+
