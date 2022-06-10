@@ -22,5 +22,8 @@ public class Member {
 	private String grade;
 	private String registDate;
 	private char secessionFlag;
+	private String profileImage;
+	private int gradeCode;
+	private String regDate;
 	
 }
