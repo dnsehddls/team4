@@ -28,13 +28,13 @@
                 <span id="box">
                     <span class="dept02">   
                         <li id="sendMessage">
-                            <a href="">쪽지 보내기</a>
+                            <a href="#">쪽지 보내기</a>
                         </li>
                         <li id="Message1">
-                            <a href="">받은 쪽지함</a>
+                            <a href="#">받은 쪽지함</a>
                         </li>
                         <li id="Message2">
-                            <a href="">보낸 쪽지함</a>
+                            <a href="#">보낸 쪽지함</a>
                         </li>
                     </span>
                 </span>
@@ -42,44 +42,5 @@
         </div>
     </section>
 
-
-    <script>
-        let popup;
-        const openPopupBtn = document.getElementById("sendMessage");
-        openPopupBtn.addEventListener("click", () => {
-            if(!popup || popup.closed){
-                const url = "http://192.168.219.100:5500/%EC%AA%BD%EC%A7%80%EB%B3%B4%EB%82%B4%EA%B8%B0.html";
-                const windowName = "쪽지보내기";
-                const options = "width=900,height=600,scrollbars=yes";
-                popup = window.open(url,windowName,options);
-            }else{
-                popup.focus();
-            }
-        });
-
-        const openPopupBtn1 = document.getElementById("Message1");
-        openPopupBtn1.addEventListener("click", () => {
-            if(!popup || popup.closed){
-                const url = "http://192.168.219.100:5500/%EB%B0%9B%EC%9D%80%EC%AA%BD%EC%A7%80%ED%95%A8.html";
-                const windowName = "받은쪽지함";
-                const options = "width=1100,height=600,scrollbars=yes";
-                popup = window.open(url,windowName,options);
-            }else{
-                popup.focus();
-            }
-        });
-
-        const openPopupBtn2 = document.getElementById("Message2");
-        openPopupBtn2.addEventListener("click", () => {
-            if(!popup || popup.closed){
-                const url = "http://192.168.219.100:5500/%EB%B3%B4%EB%82%B8%EC%AA%BD%EC%A7%80%ED%95%A8.html";
-                const windowName = "보낸쪽지함";
-                const options = "width=1100,height=600,scrollbars=yes";
-                popup = window.open(url,windowName,options);
-            }else{
-                popup.focus();
-            }
-        });
-    </script>
 </body>
 </html>
