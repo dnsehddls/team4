@@ -26,7 +26,7 @@
                     <th>아이디</th>
                     <td>
                         <input type="text" name="memberId" id="memberId"  placeholder="아이디를 입력해 주세요" autocomplete="off">
-                        <button class="member_btn" type="button" onclick="">중복확인</button>
+                        <button class="member_btn" id="idBtn" type="button" onclick="">중복확인</button>
                         <br><span class="signUp-message" id="idMessage">영어소문자,숫자,특수문자(-,_) 4~10글자 사이로 작성해주세요.</span>
                     </td>
                 </tr>
@@ -56,7 +56,7 @@
                     <th>닉네임</th>
                     <td>
                         <input type="text" name="memberNickname" value="" id="memberNickname" placeholder="닉네임(0글자 이하)을 입력해 주세요">
-                        <button class="member_btn" type="button" onclick="">중복확인</button>
+                        <button class="member_btn" id="nicknameBtn" type="button" onclick="">중복확인</button>
                         <br><span class="signUp-message" id="nicknameMessage">영어/숫자/한글 2~10글자 사이로 작성해주세요.</span>
                     </td>
                 </tr>
@@ -73,7 +73,7 @@
                     <th>이메일</th>
                     <td>
                         <input type="email" name="memberEmail" id="memberEmail" placeholder="이메일을 입력해 주세요">
-                        <button class="member_btn" type="button" onclick="">인증번호 받기</button>
+                        <button class="member_btn" id="sendBtn" type="button" onclick="">인증번호 받기</button>
                         <br><span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
                     </td>
                 </tr>
@@ -81,8 +81,9 @@
                 <tr>
                     <th>인증번호</th>
                     <td>
-                        <input type="text" name="emailCheck" id="emailCheck" placeholder="인증번호를 입력해 주세요">
-                        <button class="member_btn" type="button" onclick="">인증하기</button>
+                        <input type="text" id="cNumber" placeholder="인증번호를 입력해 주세요">
+                        <button class="member_btn" type="button" id="cBtn">인증하기</button>
+                        <br><span class="signUp-message" id="cMessage"></span>
                     </td>
                 </tr>
                 
