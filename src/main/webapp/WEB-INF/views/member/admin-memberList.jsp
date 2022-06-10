@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="memberList" value="${map.memberList}"/>
+<c:set var="pagination" value="${map.pagination}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +24,7 @@
 
         <section class="adminPage-content">
            
-            <jsp:inclue page="/WEB-INF/views/memeber/admin-sideMenu.jsp"/>
+            <jsp:include page="/WEB-INF/views/member/admin-sideMenu.jsp"/>
 
             <section class="memberList">
                 <section class="member-list">
@@ -35,13 +38,12 @@
                                     <th>회원번호</th>
                                     <th>아이디</th>
                                     <th>가입날짜</th>
-                                    <th>게시글 작성 수</th>
                                     <th>탈퇴여부</th>
                                 </tr>
                             </thead>
 
                             <tbody id="memberList">
-                                <!-- <c:choose>
+                                <c:choose>
                                     <c:when test="${empty memberList}">
                                         <tr>
                                             <th colspan="5">회원 목록이 존재하지 않습니다</th>
@@ -51,17 +53,16 @@
                                     <c:otherwise>
                                         <c:forEach var="member" items="${memberList}">
                                             <tr>
-                                                <td>${member.memberNo}</td>
+                                                <td>${member.memberNo}</td>    
                                                 <td>
                                                     <a href="#">${member.memberId}</a>
                                                 </td>
-                                                <td>${member.enrollDate}</td>
-                                                <td>${member.게시글 작성 수}</td>
-                                                <td>${memeber.secessionFl}</td>
+                                                <td>${member.enrollDate}</td>            
+                                                <td>${member.secessionFl}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:otherwise>
-                                </c:choose> -->
+                                </c:choose>
                             </tbody>
 
                         </table>
@@ -69,25 +70,46 @@
         
         
                     <div class="pagination-area">
+
+                        <c:set var="url" value="list?cp="/>
                         <ul class="pagination">
-                            <li><a href="#">&lt;&lt;</a></li>
-                            <li><a href="#">&lt;</a></li>
+                            <!-- 첫 페이지로 이동 -->
+                            <li><a href="${url}1${sURL}">&lt;&lt;</a></li>
+        
+                            <!-- 이전 목록 마지막 번호로 이동 -->
+                            <li><a href="${url}${pagination.prevPage}${sURL}">&lt;</a></li>
                             
-                            <li><a class="current">1</a></li>
         
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>       
+                            <!-- 범위가 정해진 일반 for문 사용 -->
+                            <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
         
-                            <li><a href="#">&gt;</a></li>
-                            <li><a href="#">&gt;&gt;</a></li>
+                                <c:choose>
+                                    <c:when test="${i == pagination.currentPage}">
+                                        <li><a class="current">${i}</a></li>
+                                    </c:when>
+        
+                                    <c:otherwise>
+                                        <li><a href="${url}${i}${sURL}">${i}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+        
+                            </c:forEach>
+        
+                            <li><a href="${url}${pagination.nextPage}${sURL}">&gt;</a></li>
+                            <li><a href="${url}${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
                         </ul>
                     </div>
+
+                    <form action="selectOne" method="get">
+
+                        <div id="memberSearch">
+                            <input type="text" name="query" id="in1" placeholder="이메일을 입력해주세요.">
         
-                    <div id="memberSearch">
-                        <input type="text" name="query" id="in1" placeholder="이메일을 입력해주세요.">
-    
-                         <button id="select1">검색</button>
-                    </div>
+                             <button id="select1">검색</button>
+                        </div>
+
+                    </form>
+        
             </section>
 
         </section>

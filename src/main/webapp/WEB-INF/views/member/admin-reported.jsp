@@ -22,7 +22,7 @@
         <section class="adminPage-content">
 
 
-            <jsp:inclue page="/WEB-INF/views/memeber/admin-sideMenu.jsp"/>
+            <jsp:include page="/WEB-INF/views/member/admin-sideMenu.jsp"/>
 
             <section class="memberList">
                 <section class="member-list">

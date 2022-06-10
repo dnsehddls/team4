@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import Semi.member.model.service.AdminService;
 import Semi.member.model.service.MemberService;
 import Semi.member.model.vo.Member;
 
@@ -27,7 +28,7 @@ public class adminController extends HttpServlet {
 		String contextPath = req.getContextPath();
 		String command = uri.substring((contextPath + "/admin/").length());
 		
-		MemberService service = new MemberService();
+		AdminService service = new AdminService();
 		
 		try {
 			
@@ -49,8 +50,6 @@ public class adminController extends HttpServlet {
 	    		
 	    		map = service.selectAll(cp);
 	    		
-	    		new Gson().toJson(map, resp.getWriter());
-	    		
 	    		req.setAttribute("map", map);
 	    		
 	    		String path = "/WEB-INF/views/member/memberList.jsp";
@@ -68,7 +67,13 @@ public class adminController extends HttpServlet {
 	    		
 	    		Member member = service.selectOne(memberEmail);
 	    		
-	    		new Gson().toJson(member, resp.getWriter());
+	    		req.setAttribute("member", member);
+	    		
+	    		String path = "/WEB-INF/views/member/admin-memberList.jsp";
+	    		
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp);
 	    		
 	    	}
 	    	
