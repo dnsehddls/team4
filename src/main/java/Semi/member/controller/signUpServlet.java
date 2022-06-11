@@ -37,8 +37,8 @@ public class signUpServlet extends HttpServlet{
 		
 		Member mem = new Member();
 		
-		mem.setMemberID(memberId);
-		mem.setMemberPW(memberPw);
+		mem.setMemberId(memberId);
+		mem.setMemberPw(memberPw);
 		mem.setMemberName(memberName);
 		mem.setMemberNickname(memberNickname);
 		mem.setMemberTel(memberTel);

@@ -32,8 +32,8 @@ public class MainRequestController extends HttpServlet{
 		    	String id = req.getParameter("ID");
 		    	String pw = req.getParameter("PW");
 		    	Member member = new Member();
-		    	member.setMemberID(id);
-		    	member.setMemberPW(pw);
+		    	member.setMemberId(id);
+		    	member.setMemberPw(pw);
 		    	
 		    	HttpSession session = req.getSession();
 		    	
