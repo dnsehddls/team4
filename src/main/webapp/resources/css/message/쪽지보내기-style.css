@@ -1,0 +1,96 @@
+.name{
+    margin: 0;
+    padding: 20px 20px;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.right-side{
+    width: 60%;
+    display: inline-block;
+}
+
+/* .entire{
+    position: fixed;
+    top: 10;
+    left:50;
+    right: 50;
+} */
+
+.entire{
+    width: 1000px;
+    height: 500px;
+    border: 1px solid #ddd;
+    display: flex;
+}
+
+
+
+#sendMessage-area{
+    width: 100%;
+    margin-top: 10px;
+}
+
+#receiver{
+    width: 80%;
+    height: 30px;
+   
+}
+
+#inputMessage{
+    resize: none;
+    width: 100%;
+}
+
+fieldset{
+    padding: 0;
+    margin-bottom: 5px;
+    border: none;
+    font-weight: bold;
+    
+}
+
+fieldset>span{
+    font-size: 14px;
+}
+
+#search-btn{
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #FEC85C;
+    background-color: white;
+}
+
+#bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+#bottom2 > input{
+    cursor: pointer;
+    width: 20px;
+    height: 15px;
+}
+
+#buttons{
+    width: 20%;
+    height: 30px;
+    display: flex;
+}
+
+.btns{
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid #FEC85C;
+    border-radius: 5px;
+}
+
+
+.btns:hover{
+    color: white;
+    background-color: #FEC85C;
+}

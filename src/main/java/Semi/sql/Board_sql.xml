@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>board-sql.xml</comment>
+<entry key="aBoard">
+SELECT * FROM
+(
+    SELECT ROWNUM RNUM, D.* FROM (
+        SELECT BOARD_NO,BOARD_TITLE,
+              (SELECT COUNT(*) FROM REPLY B
+               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+              (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
+               MEMBER_NICK
+               ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
+        FROM BOARD A
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_CD = 1
+        ORDER BY CREATE_DT DESC
+    )D
+)
+WHERE RNUM BETWEEN 1 AND 5
+</entry>
+
+<entry key="hotBoard">
+SELECT * FROM
+(
+    SELECT ROWNUM RNUM, D.* FROM (
+        SELECT BOARD_NO,BOARD_TITLE,
+              (SELECT COUNT(*) FROM REPLY B
+               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+              (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
+               MEMBER_NICK,BOARD_CD
+               ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
+        FROM BOARD A
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE  (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) >= 5
+        ORDER BY CREATE_DT DESC
+    )D
+)
+WHERE RNUM BETWEEN 1 AND 7
+</entry>
+
+<entry key="newBoard">
+SELECT * FROM
+(
+    SELECT ROWNUM RNUM, D.* FROM (
+        SELECT BOARD_NO,BOARD_TITLE,
+              (SELECT COUNT(*) FROM REPLY B
+               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+              (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
+               MEMBER_NICK
+               ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
+        FROM BOARD A
+        JOIN MEMBER USING(MEMBER_NO)
+        ORDER BY CREATE_DT DESC
+    )D
+)
+WHERE RNUM BETWEEN 1 AND 7
+</entry>
+
+<entry key="exerciseBoard">
+SELECT * FROM
+(
+    SELECT ROWNUM RNUM, D.* FROM (
+        SELECT BOARD_NO,BOARD_TITLE,
+              (SELECT COUNT(*) FROM REPLY B
+               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+              (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
+               MEMBER_NICK
+               ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
+        FROM BOARD A
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_CD = 2
+        ORDER BY CREATE_DT DESC
+    )D
+)
+WHERE RNUM BETWEEN 1 AND 7
+</entry>
+
+<entry key="freeBoard">
+SELECT * FROM
+(
+    SELECT ROWNUM RNUM, D.* FROM (
+        SELECT BOARD_NO,BOARD_TITLE,
+              (SELECT COUNT(*) FROM REPLY B
+               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+              (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
+               MEMBER_NICK
+               ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
+        FROM BOARD A
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_CD = 3
+        ORDER BY CREATE_DT DESC
+    )D
+)
+WHERE RNUM BETWEEN 1 AND 7
+</entry>
+
+<entry key="metBoard">
+SELECT * FROM
+(
+    SELECT ROWNUM RNUM, D.* FROM (
+        SELECT BOARD_NO,BOARD_TITLE,
+              (SELECT COUNT(*) FROM REPLY B
+               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+              (SELECT COUNT(*) FROM LIKE_BOARD C
+               WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
+               MEMBER_NICK
+               ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
+        FROM BOARD A
+        JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_CD = 4
+        ORDER BY CREATE_DT DESC
+    )D
+)
+WHERE RNUM BETWEEN 1 AND 5
+</entry>
+
+</properties>
