@@ -22,7 +22,7 @@ public class MemberService {
 	 */
 	public Member login(Member user) throws Exception{
 		Connection conn = getConnection();
-		Member result = dao.login(conn,user);
+		Member result = dao.login(conn, user);
 		close(conn);
 		return result;
 	}

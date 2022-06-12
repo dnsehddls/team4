@@ -34,6 +34,35 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public Member login(Connection conn, Member user) throws Exception {
+		Member result = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("login"));
+			pstmt.setString(1, user.getMemberID());
+			pstmt.setString(2, user.getMemberPW());
+			rs = pstmt.executeQuery();
+			
+			//vo에 데이터 저장할 애들
+			if(rs.next()) {
+				result = new Member();
+				result.setMemberNo(rs.getInt(1));
+				result.setMemberID(rs.getString(2));
+				result.setMemberEmail(rs.getString(3));
+				result.setMemberName(rs.getString(4));
+				result.setMemberTel(rs.getString(5));
+				result.setMemberProfile(rs.getString(6));
+				result.setGrade(rs.getString(7));
+				result.setPoint(rs.getInt(8));
+				result.setRegistDate(rs.getString(9));
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 
 
 	/**
@@ -52,8 +81,8 @@ public class MemberDAO {
 			String sql = prop.getProperty("signUp");
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, mem.getMemberId());
-			pstmt.setString(2, mem.getMemberPw());
+			pstmt.setString(1, mem.getMemberID());
+			pstmt.setString(2, mem.getMemberPW());
 			pstmt.setString(3, mem.getMemberName());
 			pstmt.setString(4, mem.getMemberNickname());
 			pstmt.setString(5, mem.getMemberEmail());

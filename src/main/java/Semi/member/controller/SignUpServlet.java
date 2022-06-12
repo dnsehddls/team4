@@ -14,7 +14,7 @@ import Semi.member.model.vo.Member;
 
 
 @WebServlet("/member/signUp")
-public class signUpServlet extends HttpServlet{
+public class SignUpServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,8 +37,8 @@ public class signUpServlet extends HttpServlet{
 		
 		Member mem = new Member();
 		
-		mem.setMemberId(memberId);
-		mem.setMemberPw(memberPw);
+		mem.setMemberID(memberId);
+		mem.setMemberPW(memberPw);
 		mem.setMemberName(memberName);
 		mem.setMemberNickname(memberNickname);
 		mem.setMemberTel(memberTel);

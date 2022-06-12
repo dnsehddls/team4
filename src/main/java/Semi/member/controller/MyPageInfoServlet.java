@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import Semi.member.model.service.MemberService;
 import Semi.member.model.vo.Member;
 
-@WebServlet("member/myPage/info")
+@WebServlet("/member/myPage/info")
 public class MyPageInfoServlet extends HttpServlet{
 	
 	@Override

@@ -13,8 +13,8 @@ import lombok.ToString;
 public class Member {
 	
 	private int memberNo;
-	private String memberId;
-	private String memberPw;
+	private String memberID;
+	private String memberPW;
 	private String memberName;
 	private String memberNickname;
 	private String memberEmail;
