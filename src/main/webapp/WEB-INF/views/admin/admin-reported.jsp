@@ -22,7 +22,7 @@
         <section class="adminPage-content">
 
 
-            <jsp:include page="/WEB-INF/views/member/admin-sideMenu.jsp"/>
+            <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
 
             <section class="memberList">
                 <section class="member-list">
@@ -57,17 +57,33 @@
         
         
                     <div class="pagination-area">
+
+                        <c:set var="url" value="list?cp="/>
                         <ul class="pagination">
-                            <li><a href="#">&lt;&lt;</a></li>
-                            <li><a href="#">&lt;</a></li>
+                            <!-- 첫 페이지로 이동 -->
+                            <li><a href="${url}1${sURL}">&lt;&lt;</a></li>
+        
+                            <!-- 이전 목록 마지막 번호로 이동 -->
+                            <li><a href="${url}${pagination.prevPage}${sURL}">&lt;</a></li>
                             
-                            <li><a class="current">1</a></li>
         
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>       
+                            <!-- 범위가 정해진 일반 for문 사용 -->
+                            <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
         
-                            <li><a href="#">&gt;</a></li>
-                            <li><a href="#">&gt;&gt;</a></li>
+                                <c:choose>
+                                    <c:when test="${i == pagination.currentPage}">
+                                        <li><a class="current">${i}</a></li>
+                                    </c:when>
+        
+                                    <c:otherwise>
+                                        <li><a href="${url}${i}${sURL}">${i}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+        
+                            </c:forEach>
+        
+                            <li><a href="${url}${pagination.nextPage}${sURL}">&gt;</a></li>
+                            <li><a href="${url}${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
                         </ul>
                     </div>
         
@@ -75,13 +91,16 @@
                         <select name="key">
                             <option value="id">아이디</option>
                             <option value="no">회원번호</option>
-                            <option value="joinDate">가입 날짜</option>
+                            <option value="registDate">가입 날짜</option>
                             <option value="secession">탈퇴여부</option>
                         </select>
+
+                        <form action="reported" method="get">
+                            <input type="text" name="query" placeholder="검색어를 입력해주세요.">
+            
+                            <button>검색</button>
+                        </form>
         
-                        <input type="text" name="query" placeholder="검색어를 입력해주세요.">
-        
-                        <button>검색</button>
                     </form>
             </section>
 

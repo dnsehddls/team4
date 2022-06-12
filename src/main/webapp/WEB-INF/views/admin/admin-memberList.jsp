@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
     
-    <link rel="stylesheet" href="${contextPath}/resources/css/memberList.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin/memberList.css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 
         <section class="adminPage-content">
            
-            <jsp:include page="/WEB-INF/views/member/admin-sideMenu.jsp"/>
+            <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
 
             <section class="memberList">
                 <section class="member-list">

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 페이지</title>
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/adminPage.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin/adminPage.css">
 
     <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
 </head>
@@ -22,7 +22,7 @@
         <section class="adminPage-content">
             
             <!-- 왼쪽 사이드 메뉴 -->
-            <jsp:include page="/WEB-INF/views/member/admin-sideMenu.jsp"/>
+            <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
 
 
             <section class="adminPage-main">

@@ -179,11 +179,12 @@ main{
 
 /* 검색 영역 */
 #memberSearch{
-    width: 500px;
+    width: 400px;
     height: 30px;
 
     display: flex;
-    justify-content: space-between;
+    /* box-sizing: border-box; */
+    justify-content: center;
 
     margin: 30px auto;
 }

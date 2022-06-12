@@ -52,7 +52,7 @@ public class adminController extends HttpServlet {
 	    		
 	    		req.setAttribute("map", map);
 	    		
-	    		String path = "/WEB-INF/views/member/memberList.jsp";
+	    		String path = "/WEB-INF/views/admin/memberList.jsp";
 	    		
 	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 	    		
@@ -69,7 +69,7 @@ public class adminController extends HttpServlet {
 	    		
 	    		req.setAttribute("member", member);
 	    		
-	    		String path = "/WEB-INF/views/member/admin-memberList.jsp";
+	    		String path = "/WEB-INF/views/admin/admin-memberList.jsp";
 	    		
 	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 	    		
@@ -81,7 +81,7 @@ public class adminController extends HttpServlet {
 	    	// 관리자 정보 수정
 	    	if(command.equals("info")) {
 	    		
-	    		String path = "/WEB-INF/views/member/adminPage-info.jsp";
+	    		String path = "/WEB-INF/views/admin/adminPage-info.jsp";
 	    		
 	    		req.getRequestDispatcher(path).forward(req, resp);
 	    		
@@ -121,7 +121,7 @@ public class adminController extends HttpServlet {
 	    	// 관리자 비밀번호 수정
 	    	if(command.equals("changePw")) {
 	    		
-	    		String path = "/WEB-INF/views/member/adminPage-changePw.jsp";
+	    		String path = "/WEB-INF/views/admin/adminPage-changePw.jsp";
 	    		
 	    		req.getRequestDispatcher(path).forward(req, resp);
 	    		
@@ -148,6 +148,14 @@ public class adminController extends HttpServlet {
 	    			rePath = "changePw";
 	    		}
 	    		resp.sendRedirect(rePath);
+	    		
+	    	}
+	    	
+	    	
+	    	// 신고 게시글 
+	    	if(command.equals("reported")) {
+	    		
+	    		String path = "/WEB-INF/views/admin/admin-reported.jsp";
 	    		
 	    	}
 	    	
