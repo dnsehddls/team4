@@ -1,0 +1,170 @@
+
+.board-list a{
+    text-decoration: none;
+    color : black;
+}
+
+.board-list a:hover{
+    text-decoration: underline;
+}
+
+
+.board-list{
+    width: 1000px;
+    margin: 50px auto;
+}
+
+
+.board-name{
+    font-size: 2.5em;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+
+
+.sub-name{
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+
+.list-wrapper{
+    width: 100%;
+    min-height: 670px;
+    margin-top: 30px;
+}
+
+
+.list-table{
+    width: 100%;
+    padding: 20px;
+
+    border-collapse: collapse;
+}
+
+.list-table > thead{
+    background-color: #EAEAEA;
+    color : #333333;
+    border-top: 2px solid #cccccc;
+    border-bottom: 2px solid #cccccc;
+}
+
+.list-table tr{
+    height: 60px;
+}
+
+.list-table > tbody > tr{
+    border-bottom : 1px solid gray;
+}
+
+.list-table tr > *{
+    text-align: center;
+}
+
+.list-table tr > *:nth-of-type(1){ width: 10%;}
+.list-table tr > td:nth-of-type(2){ 
+    width: 35%;
+    text-align: left;
+    padding-left : 50px;
+}
+
+.list-table tr > *:nth-of-type(3){ width: 15%;}
+.list-table tr > *:nth-of-type(4){ width: 15%;}
+.list-table tr > *:nth-of-type(5){ width: 10%;}
+
+
+
+.btn-area{
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#insertBtn{
+    margin-right: 50px;
+
+    width: 80px;
+    height: 40px;
+
+    background-color: #FEC85C;
+    border: #FEC85C;
+    color:white;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+.pagination{
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+}
+
+.pagination > li{
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a{
+    width: 100%;
+    height: 100%;
+    display: block;
+    
+    /* letter-spacing : -2px; */
+}
+
+
+.pagination .current{
+    background-color: #FEC85C;
+    border-radius: 10%;
+    color: white;
+    font-weight: bold;
+}
+
+
+
+#boardSearch{
+    width: 500px;
+    height: 30px;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin: 30px auto;
+}
+
+
+#boardSearch *{
+    box-sizing: border-box;
+    padding : 0;
+    margin : 0;
+}
+
+#boardSearch select{
+    width: 100px;
+}
+
+#boardSearch input{
+    flex-grow: 1;
+    margin: 0 10px;
+    padding-left: 10px;
+}
+
+#boardSearch button{
+    width: 100px;
+
+    background-color: #FEC85C;
+    color: white;
+    border : 0;
+
+    font-weight: bold;
+    cursor: pointer;
+}

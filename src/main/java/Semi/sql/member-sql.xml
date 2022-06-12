@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>member-sql.xml</comment>
@@ -60,6 +60,15 @@
 		  END         
 		FROM DUAL
    </entry>
-
+     
+   <!-- 회원 정보 수정 -->
+   <entry key="updateMember">
+      UPDATE MEMBER SET
+      MEMBER_PW = ?
+      MEMBER_NICK = ?
+      MEMBER_TEL = ?
+      MEMBER_EMAIL = ?
+      WHERE MEMBER_NO = ?
+   </entry>
 
 </properties>

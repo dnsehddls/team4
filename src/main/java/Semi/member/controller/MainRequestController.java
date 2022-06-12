@@ -3,6 +3,7 @@ package Semi.member.controller;
 import java.io.IOException;
 import java.util.List;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-
 import Semi.member.model.service.MemberService;
 import Semi.member.model.vo.Member;
 
@@ -27,11 +27,12 @@ public class MainRequestController extends HttpServlet{
 	    try {
 	    	//로그인 요청
 	    	MemberService service = new MemberService();
-	    	
+        
 	    	if(command.equals("login")) {
 		    	String id = req.getParameter("ID");
 		    	String pw = req.getParameter("PW");
 		    	Member member = new Member();
+
 		    	member.setMemberID(id);
 		    	member.setMemberPW(pw);
 		    	
