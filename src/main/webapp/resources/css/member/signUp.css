@@ -85,12 +85,6 @@ main{
     border-radius: 4px;
 }
 
-.agree{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-}
-
 .confirm{
     width: 300px;
     margin-left: auto;

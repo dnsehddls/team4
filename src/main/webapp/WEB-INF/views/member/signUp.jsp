@@ -22,7 +22,7 @@
 	
 	        <div class="line"></div>
 			
-	        <form action="member/signUp" method="POST" onsubmit="return signUpValidate()">
+	        <form action="signUp" method="POST" onsubmit="return signUpValidate()">
 	            <table name="signUp_form" class="tb">
 	                <tr>
 	                    <th>아이디</th>
@@ -66,8 +66,8 @@
 	                <tr>
 	                    <th>전화번호</th>
 	                    <td>
-	                        <input type="tel" name="memberHp" value="" id="memberHp" maxlength="13" placeholder="번호를 입력해 주세요">
-	                        <br><span class="signUp-message " id="hpMessage">전화번호를 입력해주세요.(-제외)</span>
+	                        <input type="tel" name="memberTel" value="" id="memberTel" maxlength="13" placeholder="번호를 입력해 주세요">
+	                        <br><span class="signUp-message " id="telMessage">전화번호를 입력해주세요.(-제외)</span>
 	                    </td>
 	                </tr>
 	
@@ -75,6 +75,7 @@
 	                    <th>이메일</th>
 	                    <td>
 	                        <input type="email" name="memberEmail" id="memberEmail" placeholder="이메일을 입력해 주세요">
+	                        <button class="member_btn" id="checkBtn" type="button">중복확인</button>
 	                        <button class="member_btn" id="sendBtn" type="button">인증번호 받기</button>
 	                        <br><span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
 	                    </td>
@@ -92,11 +93,8 @@
 	            </table>
 	
 	            <div class="terms">
-	                <textarea name="terms" id="terms" cols="10" rows="10" style="resize: none">약관내용입니다.</textarea>
-	            </div>
-	
-	            <div class="agree">
-	                <input type="checkbox"> 동의합니다.
+	                <textarea name="terms" id="terms" cols="10" rows="10" style="resize: none">약관내용입니다.
+회원가입 시 약관에 동의한 것으로 간주합니다.</textarea>
 	            </div>
 	
 	            <div class="confirm">
