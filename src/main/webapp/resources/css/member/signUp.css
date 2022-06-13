@@ -85,11 +85,6 @@ main{
     border-radius: 4px;
 }
 
-    /* <div class="confirm">
-        <button id="cancle">취소</button>
-        <button id="sinUpConfirm">회원가입</button>
-    </div> */
-
 .agree{
     display: flex;
     justify-content: center;
@@ -109,7 +104,9 @@ main{
     background-color: rgb(158, 158, 158);
     border: none;
     border-radius: 4px;
+}
 
+#cancel a{
     color: white;
     font-weight: bold;
 }

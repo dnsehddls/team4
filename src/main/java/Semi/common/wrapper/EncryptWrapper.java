@@ -33,6 +33,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		
 		switch(name) {
 		case "inputPw" : 
+		case "PW" : 
 		case "currentPw" :
 		case "memberPw" : 
 		case "newPw" :

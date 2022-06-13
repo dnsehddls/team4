@@ -100,7 +100,7 @@
 	            </div>
 	
 	            <div class="confirm">
-	                <button id="cancel" type="button">취소</button>
+	                <button id="cancel" type="button"><a href="${contextPath}">취소</a></button>
 	                <button id="signUpConfirm">회원가입</button>
 	            </div>
 	            

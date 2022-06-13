@@ -33,6 +33,10 @@ memberId.addEventListener("input", function(){
     const regExp = /^[a-z0-9_-]{4,10}$/; // 아이디 정규식 (소문자 + 숫자 + 언더바/하이픈 허용 4~10자리)
 
     if(regExp.test(memberId.value)){ // 유효한 경우
+        idMessage.innerText = "올바른 형식의 아이디입니다.";
+        idMessage.classList.add("confirm");
+        idMessage.classList.remove("error");
+        checkObj.memberId = true;
 
         idBtn.addEventListener("click", function(){
 
@@ -84,7 +88,7 @@ memberPw.addEventListener("input", function(){
 
     const regExp = /^[\w!@#_-]{6,30}$/;
 
-    if(regExp.test(memberPw.vale)){ // 비밀번호 유효
+    if(regExp.test(memberPw.value)){ // 비밀번호 유효
 
         checkObj.memberPw = true;
 
@@ -138,43 +142,41 @@ memberNickname.addEventListener("input", function(){
         checkObj.memberNickname = false;
         return;
     }
-
     const regExp = /^[a-zA-Z0-9가-힣]{2,10}$/;
-
-    if( regExp.test(memberNickname.value) ){ // 유효한 경우
-
-        nicknameBtn.addEventListener("click", function(){
-
-            $.ajax({
-                url : "nicknameDupCheck",
-                data : {"memberNickname" : memberNickname.value},
-                type : "GET",
-                seccess : function(result){
-                                // Servlet에서 응답으로 출력된 데이터가 저장
-                    if(result == 0){
-                        nicknameMessage.innerText = "사용 가능한 닉네임입니다.";
-                        nicknameMessage.classList.add("confirm");
-                        nicknameMessage.classList.remove("error");
-                        checkObj.memberNickname = true;
-                    }else{
-                        nicknameMessage.innerText = "이미 사용중인 닉네임입니다.";
-                        nicknameMessage.classList.add("error");
-                        nicknameMessage.classList.remove("confirm");
-                        checkObj.memberNickname = false;
-                    }
-                },
-                error : function(){
-                    console.log("에러 발생")
-                }
-            });
-
-        });
-    
-    }else{
+    if(!regExp.test(memberNickname.value)){
         nicknameMessage.innerText = "닉네임 형식이 유효하지 않습니다.";
         nicknameMessage.classList.add("error");
         nicknameMessage.classList.remove("confirm");
         checkObj.memberNickname = false;
+        return;
+    }
+});
+
+nicknameBtn.addEventListener("click", function(){
+    if(regExp.test(memberNickname.value) ){ // 유효한 경우
+        $.ajax({
+            url : "nicknameDupCheck",
+            data : {"memberNickname" : memberNickname.value},
+            type : "GET",
+            seccess : function(result){
+                            // Servlet에서 응답으로 출력된 데이터가 저장
+                if(result == 0){
+                    nicknameMessage.innerText = "사용 가능한 닉네임입니다.";
+                    nicknameMessage.classList.add("confirm");
+                    nicknameMessage.classList.remove("error");
+                    checkObj.memberNickname = true;
+                }else{
+                    nicknameMessage.innerText = "이미 사용중인 닉네임입니다.";
+                    nicknameMessage.classList.add("error");
+                    nicknameMessage.classList.remove("confirm");
+                    checkObj.memberNickname = false;
+                }
+            },
+            error : function(){
+                console.log("에러 발생")
+            }
+        });
+        return;
     }
 });
 
@@ -212,7 +214,7 @@ memberHp.addEventListener("input", function(){
 // 이메일
 const memberEmail = document.getElementById("memberEmail");
 const emailMessage = document.getElementById("emailMessage");
-const emailBtn = document.getElementById("emailBtn");
+const sendBtn = document.getElementById("sendBtn");
 
 memberEmail.addEventListener("input", function(){
 
@@ -228,7 +230,7 @@ memberEmail.addEventListener("input", function(){
 
     if(regExp.test(memberEmail.value)){ // 유효한 경우
         
-        emailBtn.addEventListener("click", function(){
+        sendBtn.addEventListener("click", function(){
 
             // 이메일 중복 검사
             $.ajax({
@@ -289,7 +291,6 @@ function signUpValidate(){
 
 
 // 인증번호 보내기
-const sendBtn = document.getElementById("sendBtn");
 const cMessage = document.getElementById("cMessage");
 
 // 타이머에 사용될 변수

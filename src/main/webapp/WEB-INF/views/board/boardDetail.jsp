@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,50 +67,24 @@
                 </div>
 
                 
-
+	
                 <div id="reply-area">
                     <div class="reply-title">
                         <h3>댓글</h3>
                     </div>
-
-                    <div class="reply-list-area">       
-                        <ul id="reply-list">
-                            <li class="reply-row">
-                                <p class="reply-writer">
-                                    <img src="../images/profile.png">
-                                    <span>닉네임</span>
-                                    <span class="reply-date">작성일</span>
-                                </p>
-                                
-                                <p class="reply-content">내용</p>
-            
-                                <c:if test="${loginMember.memberNo == reply.memberNo}">
-                                    <div class="reply-btn-area">
-            
-                                        <button>수정</button>     
-            
-                                        <button>삭제</button>
-                                    </div>
-                                </c:if>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <jsp:include page="/WEB-INF/views/board/replyList.jsp"/>
+                    </ul>
                     
-                
                     <div class="reply-write-area">
                         <textarea id="replyContent"></textarea>
                         <button id="addReply">
                             댓글<br>
                             등록
                         </button>
-                
                     </div>
-                
                 </div>
-
         </section>
-
-        
     </main>
     
 
