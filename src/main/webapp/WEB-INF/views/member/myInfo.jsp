@@ -20,6 +20,7 @@
 
             <section class="left-side">
                 <ul class="list-group">
+                    <!-- 링크 수정 -->
                     <li><a href="../../../webapp/html/member/myInfo.html">내 정보</a></li>
                     <li><a href="../../../webapp/html/member/myContent.html">내 글 관리</a></li>
                     <li><a href="../../../webapp/html/member/like.html">좋아요 관리</a></li>
@@ -36,7 +37,7 @@
         
                 <div class="line"></div>
                 
-                <form action="#" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
+                <form action="memberSignUp" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
                     <table name="signUp-form" class="tb">
                         <tr>
                             <th>아이디</th>
@@ -100,8 +101,6 @@
             </section>
         </section>
     </main>
-
-
 
     <script src="${contextPath}/resources/js/member/myInfo.js"></script>
 </body>

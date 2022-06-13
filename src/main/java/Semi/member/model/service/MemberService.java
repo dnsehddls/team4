@@ -48,8 +48,6 @@ public class MemberService {
 		map.put("pagination", pagination);
 		map.put("list", memberList);
 		
-		
-		
 		close(conn);
 
 		return map;
@@ -227,5 +225,18 @@ public class MemberService {
 		
 		return result;
 	}
+
+	/** 계정찾기 (이메일)
+	 * @param memberEmail
+	 * @param memberTel
+	 * @return
+	 * @throws Exception
+	 */
+//	public Member accountfind(String memberEmail, String memberTel) throws Exception{
+//		Connection conn = getConnection();
+//		Member accountInfo = dao.accountFind(conn, memberEmail, memberTel);
+//		close(conn);
+//		return accountInfo;
+//	}
 
 }

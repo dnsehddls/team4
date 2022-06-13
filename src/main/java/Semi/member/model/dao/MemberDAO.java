@@ -27,7 +27,7 @@ public class MemberDAO {
 			prop = new Properties();
 			
 			String filePath = MemberDAO.class.getResource
-					("/Semi/community/sql/member-sql.xml").getPath();  
+					("/Semi/sql/Member_sql.xml").getPath();  
 			
 			prop.loadFromXML(new FileInputStream(filePath));
 			
@@ -50,10 +50,10 @@ public class MemberDAO {
 				result = new Member();
 				result.setMemberNo(rs.getInt(1));
 				result.setMemberID(rs.getString(2));
-				result.setMemberEmail(rs.getString(3));
-				result.setMemberName(rs.getString(4));
-				result.setMemberTel(rs.getString(5));
-				result.setMemberProfile(rs.getString(6));
+				result.setMemberName(rs.getString(3));
+				result.setMemberNickname(rs.getString(4));
+				result.setMemberEmail(rs.getString(5));
+				result.setMemberTel(rs.getString(6));
 				result.setGrade(rs.getString(7));
 				result.setPoint(rs.getInt(8));
 				result.setRegistDate(rs.getString(9));
@@ -450,6 +450,23 @@ public class MemberDAO {
 		
 		return result;
 	}
+
+
+	/** 계정찾기 관련
+	 * @param conn
+	 * @param memberEmail
+	 * @param memberTel
+	 * @return
+	 * @throws Exception
+	 */
+//	public Member accountFind(Connection conn, String memberEmail, String memberTel) throws Exception{
+//		try {
+//			//메일보내기?
+//		} finally {
+//			
+//		}
+//		return accountInfo;
+//	}
 
 
 

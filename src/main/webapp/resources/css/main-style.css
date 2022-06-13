@@ -324,6 +324,10 @@ nav>div:last-child>button:hover{
     text-align: center;
     margin: 5px 30px 5px 30px;
 }
+li{
+    margin: 0;
+    padding: 0;
+}
 .exercise-board>div:first-child>a{
     font-family: '잘난체';
     font-size: 38px;
