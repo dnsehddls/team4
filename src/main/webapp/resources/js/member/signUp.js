@@ -33,6 +33,10 @@ memberId.addEventListener("input", function(){
     const regExp = /^[a-z0-9_-]{4,10}$/; // 아이디 정규식 (소문자 + 숫자 + 언더바/하이픈 허용 4~10자리)
 
     if(regExp.test(memberId.value)){ // 유효한 경우
+        idMessage.innerText = "올바른 형식의 아이디입니다.";
+        idMessage.classList.add("confirm");
+        idMessage.classList.remove("error");
+        checkObj.memberId = true;
 
         idBtn.addEventListener("click", function(){
 
@@ -210,7 +214,7 @@ memberHp.addEventListener("input", function(){
 // 이메일
 const memberEmail = document.getElementById("memberEmail");
 const emailMessage = document.getElementById("emailMessage");
-const emailBtn = document.getElementById("emailBtn");
+const sendBtn = document.getElementById("sendBtn");
 
 memberEmail.addEventListener("input", function(){
 
@@ -226,7 +230,7 @@ memberEmail.addEventListener("input", function(){
 
     if(regExp.test(memberEmail.value)){ // 유효한 경우
         
-        emailBtn.addEventListener("click", function(){
+        sendBtn.addEventListener("click", function(){
 
             // 이메일 중복 검사
             $.ajax({
@@ -287,7 +291,6 @@ function signUpValidate(){
 
 
 // 인증번호 보내기
-const sendBtn = document.getElementById("sendBtn");
 const cMessage = document.getElementById("cMessage");
 
 // 타이머에 사용될 변수

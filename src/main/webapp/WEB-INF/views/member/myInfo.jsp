@@ -37,40 +37,40 @@
         
                 <div class="line"></div>
                 
+<<<<<<< HEAD
                 <form action="memberSignUp" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
+=======
+                <form action="info" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
+>>>>>>> bc453bb8f99b5195a6840fbb711b7964801f39ca
                     <table name="signUp-form" class="tb">
                         <tr>
                             <th>아이디</th>
-                            <td>
-                                user01
-                            </td>
+                            <td>${loginMember.memberID}</td>
                         </tr>
         
                         <tr>
                             <th>이름</th>
-                            <td>
-                                유저일
-                            </td>
+                            <td>${loginMember.memberName}</td>
                         </tr>
         
                         <tr>
                             <th>비밀번호</th>
                             <td>
-                                <input type="password" name="newPw" id="newPw" placeholder="비밀번호를 입력해 주세요." autocomplete="off">
+                                <input type="password" name="newPw" value="${loginMember.memberPW}" id="newPw" placeholder="비밀번호를 입력해 주세요." autocomplete="off">
                             </td>
                         </tr>
         
                         <tr>
                             <th>비밀번호 확인</th>
                             <td>
-                                <input type="password" name="newPw2" id="newPw2" placeholder="비밀번호를 한번 더 입력해 주세요" autocomplete="off">
+                                <input type="password" name="newPw2" value="${loginMember.memberPW}" id="newPw2" placeholder="비밀번호를 한번 더 입력해 주세요" autocomplete="off">
                             </td>
                         </tr>
         
                         <tr>
                             <th>닉네임</th>
                             <td>
-                                <input type="text" name="memberNick" value="" id="memberNick" placeholder="닉네임(0글자 이하)을 입력해 주세요">
+                                <input type="text" name="memberNick" value="${loginMember.memberNickname}" id="memberNick" placeholder="닉네임(0글자 이하)을 입력해 주세요">
                             <button class="memberBtn" type="button" onclick="">중복확인</button>
                             </td>
                         </tr>
@@ -78,14 +78,14 @@
                         <tr>
                             <th>전화번호</th>
                             <td>
-                                <input type="tel" name="memberTel" value="" id="memberTel" maxlength="13" placeholder="번호를 입력해 주세요">
+                                <input type="tel" name="memberTel" value="${loginMember.memberTel}" id="memberTel" maxlength="13" placeholder="번호를 입력해 주세요">
                             </td>
                         </tr>
         
                         <tr>
                             <th>이메일</th>
                             <td>
-                                <input type="email" name="memberEmail" id="memberEmail" placeholder="이메일을 입력해 주세요">
+                                <input type="email" name="memberEmail" value="${loginMember.memberEmail}" id="memberEmail" placeholder="이메일을 입력해 주세요">
                             </td>
                         </tr>
         
