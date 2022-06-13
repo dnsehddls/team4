@@ -15,9 +15,10 @@
 </head>
 <body>
 
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    
     <main>
 
-        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <section class="adminPage-content">
             
@@ -34,12 +35,17 @@
 
                     <div class="adminPage-row">
                         <label>닉네임</label>
-                        <input type="text" name="memberNickname" value="${loginMember.memberNickname}" maxlength="10">
+                        <input type="text" name="memberNickname" value="${loginMember.memberNickname}" id="memberNickname" maxlength="10">
+                    </div>
+
+                    <div class="adminPage-row">
+                        <label>이메일</label>
+                        <input type="text" name="memberEmail" value="${loginMember.memberEmail}" id="memberEmail" maxlength="11">
                     </div>
 
                     <div class="adminPage-row">
                         <label>전화번호</label>
-                        <input type="text" name="memberTel" value="${loginMember.memberTel}" maxlength="11">
+                        <input type="text" name="memberTel" value="${loginMember.memberTel}" id="memberTel" maxlength="11">
                     </div>
 
                     <!-- 주소

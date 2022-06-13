@@ -14,10 +14,11 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/memberList.css">
 </head>
 <body>
+    
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <main>
 
-        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <section class="adminPage-content">
 

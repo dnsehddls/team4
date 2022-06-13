@@ -1,6 +1,7 @@
 package Semi.member.model.dao;
 
-import static Semi.common.JDBCTemplate.close;
+
+import static Semi.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -14,12 +15,14 @@ import java.util.Properties;
 import Semi.board.model.vo.Pagination;
 import Semi.member.model.vo.Member;
 
+
+
+
 public class AdminDAO {
 	
-	private PreparedStatement pstmt;
-	private Statement stmt;
-	private ResultSet rs;
-	
+	private Statement stmt = null;
+	private PreparedStatement pstmt = null;
+	private ResultSet rs = null;	
 	private Properties prop;
 	
 	public AdminDAO() {
@@ -27,8 +30,7 @@ public class AdminDAO {
 		try {
 			prop = new Properties();
 			
-			String filePath = MemberDAO.class.getResource
-					("/Semi/sql/admin_sql.xml").getPath();  
+			String filePath = AdminDAO.class.getResource("/team4/src/main/java/Semi/sql/Admin_sql.xml").getPath();
 			
 			prop.loadFromXML(new FileInputStream(filePath));
 			
@@ -36,7 +38,9 @@ public class AdminDAO {
 			e.printStackTrace();
 		}
 		
+		
 	}
+	
 	
 	/** 회원 목록 조회 DAO
 	 * @param conn
@@ -65,10 +69,10 @@ public class AdminDAO {
 				
 				Member mem = new Member();
 				
-				mem.setMemberNo(rs.getInt(1));
-				mem.setMemberEmail(rs.getString(2));
-				mem.setMemberName(rs.getString(3));
-				mem.setRegistDate(rs.getString(4));
+				mem.setMemberNo(rs.getInt("MEMBER_NO"));
+				mem.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+				mem.setMemberName(rs.getString("MEMBER_NAME"));
+				mem.setRegistDate(rs.getString("REG_DATE"));
 				
 				memberList.add(mem);
 				
@@ -111,44 +115,6 @@ public class AdminDAO {
 		return listCount;
 	}
 
-
-	/** 회원 정보 조회 DAO
-	 * @param conn
-	 * @param memberEmail
-	 * @return member
-	 * @throws Exception
-	 */
-	public Member selectOne(Connection conn, String memberEmail) throws Exception {
-		
-		Member member = null;
-		
-		try {
-			String sql = prop.getProperty("selectOne");
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, memberEmail);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				
-				member = new Member();
-				
-				member.setMemberNo(rs.getInt(1));
-				member.setMemberEmail(rs.getString(2));
-				member.setMemberName(rs.getString(3));
-				member.setRegistDate(rs.getString(4));
-				
-			}
-			
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return member;
-	}
 
 
 	/** 관리자 정보 수정 DAO
@@ -208,6 +174,112 @@ public class AdminDAO {
 		}
 		
 		return result;
+	}
+
+
+	/** 회원 탈퇴 / 복구
+	 * @param conn
+	 * @param memberEmail
+	 * @param secessionFlag
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changeSecession(Connection conn, String memberEmail) throws Exception {
+		int result = 0;
+		
+		
+		try {
+			String sql = prop.getProperty("changeSecession");
+			
+			pstmt = conn.prepareStatement(sql);		
+		
+			pstmt.setString(1, memberEmail);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);			
+		}
+		
+		return result;
+	}
+
+
+	/** 회원 상세 조회		
+	 * @param conn
+	 * @param memberEmail
+	 * @return memberDetail
+	 * @throws Exception
+	 */
+	public Member memberDetail(Connection conn, String memberEmail) throws Exception {
+		
+		Member memberDetail = null;
+		
+		try {
+			String sql = prop.getProperty("memberDetail");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberEmail);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				memberDetail = new Member();
+				
+				memberDetail.setMemberID(rs.getString("MEMBER_ID"));
+				memberDetail.setMemberName(rs.getString("MEMBER_NAME"));
+				memberDetail.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+				memberDetail.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
+				
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return memberDetail;
+	}
+
+
+	/** 회원 검색 DAO
+	 * @param conn
+	 * @param memberEmail
+	 * @return	searchMember
+	 * @throws Exception
+	 */
+	public Member searchMember(Connection conn, String memberEmail) throws Exception {
+		
+		Member searchMember = null;
+		
+		try {
+			String sql = prop.getProperty("searchMember");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberEmail);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				searchMember = new Member();
+				
+				searchMember.setMemberNo(rs.getInt("MEMBER_NO"));
+				searchMember.setMemberEmail(rs.getString("MEMBER_EMAIL"));
+				searchMember.setMemberName(rs.getString("MEMBER_NAME"));
+				searchMember.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
+				
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return searchMember;
+		
 	}
 
 }

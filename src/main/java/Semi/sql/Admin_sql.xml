@@ -8,7 +8,7 @@
 		SELECT * FROM(
 		   SELECT ROWNUM RNUM, A.* FROM(   
 		      SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICK
-		            TO_CHAR(가입날짜, 'YYYY-MM-DD') AS 가입날짜
+		            TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE
 
 		      FROM MEMBER
 
@@ -20,8 +20,8 @@
 	</entry>
 	
 	<!-- 회원 조회 -->
-	<entry key="selectOne">
-		SELECT 
+	<entry key="searchMember">
+		SELECT MEMBER_NO, MEMBER_ID, REG_DATE, SECESSION_FL
 		FROM MEMBER
 		WHERE MEMBER_EMAIL = ?
 		AND SECESSION_FL = 'N'
@@ -33,14 +33,14 @@
 		MEMBER_NICK = ?,
 		MEMBER_TEL = ?,
 		
-		WHERE MEMBER_NO = ?	
+		WHERE GRADE_CODE = 99	
 	</entry>
 	
 	<!-- 관리자 비밀번호 수정 -->
 	<entry key="adminChangePw">
 		UPDATE MEMBER SET
 		MEMBER_PW = ?
-		WHERE MEMBER_NO = ?
+		WHERE GRADE_CODE = 99
 		AND MEMBER_PW = ?
 	</entry>
 	
@@ -48,6 +48,20 @@
 	<entry key="getListCount">
 		SELECT COUNT(*)FROM MEMBER
 		WHERE SECESSION_FL = 'N'
+	</entry>
+	
+		<!-- 회원 탈퇴 / 복구 (회원 detail) -->
+	<entry key="changeSecession">
+		UPDATE MEMBER SET
+		SECESSION_FL = 'Y'
+		WHERE MEMBER_EMAIL = ?
+	</entry>
+	
+	<!-- 회원 상세 조회 -->
+	<entry key="memberDetail">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL, SECESSION_FL
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = ?
 	</entry>
 
 

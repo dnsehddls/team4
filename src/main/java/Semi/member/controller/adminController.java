@@ -15,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import Semi.member.model.service.AdminService;
-import Semi.member.model.service.MemberService;
 import Semi.member.model.vo.Member;
+
+
+
 
 @WebServlet("/admin/*") // admin으로 시작하는 모든 요청
 public class adminController extends HttpServlet {
@@ -35,9 +37,15 @@ public class adminController extends HttpServlet {
 			
 			// cp 추가하기
 			// 회원목록 조회
-	    	if(command.equals("selectAll")) {
+	    	if(command.equals("memberList")) {
 	    		
 //	    		List<Member> list = service.selectAll();
+	    		
+	    		String path = "/WEB-INF/views/admin/admin-memberList.jsp";
+	    		
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp);
 	    		
 	    		int cp = 1;
 	    		
@@ -48,32 +56,20 @@ public class adminController extends HttpServlet {
 	    		
 	    		Map<String, Object> map = null;
 	    		
-	    		map = service.selectAll(cp);
+	    		if(req.getParameter("memberEmail") == null) { // 일반 회원 목록
+	    			
+	    			map = service.selectAll(cp);
+	    				    			
+	    		}else {
+	    			
+	    			String memberEmail = req.getParameter("memberEmail");
+	    			
+	    			map = service.searchMember(memberEmail);
+	    			
+	    		}
 	    		
-	    		req.setAttribute("map", map);
-	    		
-	    		String path = "/WEB-INF/views/admin/memberList.jsp";
-	    		
-	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
-	    		
-	    		dispatcher.forward(req, resp);
-	    		
-	    	}
-	    	
-	    	// 회원정보 조회
-	    	if(command.equals("selectOne")) {
-	    		
-	    		String memberEmail = req.getParameter("memberEmail");
-	    		
-	    		Member member = service.selectOne(memberEmail);
-	    		
-	    		req.setAttribute("member", member);
-	    		
-	    		String path = "/WEB-INF/views/admin/admin-memberList.jsp";
-	    		
-	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
-	    		
-	    		dispatcher.forward(req, resp);
+	    		req.setAttribute("map", map);	    			    		
+
 	    		
 	    	}
 	    	
@@ -86,7 +82,6 @@ public class adminController extends HttpServlet {
 	    		req.getRequestDispatcher(path).forward(req, resp);
 	    		
 	    		String memberEmail = req.getParameter("memberEmail");
-	    		String memberPw = req.getParameter("memberPw");
 	    		String memberNickname = req.getParameter("memberNickname");
 	    		String memberTel = req.getParameter("memberTel");
 	    		
@@ -103,6 +98,7 @@ public class adminController extends HttpServlet {
 	    		mem.setMemberNo(memberNo);
 	    		mem.setMemberNickname(memberNickname);
 	    		mem.setMemberTel(memberTel);
+	    		mem.setMemberEmail(memberEmail);
 	    		
 	    		int result = service.updateAdmin(mem);
 	    		
@@ -152,12 +148,39 @@ public class adminController extends HttpServlet {
 	    	}
 	    	
 	    	
-	    	// 신고 게시글 
-	    	if(command.equals("reported")) {
+	    	// 회원 탈퇴 / 복구, 회원 상세 조회
+	    	if(command.equals("memberDetail")) {
 	    		
-	    		String path = "/WEB-INF/views/admin/admin-reported.jsp";
+	    		String path = "/WEB-INF/views/admin/memberDetail.jsp";
 	    		
+	    		req.getRequestDispatcher(path).forward(req, resp);
+	    		
+	    		HttpSession session = req.getSession();
+	    		
+	    		String memberEmail = req.getParameter("memberEmail");
+	    		
+	    		
+	    		Member memberDetail = service.memberDetail(memberEmail);
+	    		
+	    		req.setAttribute("memberDetail", memberDetail);
+	    		
+	    		int result = service.changeSecession(memberEmail);
+	    		
+	    		if(result>0) {
+	    			session.setAttribute("message",	"회원 탈퇴 변경 성공");
+	    			
+	    			path = "/WEB-INF/views/admin/memberDetail.jsp";
+	    			
+	    		}else {
+	    			session.setAttribute("message", "회원 탈퇴 변경 실패");
+	    			
+	    			path = "/WEB-INF/views/admin/memberDetail.jsp";
+	    		}
+	    				    			    			    			    		
 	    	}
+	    	
+	    	
+	    	
 	    	
 	    	
 			

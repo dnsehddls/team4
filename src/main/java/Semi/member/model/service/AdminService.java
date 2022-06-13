@@ -1,9 +1,7 @@
 package Semi.member.model.service;
 
-import static Semi.common.JDBCTemplate.close;
-import static Semi.common.JDBCTemplate.commit;
-import static Semi.common.JDBCTemplate.getConnection;
-import static Semi.common.JDBCTemplate.rollback;
+
+import static Semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.HashMap;
@@ -14,10 +12,20 @@ import Semi.board.model.vo.Pagination;
 import Semi.member.model.dao.AdminDAO;
 import Semi.member.model.vo.Member;
 
+
+
 public class AdminService {
 	
 	private AdminDAO dao = new AdminDAO();
+
+//	public Member login(Member user) throws Exception{
+//		Connection conn = getConnection();
+//		Member result = dao.login(conn,user);
+//		close(conn);
+//		return result;
+//	}
 	
+
 	/** 회원 목록 조회 Service
 	 * @return list
 	 * @throws Exception
@@ -44,23 +52,6 @@ public class AdminService {
 		close(conn);
 
 		return map;
-	}
-
-
-	/** 회원 정보 조회 Service
-	 * @param memberEmail
-	 * @return member
-	 * @throws Exception
-	 */
-	public Member selectOne(String memberEmail) throws Exception {
-
-		Connection conn = getConnection();
-		
-		Member member = dao.selectOne(conn, memberEmail);
-		
-		close(conn);
-		
-		return member;
 	}
 
 
@@ -104,5 +95,68 @@ public class AdminService {
 		
 		return result;
 	}
+
+
+	/** 회원 상세 조회
+	 * @param memberEmail
+	 * @param secessionFlag
+	 * @return result
+	 * @throws Exception
+	 */
+	public Member memberDetail(String memberEmail) throws Exception {
+
+		Connection conn = getConnection();
+		
+		
+		// 회원 상세 조회
+		Member memberDetail = dao.memberDetail(conn, memberEmail);
+		
+		
+		close(conn);
+		
+		return memberDetail;
+	}
+
+
+	/** 회원 탈퇴 / 복구
+	 * @param memberEmail
+	 * @return	result
+	 * @throws Exception
+	 */
+	public int changeSecession(String memberEmail) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = dao.changeSecession(conn, memberEmail);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/** 회원 검색 Service
+	 * @param memberEmail
+	 * @return searchMember
+	 * @throws Exception
+	 */
+	public Map<String, Object> searchMember(String memberEmail) throws Exception {
+
+		Connection conn = getConnection();
+		
+		Member searchMember = dao.searchMember(conn, memberEmail);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("searchMember", searchMember);
+		
+		close(conn);
+		
+		return map;
+		
+	}
+
+
+
 
 }

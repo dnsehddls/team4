@@ -18,9 +18,10 @@
 
 </head>
 <body>
+    
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <main>
-        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <section class="adminPage-content">
            
@@ -100,7 +101,7 @@
                         </ul>
                     </div>
 
-                    <form action="selectOne" method="get">
+                    <form action="memberList" method="get">
 
                         <div id="memberSearch">
                             <input type="text" name="query" id="in1" placeholder="이메일을 입력해주세요.">
@@ -117,7 +118,5 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
-
-    <script src="${contextPath}/resources/js/member/admin-memberList.js"></script>
 </body>
 </html>

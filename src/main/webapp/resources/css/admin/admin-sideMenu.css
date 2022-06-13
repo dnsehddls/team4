@@ -1,0 +1,36 @@
+/* 왼쪽 사이드 메뉴 */
+
+.left-side{
+    width: 25%;
+    border-right : 2px solid #ddd;
+    /* border-right : 2px solid gray; */
+}
+
+.list-group{
+    width: 100%;
+    padding: 0 20px 0 0;
+           /*상 우  하 좌  */
+}
+
+.list-group > li{
+    list-style: none;
+    height: 50px;
+    font-size: 18px;
+}
+
+.list-group > li > a{
+    text-decoration: none;
+    color : black;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-bottom : 2px solid #ddd;
+}
+
+.list-group > li:hover{
+    background-color: #f2f2f2;
+}
