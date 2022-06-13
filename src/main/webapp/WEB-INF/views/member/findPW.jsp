@@ -28,7 +28,7 @@
                 </span>
 
                 <div class="find-main">
-                    <form action="member/findPw" method="POST" style="margin: 90px;">
+                    <form action="#" method="POST">
 
                         <table class="tb">
                             <tr>
