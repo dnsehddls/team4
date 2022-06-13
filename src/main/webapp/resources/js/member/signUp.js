@@ -41,12 +41,12 @@ memberId.addEventListener("input", function(){
         idBtn.addEventListener("click", function(){
 
             $.ajax({
-                url : "idDupCheck",
+                url : "IDDupCheck",
                 data : {"memberId" : memberId.value},
                 type : "GET",
                 success : function(result){
                     if(result == 0){ // 아이디 중복 X
-                        idMessage.innerText = "사용 가능한 아이디입니다.";
+                        idMessage.innerText = "사용 가능한 아이디입니다."
                         idMessage.classList.add("confirm");
                         idMessage.classList.remove("error");
                         checkObj.memberId = true;
@@ -146,6 +146,10 @@ memberNickname.addEventListener("input", function(){
     const regExp = /^[a-zA-Z0-9가-힣]{2,10}$/;
 
     if( regExp.test(memberNickname.value) ){ // 유효한 경우
+        
+        nicknameMessage.innerText = "유효한 닉네임 형식입니다."
+        nicknameMessage.classList.add("confirm");
+        nicknameMessage.classList.remove("error");
 
         nicknameBtn.addEventListener("click", function(){
 
@@ -168,7 +172,7 @@ memberNickname.addEventListener("input", function(){
                     }
                 },
                 error : function(){
-                    console.log("에러 발생")
+                    console.log("에러 발생");
                 }
             });
 

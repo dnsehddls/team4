@@ -19,6 +19,11 @@
     margin: 30px;
 }
 
+#message{
+    display: block;
+    margin-left: 12px;
+}
+
 #secessionBtn{
     display: block;
     width: 300px;

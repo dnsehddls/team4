@@ -1,0 +1,90 @@
+main{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.myPage-content{
+    width: 900px;
+}
+
+.find-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.line{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    width: 100%;
+    height: 5px;
+    background-color: rgb(254, 200, 92);
+}
+
+#message{
+    display: block;
+    margin-left: 12px;
+    margin-top: 20px;
+
+}
+
+.tb{
+    width: 250px;
+    height: 50px;
+    border-spacing: 10px;
+
+    margin: 20px;
+}
+
+th{
+    padding: 0;
+}
+
+th > button{
+    box-sizing: border-box;
+
+    width: 90px;
+    height: 90px;
+    padding: 0;
+
+    background-color: rgb(254, 200, 92);
+    border: 0;
+    border-radius: 3px;
+
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+}
+
+th > input{
+    box-sizing: border-box;
+    height: 40px;
+    width: 180px;
+    padding: 5px;
+}
+
+.selectBtn{
+    background-color: #eee;
+    width: 250px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.selectBtn a{
+    text-decoration: none;
+    color: black;
+}
+
+form {
+    background-color: #eee;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 40px; 
+}
