@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secession</title>
 
-    <link rel="stylesheet" href="../../resources/css/member/secession.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/member/secession.css">
 
 </head>
 <body>  
@@ -24,7 +24,7 @@
                     <li><a href="myContent">내 글 관리</a></li>
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
-                    <li><a href="seccesion">회원 탈퇴</a></li>
+                    <li><a href="secession">회원 탈퇴</a></li>
                     <li><a href="#">쪽지</a></li>
                 </ul>
             </section>
@@ -54,11 +54,9 @@
                             </tr>
                             <tr>
                                 <th>아이디</th>
-                                <th>가입 일시</th>
                             </tr>
                             <tr>
-                                <td>user01</td>
-                                <td>2021.05.01</td>
+                                <td>${loginMember.memberID}</td>
                             </tr>
                         </table>
             
@@ -67,7 +65,7 @@
                         <form action="#" method="POST" name="secession-form" onsubmit="secessionValidate()">
                             <div class="myPage-row">
                                 <label>비밀번호</label>
-                                <input type="password" id="inputPw" name="inputPw">
+                                <input type="password" id="inputPw" name="inputPw" placeholder="비밀번호를 입력해주세요." style="border: 1px solid black; border-radius: 5px; height: 25px;">
                             </div>
                             
                             <div>
