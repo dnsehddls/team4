@@ -1,0 +1,24 @@
+package Semi.message.model.vo;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class Message {
+
+	private int messageNo;
+	private int sendNo;
+	private String messageDate;
+	private String messageContent;
+	private char sendDelete;
+	private int receiveNo;
+	private String receiveDate;
+	private char deleteYN;
+ 	private char receiveDelete;
+	
+}

@@ -596,3 +596,44 @@ footer-div>span{
 .add-box,.met-board{
     padding: 12px;
 }
+
+
+/* slideMessage 스타일 추가 - 김성태 */
+#messageIcon{
+    height: 50px;
+    width: 50px;
+    cursor: pointer; 
+}
+
+#box{
+    display: flex;
+}
+
+.dept02{
+    box-sizing: border-box;
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: #FEC85C;
+    color: white;
+    display: none;
+}
+
+#box:hover{
+    width: auto;
+    height: auto;
+    transition-duration: 120ms;
+}
+
+.dept02>li{
+    margin: 5px 5px;
+    list-style: none;
+}
+
+.dept02>li:hover{
+    margin: 12px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
