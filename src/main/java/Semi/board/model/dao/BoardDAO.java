@@ -58,10 +58,7 @@ public class BoardDAO {
 				//exercise
 				//free
 				//met
-				switch(boardType) {
-					case "hot","recency": break;
-					default : show.setBoardType(rs.getInt("BOARD_CD"));
-				}
+				show.setBoardType(rs.getInt("BOARD_CD"));
 				
 				sList.add(show);
 			}

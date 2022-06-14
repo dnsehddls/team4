@@ -45,7 +45,6 @@
         <section class="container">
             <div class="main-content">
                 <div class="hot-board">
-                									<!-- 타입 관련 생각 -->
                     <div>
                         <a href="${contextPath}/board/list?type=5">인기 게시판</a>
                     </div>
@@ -54,7 +53,7 @@
                         <ul>
                             <c:forEach var="hb" items="${hot}">
                                                 <!-- 링크주소 -->
-                                <li><a href="${contextPath}/board/detail?type=${hb.boardType}&no=${hb.boardNo}">
+                                <li><a href="${contextPath}/board/detail?type=5&no=${hb.boardNo}">
                                         <span>${hb.boardTitle}</span>
                                     </a>
                                     <span>${hb.likeCount}</span>
@@ -71,7 +70,7 @@
                     </div>
                 </div>
                 <div class="new-board">
-                										<!-- 타입 관련 생각 -->
+                										
                     <div><a href="${contextPath}/board/list?type=6">최근 게시글</a></div>
                     <div>                    
                         <c:if test="${!empty recency}">
@@ -79,7 +78,7 @@
                             <c:forEach var="nb" items="${recency}">
                                                 <!-- 링크주소 -->
                                 <li>
-                                    <a href="${contextPath}/board/detail?type=${nb.boardType}&no=${nb.boardNo}">
+                                    <a href="${contextPath}/board/detail?type=6&no=${nb.boardNo}">
                                         <span>${nb.boardTitle}</span>
                                     </a>
                                     <span>${nb.likeCount}</span>
@@ -167,7 +166,7 @@
                     <!-- 로그인세션 존재시 -->
                     <c:if test="${!empty loginMember}">
                         <div>
-                            <div>프로필 이미지</div>
+                            <!-- <div>프로필 이미지</div> -->
                             <div>닉네임</div>
                             <div>이메일</div>
                             <div>
@@ -175,6 +174,9 @@
                             </div>
                             <div>
                                 <a href="#">내 정보</a>
+                            </div>
+                            <div>
+                            	<a href="#">로그아웃</a>
                             </div>
                         </div>
                     </c:if>
