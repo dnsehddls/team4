@@ -76,10 +76,8 @@
    <!-- 회원 정보 수정 -->
    <entry key="updateMember">
       UPDATE MEMBER SET
-      MEMBER_PW = ?
-      MEMBER_NICK = ?
+      MEMBER_NICK = ?,
       MEMBER_TEL = ?
-      MEMBER_EMAIL = ?
       WHERE MEMBER_NO = ?
    </entry>
    
@@ -90,5 +88,13 @@
 		WHERE MEMBER_NO = ?
 		AND MEMBER_PW = ?
 	</entry>
+	
+	<!-- 비밀번호 변경 -->
+	 <entry key="changePw">
+	 	UPDATE MEMBER SET
+		MEMBER_PW = ?
+		WHERE MEMBER_NO = ?
+		AND MEMBER_PW = ?
+	 </entry>
 
 </properties>
