@@ -12,55 +12,59 @@ import javax.servlet.http.HttpSession;
 import Semi.member.model.service.MemberService;
 import Semi.member.model.vo.Member;
 
-
-@WebServlet("/member/signUp")
-public class signUpServlet extends HttpServlet{
-
+@WebServlet("/member/myPage/info")
+public class MyPageInfoServlet extends HttpServlet{
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String path = "/WEB-INF/views/member/signUp.jsp";
+		String path = "/WEB-INF/views/member/myInfo.jsp";
 		
 		req.getRequestDispatcher(path).forward(req, resp);
-		
 	}
 	
+	// 내정보 수정 요청
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String memberId = req.getParameter("memberId");
-		String memberPw = req.getParameter("memberPw");
-		String memberName = req.getParameter("memberName");
-		String memberNickname = req.getParameter("memberNickname");
+		String newPw = req.getParameter("newPw2");
+		String memeberNickname = req.getParameter("memberNick");
 		String memberTel = req.getParameter("memberTel");
 		String memberEmail = req.getParameter("memberEmail");
 		
+		HttpSession session = req.getSession();
+		
+		Member loginMember = (Member)(session.getAttribute("loginMember"));
+		
+		int memberNo = loginMember.getMemberNo();
+		
 		Member mem = new Member();
 		
-		mem.setMemberId(memberId);
-		mem.setMemberPw(memberPw);
-		mem.setMemberName(memberName);
-		mem.setMemberNickname(memberNickname);
+		mem.setMemberNo(memberNo);
+		mem.setMemberPW(newPw);
+		mem.setMemberNickname(memeberNickname);
 		mem.setMemberTel(memberTel);
 		mem.setMemberEmail(memberEmail);
 		
 		try {
 			
-			MemberService service = new MemberService();
+			int result = new MemberService().updateMember(mem);
 			
-			int result = service.signUp(mem);
-			
-			HttpSession session = req.getSession();
-			
-			if(result > 0) { // 성공
-				session.setAttribute("message", "회원 가입 성공!");
-			}else { // 실패
-				session.setAttribute("message", "회원 가입 실패");
+			if(result > 0) {
+				loginMember.setMemberPW(newPw);
+				loginMember.setMemberNickname(memeberNickname);
+				loginMember.setMemberTel(memberTel);
+				loginMember.setMemberEmail(memberEmail);
+			}else {
+				session.setAttribute("message", "회원 정보 수정 실패");
 			}
+			
+			resp.sendRedirect(req.getContextPath() + "/member/myPage/info");
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-		
+	
+
 }
