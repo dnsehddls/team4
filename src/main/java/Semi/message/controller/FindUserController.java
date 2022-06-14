@@ -18,7 +18,7 @@ import Semi.message.model.service.MessageService;
 
 
 // 특정 회원 조회
-@WebServlet("/findUser")
+@WebServlet("/sendView/*")
 public class FindUserController extends HttpServlet {
 
 //	@Override
@@ -61,11 +61,12 @@ public class FindUserController extends HttpServlet {
 	
 		String uri = req.getRequestURI();
 		String contextPath = req.getContextPath();
-		String command = uri.substring(  (contextPath + "/findUser/").length()  );
-		
+		String command = uri.substring(  (contextPath + "/sendView/").length()  );
+		System.out.println(uri);
 		MessageService service = new MessageService();
 		
 		try {
+			System.out.println("findUser");
 			
 			if(command.equals("findNo")) {
 				
