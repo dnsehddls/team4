@@ -25,7 +25,8 @@ public class MemberDAO {
 		try {
 			prop = new Properties();
 			String filePath = MemberDAO.class.getResource
-					("/edu/kh/SemiProject/sql/User_sql.xml").getPath();
+//					("/edu/kh/SemiProject/sql/User_sql.xml").getPath();
+					("/Semi/sql/User_sql.xml").getPath(); // 테스트 위한 경로 수정 - 김성태
 			prop.loadFromXML(new FileInputStream(filePath));
 			
 		}catch(Exception e) {

@@ -22,6 +22,16 @@
     height: 50%;
 }
 
+.right-side>div{
+    margin: 10px;
+
+}
+
+.right-side span{
+    font-size: 13px;
+    margin-left: 20px;
+}
+
 .list-table *{
     border: 1px solid #ddd;
 }

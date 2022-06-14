@@ -26,7 +26,7 @@ public class BoardDAO {
 		try {
 			prop = new Properties();
 			String filePath = BoardDAO.class.getResource
-					("/edu/kh/SemiProject/sql/Board-sql.xml").getPath();
+					("/Semi/sql/Board_sql.xml").getPath();
 			prop.loadFromXML(new FileInputStream(filePath));
 			
 		}catch(Exception e) {
