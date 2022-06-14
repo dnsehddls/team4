@@ -11,10 +11,11 @@
 
     <link rel="stylesheet" href="${contextPath}/resources/css/board/boardDetail-style.css">
     <link rel="stylesheet" href="${contextPath}/resources/css/board/reply-style.css">
-
+    <link rel="stylesheet" href="${contextPath}/resources/css/board/reply-test2-style.css">
     <script src="https://kit.fontawesome.com/296924b572.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <main>
         <section class="board-detail">  
                 <div class="title-box">
@@ -62,7 +63,12 @@
                         <h3>댓글</h3>
                     </div>
                     <ul>
-                        <jsp:include page="/WEB-INF/views/board/replyList.jsp"/>
+                        <c:if test="${!empty rList}">
+                           	<jsp:include page="/WEB-INF/views/board/replyList.jsp"/>
+                        </c:if>
+                        <c:if test="${empty rList}">
+                            <h2>현재 댓글이 존재하지 않습니다.</h2>
+                        </c:if>
                     </ul>
                     
                     <div class="reply-write-area">
@@ -75,9 +81,13 @@
                 </div>
         </section>
     </main>
-    
-
-
-
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    <script src="${contextPath}/resources/js/board/board.js"></script>
+	<script>
+		const contextPath = "${contextPath}";
+		const boardNo = "${detail.boardNo}";
+		const loginMember = "${sessionScope.loginMember.memberNo}"
+	</script>
+	<script src="${contextPath}/resources/js/board/reply.js"></script>
 </body>
 </html>

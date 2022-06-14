@@ -55,7 +55,8 @@ public class ReplyDAO {
 			}
 			
 		} finally {
-
+			close(rs);
+			close(pstmt);
 		}
 		return rList;
 	}

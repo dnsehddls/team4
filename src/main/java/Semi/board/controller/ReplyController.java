@@ -31,6 +31,7 @@ public class ReplyController extends HttpServlet{
 	    		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 	    		List<Reply> rList = service.replyList(boardNo);
 	    		new Gson().toJson(rList,resp.getWriter());
+	    		//JSP만 하면 완료
 	    	}
 	    	
 	    	if(command.equals("updateReply")) {

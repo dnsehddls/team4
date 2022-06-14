@@ -15,6 +15,7 @@ public class ReplyService {
 	public List<Reply> replyList(int boardNo) throws Exception {
 		Connection conn = getConnection();
 		List<Reply> rList = dao.replyList(conn,boardNo);
+		close(conn);
 		return rList;
 	}
 
