@@ -41,7 +41,7 @@
                         <tr>
                             <th>아이디</th>
                             <td>
-                                ${memberDetail.memberId}
+                                ${memberDetail.memberID}
                             </td>
                         </tr>
         
@@ -62,7 +62,7 @@
                         <tr>
                             <th>탈퇴 여부</th>
                             <td>
-                                <input type="text" name="secessionFlag" value="${memberDetail.secessionFlag}">
+                                <input type="text" name="secessionFlag" id="secessionFlag" value="${memberDetail.secessionFlag}">
                             </td>
                         </tr>
                         

@@ -23,6 +23,10 @@
 
     <main>
 
+        <c:if test="${!empty param.key}">
+            <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+        </c:if>
+
         <section class="adminPage-content">
            
             <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
@@ -38,6 +42,7 @@
                                 <tr>
                                     <th>회원번호</th>
                                     <th>아이디</th>
+                                    <th>닉네임</th>
                                     <th>가입날짜</th>
                                     <th>탈퇴여부</th>
                                 </tr>
@@ -56,10 +61,11 @@
                                             <tr>
                                                 <td>${member.memberNo}</td>    
                                                 <td>
-                                                    <a href="#">${member.memberId}</a>
+                                                    <a href="memberDetail?memberEmail=${member.memberEmail}&cp=${pagination.currentPage}">${member.memberEmail}</a>
                                                 </td>
-                                                <td>${member.enrollDate}</td>            
-                                                <td>${member.secessionFl}</td>
+                                                <td>${member.memberNickname}</td>            
+                                                <td>${member.registDate}</td>            
+                                                <td>${member.secessionFlag}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:otherwise>
@@ -72,7 +78,8 @@
         
                     <div class="pagination-area">
 
-                        <c:set var="url" value="list?cp="/>
+                        <c:set var="url" value="memberList?cp="/>
+                        
                         <ul class="pagination">
                             <!-- 첫 페이지로 이동 -->
                             <li><a href="${url}1${sURL}">&lt;&lt;</a></li>
@@ -101,13 +108,18 @@
                         </ul>
                     </div>
 
-                    <form action="memberList" method="get">
+                    <form action="memberList" method="get" id="memberSearch">
 
-                        <div id="memberSearch">
-                            <input type="text" name="query" id="in1" placeholder="이메일을 입력해주세요.">
-        
-                             <button id="select1">검색</button>
-                        </div>
+                        <select name="key" id="search-key">
+                            <option value="e">이메일</option>
+                            <option value="n">닉네임</option>
+                            <option value="id">아이디</option>
+                        </select>
+                        
+                        <input type="text" name="query" id="in1" placeholder="검색어를 입력해주세요.">
+    
+                        <button id="select1">검색</button>
+                        
 
                     </form>
         

@@ -17,16 +17,17 @@ import Semi.board.model.vo.ShowWindowInfo;
 
 public class BoardDAO {
 	
-	private PreparedStatement pstmt;
-	private Statement stmt;
-	private ResultSet rs;
+	private PreparedStatement pstmt = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
 	
-	private Properties prop;
+	private Properties prop = null;
+	
 	public BoardDAO() {
 		try {
 			prop = new Properties();
 			String filePath = BoardDAO.class.getResource
-					("/team4/src/main/java/Semi/sql/Board_sql.xml").getPath();
+					("/Semi/sql/Board_sql.xml").getPath();
 			prop.loadFromXML(new FileInputStream(filePath));
 //			C:\workspace\team4\src\main\java\Semi\sql\Board_sql.xml
 		}catch(Exception e) {

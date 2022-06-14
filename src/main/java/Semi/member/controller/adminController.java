@@ -41,11 +41,10 @@ public class adminController extends HttpServlet {
 	    		
 //	    		List<Member> list = service.selectAll();
 	    		
-	    		String path = "/WEB-INF/views/admin/admin-memberList.jsp";
+//	    		String path = "/WEB-INF/views/admin/admin-memberList.jsp";
 	    		
-	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+
 	    		
-	    		dispatcher.forward(req, resp);
 	    		
 	    		int cp = 1;
 	    		
@@ -56,20 +55,26 @@ public class adminController extends HttpServlet {
 	    		
 	    		Map<String, Object> map = null;
 	    		
-	    		if(req.getParameter("memberEmail") == null) { // 일반 회원 목록
+	    		if(req.getParameter("key") == null) { // 일반 회원 목록
 	    			
 	    			map = service.selectAll(cp);
 	    				    			
-	    		}else {
+	    		}else { // 검색 회원 목록
 	    			
-	    			String memberEmail = req.getParameter("memberEmail");
-	    			
-	    			map = service.searchMember(memberEmail);
+	    			String key = req.getParameter("key");
+	    			String query = req.getParameter("query");
+	    			
+	    			map = service.searchMember(key, query, cp);
 	    			
 	    		}
 	    		
 	    		req.setAttribute("map", map);	    			    		
 
+	    		String path = "/WEB-INF/views/admin/memberList.jsp";
+	    		
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp);
 	    		
 	    	}
 	    	
@@ -148,40 +153,53 @@ public class adminController extends HttpServlet {
 	    	}
 	    	
 	    	
-	    	// 회원 탈퇴 / 복구, 회원 상세 조회
+	    	// 회원 상세 조회
 	    	if(command.equals("memberDetail")) {
 	    		
-	    		String path = "/WEB-INF/views/admin/memberDetail.jsp";
-	    		
-	    		req.getRequestDispatcher(path).forward(req, resp);
-	    		
-	    		HttpSession session = req.getSession();
 	    		
 	    		String memberEmail = req.getParameter("memberEmail");
 	    		
 	    		
-	    		Member memberDetail = service.memberDetail(memberEmail);
+	    		Member memberDetail = service.memberDetail(memberEmail);	    		
+	    		
+	    		// 회원탈퇴 아직..
+	    		int result = service.changeSecession(memberEmail);
 	    		
 	    		req.setAttribute("memberDetail", memberDetail);
 	    		
-	    		int result = service.changeSecession(memberEmail);
+	    		String path = "/WEB-INF/views/admin/memberDetail.jsp";
+    		
+	    		req.getRequestDispatcher(path).forward(req, resp);
 	    		
-	    		if(result>0) {
-	    			session.setAttribute("message",	"회원 탈퇴 변경 성공");
-	    			
-	    			path = "/WEB-INF/views/admin/memberDetail.jsp";
-	    			
-	    		}else {
-	    			session.setAttribute("message", "회원 탈퇴 변경 실패");
-	    			
-	    			path = "/WEB-INF/views/admin/memberDetail.jsp";
-	    		}
+	    		HttpSession session = req.getSession();
+	    		    	
+	    		
+	    		
+//	    		if(result>0) {
+//	    			session.setAttribute("message",	"회원 탈퇴 변경 성공");
+//	    			    			
+//	    			resp.sendRedirect(path); 
+//	    			
+//	    		}else {
+//	    			session.setAttribute("message", "회원 탈퇴 변경 실패");
+//	    			
+//	    		}
+	    		
+	    		
 	    				    			    			    			    		
 	    	}
 	    	
 	    	
 	    	
-	    	
+	    	if(command.equals("reported")) {
+	    		
+	    		String path = "/WEB-INF/views/admin/admin-reported.jsp";
+	    		
+	    		req.getRequestDispatcher(path).forward(req, resp);
+	    		
+	    	}
+	    
+	      	
 	    	
 			
 		}catch(Exception e) {

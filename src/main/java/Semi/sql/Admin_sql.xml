@@ -7,7 +7,7 @@
 	<entry key="selectAll">
 		SELECT * FROM(
 		   SELECT ROWNUM RNUM, A.* FROM(   
-		      SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICK
+		      SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICK, SECESSION_FL,
 		            TO_CHAR(REG_DATE, 'YYYY-MM-DD') AS REG_DATE
 
 		      FROM MEMBER
@@ -63,6 +63,29 @@
 		FROM MEMBER
 		WHERE MEMBER_EMAIL = ?
 	</entry>
+	
+	<!-- 조건을 만족하는 회원의 수 조회 -->
+	<entry key="searchListCount">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE SECESSION_FL = 'N'	
+	</entry>
+	
+	<!-- 조건을 만족하는 회원 목록 조회 -->
+	<entry key="searchMemberList1">
+	SELECT * FROM(
+   		SELECT ROWNUM RNUM, A.* FROM(   
+     		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICK, REG_DATE, SECESSION_FL
+			FROM MEMBER
+			WHERE SECESSION_FL = 'N'
+	</entry>
+	
+	<entry key="searchMemberList2">
+		      ORDER BY MEMBER_NO DESC
+        	 ) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
 
 
 </properties>

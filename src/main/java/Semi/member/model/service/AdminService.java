@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Semi.board.model.vo.Pagination;
+import Semi.member.model.vo.Pagination;
 import Semi.member.model.dao.AdminDAO;
 import Semi.member.model.vo.Member;
 
@@ -18,12 +18,6 @@ public class AdminService {
 	
 	private AdminDAO dao = new AdminDAO();
 
-//	public Member login(Member user) throws Exception{
-//		Connection conn = getConnection();
-//		Member result = dao.login(conn,user);
-//		close(conn);
-//		return result;
-//	}
 	
 
 	/** 회원 목록 조회 Service
@@ -45,8 +39,7 @@ public class AdminService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", pagination);
-		map.put("list", memberList);
-		
+		map.put("memberList", memberList);	
 		
 		
 		close(conn);
@@ -140,20 +133,56 @@ public class AdminService {
 	 * @return searchMember
 	 * @throws Exception
 	 */
-	public Map<String, Object> searchMember(String memberEmail) throws Exception {
+//	public Map<String, Object> searchMember(String memberEmail) throws Exception {
+//
+//		Connection conn = getConnection();
+//		
+//		Member searchMember = dao.searchMember(conn, memberEmail);
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		
+//		map.put("searchMember", searchMember);
+//		
+//		close(conn);
+//		
+//		return map;
+//		
+//	}
 
+
+	/** 회원 검색 조회
+	 * @param key
+	 * @param query
+	 * @param cp
+	 * @return map
+	 * @throws Exception
+	 */
+	public Map<String, Object> searchMember(String key, String query, int cp) throws Exception {
+		
 		Connection conn = getConnection();
 		
-		Member searchMember = dao.searchMember(conn, memberEmail);
+		String condition = null;
+		
+		switch(key) {		
+		case "e" : condition = "AND MEMBER_EMAIL LIKE '%"+query+"%' "; break;
+		case "n" : condition = "AND MEMBER_NICK LIKE '%"+query+"%' "; break;
+		case "id" : condition = "AND MEMBER_ID LIKE '%"+query+"%' "; break;	
+		}
+		
+		int listCount = dao.searchListCount(conn, condition);
+		
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		List<Member> memberList = dao.searchMemberList(conn, pagination, condition);
 		
 		Map<String, Object> map = new HashMap<>();
 		
-		map.put("searchMember", searchMember);
+		map.put("pagination", pagination);
+		map.put("memberList", memberList);
 		
 		close(conn);
 		
 		return map;
-		
 	}
 
 
