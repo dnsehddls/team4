@@ -2,6 +2,18 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>member-sql.xml</comment>
+	
+	<!-- 로그인 -->
+	<entry key="login">
+		SELECT MEMBER_NO,MEMBER_ID,MEMBER_NAME,MEMBER_NICK,MEMBER_EMAIL,MEMBER_TEL,
+		       GRADE_NAME,POINT, 
+		 	   TO_CHAR( REG_DATE, 'YYYY-MM-DD') AS REG_DATE
+		FROM MEMBER
+		JOIN GRADE USING (GRADE_CODE)
+		WHERE MEMBER_ID = ?
+		AND MEMBER_PW = ?
+		AND SECESSION_FL = 'N'
+	</entry>
 
 	<!-- 회원가입 -->
 	<entry key="signUp">
