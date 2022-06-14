@@ -262,6 +262,28 @@ public class MemberService {
 		return result;
 	}
 
+
+	/**
+	 * 회원 탈퇴 Service
+	 * @param memberNo
+	 * @param inputPW
+	 * @return result
+	 * @throws Exception
+	 */
+	public int secession(int memberNo, String inputPW) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.secession(conn, memberNo, inputPW);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 	
 
 }

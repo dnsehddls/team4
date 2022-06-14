@@ -26,9 +26,8 @@ public class MemberDAO {
 			prop = new Properties();
 
 			String filePath = MemberDAO.class.getResource
+					("/Semi/sql/member-sql.xml").getPath();
 
-					("/Semi/sql/Member_sql.xml").getPath();  
-			
 			prop.loadFromXML(new FileInputStream(filePath));
 
 		}catch(Exception e) {
@@ -49,10 +48,10 @@ public class MemberDAO {
 				result = new Member();
 				result.setMemberNo(rs.getInt(1));
 				result.setMemberID(rs.getString(2));
-				result.setMemberName(rs.getString(3));
-				result.setMemberNickname(rs.getString(4));
-				result.setMemberEmail(rs.getString(5));
-				result.setMemberTel(rs.getString(6));
+				result.setMemberEmail(rs.getString(3));
+				result.setMemberName(rs.getString(4));
+				result.setMemberTel(rs.getString(5));
+				result.setMemberProfile(rs.getString(6));
 				result.setGrade(rs.getString(7));
 				result.setPoint(rs.getInt(8));
 				result.setRegistDate(rs.getString(9));
@@ -479,6 +478,34 @@ public class MemberDAO {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	/**
+	 * 회원 탈퇴 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @param inputPW
+	 * @return result
+	 * @throws Exception
+	 */
+	public int secession(Connection conn, int memberNo, String inputPW) throws Exception{
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("secession");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, inputPW);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

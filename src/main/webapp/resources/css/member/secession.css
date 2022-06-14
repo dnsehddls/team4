@@ -3,6 +3,12 @@
     display: flex;
 }
 
+main{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .line{
     margin-left: auto;
     margin-right: auto;
@@ -17,6 +23,11 @@
 .myPage-main{
     width: 900px;
     margin: 30px;
+}
+
+#message{
+    display: block;
+    margin-left: 12px;
 }
 
 #secessionBtn{

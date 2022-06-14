@@ -20,12 +20,11 @@
 
             <section class="left-side">
                 <ul class="list-group">
-                    <!-- 링크 수정 -->
-                    <li><a href="../../../webapp/html/member/myInfo.html">내 정보</a></li>
-                    <li><a href="../../../webapp/html/member/myContent.html">내 글 관리</a></li>
-                    <li><a href="../../../webapp/html/member/like.html">좋아요 관리</a></li>
-                    <li><a href="../../../webapp/html/member/bookmark.html">북마크 관리</a></li>
-                    <li><a href="../../../webapp/html/member/secession.html">회원 탈퇴</a></li>
+                    <li><a href="info">내 정보</a></li>
+                    <li><a href="myContent">내 글 관리</a></li>
+                    <li><a href="like">좋아요 관리</a></li>
+                    <li><a href="bookmark">북마크 관리</a></li>
+                    <li><a href="secession">회원 탈퇴</a></li>
                     <li><a href="#">쪽지</a></li>
                 </ul>
             </section>
@@ -37,11 +36,7 @@
         
                 <div class="line"></div>
                 
-<<<<<<< HEAD
-                <form action="memberSignUp" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
-=======
                 <form action="info" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
->>>>>>> bc453bb8f99b5195a6840fbb711b7964801f39ca
                     <table name="signUp-form" class="tb">
                         <tr>
                             <th>아이디</th>
@@ -101,6 +96,8 @@
             </section>
         </section>
     </main>
+
+
 
     <script src="${contextPath}/resources/js/member/myInfo.js"></script>
 </body>

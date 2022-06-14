@@ -1,40 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Like</title>
-
-    <link rel="stylesheet" href="../../resources/css/member/like.css">
+    <title>Bookmark</title>
+    
+    <link rel="stylesheet" href="${contextPath}/resources/css/member/bookmark.css">
 
 </head>
 <body>
-    <section class="myPage-content">
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <main>
+        <section class="myPage-content">
 
-        <section class="left-side">
-            <ul class="list-group">
-                <li><a href="../../../webapp/html/member/myInfo.html">내 정보</a></li>
-                <li><a href="../../../webapp/html/member/myContent.html">내 글 관리</a></li>
-                <li><a href="../../../webapp/html/member/like.html">좋아요 관리</a></li>
-                <li><a href="../../../webapp/html/member/bookmark.html">북마크 관리</a></li>
-                <li><a href="../../../webapp/html/member/secession.html">회원 탈퇴</a></li>
-                <li><a href="#">쪽지</a></li>
-            </ul>
-        </section>
-    
-        <section class="myPage-main">
-            <h2 class="title">
-                <span>좋아요 관리</span>
-            </h2>
-    
-            <div class="line">
-    
-            </div>
+            <section class="left-side">
+                <ul class="list-group">
+                    <li><a href="info">내 정보</a></li>
+                    <li><a href="myContent">내 글 관리</a></li>
+                    <li><a href="like">좋아요 관리</a></li>
+                    <li><a href="bookmark">북마크 관리</a></li>
+                    <li><a href="secession">회원 탈퇴</a></li>
+                    <li><a href="#">쪽지</a></li>
+                </ul>
+            </section>
             
-            <form action="#" method="POST">
+            <section class="myPage-main">
+                <h2 class="title">
+                    <span>북마크 관리</span>
+                </h2>
+        
+                <div class="line">
+        
+                </div>
+                
                 <table name="myContent" class="tb">
-    
                     <thead>
                         <tr>
                             <th>번호</th>
@@ -158,24 +161,40 @@
                         </tr>
                     </tbody>
                 </table>
+
                 <div class="btn-area">
                     <button type="submit" id="deleteBtn">삭제</button>
                 </div>
-            </form>
-    
-            <div class="page">
-                <div>&lt;</div>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>&gt;</div>
-            </div>
-            <div class="line"></div>
+        
+                
+                <div class="pagination-area">
+                    <ul class="pagination">
+                        <li><a href="#">&lt;</a></li>
+                        <li><a class="current">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#">9</a></li>
+                        <li><a href="#">10</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+                
+                <div class="line"></div>
+            </section>
         </section>
-    </section>
+    </main>
 
-    <script src="../../resources/js/member/like.js"></script>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    <!-- jQuery 라이브러리 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    <!-- js -->
+    <script src="${contextPath}/resources/js/member/bookmark.js"></script>
+    
 </body>
 </html>
