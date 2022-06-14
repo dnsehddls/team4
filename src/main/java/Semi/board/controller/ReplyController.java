@@ -33,11 +33,21 @@ public class ReplyController extends HttpServlet{
 	    		new Gson().toJson(rList,resp.getWriter());
 	    	}
 	    	
+	    	if(command.equals("updateReply")) {
+	    		
+	    	}
+	    	
+	    	if(command.equals("deleteReply")) {
+	    		
+	    	}
+	    	
+	    	if(command.equals("insertReply")) {
+	    		
+	    	}
 	    	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    
 	}
 	
 	@Override

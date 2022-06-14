@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import Semi.board.model.vo.Board;
 import Semi.board.model.vo.ShowWindowInfo;
 
 public class BoardDAO {
@@ -62,6 +63,33 @@ public class BoardDAO {
 			close(stmt);
 		}
 		return sList;
+	}
+
+	public Board boardDetail(Connection conn, int boardNo) throws Exception{
+		Board boardDetail = null;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("boardDetail"));
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				boardDetail = new Board();
+				boardDetail.setBoardNo(rs.getInt(1));
+				boardDetail.setBoardTitle(rs.getString(2));
+				boardDetail.setBoardContent(rs.getString(3));
+				boardDetail.setReadCount(rs.getInt(4));
+				boardDetail.setMemberNickname(rs.getString(5));
+				boardDetail.setCreateDate(rs.getString(6));
+				if(rs.getString(7)!=null) {
+					boardDetail.setUpdateDate(rs.getString(7));
+				}
+				boardDetail.setBoardType(rs.getString(8));
+			}
+			
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return boardDetail;
 	}
 
 }
