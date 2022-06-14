@@ -41,7 +41,7 @@
                             <thead>
                                 <tr>
                                     <th>회원번호</th>
-                                    <th>아이디</th>
+                                    <th>이메일</th>
                                     <th>닉네임</th>
                                     <th>가입날짜</th>
                                     <th>탈퇴여부</th>

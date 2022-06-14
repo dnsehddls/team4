@@ -111,43 +111,10 @@ public class AdminService {
 	}
 
 
-	/** 회원 탈퇴 / 복구
-	 * @param memberEmail
-	 * @return	result
-	 * @throws Exception
-	 */
-	public int changeSecession(String memberEmail) throws Exception {
-
-		Connection conn = getConnection();
-		
-		int result = dao.changeSecession(conn, memberEmail);
-		
-		close(conn);
-		
-		return result;
-	}
 
 
-	/** 회원 검색 Service
-	 * @param memberEmail
-	 * @return searchMember
-	 * @throws Exception
-	 */
-//	public Map<String, Object> searchMember(String memberEmail) throws Exception {
-//
-//		Connection conn = getConnection();
-//		
-//		Member searchMember = dao.searchMember(conn, memberEmail);
-//		
-//		Map<String, Object> map = new HashMap<>();
-//		
-//		map.put("searchMember", searchMember);
-//		
-//		close(conn);
-//		
-//		return map;
-//		
-//	}
+
+
 
 
 	/** 회원 검색 조회
@@ -166,7 +133,7 @@ public class AdminService {
 		switch(key) {		
 		case "e" : condition = "AND MEMBER_EMAIL LIKE '%"+query+"%' "; break;
 		case "n" : condition = "AND MEMBER_NICK LIKE '%"+query+"%' "; break;
-		case "id" : condition = "AND MEMBER_ID LIKE '%"+query+"%' "; break;	
+		case "id" : condition = "AND SESSION_FL LIKE '%"+query+"%' "; break;	
 		}
 		
 		int listCount = dao.searchListCount(conn, condition);
@@ -183,6 +150,46 @@ public class AdminService {
 		close(conn);
 		
 		return map;
+	}
+
+
+	/** 회원 탈퇴 Service
+	 * @param memberEmail
+	 * @return result
+	 * @throws Exception
+	 */
+	public int memberFlagY(String memberEmail) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = dao.memberFlagY(conn, memberEmail);
+		
+		if(result>0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/** 탈퇴 회원 복구
+	 * @param memberEmail
+	 * @return result
+	 * @throws Exception
+	 */
+	public int memberFlagN(String memberEmail) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.memberFlagN(conn, memberEmail);
+		
+		if(result>0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 
 

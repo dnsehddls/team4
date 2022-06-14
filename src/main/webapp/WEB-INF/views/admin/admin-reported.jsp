@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
     
-    <link rel="stylesheet" href="${contextPath}/resources/css/memberList.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin/memberList.css">
 </head>
 <body>
     

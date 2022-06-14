@@ -154,40 +154,80 @@ public class adminController extends HttpServlet {
 	    	
 	    	
 	    	// 회원 상세 조회
-	    	if(command.equals("memberDetail")) {
-	    		
+	    	if(command.equals("memberDetail")) {  		
 	    		
 	    		String memberEmail = req.getParameter("memberEmail");
 	    		
-	    		
 	    		Member memberDetail = service.memberDetail(memberEmail);	    		
 	    		
-	    		// 회원탈퇴 아직..
-	    		int result = service.changeSecession(memberEmail);
 	    		
 	    		req.setAttribute("memberDetail", memberDetail);
 	    		
 	    		String path = "/WEB-INF/views/admin/memberDetail.jsp";
     		
-	    		req.getRequestDispatcher(path).forward(req, resp);
-	    		
-	    		HttpSession session = req.getSession();
-	    		    	
-	    		
-	    		
-//	    		if(result>0) {
-//	    			session.setAttribute("message",	"회원 탈퇴 변경 성공");
-//	    			    			
-//	    			resp.sendRedirect(path); 
-//	    			
-//	    		}else {
-//	    			session.setAttribute("message", "회원 탈퇴 변경 실패");
-//	    			
-//	    		}
-	    		
-	    		
+	    		req.getRequestDispatcher(path).forward(req, resp);    		
 	    				    			    			    			    		
 	    	}
+	    	
+	    	
+	    	// 회원 탈퇴
+	    	if(command.equals("flagY")) {
+	    		
+	    		String memberEmail = req.getParameter("memberEmail");
+	    		
+	    		int result = service.memberFlagY(memberEmail);
+	    		
+	    		HttpSession session = req.getSession();
+	    		
+	    		String path = null;
+	    		String message = null;
+	    		
+	    		if(result>0) {
+	    			message = "회원 탈퇴 성공";
+	    			path = "memberDetail?memberEmail=" + memberEmail;	
+	    			
+	    		}else {
+	    			message = "회원 탈퇴 실패";
+	    			path = "memberList";		
+	    		}
+	    		
+	    		session.setAttribute("message", message);
+	    		
+	    		resp.sendRedirect(path);
+	    		
+	    	}
+	    	
+	    	
+	    	
+	    	// 탈퇴한 회원 복구
+	    	if(command.equals("flagN")) {
+	    		
+	    		String memberEmail = req.getParameter("memberEmail");
+	    		
+	    		int result = service.memberFlagN(memberEmail);
+	    		
+	    		HttpSession session = req.getSession();
+	    		
+	    		String path = null;
+	    		String message = null;
+	    		
+	    		if(result>0) {
+	    			message = "탈퇴 회원 복구 성공";
+	    			path = "memberDetail?memberEmail=" + memberEmail;	
+	    			
+	    		}else {
+	    			message = "탈퇴 회원 복구 실패";
+	    			path = "memberList";		
+	    		}
+	    		
+	    		session.setAttribute("message", message);
+	    		
+	    		resp.sendRedirect(path);
+	    		
+	    	}
+	    	
+	    	
+	    	
 	    	
 	    	
 	    	

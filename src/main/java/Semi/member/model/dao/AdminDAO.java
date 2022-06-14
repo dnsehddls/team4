@@ -181,32 +181,6 @@ public class AdminDAO {
 	}
 
 
-	/** 회원 탈퇴 / 복구
-	 * @param conn
-	 * @param memberEmail
-	 * @param secessionFlag
-	 * @return result
-	 * @throws Exception
-	 */
-	public int changeSecession(Connection conn, String memberEmail) throws Exception {
-		int result = 0;
-		
-		
-		try {
-			String sql = prop.getProperty("changeSecession");
-			
-			pstmt = conn.prepareStatement(sql);		
-		
-			pstmt.setString(1, memberEmail);
-			
-			result = pstmt.executeUpdate();
-			
-		}finally {
-			close(pstmt);			
-		}
-		
-		return result;
-	}
 
 
 	/** 회원 상세 조회		
@@ -247,44 +221,7 @@ public class AdminDAO {
 	}
 
 
-	/** 회원 검색 DAO
-	 * @param conn
-	 * @param memberEmail
-	 * @return	searchMember
-	 * @throws Exception
-	 */
-//	public Member searchMember(Connection conn, String memberEmail) throws Exception {
-//		
-//		Member searchMember = null;
-//		
-//		try {
-//			String sql = prop.getProperty("searchMember");
-//			
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			pstmt.setString(1, memberEmail);
-//			
-//			rs = pstmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				
-//				searchMember = new Member();
-//				
-//				searchMember.setMemberNo(rs.getInt("MEMBER_NO"));
-//				searchMember.setMemberEmail(rs.getString("MEMBER_EMAIL"));
-//				searchMember.setMemberName(rs.getString("MEMBER_NAME"));
-//				searchMember.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
-//				
-//			}
-//			
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		
-//		return searchMember;
-//		
-//	}
+
 
 
 	/** 조건을 만족하는 회원의 수 조회 
@@ -363,6 +300,61 @@ public class AdminDAO {
 		}
 		
 		return memberList;
+	}
+
+
+	/** 회원 탈퇴 DAO 
+	 * @param conn
+	 * @param memberEmail
+	 * @return result
+	 * @throws Exception
+	 */
+	public int memberFlagY(Connection conn, String memberEmail) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("memberFlagY");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberEmail);
+			
+			result = pstmt.executeUpdate();			
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 탈퇴 회원 복구 
+	 * @param conn
+	 * @param memberEmail
+	 * @return result
+	 * @throws Exception
+	 */
+	public int memberFlagN(Connection conn, String memberEmail) throws Exception {
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("memberFlagN");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberEmail);
+			
+			result = pstmt.executeUpdate();			
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 
 }

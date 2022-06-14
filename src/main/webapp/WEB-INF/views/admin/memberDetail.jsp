@@ -36,41 +36,43 @@
         
                 <div class="line"></div>
                 
-                <form action="memberDetail" method="POST" name="myPage-form" onsubmit="return secessionFl()">
-                    <table name="signUp-form" class="tb">
-                        <tr>
-                            <th>아이디</th>
+
+                <table name="signUp-form" class="tb">
+                    <tr>
+                        <th>아이디</th>
+                        <td>
+                            ${memberDetail.memberID}
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <th>이름</th>
+                        <td>
+                            ${memberDetail.memberName}
+                        </td>
+                    </tr>      
+    
+                    <tr>
+                        <th>이메일</th>
+                        <td>
+                            ${memberDetail.memberEmail}
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <th>탈퇴 여부</th>
                             <td>
-                                ${memberDetail.memberID}
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <th>이름</th>
-                            <td>
-                                ${memberDetail.memberName}
-                            </td>
-                        </tr>      
-        
-                        <tr>
-                            <th>이메일</th>
-                            <td>
-                                ${memberDetail.memberEmail}
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <th>탈퇴 여부</th>
-                            <td>
-                                <input type="text" name="secessionFlag" id="secessionFlag" value="${memberDetail.secessionFlag}">
-                            </td>
-                        </tr>
-                        
-                    </table>
-        
-                    <button id="update">수정하기</button>
+                                ${memberDetail.secessionFlag}
+
+                                <button id="flagY">탈퇴</button>
+                                <button id="flagN">복구</button>
+                            </td>  
+                    </tr>
                     
-                </form>
+                </table>
+    
+                    
+
         
                 <div class="line"></div>
             </section>

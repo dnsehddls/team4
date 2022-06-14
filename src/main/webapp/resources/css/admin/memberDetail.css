@@ -59,6 +59,7 @@ main{
     height: 23px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    /* margin-right: 100; */
 }
 
 .tb button{
