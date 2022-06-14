@@ -18,5 +18,6 @@ public class Board {
 	private String updateDate;
 
 	private String boardType;
+	private String goodCount; // 좋아요 갯수
 	
 }

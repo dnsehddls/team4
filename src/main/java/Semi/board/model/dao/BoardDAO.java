@@ -54,7 +54,15 @@ public class BoardDAO {
 				show.setReplyCount(rs.getInt("R_C"));
 				show.setMemberNick(rs.getString("MEMBER_NICK"));
 				show.setDate(rs.getString("CREATE_DT"));
-				show.setBoardType(rs.getInt("BOARD_CD"));
+				//announcement
+				//exercise
+				//free
+				//met
+				switch(boardType) {
+					case "hot","recency": break;
+					default : show.setBoardType(rs.getInt("BOARD_CD"));
+				}
+				
 				sList.add(show);
 			}
 			

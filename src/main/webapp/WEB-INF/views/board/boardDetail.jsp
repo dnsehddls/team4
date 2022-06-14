@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 상세</title>
 
-    <link rel="stylesheet" href="../../resources/css/board/boardDetail-style.css">
-    <link rel="stylesheet" href="../../resources/css/board/reply-style.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/board/boardDetail-style.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/board/reply-style.css">
 
     <script src="https://kit.fontawesome.com/296924b572.js" crossorigin="anonymous"></script>
 </head>
@@ -18,7 +18,7 @@
     <main>
         <section class="board-detail">  
                 <div class="title-box">
-                    <h1 class="board-title">${boardDetail.boardtitle}</h1>
+                    <h1 class="board-title">${boardDetail.boardTitle}</h1>
                 </div>
                 <div class="board-header">
                     <div class="board-writer">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="board-info">
                         <span>${boardDetail.readCount}</span>
-                        <span>추천 : 12</span> <!-- 이거아직안함 -->
+                        <span>${boardDetail.goodCount}</span> <!-- 이거아직안함 -->
                     </div>
                 </div>
 
