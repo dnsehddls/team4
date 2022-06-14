@@ -25,9 +25,7 @@ public class MemberDAO {
 		try {
 			prop = new Properties();
 
-			String filePath = MemberDAO.class.getResource
-					("/Semi/sql/member-sql.xml").getPath();
-
+			String filePath = MemberDAO.class.getResource("/Semi/sql/member-sql.xml").getPath();
 			prop.loadFromXML(new FileInputStream(filePath));
 
 		}catch(Exception e) {
