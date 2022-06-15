@@ -37,6 +37,7 @@ SELECT * FROM
         JOIN MEMBER USING(MEMBER_NO)
         WHERE  (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) >= 5
+        AND BOARD_CD IN (2,3,4)
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -71,7 +72,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -91,7 +92,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -111,7 +112,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -120,6 +121,29 @@ SELECT * FROM
     )D
 )
 WHERE RNUM BETWEEN 1 AND 5
+</entry>
+
+
+
+
+
+
+
+
+
+
+<!-- 게시글 조회 -->
+<entry key="boardDetail">
+SELECT BOARD_NO,BOARD_TITLE,BOARD_CONTENT,READ_COUNT,
+	   MEMBER_NICK,
+	   TO_CHAR(CREATE_DT,'YYYY-MM-DD hh:mm:ss') CREATE_DT,
+	   TO_CHAR(UPDATE_DT,'YYYY-MM-DD hh:mm:ss') UPDATE_DT,
+	   BOARD_NM
+FROM BOARD
+JOIN MEMBER USING(MEMBER_NO)
+JOIN BOARD_TYPE USING(BOARD_CD)
+WHERE BOARD_NO = ?
+AND BOARD_FL = 'N'
 </entry>
 
 </properties>

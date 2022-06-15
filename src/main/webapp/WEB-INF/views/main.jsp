@@ -45,16 +45,15 @@
         <section class="container">
             <div class="main-content">
                 <div class="hot-board">
-                									<!-- 타입 관련 생각 -->
                     <div>
                         <a href="${contextPath}/board/list?type=5">인기 게시판</a>
                     </div>
                     <div>                    
                         <c:if test="${!empty hot}">
                         <ul>
-                            <c:forEach var="hb" items="${map.hot}">
+                            <c:forEach var="hb" items="${hot}">
                                                 <!-- 링크주소 -->
-                                <li><a href="${contextPath}/board/detail?type=${hb.boardType}&no=${hb.boardNo}">
+                                <li><a href="${contextPath}/board/detail?type=5&no=${hb.boardNo}">
                                         <span>${hb.boardTitle}</span>
                                     </a>
                                     <span>${hb.likeCount}</span>
@@ -65,21 +64,21 @@
                             </c:forEach>
                         </ul>
                         </c:if>
-                        <c:if test="${empty map.hot}">
+                        <c:if test="${empty hot}">
                             <div>현재 게시글이 존재하지 않습니다.</div>
                         </c:if>
                     </div>
                 </div>
                 <div class="new-board">
-                										<!-- 타입 관련 생각 -->
+                										
                     <div><a href="${contextPath}/board/list?type=6">최근 게시글</a></div>
                     <div>                    
-                        <c:if test="${!empty map.recency}">
+                        <c:if test="${!empty recency}">
                         <ul>
-                            <c:forEach var="nb" items="${map.recency}">
+                            <c:forEach var="nb" items="${recency}">
                                                 <!-- 링크주소 -->
                                 <li>
-                                    <a href="${contextPath}/board/detail?type=${nb.boardType}&no=${nb.boardNo}">
+                                    <a href="${contextPath}/board/detail?type=6&no=${nb.boardNo}">
                                         <span>${nb.boardTitle}</span>
                                     </a>
                                     <span>${nb.likeCount}</span>
@@ -90,7 +89,7 @@
                             </c:forEach>
                         </ul>
                         </c:if>
-                        <c:if test="${empty map.recency}">
+                        <c:if test="${empty recency}">
                             <div>현재 게시글이 존재하지 않습니다.</div>
                         </c:if>                        
                     </div>
@@ -122,9 +121,9 @@
                 <div class="free-board">
                     <div><a href="${contextPath}/board/list?type=3">자유 게시판</a></div>
                     <div>                    
-                        <c:if test="${!empty map.free}">
+                        <c:if test="${!empty free}">
                         <ul>
-                            <c:forEach var="fb" items="free">
+                            <c:forEach var="fb" items="${free}">
                         							<!-- 링크주소 -->
                                 <li>
                                     <a href="${contextPath}/board/detail?type=3&no=${fb.boardNo}">
@@ -138,7 +137,7 @@
                             </c:forEach>
                         </ul>
                         </c:if>
-                        <c:if test="${empty map.free}">
+                        <c:if test="${empty free}">
                             <div>현재 게시글이 존재하지 않습니다.</div>
                         </c:if>           
                     </div>
@@ -167,7 +166,7 @@
                     <!-- 로그인세션 존재시 -->
                     <c:if test="${!empty loginMember}">
                         <div>
-                            <div>프로필 이미지</div>
+                            <!-- <div>프로필 이미지</div> -->
                             <div>닉네임</div>
                             <div>이메일</div>
                             <div>
@@ -176,6 +175,9 @@
                             <div>
                                 <a href="#">내 정보</a>
                             </div>
+                            <div>
+                            	<a href="#">로그아웃</a>
+                            </div>
                         </div>
                     </c:if>
                 </div>
@@ -183,9 +185,9 @@
                 <div class="met-board">
                     <div><a href="${contextPath}/board/list?type=4">정모 게시판</a></div>
                     <div>
-                        <c:if test="${!empty map.met}">
+                        <c:if test="${!empty met}">
                         <ul>
-                            <c:forEach var="mb" items="met">
+                            <c:forEach var="mb" items="${met}">
                                                 <!-- 링크주소 -->
                                 <li>
                                     <a href="${contextPath}/board/detail?type=4&no=${mb.boardNo}">
@@ -199,7 +201,7 @@
                             </c:forEach>
                         </ul>
                         </c:if>
-                        <c:if test="${empty map.met}">
+                        <c:if test="${empty met}">
                             <div>현재 게시글이 <br>존재하지 않습니다.</div>
                         </c:if>           
                     </div>                    

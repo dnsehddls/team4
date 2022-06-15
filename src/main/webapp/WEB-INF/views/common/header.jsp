@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
+<link rel="stylesheet" href="../../resources/css/message/slideMessage-style.css">
 <!DOCTYPE html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../resources/css/message/slideMessage-style.css">
     <header>
         <section class="logo">
             <a href="${contextPath}"><img src="${contextPath}/resources/images/updatelogo.jpg" alt="logo" class="logo"></a>
@@ -24,6 +25,16 @@
             </ul>
         </div>
         <div>
+
+            <c:if test="${!empty loginMember}">
+                <img src="" alt="등급이미지">
+                <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
+                <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+            </c:if>
+            <c:if test="${empty loginMember}">
+                <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+            </c:if>
+<!-- =======
             <img src="" alt="등급이미지">
             <div class="topMenu">
                 <ul class="dept01">
@@ -46,7 +57,7 @@
             <!-- <img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""> -->
             
             <!-- <a href="${contextPath}/findUser"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a> -->
-            <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+           <!--  <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a> -->
             <input type="text" name="search-area" id="search" >
             <button type="button" class="fa-solid fa-magnifying-glass"></button>
         </div>
