@@ -33,7 +33,7 @@ memberId.addEventListener("input", function(){
     const regExp = /^[a-z0-9_-]{4,10}$/; // 아이디 정규식 (소문자 + 숫자 + 언더바/하이픈 허용 4~10자리)
 
     if(regExp.test(memberId.value)){ // 유효한 경우
-        idMessage.innerText = "올바른 형식의 아이디입니다.";
+        idMessage.innerText = "올바른 형식의 아이디입니다. 중복확인을 진행해주세요.";
         idMessage.classList.add("confirm");
         idMessage.classList.remove("error");
         checkObj.memberId = true;
@@ -41,12 +41,12 @@ memberId.addEventListener("input", function(){
         idBtn.addEventListener("click", function(){
 
             $.ajax({
-                url : "idDupCheck",
+                url : "IDDupCheck",
                 data : {"memberId" : memberId.value},
                 type : "GET",
                 success : function(result){
                     if(result == 0){ // 아이디 중복 X
-                        idMessage.innerText = "사용 가능한 아이디입니다.";
+                        idMessage.innerText = "사용 가능한 아이디입니다."
                         idMessage.classList.add("confirm");
                         idMessage.classList.remove("error");
                         checkObj.memberId = true;
@@ -93,7 +93,7 @@ memberPw.addEventListener("input", function(){
         checkObj.memberPw = true;
 
         if(memberPw2.value.length == 0){ // 비밀번호 유효O, 비밀번호 확인 작성X
-            pwMessage.innerText = "유효한 비밀번호 형식입니다.";
+            pwMessage.innerText = "유효한 비밀번호 형식입니다. 비밀번호를 한번 더 입력해주세요.";
             pwMessage.classList.add("confirm");
             pwMessage.classList.remove("error");
 
@@ -150,15 +150,23 @@ memberNickname.addEventListener("input", function(){
         checkObj.memberNickname = false;
         return;
     }
+    if(regExp.test(memberNickname.value)){
+        nicknameMessage.innerText = "유효한 닉네임 형식입니다. 중복확인을 진행해주세요.";
+        nicknameMessage.classList.remove("error");
+        nicknameMessage.classList.add("confirm");
+        return;
+    }
 });
 
-nicknameBtn.addEventListener("click", function(){
+nicknameBtn.addEventListener("click",function(){
+    const regExp = /^[a-zA-Z0-9가-힣]{2,10}$/;
+
     if(regExp.test(memberNickname.value) ){ // 유효한 경우
         $.ajax({
             url : "nicknameDupCheck",
             data : {"memberNickname" : memberNickname.value},
             type : "GET",
-            seccess : function(result){
+            success : function(result){
                             // Servlet에서 응답으로 출력된 데이터가 저장
                 if(result == 0){
                     nicknameMessage.innerText = "사용 가능한 닉네임입니다.";
@@ -178,17 +186,48 @@ nicknameBtn.addEventListener("click", function(){
         });
         return;
     }
-});
+
+})
+
+// nicknameBtn.addEventListener("click", function(){
+//     if(regExp.test(memberNickname.value) ){ // 유효한 경우
+//         $.ajax({
+//             url : "nicknameDupCheck",
+//             data : {"memberNickname" : memberNickname.value},
+//             type : "GET",
+//             success : function(result){
+//                             // Servlet에서 응답으로 출력된 데이터가 저장
+//                 if(result == 0){
+//                     nicknameMessage.innerText = "사용 가능한 닉네임입니다.";
+//                     nicknameMessage.classList.add("confirm");
+//                     nicknameMessage.classList.remove("error");
+//                     checkObj.memberNickname = true;
+//                 }else{
+//                     nicknameMessage.innerText = "이미 사용중인 닉네임입니다.";
+//                     nicknameMessage.classList.add("error");
+//                     nicknameMessage.classList.remove("confirm");
+//                     checkObj.memberNickname = false;
+//                 }
+//             },
+//             error : function(){
+//                 console.log("에러 발생")
+//             }
+//         });
+//         return;
+//     }
+// });
+
+
 
 
 // 전화번호
-const memberTel = document.getElementById("memberHp");
+const memberTel = document.getElementById("memberTel");
 const telMessage = document.getElementById("telMessage");
 
-memberHp.addEventListener("input", function(){
+memberTel.addEventListener("input", function(){
 
     // 전화번호 입력X 경우
-    if(memberHp.value.length == 0){
+    if(memberTel.value.length == 0){
         telMessage.innerText = "전화번호를 입력해주세요.(-제외)";
         telMessage.classList.remove("confirm", "error");
         checkObj.memberTel = false;
@@ -198,7 +237,7 @@ memberHp.addEventListener("input", function(){
     // 전화번호 유효성 검사
     const regExp = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/; // 전화번호 정규식
     
-    if(regExp.text(memberHp.value)){ // 유효한 경우
+    if(regExp.test(memberTel.value)){ // 유효한 경우
         telMessage.innerText = "유효한 전화번호 형식입니다.";
         telMessage.classList.add("confirm");
         telMessage.classList.remove("error");
@@ -214,11 +253,12 @@ memberHp.addEventListener("input", function(){
 // 이메일
 const memberEmail = document.getElementById("memberEmail");
 const emailMessage = document.getElementById("emailMessage");
+const checkBtn = document.getElementById("checkBtn");
 const sendBtn = document.getElementById("sendBtn");
 
 memberEmail.addEventListener("input", function(){
 
-    if(memberEmail.value.length == 0){ // 입력되지 않은 경우
+    if(memberEmail.value.trim().length == 0){ // 입력되지 않은 경우
         emailMessage.innerText = "메일을 받을 수 있는 이메일을 입력해주세요.";
         emailMessage.classList.remove("confirm", "error");
         checkObj.memberEmail = false;
@@ -229,15 +269,20 @@ memberEmail.addEventListener("input", function(){
     const regExp = /^[\w\-\_]{4,}@[\w\-\_]+(\.\w+){1,3}$/;
 
     if(regExp.test(memberEmail.value)){ // 유효한 경우
+
+        emailMessage.innerText = "올바른 형식의 이메일입니다. 중복확인을 진행해주세요.";
+        emailMessage.classList.add("confirm");
+        emailMessage.classList.remove("error");
+        checkObj.emailMessage = true;
         
-        sendBtn.addEventListener("click", function(){
+        checkBtn.addEventListener("click", function(){
 
             // 이메일 중복 검사
             $.ajax({
                 url : "emailDupCheck",
                 data : {"memberEmail" : memberEmail.value},
                 type : "GET",
-                seccess : function(result){
+                success : function(result){
                     if(result == 1){ // 중복O
                         emailMessage.innerText = "이미 사용중인 이메일입니다.";
                         emailMessage.classList.remove("confirm");
@@ -288,7 +333,6 @@ function signUpValidate(){
     }
     return true; // false결과가 없을 때 form태그 기본이벤트 수행
 }
-
 
 // 인증번호 보내기
 const cMessage = document.getElementById("cMessage");
