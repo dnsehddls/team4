@@ -51,16 +51,22 @@ function btnClick(){
 			// 매개변수 res : Servlet에서 응답으로 출력된 데이터가 저장
 
 			// 닉네임 조회 실패
-			if(!res > 0){
-				alert("일치하는 회원이 없습니다.");
-				receiver.value = "";
-				receiver.focus();
-				return;
-			}
+			// if(!res > 0){
+			// 	alert("일치하는 회원이 없습니다.");
+			// 	receiver.value = "";
+			// 	receiver.focus();
+			// 	return;
+			// }
+
+			console.log(res);
+			var testtt = JSON.parse(res);
+			console.log("testtt", testtt);
+
+			//alert("testtt : " + testtt);
 
 			// 닉네임 미입력시
 			if(receiver.value.trim().length == 0){
-				alert("닉네임을 입력해주세요.click");
+				alert("닉네임을 입력해주세요.");
 				receiver.value = "";
 				receiver.focus();
 				return;
@@ -72,8 +78,7 @@ function btnClick(){
 				receiver.focus();
 				return;
 			}
-			
-			alert("일치하는 회원입니다.");
+
 		}
 	
 	// sendNickname.value(receiver.value);
@@ -81,30 +86,30 @@ function btnClick(){
 };
 
 
-
-function enterkey(e){
-	// 닉네임 미입력시
-	if(e.keyCode == 13) {
-		if(receiver.value.trim().length == 0){
-			alert("닉네임을 입력해주세요.enter");
-			receiver.value = "";
-			receiver.focus();
-			return;
-		}
+// enterkey 이벤트 -> 제거
+// function enterkey(e){
+// 	// 닉네임 미입력시
+// 	if(e.keyCode == 13) {
+// 		if(receiver.value.trim().length == 0){
+// 			alert("닉네임을 입력해주세요.enter");
+// 			receiver.value = "";
+// 			receiver.focus();
+// 			return;
+// 		}
 		
-		// 없는 회원일 경우
-		if(receiver.value == null){
-			alert("일치하는 회원이 없습니다.");
-			receiver.focus();
-			return;
-		}
-		receiveNickname.value = receiver.value();
-		receiveNickname.value(receiver.value());
-		receiveNickname.value(receiver.value);
-		//searchForm.submit();
-	}
-    // sendNickname.value(receiver.value);
-};
+// 		// 없는 회원일 경우
+// 		if(receiver.value == null){
+// 			alert("일치하는 회원이 없습니다.");
+// 			receiver.focus();
+// 			return;
+// 		}
+// 		receiveNickname.value = receiver.value();
+// 		receiveNickname.value(receiver.value());
+// 		receiveNickname.value(receiver.value);
+// 		//searchForm.submit();
+// 	}
+//     // sendNickname.value(receiver.value);
+// };
 
 
 // 보내기 버튼 클릭

@@ -154,6 +154,8 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	
 
 	/**
 	 * 아이디 중복 검사 DAO
@@ -275,5 +277,270 @@ public class MemberDAO {
 
 	      return result;
 	}
+
+
+	/** 회원 목록 조회 DAO
+	 * @param conn
+	 * @return list
+	 * @throws Exception
+	 */
+	public List<Member> selectAll(Connection conn, Pagination pagination) throws Exception {
+
+		List<Member> memberList = new ArrayList<Member>();
+
+		try {
+			String sql = prop.getProperty("selectAll");
+
+			// BETWEEN 구문에 들어갈 범위 계산
+			int start = (pagination.getCurrentPage() -1) * pagination.getLimit() +1;
+			int end = start + pagination.getLimit() -1;
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+
+				Member mem = new Member();
+
+				mem.setMemberNo(rs.getInt(1));
+				mem.setMemberEmail(rs.getString(2));
+				mem.setMemberName(rs.getString(3));
+				mem.setRegistDate(rs.getString(4));
+
+				memberList.add(mem);
+
+			}
+
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+
+		return memberList;
+	}
+
+
+	/** 전체 회원 수 조회 DAO
+	 * @param conn
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int searchListCount(Connection conn) throws Exception {
+
+		int listCount = 0;
+
+		try {
+			String sql = prop.getProperty("getListCount");
+
+			stmt = conn.createStatement();
+
+			rs = stmt.executeQuery(sql);
+
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+
+		return listCount;
+	}
+
+
+	/** 회원 정보 조회 DAO
+	 * @param conn
+	 * @param memberEmail
+	 * @return member
+	 * @throws Exception
+	 */
+	public Member selectOne(Connection conn, String memberEmail) throws Exception {
+
+		Member member = null;
+
+		try {
+			String sql = prop.getProperty("selectOne");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberEmail);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+
+				member = new Member();
+
+				member.setMemberNo(rs.getInt(1));
+				member.setMemberEmail(rs.getString(2));
+				member.setMemberName(rs.getString(3));
+				member.setRegistDate(rs.getString(4));
+
+			}
+
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return member;
+	}
+
+
+	/** 관리자 정보 수정 DAO
+	 * @param conn
+	 * @param mem
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateAdmin(Connection conn, Member mem) throws Exception {
+
+		int result = 0;
+
+		try {
+			String sql = prop.getProperty("updateAdmin");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, mem.getMemberNickname());
+			pstmt.setString(2, mem.getMemberTel());
+			pstmt.setInt(3, mem.getMemberNo());
+
+			result = pstmt.executeUpdate();
+
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	/** 관리자 비밀번호 수정
+	 * @param conn
+	 * @param currentPw
+	 * @param newPw
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int adminChangePw(Connection conn, String currentPw, String newPw, int memberNo) throws Exception {
+
+		int result = 0;
+
+		try {
+			String sql = prop.getProperty("adminChangePw");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, newPw);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, currentPw);
+
+			result = pstmt.executeUpdate();
+
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	/**
+	 * 회원 정보 수정 DAO
+	 * @param conn
+	 * @param mem
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateMember(Connection conn, Member mem) throws Exception{
+
+		int result = 0;
+
+		try {
+			String sql = prop.getProperty("updateMember");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, mem.getMemberNickname());
+			pstmt.setString(2, mem.getMemberTel());
+			pstmt.setInt(3, mem.getMemberNo());
+
+			result = pstmt.executeUpdate();
+
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/**
+	 * 회원 탈퇴 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @param inputPW
+	 * @return result
+	 * @throws Exception
+	 */
+	public int secession(Connection conn, int memberNo, String inputPW) throws Exception{
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("secession");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, inputPW);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 비밀번호 변경 DAO
+	 * @param conn
+	 * @param currentPw
+	 * @param newPw
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changePw(Connection conn, String currentPw, String newPw, int memberNo) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("changePw");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPw);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, currentPw);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+
+
 
 }

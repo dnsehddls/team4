@@ -1,9 +1,11 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
+<!-- <link rel="stylesheet" href="../../resources/css/message/slideMessage-style.css"> -->
 <!DOCTYPE html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../../resources/css/message/slideMessage-style.css">
     <header>
         <section class="logo">
             <a href="${contextPath}"><img src="${contextPath}/resources/images/updatelogo.jpg" alt="logo" class="logo"></a>
@@ -16,15 +18,26 @@
     <nav>
         <div>
             <ul>
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">인기게시판</a></li>
-                <li><a href="#">운동게시판</a></li>
-                <li><a href="#">자유게시판</a></li>
-                <li><a href="#">정모게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=1">공지사항</a></li>
+                <li><a href="${contextPath}/board/list?type=5">인기게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=3">운동게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=4">자유게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=5">정모게시판</a></li>
             </ul>
         </div>
         <div>
+
+            <c:if test="${!empty loginMember}">
+                <img src="" alt="등급이미지">
+                <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
+                <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+            </c:if>
+            <c:if test="${empty loginMember}">
+                <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+            </c:if>
+<!-- =======
             <img src="" alt="등급이미지">
+<<<<<<< HEAD
             <div class="topMenu">
                 <ul class="dept01">
                     <div class="messageSpan"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt="" id="messageIcon"></div>
@@ -46,7 +59,7 @@
             <!-- <img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""> -->
             
             <!-- <a href="${contextPath}/findUser"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a> -->
-            <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+           <!--  <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a> -->
             <input type="text" name="search-area" id="search" >
             <button type="button" class="fa-solid fa-magnifying-glass"></button>
         </div>

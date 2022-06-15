@@ -72,6 +72,15 @@
 		FROM DUAL
    </entry>
    
+   <entry key="updateMember">
+      UPDATE MEMBER SET
+      MEMBER_PW = ?
+      MEMBER_NICK = ?
+      MEMBER_TEL = ?
+      MEMBER_EMAIL = ?
+      WHERE MEMBER_NO = ?
+   </entry>
+
    
 
 </properties>
