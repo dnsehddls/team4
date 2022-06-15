@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
-<link rel="stylesheet" href="../../resources/css/message/slideMessage-style.css">
+<!-- <link rel="stylesheet" href="../../resources/css/message/slideMessage-style.css"> -->
 <!DOCTYPE html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <header>

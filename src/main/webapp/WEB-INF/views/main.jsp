@@ -7,15 +7,7 @@
 <c:set var="exercise" value="${map.exercise}"></c:set>
 <c:set var="free" value="${map.free}"></c:set>
 <c:set var="met" value="${map.met}"></c:set>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title> undongin </title>
-   <script src="https://kit.fontawesome.com/381a5c9f75.js" crossorigin="anonymous"></script>
-</head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <main>
