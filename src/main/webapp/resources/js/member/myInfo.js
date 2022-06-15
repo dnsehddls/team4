@@ -6,42 +6,45 @@ const memberTel = document.getElementById("memberTel");
 const regExp1 = /^[a-zA-Z0-9가-힣]{2,10}$/; // 닉네임 정규식
 const regExp2 = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}\d{4}$/; // 전화번호 정규식
 
-nicknameBtn.addEventListener("click", function(){
+if(nicknameBtn){
+    nicknameBtn.addEventListener("click", function(){
 
-    if(memberNickname.value.trim().length == 0){
-        alert("닉네임을 입력해주세요.");
-        memberNickname.focus();
-        return false;
-    }
-    if(!regExp1.test(memberNickname.value)){
-        alert("영어/숫자/한글 2~10글자 사이로 작성해주세요.");
-        memberNickname.focus();
-        return false;
-    }
-    if(regExp1.test(memberNickname.value)){
-        $.ajax({
-            url : "nicknameDupcheck",
-            data : {"memberNickname" : memberNickname.value},
-            type : "GET",
-            success : function(result){
-
-                if(result == 0){
-                    alert("사용 가능한 닉네임입니다.");
-                }else{
-                    alert("이미 사용중인 닉네임입니다.");
-                    memberNickname.focus();
-                    buttonCheck = false;
-                    return false;
+        if(memberNickname.value.trim().length == 0){
+            alert("닉네임을 입력해주세요.");
+            memberNickname.focus();
+            return false;
+        }
+        if(!regExp1.test(memberNickname.value)){
+            alert("영어/숫자/한글 2~10글자 사이로 작성해주세요.");
+            memberNickname.focus();
+            return false;
+        }
+        if(regExp1.test(memberNickname.value)){
+            $.ajax({
+                url : "nicknameDupcheck",
+                data : {"memberNickname" : memberNickname.value},
+                type : "GET",
+                success : function(result){
+    
+                    if(result == 0){
+                        alert("사용 가능한 닉네임입니다.");
+                    }else{
+                        alert("이미 사용중인 닉네임입니다.");
+                        memberNickname.focus();
+                        buttonCheck = false;
+                        return false;
+                    }
+                },
+                error : function(){
+                    console.log("에러 발생")
                 }
-            },
-            error : function(){
-                console.log("에러 발생")
-            }
-        });
-
-        buttonCheck = true;
-    }
-});
+            });
+    
+            buttonCheck = true;
+        }
+    });
+    
+}
 
 
 function changeInfoValidate(){

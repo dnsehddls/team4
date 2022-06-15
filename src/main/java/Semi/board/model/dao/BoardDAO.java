@@ -17,6 +17,7 @@ import Semi.board.model.vo.Board;
 import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
+import Semi.member.model.vo.Member;
 
 public class BoardDAO {
 
@@ -255,43 +256,154 @@ public class BoardDAO {
 		return boardList;
 	}
 
-
 	/**
-	 * 내 글 목록 조회 DAO
+	 * 내가 쓴 글 수 조회 DAO
 	 * @param conn
-	 * @param memberNo
-	 * @return clist
+	 * @param loginMember
+	 * @return listCount
 	 * @throws Exception
 	 */
-	public List<MyBoard> myContent(Connection conn, int memberNo) throws Exception{
-		List<MyBoard> clist = null;
+	public int mycCount(Connection conn, Member loginMember) throws Exception{
+		int listCount = 0;
 		
 		try {
-
-			String sql = prop.getProperty("myContent");
-
+			String sql = prop.getProperty("mycCount");
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, memberNo);
-
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
 			rs = pstmt.executeQuery();
-
-			while(rs.next()) {
-				MyBoard mb = new MyBoard();
-
-				mb.setBoardNo(rs.getInt(1));
-				mb.setBoardName(rs.getString(2));
-				mb.setBoardTitle(rs.getString(3));
-				mb.setCreateDate(rs.getString(4));
-
-				clist.add(mb);
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
 			}
-
-
+			
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		return clist;
+		return listCount;
 	}
+
+	/**
+	 * 내 글 목록 조회
+	 * @param conn
+	 * @param pagination
+	 * @param loginMember
+	 * @return 
+	 * @throws Exception
+	 */
+	public List<MyBoard> myContentList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
+		List<MyBoard> contentList = new ArrayList<MyBoard>();
+		
+		try {
+			String sql = prop.getProperty("contentList");
+			
+			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int end = start + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MyBoard board = new MyBoard();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardName(rs.getString("BOARD_NM"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setCreateDate(rs.getString("CREATE_DT"));
+				
+				contentList.add(board);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return contentList;
+	}
+
+	/**
+	 * 북마크한 게시글 수 조회
+	 * @param conn
+	 * @param loginMember
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int bookmarkCount(Connection conn, Member loginMember) throws Exception{
+		int listCount = 0;
+		
+		try {
+			String sql = prop.getProperty("bookmarkCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+	/**
+	 * 북마크한 게시글 목록 조회
+	 * @param conn
+	 * @param pagination
+	 * @param loginMember
+	 * @return bookmarkList
+	 * @throws Exception
+	 */
+	public List<MyBoard> bookmarkList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
+		List<MyBoard> bookmarkList = new ArrayList<MyBoard>();
+		
+		try {
+			String sql = prop.getProperty("bookmarkList");
+
+			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int end = start + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MyBoard board = new MyBoard();
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setMemberNickname(rs.getString("MEMBER_NICK"));
+				board.setCreateDate(rs.getString("CREATE_DT"));
+				
+				bookmarkList.add(board);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return bookmarkList;
+	}
+	
+	
+
+
 
 }

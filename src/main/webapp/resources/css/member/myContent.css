@@ -72,21 +72,33 @@ thead th{
     background-color : #eaeaea;
 }
 
+/* 페이지네이션(Pagination) */
 .page{
+    padding: 0;
+    list-style: none;
+
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 15px;
 }
 
-.page > * {
-    display : inline-block;
-    width : 35px;
-    height : 35px;
-    background-color : #F4F4F4;
+.page > li{
+    width: 20px;
+    margin: 0 5px; /* 좌우만 5px */
     text-align: center;
-    line-height: 35px;
-    margin: 5px;
+}
+
+.page a{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* 현재 페이지 번호 */
+.page .current{
+    background-color: rgb(254, 200, 92);
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
 }
 
 /* 왼쪽 사이드 메뉴 */
