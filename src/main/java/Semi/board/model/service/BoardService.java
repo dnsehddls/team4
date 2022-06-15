@@ -152,4 +152,30 @@ public class BoardService {
 		return map;
 	}
 
+	/**
+	 * 좋아요 목록 조회
+	 * @param cp
+	 * @param loginMember
+	 * @return map
+	 * @throws Exception
+	 */
+	public Map<String, Object> likeList(int cp, Member loginMember) throws Exception{
+		Connection conn = getConnection();
+
+		int listCount = dao.likeCount(conn, loginMember);
+
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		List<MyBoard> likeList = dao.likeList(conn, pagination, loginMember);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("likeList", likeList);
+
+		close(conn);
+		
+		return map;
+	}
+
 }

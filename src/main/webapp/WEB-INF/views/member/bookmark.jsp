@@ -46,7 +46,7 @@
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
-                            <th><input type="checkbox"></th>
+                            <td></td>
                         </tr>
                     </thead>
 
@@ -65,6 +65,7 @@
                                         <td><a href="#">${bookmark.boardTitle}</a></td>
                                         <td>${bookmark.memberNickname}</td>
                                         <td>${bookmark.createDate}</td>
+                                        <td><input type="checkbox"></td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>

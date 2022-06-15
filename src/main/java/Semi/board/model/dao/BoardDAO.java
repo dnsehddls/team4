@@ -30,7 +30,7 @@ public class BoardDAO {
 	public BoardDAO() {
 		try {
 			prop = new Properties();
-			String filePath = BoardDAO.class.getResource("/Semi/sql/Board-sql.xml").getPath();
+			String filePath = BoardDAO.class.getResource("/Semi/sql/board-sql.xml").getPath();
 
 			prop.loadFromXML(new FileInputStream(filePath));
 
@@ -396,6 +396,81 @@ public class BoardDAO {
 		}
 
 		return bookmarkList;
+	}
+
+	/**
+	 * 좋아요한 게시글 수 조회
+	 * @param conn
+	 * @param loginMember
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int likeCount(Connection conn, Member loginMember) throws Exception{
+		int listCount = 0;
+
+		try {
+			String sql = prop.getProperty("likeCount");
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+	/**
+	 * 좋아요한 게시글 목록 조회
+	 * @param conn
+	 * @param pagination
+	 * @param loginMember
+	 * @return likeList
+	 * @throws Exception
+	 */
+	public List<MyBoard> likeList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
+		
+		List<MyBoard> likeList = new ArrayList<MyBoard>();
+
+		try {
+			String sql = prop.getProperty("likeList");
+
+			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int end = start + pagination.getLimit() - 1;
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				MyBoard board = new MyBoard();
+
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setMemberNickname(rs.getString("MEMBER_NICK"));
+				board.setCreateDate(rs.getString("CREATE_DT"));
+
+				likeList.add(board);
+			}
+
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return likeList;
 	}
 
 
