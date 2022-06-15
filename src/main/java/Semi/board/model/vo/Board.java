@@ -11,6 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Board {
 
+	
 	private int boardNo;
 	private String boardTitle;
 	private String memberNickname;

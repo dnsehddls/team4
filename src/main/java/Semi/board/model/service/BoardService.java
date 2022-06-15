@@ -10,6 +10,7 @@ import java.util.Map;
 import Semi.board.model.dao.BoardDAO;
 import Semi.board.model.vo.Board;
 import Semi.board.model.vo.Pagination;
+import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.ShowWindowInfo;
 
 public class BoardService {
@@ -92,4 +93,17 @@ public class BoardService {
 			
 			return map;
 	}
+
+	/**
+	 * 내 글 목록 조회 Service
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<MyBoard> myContent(int memberNo) throws Exception{
+		
+		
+		return null;
+	}
+	
 }

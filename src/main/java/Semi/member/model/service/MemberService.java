@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Semi.board.model.vo.Board;
 import Semi.board.model.vo.Pagination;
 import Semi.member.model.dao.MemberDAO;
 import Semi.member.model.vo.Member;
@@ -333,6 +334,12 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	public List<Board> bookmarkList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

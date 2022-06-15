@@ -16,7 +16,6 @@ import java.util.Properties;
 import Semi.board.model.vo.Board;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
-import Semi.board.model.dao.BoardDAO;
 
 public class BoardDAO {
 	
@@ -28,8 +27,8 @@ public class BoardDAO {
 	public BoardDAO() {
 		try {
 			prop = new Properties();
-			String filePath = BoardDAO.class.getResource("/Semi/sql/Board_sql.xml").getPath();
-
+			String filePath = BoardDAO.class.getResource
+					("/Semi/sql/Board_sql.xml").getPath();
 			prop.loadFromXML(new FileInputStream(filePath));
 			
 		}catch(Exception e) {
@@ -252,5 +251,6 @@ public class BoardDAO {
 		
 		return boardList;
 	}
+
 
 }
