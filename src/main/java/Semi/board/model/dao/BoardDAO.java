@@ -43,7 +43,7 @@ public class BoardDAO {
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setInt(1, 0);
 //			rs = pstmt.executeQuery();
-//			°ü¸®ÀÚ ÆäÀÌÁö¿¡ ±â´ÉÀ» Ãß°¡ÇÒ ½Ã pstmt
+//			ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ pstmt
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -122,7 +122,7 @@ public class BoardDAO {
 		try {
 			String sql = prop.getProperty("selectBoardList");
 			
-			// BETWEEN ±¸¹®¿¡ µé¾î°¥ ¹üÀ§ °è»ê
+			// BETWEEN ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 			
@@ -188,7 +188,7 @@ public class BoardDAO {
 					   + condition
 					   + prop.getProperty("searchBoardList2");
 			
-			// BETWEEN ±¸¹®¿¡ µé¾î°¥ ¹üÀ§ °è»ê
+			// BETWEEN ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 			
