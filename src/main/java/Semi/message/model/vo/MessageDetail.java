@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Message {
+public class MessageDetail {
 
 	private int messageNo;
 	private int sendNo;

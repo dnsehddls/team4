@@ -34,10 +34,10 @@
                                 <a href="${contextPath}/sendView">쪽지 보내기</a>
                             </li>
                             <li id="Message1">
-                                <a href="${contextPath}/rMessageList">받은 쪽지함</a>
+                                <a href="${contextPath}/messageList?t=r">받은 쪽지함</a>
                             </li>
                             <li id="Message2">
-                                <a href="${contextPath}/sMessageList">보낸 쪽지함</a>
+                                <a href="${contextPath}/messageList?t=s">보낸 쪽지함</a>
                             </li>
                         </span>
                     </span>
