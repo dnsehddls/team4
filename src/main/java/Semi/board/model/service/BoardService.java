@@ -104,7 +104,7 @@ public class BoardService {
 
 		Connection conn = getConnection();
 
-		Pagination pagination = new Pagination(currentPage);
+//		Pagination pagination = new Pagination(currentPage);
 
 		List<MyBoard> clist = dao.myContent(conn, memberNo);
 

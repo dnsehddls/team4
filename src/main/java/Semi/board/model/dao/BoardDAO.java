@@ -29,8 +29,8 @@ public class BoardDAO {
 	public BoardDAO() {
 		try {
 			prop = new Properties();
-			String filePath = BoardDAO.class.getResource
-					("/Semi/sql/board-sql.xml").getPath();
+			String filePath = BoardDAO.class.getResource("/Semi/sql/Board-sql.xml").getPath();
+			
 			prop.loadFromXML(new FileInputStream(filePath));
 
 
@@ -46,8 +46,6 @@ public class BoardDAO {
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setInt(1, 0);
 //			rs = pstmt.executeQuery();
-//			������ �������� ����� �߰��� �� pstmt
-
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -155,7 +153,6 @@ public class BoardDAO {
 
 		try {
 			String sql = prop.getProperty("selectBoardList");
-
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 
@@ -221,7 +218,6 @@ public class BoardDAO {
 			String sql = prop.getProperty("searchBoardList1")
 					   + condition
 					   + prop.getProperty("searchBoardList2");
-
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 
@@ -257,7 +253,7 @@ public class BoardDAO {
 
 
 	/**
-	 * 내 글 목록 조회 DAO
+	 * �궡 湲� 紐⑸줉 議고쉶 DAO
 	 * @param conn
 	 * @param memberNo
 	 * @return clist
@@ -265,7 +261,6 @@ public class BoardDAO {
 	 */
 	public List<MyBoard> myContent(Connection conn, int memberNo) throws Exception{
 		List<MyBoard> clist = null;
-		
 		try {
 
 			String sql = prop.getProperty("myContent");
