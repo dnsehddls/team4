@@ -32,57 +32,36 @@
         
             <section class="myPage-main">
                 <h2 class="title">
-                    <span>내 정보</span>
+                    <span>비밀번호 변경</span>
                 </h2>
         
                 <div class="line"></div>
                 
-                <form action="info" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
-                    <table name="signUp-form" class="tb">
+                <form action="changePw" method="POST" name="myPage-form" onsubmit="return changePwValidate()">
+                    <table name="signUp-form" class="tb" style="height: 150px;">
+                        
                         <tr>
-                            <th>아이디</th>
-                            <td>${loginMember.memberID}</td>
+                            <th>현재 비밀번호</th>
+                            <td>
+                                <input type="password" name="currentPw" id="currentPw" placeholder="현재 비밀번호를 입력해 주세요." autocomplete="off">
+                            </td>
                         </tr>
-        
+
                         <tr>
-                            <th>이름</th>
-                            <td>${loginMember.memberName}</td>
-                        </tr>
-        
-                        <!-- <tr>
                             <th>새 비밀번호</th>
                             <td>
-                                <input type="password" name="newPw" value="${loginMember.memberPW}" id="newPw" placeholder="비밀번호를 입력해 주세요." autocomplete="off">
+                                <input type="password" name="newPw" id="newPw" placeholder="새 비밀번호를 입력해 주세요." autocomplete="off">
                             </td>
                         </tr>
         
                         <tr>
                             <th>새 비밀번호 확인</th>
                             <td>
-                                <input type="password" name="newPw2" value="${loginMember.memberPW}" id="newPw2" placeholder="비밀번호를 한번 더 입력해 주세요" autocomplete="off">
-                            </td>
-                        </tr> -->
-        
-                        <tr>
-                            <th>닉네임</th>
-                            <td>
-                                <input type="text" name="memberNickname" value="${loginMember.memberNickname}" id="memberNick" placeholder="영어/숫자/한글 2~10글자 사이로 작성해주세요.">
-                                <button class="member_btn" id="nicknameBtn" type="button">중복확인</button>
+                                <input type="password" name="newPw2" id="newPw2" placeholder="새 비밀번호를 한번 더 입력해 주세요" autocomplete="off">
                             </td>
                         </tr>
         
-                        <tr>
-                            <th>전화번호</th>
-                            <td>
-                                <input type="tel" name="memberTel" value="${loginMember.memberTel}" id="memberTel" maxlength="13" placeholder="번호를 입력해 주세요">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <th>이메일</th>
-                            <td>${loginMember.memberEmail}</td>
-                        </tr>
-        
+
                         
                     </table>
         
