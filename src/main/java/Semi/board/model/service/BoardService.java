@@ -9,6 +9,7 @@ import java.util.Map;
 
 import Semi.board.model.dao.BoardDAO;
 import Semi.board.model.vo.Board;
+import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
 
@@ -23,66 +24,93 @@ public class BoardService {
 		return showList ;
 	}
 
+
+	public Board boardDetail(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		Board result = dao.boardDetail(conn,boardNo);
+		close(conn);
+		return result;
+}
 	public Map<String, Object> selectBoardList(int type, int cp) throws Exception{
-		
+
 		Connection conn = getConnection();
 
 		String boardName = dao.selectBoardName(conn, type);
-		
-		int listCount = dao.getListCount(conn, type);		
-		
+
+		int listCount = dao.getListCount(conn, type);
+
 		Pagination pagination = new Pagination(cp, listCount);
-		
+
 		List<Board> boardList = dao.selectBoardList(conn, pagination, type);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("boardName", boardName);
 		map.put("pagination", pagination);
 		map.put("boardList", boardList);
-		
+
 		close(conn);
-		
-		return map; 
+
+		return map;
 	}
-	
+
 	public Map<String, Object> searchBoardList(int type, int cp, String key, String query) throws Exception {
-			
+
 			Connection conn = getConnection();
-			
-			// ±âÁ¸ ¸ñ·Ï Á¶È¸ Service, DAO, SQLÀ» Âü°íÇÏ¸é¼­ ÁøÇà
-			// 1. °Ô½ÃÆÇ ÀÌ¸§ Á¶È¸ DAO È£Ãâ
+
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ Service, DAO, SQLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸é¼­ ï¿½ï¿½ï¿½ï¿½
+			// 1. ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½È¸ DAO È£ï¿½ï¿½
 			String boardName = dao.selectBoardName(conn, type);
-			
-			// 2. SQL Á¶°ÇÀı¿¡ Ãß°¡µÉ ±¸¹® °¡°ø(key, query »ç¿ë)
-			String condition = null;// Á¶°Ç
-			
+
+			// 2. SQL ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(key, query ï¿½ï¿½ï¿½)
+			String condition = null;// ï¿½ï¿½ï¿½ï¿½
+
 			switch(key) {
 						case "t"  : condition = " AND BOARD_TITLE LIKE '%"+query+"%' ";  break;
 						case "c"  : condition = " AND BOARD_CONTENT LIKE '%"+query+"%' ";  break;
 						case "tc" : condition = " AND (BOARD_TITLE LIKE '%"+query+"%' OR BOARD_CONTENT LIKE '%"+query+"%') ";  break;
 						case "w"  : condition = " AND MEMBER_NICK LIKE '%"+query+"%' "; break;
 						}
-			
-			// 3-1. Æ¯Á¤ °Ô½ÃÆÇ¿¡¼­ Á¶°ÇÀ» ¸¸Á·ÇÏ´Â °Ô½Ã±Û ¼ö Á¶È¸
+
+			// 3-1. Æ¯ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½È¸
 			int listCount = dao.searchListCount(conn, type, condition);
-					
-			// 3-2. listCount  + ÇöÀç ÆäÀÌÁö(cp)¸¦ ÀÌ¿ëÇØ ÆäÀÌÁö³×ÀÌ¼Ç °´Ã¼ »ı¼º
-			Pagination pagination = new Pagination(cp, listCount);		
-			
-			
-			// 4. Æ¯Á¤ °Ô½ÃÆÇ¿¡¼­ Á¶°ÇÀ» ¸¸Á·ÇÏ´Â °Ô½Ã±Û ¸ñ·Ï Á¶È¸
+
+			// 3-2. listCount  + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(cp)ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+			Pagination pagination = new Pagination(cp, listCount);
+
+
+			// 4. Æ¯ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 			List<Board> boardList = dao.searchBoardList(conn, pagination, type, condition);
-			
-			// 5. °á°ú °ªÀ» ÇÏ³ªÀÇ Map¿¡ ¸ğ¾Æ¼­ ¹İÈ¯
+
+			// 5. ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ Mapï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½È¯
 			Map<String, Object> map = new HashMap<>();
-			
+
 			map.put("boardName", boardName);
 			map.put("pagination", pagination);
 			map.put("boardList", boardList);
-			
+
 			close(conn);
-			
+
 			return map;
 	}
+
+	/**
+	 * ë‚´ ê¸€ ëª©ë¡ ì¡°íšŒ Service
+	 * @param memberNo
+	 * @return clist
+	 * @throws Exception
+	 */
+	public List<MyBoard> myContent(int memberNo) throws Exception{
+
+		Connection conn = getConnection();
+
+//		Pagination pagination = new Pagination(currentPage);
+
+		List<MyBoard> clist = dao.myContent(conn, memberNo);
+
+		close(conn);
+
+		return clist;
+	}
+
 }

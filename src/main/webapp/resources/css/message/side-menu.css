@@ -32,8 +32,8 @@
 }
 
 .list-group > li:hover{
+    color: white;
     background-color: #FEC85C;
-    display: white;
 }
 
 .list-group > p{

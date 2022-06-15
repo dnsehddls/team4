@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Reply_sql.xml</comment>
+
+<entry key="replyList">
+SELECT  REPLY_NO,MEMBER_NICK,MEMBER_NO,
+		REPLY_CONTENT,CREATE_REPLY,
+		UPDATE_REPLY,
+        (SELECT COUNT(*) FROM LK_REPLY LR
+        WHERE LR.REPLY_NO = BO.REPLY_NO) GOOD_COUNT,
+        (SELECT COUNT(*) FROM REPORT_REPLY RR
+        WHERE RR.REPLY_NO = BO.REPLY_NO) REPORT_COUNT
+FROM REPLY BO
+JOIN MEMBER USING (MEMBER_NO)
+WHERE BOARD_NO = ? 
+AND REPLY_FL = 'N'
+</entry>
+
+</properties>

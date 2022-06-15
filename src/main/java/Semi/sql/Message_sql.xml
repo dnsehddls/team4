@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Message_sql.xml</comment>
+
+<!-- 회원 조회 -->
+<entry key="findUser">
+	SELECT MEMBER_NO
+	  FROM MEMBER
+	 WHERE MEMBER_NICK = ?
+	   AND SECESSION_FL = 'N'
+</entry>
+
+
+<!-- 쪽지 보내기 -->
+<!-- <entry key="sendMessage">
+	INSERT INTO MESSAGE VALUES
+	( 1
+	, (SELECT MEMBER_NO from member where MEMBER_NICK=?)
+	, SYSDATE
+	, ?
+	, null
+	, (SELECT MEMBER_NO from member where MEMBER_NICK=?)
+	, null
+	, 'N'
+	, null)
+</entry> -->
+
+<entry key="sendMessage">
+	INSERT INTO MESSAGE VALUES
+	( 
+	, ?
+	, SYSDATE
+	, ?
+	, default
+	, ?
+	, null
+	, 'N'
+	)
+</entry>
+
+
+<!-- 받은 쪽지함에서 쪽지 삭제 시 -->
+<entry key="deleteMessage1">
+	UPDATE MESSAGE SET
+	SEND_DEL_ST = ‘N’
+	RECEIVE_DEL_ST  = ‘Y’
+	WHERE MS_NO = ?
+</entry>
+
+
+<!-- 보낸 쪽지함에서 쪽지 삭제 시 -->
+<entry key="deleteMessage2">
+	UPDATE MESSAGE SET
+	SEND_DEL_ST = ‘Y’
+	RECEIVE_DEL_ST  = ’N'
+	WHERE MS_NO = ?
+</entry>
+
+
+<!-- 쪽지 내용 확인시 읽은 날짜 표시 -->
+<entry key="changeDate">
+UPDATE MESSAGE SET
+RECEIVE_DATE = SYSDATE
+WHERE MS_NO =?
+</entry>
+
+
+
+
+
+</properties>

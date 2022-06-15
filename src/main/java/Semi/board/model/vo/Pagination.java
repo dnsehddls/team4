@@ -1,26 +1,33 @@
 package Semi.board.model.vo;
 
 public class Pagination {
-	private int currentPage;		// ÇöÀç ÆäÀÌÁö ¹øÈ£
-	private int listCount;			// ÀüÃ¼ °Ô½Ã±Û ¼ö
 	
-	private int limit = 10;			// ÇÑ ÆäÀÌÁö¿¡ º¸¿©Áú °Ô½Ã±ÛÀÇ ¼ö
-	private int pageSize = 10;		// ¸ñ·Ï ÇÏ´Ü ÆäÀÌÁö ¹øÈ£ÀÇ ³ëÃâ °³¼ö
-		
-	private int maxPage;			// Á¦ÀÏ Å« ÆäÀÌÁö ¹øÈ£ == ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£
-	private int startPage;			// ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ÆäÀÌÁöÀÇ ½ÃÀÛ ¹øÈ£
-	private int	endPage;			// ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
+	// íŽ˜ì´ì§€ë„¤ì´ì…˜(íŽ˜ì´ì§• ì²˜ë¦¬)ì— í•„ìš”í•œ ëª¨ë“  ê°’ë“¤ì„ ì €ìž¥í•˜ê³  ìžˆëŠ” ê°ì²´ 
 	
-	private int prevPage;			// ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ¹øÈ£ÀÇ ÀÌÀü ¸ñ·Ï ³¡ ¹øÈ£
-	private int nextPage;			// ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ¹øÈ£ÀÇ ´ÙÀ½ ¸ñ·Ï ½ÃÀÛ ¹øÈ£
-		
+	private int currentPage;	// í˜„ìž¬ íŽ˜ì´ì§€ ë²ˆí˜¸
+	private int listCount;	    // ì „ì²´ ê²Œì‹œê¸€ ìˆ˜
 	
-	// »ý¼ºÀÚ
+	private int limit = 10;		// í•œ íŽ˜ì´ì§€ì— ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ì˜ ìˆ˜
+	private int pageSize = 10;	// ëª©ë¡ í•˜ë‹¨ íŽ˜ì´ì§€ ë²ˆí˜¸ì˜ ë…¸ì¶œ ê°œìˆ˜
+	
+	private int maxPage;		// ì œì¼ í° íŽ˜ì´ì§€ ë²ˆí˜¸ == ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸
+	private int startPage;		// ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ íŽ˜ì´ì§€ì˜ ì‹œìž‘ ë²ˆí˜¸
+	private int endPage;		// ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ íŽ˜ì´ì§€ì˜ ë ë²ˆí˜¸ 
+	
+	private int prevPage;		// ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ ë²ˆí˜¸ì˜ ì´ì „ ëª©ë¡ ëë²ˆí˜¸ 
+	private int nextPage;		// ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œë˜ ë²ˆí˜¸ì˜ ë‹¤ìŒ ëª©ë¡ ì‹œìž‘ ë²ˆí˜¸ 
+	
+	
+	
+
+
+	// ìƒì„±ìž
 	public Pagination(int currentPage, int listCount) {
 		this.currentPage = currentPage;
 		this.listCount = listCount;
 		
-		calculatePagination(); // °è»ê ¸Þ¼­µå È£Ãâ
+		calculatePagination(); // ê³„ì‚° ë©”ì„œë“œ í˜¸ì¶œ
+		
 	}
 
 
@@ -130,84 +137,74 @@ public class Pagination {
 	}
 	
 	
-	
-	// ÆäÀÌÂ¡ Ã³¸®¿¡ ÇÊ¿äÇÑ °ªÀ» °è»êÇÏ´Â ¸Þ¼­µå
+	// íŽ˜ì´ì§• ì²˜ë¦¬ì— í•„ìš”í•œ ê°’ì„ ê³„ì‚°í•˜ëŠ” ë©”ì„œë“œ
 	private void calculatePagination() {
 		
-		// * maxPage °è»ê : ÃÖ´ë ÆäÀÌÁö ¼ö == ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£
+		// * maxPage ê³„ì‚° : ìµœëŒ€ íŽ˜ì´ì§€ ìˆ˜ == ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸ 
 		
-		// ÀüÃ¼ °Ô½Ã±Û ¼ö : 500°³  //  º¸¿©Áö´Â °Ô½Ã±Û ¼ö: 10°³
-		// -> ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£´Â?  500 / 10 =  50
+		// ì „ì²´ ê²Œì‹œê¸€ ìˆ˜ : 500ê°œ // ë³´ì—¬ì§€ëŠ” ê²Œì‹œê¸€ ìˆ˜ : 10ê°œ
+		// -> ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸ëŠ”? 500 / 10 = 50
 		
-		// ÀüÃ¼ °Ô½Ã±Û ¼ö : 501°³  //  º¸¿©Áö´Â °Ô½Ã±Û ¼ö: 10°³
-		// -> ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£´Â?  501 / 10 =  51  (50.1ÀÇ ¿Ã¸² Ã³¸®)
+		// ì „ì²´ ê²Œì‹œê¸€ ìˆ˜ : 500ê°œ // ë³´ì—¬ì§€ëŠ” ê²Œì‹œê¸€ ìˆ˜ : 10ê°œ
+		// -> ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸ëŠ”? 501 / 10 = 51 (50.1ì˜ ì˜¬ë¦¼ì²˜ë¦¬)
 		
-		maxPage = (int)Math.ceil(  (double)listCount / limit  );
+		maxPage = (int)Math.ceil((double)listCount/limit);
 		
 		
+		// * startPage : ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ íŽ˜ì´ì§€ì˜ ì‹œìž‘ ë²ˆí˜¸
 		
-		// * startPage : ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ÆäÀÌÁöÀÇ ½ÃÀÛ ¹øÈ£
+		// ëª©ë¡ í•˜ë‹¨ íŽ˜ì´ì§€ ë²ˆí˜¸ì˜ ë…¸ì¶œ ê°œìˆ˜ê°€ 10ê°œì¼ ë•Œ
 		
-		// ¸ñ·Ï ÇÏ´Ü ÆäÀÌÁö ¹øÈ£ÀÇ ³ëÃâ °³¼ö°¡ 10°³ÀÏ ¶§
-		
-		// ÇöÀç ÆäÀÌÁö°¡  1~10 ÀÎ °æ¿ì :  1
-		// ÇöÀç ÆäÀÌÁö°¡ 11~20 ÀÎ °æ¿ì : 11
-		// ÇöÀç ÆäÀÌÁö°¡ 21~30 ÀÎ °æ¿ì : 21
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 1~10 ì¸ ê²½ìš° : 1
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 11~20 ì¸ ê²½ìš° : 11
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 21~30 ì¸ ê²½ìš° : 21
 		
 		startPage = (currentPage - 1) / pageSize * pageSize + 1;
 		
 		
+		// * endPage : ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ íŽ˜ì´ì§€ì˜ ë ë²ˆí˜¸
 		
-		// * endPage : ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ÆäÀÌÁöÀÇ ³¡ ¹øÈ£
+		// ëª©ë¡ í•˜ë‹¨ íŽ˜ì´ì§€ ë²ˆí˜¸ì˜ ë…¸ì¶œ ê°œìˆ˜ê°€ 10ê°œì¼ ë•Œ
 		
-		// ¸ñ·Ï ÇÏ´Ü ÆäÀÌÁö ¹øÈ£ÀÇ ³ëÃâ °³¼ö°¡ 10°³ÀÏ ¶§
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 1~10 ì¸ ê²½ìš° : 10
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 11~20 ì¸ ê²½ìš° : 20
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 21~30 ì¸ ê²½ìš° : 30
 		
-		// ÇöÀç ÆäÀÌÁö°¡  1~10 ÀÎ °æ¿ì : 10
-		// ÇöÀç ÆäÀÌÁö°¡ 11~20 ÀÎ °æ¿ì : 20
-		// ÇöÀç ÆäÀÌÁö°¡ 21~30 ÀÎ °æ¿ì : 30
-
-		endPage = startPage + pageSize - 1;
+		endPage = startPage + pageSize -1;
 		
-		// ¸¸¾à¿¡ endPage°¡ maxPage¸¦ ÃÊ°úÇÏ´Â °æ¿ì
+		// ë§Œì•½ì— endPageê°€ maxPageë¥¼ ì´ˆê³¼í•˜ëŠ” ê²¨ìš°
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
 		
-		// * prevPage(<) : ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ¹øÈ£ÀÇ ÀÌÀü ¸ñ·Ï ³¡ ¹øÈ£
-		// * nextPage(>) : ¸ñ·Ï ÇÏ´Ü¿¡ ³ëÃâµÈ ¹øÈ£ÀÇ ´ÙÀ½ ¸ñ·Ï ½ÃÀÛ ¹øÈ£
+		// * prevPage(<) : ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ ë²ˆí˜¸ì˜ ì´ì „ ëª©ë¡ ë ë²ˆí˜¸
+		// * nextPage(>) : ëª©ë¡ í•˜ë‹¨ì— ë…¸ì¶œëœ ë²ˆí˜¸ì˜ ë‹¤ìŒ ëª©ë¡ ì‹œìž‘ ë²ˆí˜¸
 		
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 1~10 ì¼ ê²½ìš°
+		// < : 1 íŽ˜ì´ì§€
+		// > : 11 íŽ˜ì´ì§€
 		
-		// ÇöÀç ÆäÀÌÁö°¡  1~10 ÀÏ °æ¿ì
-		// < :  1 ÆäÀÌÁö
-		// > : 11 ÆäÀÌÁö
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 11~20 ì¼ ê²½ìš°
+		// < : 10 íŽ˜ì´ì§€
+		// > : 21 íŽ˜ì´ì§€
 		
-		// ÇöÀç ÆäÀÌÁö°¡ 11~20 ÀÏ °æ¿ì
-		// < : 10 ÆäÀÌÁö
-		// > : 21 ÆäÀÌÁö
+		// í˜„ìž¬ íŽ˜ì´ì§€ê°€ 41~50 ì¼ ê²½ìš° (maxPageê°€ 50)
+		// < : 40 íŽ˜ì´ì§€
+		// > : 50 íŽ˜ì´ì§€
 		
-		// ÇöÀç ÆäÀÌÁö°¡ 41~50 ÀÏ °æ¿ì  (maxPage°¡ 50)
-		// < : 40 ÆäÀÌÁö
-		// > : 50 ÆäÀÌÁö
-		
-		if(currentPage <= pageSize) { 
+		if(currentPage <= pageSize) {
 			prevPage = 1;
 		}else {
-			prevPage = startPage - 1;
+			prevPage = startPage -1;
 		}
-		
 		
 		if(endPage == maxPage) {
 			nextPage = maxPage;
 		}else {
-			nextPage = endPage + 1;
+			nextPage = endPage +1;
 		}
 		
-		
+	
 	}
-	
-	
-	
-	
-	
 }
