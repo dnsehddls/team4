@@ -1,0 +1,136 @@
+.myPage-content{
+    margin: 50px 155px;
+    display: flex;
+}
+
+main{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.line{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    width: 100%;
+    height: 5px;
+    background-color: rgb(254, 200, 92);
+}
+
+.myPage-main{
+    width: 900px;
+    margin: 30px;
+}
+
+.tb{
+    width: 850px;
+    height: 378px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.tb tr{
+    border-bottom: 1px solid #ccc;
+}
+
+.tb tr:nth-child(1){
+    border-top: 1px solid #ccc;
+}
+
+.tb th{
+    width: 127px;
+    height: 55px;
+    background-color : #eaeaea;;
+    font-size: 14px;
+}
+
+.tb td{
+    width: 720px;
+    height: 55px;
+    padding-left: 10px;
+}
+
+.tb input{
+    width: 180px;
+    height: 23px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.tb button{
+    width: 69px;
+    height: 26px;
+    background-color: rgb(254, 200, 92);
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+#update{
+    display: block;
+    width: 300px;
+    height: 40px;
+
+    background-color: rgb(254, 200, 92);
+    border: none;
+    border-radius: 4px;
+
+    color: white;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 왼쪽 사이드 메뉴 */
+.left-side{
+    width: 200px;
+    border-right : 2px solid #ddd;
+    display: flex;
+}
+
+.list-group{
+    width: 200px;
+    padding: 0 20px 0 0;
+}
+
+.list-group > li{
+    list-style: none;
+    height: 50px;
+    font-size: 18px;
+}
+
+.list-group > li > a{
+    font-size: 15px;
+    text-decoration: none;
+    color : black;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-bottom : 2px solid #ddd;
+}
+
+.list-group > li:hover{
+    background-color: #f2f2f2;
+}
+
+.myPage-row{
+    width: 500px;
+    height: 50px;
+    margin-top: 20px;
+
+    display: flex;
+    align-items: center;
+    border-bottom : 2px solid #ddd;
+}

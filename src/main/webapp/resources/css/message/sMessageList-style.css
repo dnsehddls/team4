@@ -1,0 +1,126 @@
+
+/* 오른쪽 메뉴 */
+
+.entire{
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    border: 1px solid #ddd;
+}
+
+.name{
+    margin: 0;
+    padding: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+.right-side{
+    display: inline-block;
+    width: 75%;
+    height: 50%;
+}
+
+.right-side>div{
+    margin: 10px;
+
+}
+
+.right-side span{
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+.list-table *{
+    border: 1px solid #ddd;
+}
+
+.top-buttons{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.top-buttons>button{
+    width: 70px;
+    height: 25px;
+    border: 1px solid #FEC85C;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+}
+
+.top-buttons>button:hover{
+    cursor: pointer;
+    background-color: #FEC85C;
+    color: white;
+}
+
+td>input{
+    width: 30px;
+    text-align: center;
+}
+
+
+#sender{
+    width: 15%;
+    text-align: center;
+}
+
+td:nth-child(2){
+    text-align: center;
+}
+
+td:nth-child(3){
+    width: 55%;
+}
+
+td:nth-child(4){
+    font-size: 10px;
+    text-align: center;
+
+}
+td:nth-child(5){
+    font-size: 10px;
+    text-align: center;
+
+}
+
+td>a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+/* 페이지네이션(Pagination) */
+.pagination{
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+}
+
+.pagination > li{
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a{
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    color: black;
+    /* letter-spacing : -2px; */
+}
+
+/* 현재 페이지 번호 */
+.pagination .current{
+    background-color: #FEC85C;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+}

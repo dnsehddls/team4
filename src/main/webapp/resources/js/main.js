@@ -13,33 +13,3 @@ function login(){
     }
 }
 
-function selectBoardContent(){
-    $.ajax({
-        url : "board/hotBoard",
-        dataType : "JSON",
-        type : "GET",
-        success : function(){
-
-        },
-        error : function(){
-
-        }
-    })
-}
-
-(function(){
-    selectBoardContent();
-})()
-
-
-
-
-
-
-function all(){
-    function ajax1(){}
-    function ajax2(){}
-    function ajax3(){}
-    function ajax4(){}
-    function ajax5(){}
-}

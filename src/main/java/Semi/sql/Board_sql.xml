@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>board-sql.xml</comment>
-<entry key="aBoard">
+<entry key="announcementBoard">
 SELECT * FROM
 (
     SELECT ROWNUM RNUM, D.* FROM (
@@ -11,7 +11,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -19,7 +19,7 @@ SELECT * FROM
         ORDER BY CREATE_DT DESC
     )D
 )
-WHERE RNUM BETWEEN 1 AND 5
+WHERE RNUM = 1
 </entry>
 
 <entry key="hotBoard">
@@ -37,13 +37,14 @@ SELECT * FROM
         JOIN MEMBER USING(MEMBER_NO)
         WHERE  (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) >= 5
+        AND BOARD_CD IN (2,3,4)
         ORDER BY CREATE_DT DESC
     )D
 )
 WHERE RNUM BETWEEN 1 AND 7
 </entry>
 
-<entry key="newBoard">
+<entry key="recencyBoard">
 SELECT * FROM
 (
     SELECT ROWNUM RNUM, D.* FROM (
@@ -52,7 +53,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -71,7 +72,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -91,7 +92,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -111,7 +112,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -122,6 +123,30 @@ SELECT * FROM
 WHERE RNUM BETWEEN 1 AND 5
 </entry>
 
+
+
+
+
+
+
+
+
+
+<!-- 게시글 조회 -->
+<entry key="boardDetail">
+SELECT BOARD_NO,BOARD_TITLE,BOARD_CONTENT,READ_COUNT,
+	   MEMBER_NICK,
+	   TO_CHAR(CREATE_DT,'YYYY-MM-DD hh:mm:ss') CREATE_DT,
+	   TO_CHAR(UPDATE_DT,'YYYY-MM-DD hh:mm:ss') UPDATE_DT,
+	   BOARD_NM
+FROM BOARD
+JOIN MEMBER USING(MEMBER_NO)
+JOIN BOARD_TYPE USING(BOARD_CD)
+WHERE BOARD_NO = ?
+AND BOARD_FL = 'N'
+</entry>
+
+<!-- 게시글 이름 -->
 <entry key="selectBoardName">
 SELECT BOARD_NM FROM BOARD_TYPE 
 WHERE BOARD_CD = ?

@@ -129,7 +129,7 @@
 
                 <select name="key" id="search-key">
                     <option value="t">제목</option>
-                  op  <option value="c">내용</option>
+                    <option value="c">내용</option>
                     <option value="tc">제목+내용</tion>
                     <option value="w">작성자</option>
                 </select>
@@ -140,8 +140,6 @@
             </form>
 
         </section>
-    </main>
-    
     <div class="modal">
         <span id="modal-close">&times;</span>
         <img id="modal-image" src="${contextPath}/resources/images/user.png">
@@ -150,6 +148,5 @@
 
         <script src="${contextPath}/resources/js/board/board.js"></script>
     </main>
-
 </body>
 </html>
