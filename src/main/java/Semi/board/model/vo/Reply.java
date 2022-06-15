@@ -1,5 +1,26 @@
 package Semi.board.model.vo;
 
-public class Reply {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class Reply {
+	
+	private int replyNo;
+	private String replyContent;
+	private String createDate;
+	private String updateDate;
+	private int boardNo;
+	private int memberNo;
+	private String memberNickname;
+	private String profileImage;
+	
+	private int likeCount;
+	private int reportCount;
+	
 }

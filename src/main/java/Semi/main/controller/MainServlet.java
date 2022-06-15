@@ -28,7 +28,7 @@ public class MainServlet extends HttpServlet {
 				switch(i) {
 					case 0 : boardType = "hot";
 						break;
-					case 1 : boardType = "new";
+					case 1 : boardType = "recency";
 						break;
 					case 2 : boardType = "exercise";
 						break;

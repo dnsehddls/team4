@@ -55,34 +55,6 @@ function changeInfoValidate(){
         return false;
     }
 
-    
-    // 비밀번호 변경
-
-    // 비밀번호 정규표현식
-    const regEx = /^[\w!@#_-]{6,30}$/;
-
-    // if(newPw.value.trim().length == 0){
-    //     alert("새 비밀번호를 입력해주세요.");
-    //     newPw.focus();
-    //     return false;
-    // }
-
-    // 유효하지 않은 경우
-    if(!regEx.test(newPw.value)){
-        alert("영어, 숫자, 특수문자(!,@,#,-,_) 6~30 글자 사이로 작성해주세요.");
-        newPw.focus();
-        return false;
-    }
-
-    if(newPwConfirm.value.trim().length == 0){
-        return printAlert(newPwConfirm, "새 비밀번호 확인을 입력해주세요.");
-    }
-
-    // 새 비밀번호 != 새 비밀번호 확인
-    if(newPw.value != newPwConfirm.value){
-        return printAlert(newPwConfirm, "새 비밀번호가 일치하지 않습니다.");
-    }
-
 
 
     return true;

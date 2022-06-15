@@ -1,12 +1,12 @@
+.myPage-content{
+    margin: 50px auto;
+    display: flex;
+}
+
 main{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.myPage-content{
-    margin: 50px auto;
-    display: flex;
 }
 
 .line{
@@ -23,6 +23,11 @@ main{
 .myPage-main{
     width: 900px;
     margin: 30px;
+}
+
+#message{
+    display: block;
+    margin-left: 12px;
 }
 
 #secessionBtn{

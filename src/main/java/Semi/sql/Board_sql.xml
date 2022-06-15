@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>board-sql.xml</comment>
-<entry key="aBoard">
+<entry key="announcementBoard">
 SELECT * FROM
 (
     SELECT ROWNUM RNUM, D.* FROM (
@@ -11,7 +11,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -19,7 +19,7 @@ SELECT * FROM
         ORDER BY CREATE_DT DESC
     )D
 )
-WHERE RNUM BETWEEN 1 AND 5
+WHERE RNUM = 1
 </entry>
 
 <entry key="hotBoard">
@@ -43,7 +43,7 @@ SELECT * FROM
 WHERE RNUM BETWEEN 1 AND 7
 </entry>
 
-<entry key="newBoard">
+<entry key="recencyBoard">
 SELECT * FROM
 (
     SELECT ROWNUM RNUM, D.* FROM (
@@ -52,7 +52,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)

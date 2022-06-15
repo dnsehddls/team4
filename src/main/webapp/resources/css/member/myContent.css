@@ -1,11 +1,5 @@
-main{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .myPage-content{
-    margin: 50px auto;
+    margin: 50px 155px;
     display: flex;
 }
 

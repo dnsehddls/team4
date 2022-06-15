@@ -22,12 +22,12 @@ public class MemberService {
 	 */
 	public Member login(Member user) throws Exception{
 		Connection conn = getConnection();
-		Member result = dao.login(conn,user);
+		Member result = dao.login(conn, user);
 		close(conn);
 		return result;
 	}
 	
-
+	
 	
 	/**
 	 * 회원가입 Service
@@ -142,5 +142,63 @@ public class MemberService {
 		
 		return result;
 	}
+
+	/** 계정찾기 (이메일)
+	 * @param memberEmail
+	 * @param memberTel
+	 * @return
+	 * @throws Exception
+	 */
+//	public Member accountfind(String memberEmail, String memberTel) throws Exception{
+//		Connection conn = getConnection();
+//		Member accountInfo = dao.accountFind(conn, memberEmail, memberTel);
+//		close(conn);
+//		return accountInfo;
+//	}
+
+
+	/**
+	 * 회원 정보 수정 Service
+	 * @param mem
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateMember(Member mem) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updateMember(conn, mem);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	/**
+	 * 회원 탈퇴 Service
+	 * @param memberNo
+	 * @param inputPW
+	 * @return result
+	 * @throws Exception
+	 */
+	public int secession(int memberNo, String inputPW) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.secession(conn, memberNo, inputPW);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	
 
 }

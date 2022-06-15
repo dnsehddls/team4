@@ -18,7 +18,7 @@ import Semi.member.model.vo.Member;
 
 @WebServlet("/user/*")
 public class MainRequestController extends HttpServlet{
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
@@ -27,16 +27,16 @@ public class MainRequestController extends HttpServlet{
 	    try {
 	    	//로그인 요청
 	    	MemberService service = new MemberService();
-	    	
+
 	    	if(command.equals("login")) {
 		    	String id = req.getParameter("ID");
 		    	String pw = req.getParameter("PW");
 		    	Member member = new Member();
 		    	member.setMemberID(id);
 		    	member.setMemberPW(pw);
-		    	
+
 		    	HttpSession session = req.getSession();
-		    	
+
 		    	Member loginSession = service.login(member);
 		    	if(loginSession !=null) {
 		    		session.setAttribute("loginMember", loginSession);
@@ -47,17 +47,17 @@ public class MainRequestController extends HttpServlet{
 		    	resp.sendRedirect(req.getContextPath());
 	    	}
 	    	//회원가입
-	    	
+
 	    	//계정찾기
-	    	
-	    	
-	    	
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
