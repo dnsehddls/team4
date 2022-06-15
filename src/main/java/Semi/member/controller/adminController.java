@@ -53,7 +53,7 @@ public class adminController extends HttpServlet {
 	    			
 	    			map = service.selectAll(cp);
 	    				    			
-	    		}else { // 검색 회원 목록
+	    		} else { // 검색 회원 목록
 	    			
 	    			String key = req.getParameter("key");
 	    			String query = req.getParameter("query");
@@ -72,79 +72,7 @@ public class adminController extends HttpServlet {
 	    		
 	    	}
 	    	
-	    	
-	    	// 관리자 정보 수정
-	    	if(command.equals("info")) {
-	    		
-	    		String path = "/WEB-INF/views/admin/adminPage-info.jsp";
-	    		
-	    		req.getRequestDispatcher(path).forward(req, resp);
-	    		
-	    		String memberEmail = req.getParameter("memberEmail");
-	    		String memberNickname = req.getParameter("memberNickname");
-	    		String memberTel = req.getParameter("memberTel");
-	    		
-//	    		String[] address = req.getParameterValues("memberAddress");
-	    		
-	    		HttpSession session = req.getSession();
-	    		
-	    		Member loginMember = (Member)(session.getAttribute("loginMember"));
-	    		
-	    		int memberNo = loginMember.getMemberNo();
-	    		
-	    		Member mem = new Member();
-	    		
-	    		mem.setMemberNo(memberNo);
-	    		mem.setMemberNickname(memberNickname);
-	    		mem.setMemberTel(memberTel);
-	    		mem.setMemberEmail(memberEmail);
-	    		
-	    		int result = service.updateAdmin(mem);
-	    		
-	    		if(result>0) {
-	    			session.setAttribute("message", "관리자 정보가 수정 되었습니다");
-	    			
-	    			loginMember.setMemberNickname(memberNickname);
-					loginMember.setMemberTel(memberTel);
-	    		}else {
-	    			session.setAttribute("message", "관리자 정보 수정 실패");
-	    		}	    		
-	    		resp.sendRedirect("info");	    		
-	    	}
-	    	
-	    	
-	    	// 관리자 비밀번호 수정
-	    	if(command.equals("changePw")) {
-	    		
-	    		String path = "/WEB-INF/views/admin/adminPage-changePw.jsp";
-	    		
-	    		req.getRequestDispatcher(path).forward(req, resp);
-	    		
-	    		String currentPw = req.getParameter("currentPw");
-	    		String newPw = req.getParameter("newPw");
-	    		
-	    		HttpSession session = req.getSession();
-	    		
-	    		Member loginMember = (Member)(session.getAttribute("loginMember"));
-	    		
-	    		int memberNo = loginMember.getMemberNo();
-	    		
-	    		int result = service.adminChangePw(currentPw, newPw, memberNo);
-	    		
-	    		String rePath = null;
-	    		
-	    		if(result>0) {
-	    			session.setAttribute("message", "관리자 비밀번호 변경 성공");
-	    			 
-	    			rePath = "info";
-	    		}else {
-	    			session.setAttribute("message", "현재 관리자 비밀번호가 일치하지 않습니다");
-	    			
-	    			rePath = "changePw";
-	    		}
-	    		resp.sendRedirect(rePath);
-	    		
-	    	}
+	 
 	    	
 	    	
 	    	// 회원 상세 조회
@@ -224,7 +152,7 @@ public class adminController extends HttpServlet {
 	
 	    	// 신고 게시글 조회
 	    	
-	    	if(command.equals("report")) {
+	    	if(command.equals("reportList")) {
 	    		
 	    		
 	    		int cp = 1;

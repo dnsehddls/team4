@@ -62,10 +62,16 @@
                     <tr>
                         <th>탈퇴 여부</th>
                             <td>
-                                ${memberDetail.secessionFlag}
-
-                                <button id="flagY">탈퇴</button>
-                                <button id="flagN">복구</button>
+                                 <c:choose>
+                                    <c:when test="${memberDetail.secessionFlag eq 'Y'}">
+                                        탈퇴 회원
+                                        <button id="flagN">복구</button>
+                                    </c:when>
+                                    <c:otherwise>                                        
+                                        회원
+                                        <button id="flagY">탈퇴</button>
+                                    </c:otherwise>
+                                </c:choose> 
                             </td>  
                     </tr>
                     

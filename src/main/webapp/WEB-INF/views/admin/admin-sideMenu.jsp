@@ -13,10 +13,8 @@
 <body>
 
     <section class="left-side">
-        사이드메뉴
+  
         <ul class="list-group">
-            <li><a href="${contextPath}/admin/profile">프로필</a></li>
-            
             <!-- /community/member/myPage/info -->
             <li><a href="${contextPath}/admin/info">내 정보</a></li>
             
@@ -26,7 +24,7 @@
             <!-- /community/member/myPage/secession -->
             <li><a href="${contextPath}/admin/memberList">회원 목록</a></li>
 
-            <li><a href="${contextPath}/admin/reported">신고 게시글</a></li>
+            <li><a href="${contextPath}/admin/reportList">신고 게시글</a></li>
 
 
         </ul>

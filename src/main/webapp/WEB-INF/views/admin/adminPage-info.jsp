@@ -7,79 +7,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자 페이지</title>
+    <title>My Info</title>
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin/adminPage.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/member/myInfo.css">
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
 </head>
-<body>
+<body>    
+    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    
     <main>
+        <section class="myPage-content">
 
-
-        <section class="adminPage-content">
-            
-            <!-- 왼쪽 사이드 메뉴 -->
             <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
 
-
-            <section class="adminPage-main">
-
-                <h1 class="adminPage-title">관리자 정보</h1>
-                <span class="adminPage-explanation">원하는 관리자 정보를 수정할 수 있습니다</span>
-
-                <form action="info" method="POST" name="profile-form" onsubmit="return infoValidate()">
-
-                    <div class="adminPage-row">
-                        <label>닉네임</label>
-                        <input type="text" name="memberNickname" value="${loginMember.memberNickname}" id="memberNickname" maxlength="10">
-                    </div>
-
-                    <div class="adminPage-row">
-                        <label>이메일</label>
-                        <input type="text" name="memberEmail" value="${loginMember.memberEmail}" id="memberEmail" maxlength="11">
-                    </div>
-
-                    <div class="adminPage-row">
-                        <label>전화번호</label>
-                        <input type="text" name="memberTel" value="${loginMember.memberTel}" id="memberTel" maxlength="11">
-                    </div>
-
-                    <!-- 주소
-                    <div class="adminPage-row info-title">
-                        <span>주소</span>
-                    </div>
-
-                    <div class="adminPage-row info-address">
-                        <input type="text" name="memberAddress" value="${addr[0]}" maxlength="6">
-
-                        <button type="button" id="info-address-btn">검색</button>
-                    </div>
-
-                    <div class="adminPage-row info-address">
-                        <input type="text" name="memberAddress" value="${addr[1]}">
-                    </div>
-
-                    <div class="adminPage-row info-address">
-                        <input type="text" name="memberAddress" value="${addr[2]}">
-                    </div> -->
-
-                    <button id="info-update-btn">수정하기</button>
-
-                </form>
-
-            </section>           
-
-        </section>
-
+            <section class="myPage-main">
+                <h2 class="title">
+                    <span>내 정보</span>
+                </h2>
         
+                <div class="line"></div>
+                
+                <form action="info" method="POST" name="myPage-form" onsubmit="return changeInfoValidate()">
+                    <table name="signUp-form" class="tb">
+                        <tr>
+                            <th>아이디</th>
+                            <td>${loginMember.memberID}</td>
+                        </tr>
+        
+                        <tr>
+                            <th>이름</th>
+                            <td>${loginMember.memberName}</td>
+                        </tr>
+        
+                        <tr>
+                            <th>닉네임</th>
+                            <td>
+                                <input type="text" name="memberNickname" value="${loginMember.memberNickname}" id="memberNick" placeholder="영어/숫자/한글 2~10글자 사이로 작성해주세요.">
+                                <button class="member_btn" id="nicknameBtn" type="button">중복확인</button>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <th>전화번호</th>
+                            <td>
+                                <input type="tel" name="memberTel" value="${loginMember.memberTel}" id="memberTel" maxlength="13" placeholder="번호를 입력해 주세요">
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <th>이메일</th>
+                            <td>${loginMember.memberEmail}</td>
+                        </tr>
+        
+                        
+                    </table>
+        
+                    <button id="update">수정하기</button>
+                    
+                </form>
+        
+                <div class="line"></div>
+            </section>
+        </section>
     </main>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script src="${contextPath}/resources/js/member/admin-info.js"></script>
+    <script src="${contextPath}/resources/js/member/myInfo.js"></script>
 </body>
 </html>

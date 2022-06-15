@@ -30,7 +30,17 @@
             <c:if test="${!empty loginMember}">
                 <img src="" alt="등급이미지">
                 <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
-                <a href="${contextPath}/member/myPage/info"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+
+                <c:choose>
+                    <c:when test="${loginMember.grade eq '관리자'}">
+                        <a href="${contextPath}/admin/info"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${contextPath}/member/myPage/info"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                    </c:otherwise>
+                </c:choose>
+
+
             </c:if>
             <c:if test="${empty loginMember}">
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
