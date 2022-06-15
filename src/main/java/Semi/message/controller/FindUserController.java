@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import com.google.gson.Gson;
 
 import Semi.member.model.vo.Member;
@@ -18,7 +21,7 @@ import Semi.message.model.service.MessageService;
 
 
 // 특정 회원 조회
-@WebServlet("/findUser")
+@WebServlet("/sendView/*")
 public class FindUserController extends HttpServlet {
 
 //	@Override
@@ -61,24 +64,47 @@ public class FindUserController extends HttpServlet {
 	
 		String uri = req.getRequestURI();
 		String contextPath = req.getContextPath();
-		String command = uri.substring(  (contextPath + "/findUser/").length()  );
-		
+		String command = uri.substring(  (contextPath + "/sendView/").length()  );
+		System.out.println(uri);
 		MessageService service = new MessageService();
 		
 		try {
+			System.out.println("findUser");
 			
 			if(command.equals("findNo")) {
 				
 				String memberNickname = req.getParameter("memberNickname");
-
+				System.out.println("memberNickname : " + memberNickname);
 				int receiveNo = service.selectUser(memberNickname);
 				
-				if(receiveNo > 0) {
-					req.setAttribute("memberNickname", memberNickname);
-					req.setAttribute("receiveNo", receiveNo);
-					resp.getWriter().print(memberNickname);
-				}
 				
+//					Member mm = new Member();
+//					mm.setMemberNickname(memberNickname);
+//					mm.setMemberNo(receiveNo);
+//					req.setAttribute("memberNickname", memberNickname);
+//					req.setAttribute("receiveNo", receiveNo);
+//					resp.getWriter().print(mm);
+//					//resp.getWriter().print(receiveNo);
+//					//JSONParser parser = new JSONParser();
+//					//Object obj = parser.parse(resp);
+//					
+//					//new Gson().toJson(rList, resp.getWriter());
+
+					
+					// 2) JSON-Simple 라이브러리에서 제공하는 JSONObject 사용
+				if(receiveNo > 0) {
+					JSONObject obj = new JSONObject(); // Map 형식의 객체
+					obj.put("memberNickname", memberNickname);
+					obj.put("receiveNo", receiveNo);
+					
+					
+					// JSONObject의 toString() 메서드는
+					// JSON 형태로 출력될 수 있도록 오버라이딩이 되어있다!
+					resp.getWriter().print(obj.toString());
+					
+				} else {
+					resp.getWriter().print(receiveNo); // null
+				}
 			}
 
 		}catch(Exception e) {
