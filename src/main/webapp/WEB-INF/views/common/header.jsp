@@ -30,7 +30,7 @@
             <c:if test="${!empty loginMember}">
                 <img src="" alt="등급이미지">
                 <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
-                <a href="${contextPath}/member/myPage/info"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
             </c:if>
             <c:if test="${empty loginMember}">
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>

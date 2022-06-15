@@ -103,26 +103,26 @@ public class BoardService {
 	 * @throws Exception
 	 */
 	public Map<String, Object> myc(int cp, Member loginMember) throws Exception{
-		
+
 		Connection conn = getConnection();
-		
+
 		// 내 글 게시글 수 조회
 		int listCount = dao.mycCount(conn, loginMember);
-		
+
 		// 페이지네이션
 		Pagination pagination = new Pagination(cp, listCount);
-		
+
 		// 게시글 목록 조회
 		List<MyBoard> contentList = dao.myContentList(conn, pagination, loginMember);
-		
+
 		// Map에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("pagination", pagination);
 		map.put("contentList", contentList);
-		
+
 		close(conn);
-		
+
 		return map;
 	}
 
@@ -135,9 +135,9 @@ public class BoardService {
 	 */
 	public Map<String, Object> bookmarkList(int cp, Member loginMember) throws Exception{
 		Connection conn = getConnection();
-		
+
 		int listCount = dao.bookmarkCount(conn, loginMember);
-		
+
 		Pagination pagination = new Pagination(cp, listCount);
 
 		List<MyBoard> bookmarkList = dao.bookmarkList(conn, pagination, loginMember);
@@ -146,9 +146,9 @@ public class BoardService {
 
 		map.put("pagination", pagination);
 		map.put("bookmarkList", bookmarkList);
-		
+
 		close(conn);
-		
+
 		return map;
 	}
 

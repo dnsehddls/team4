@@ -30,8 +30,8 @@ public class BoardDAO {
 	public BoardDAO() {
 		try {
 			prop = new Properties();
-			String filePath = BoardDAO.class.getResource
-					("/Semi/sql/board-sql.xml").getPath();
+			String filePath = BoardDAO.class.getResource("/Semi/sql/Board-sql.xml").getPath();
+
 			prop.loadFromXML(new FileInputStream(filePath));
 
 
@@ -47,8 +47,6 @@ public class BoardDAO {
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setInt(1, 0);
 //			rs = pstmt.executeQuery();
-//			������ �������� ����� �߰��� �� pstmt
-
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -156,7 +154,6 @@ public class BoardDAO {
 
 		try {
 			String sql = prop.getProperty("selectBoardList");
-
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 
@@ -222,7 +219,6 @@ public class BoardDAO {
 			String sql = prop.getProperty("searchBoardList1")
 					   + condition
 					   + prop.getProperty("searchBoardList2");
-
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 
@@ -265,19 +261,19 @@ public class BoardDAO {
 	 */
 	public int mycCount(Connection conn, Member loginMember) throws Exception{
 		int listCount = 0;
-		
+
 		try {
 			String sql = prop.getProperty("mycCount");
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, loginMember.getMemberNo());
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.next()) {
 				listCount = rs.getInt(1);
 			}
-			
+
 		}finally {
 			close(rs);
 			close(pstmt);
@@ -290,37 +286,37 @@ public class BoardDAO {
 	 * @param conn
 	 * @param pagination
 	 * @param loginMember
-	 * @return 
+	 * @return
 	 * @throws Exception
 	 */
 	public List<MyBoard> myContentList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
 		List<MyBoard> contentList = new ArrayList<MyBoard>();
-		
+
 		try {
 			String sql = prop.getProperty("contentList");
-			
+
 			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
-			
+
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, loginMember.getMemberNo());
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				MyBoard board = new MyBoard();
-				
+
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardName(rs.getString("BOARD_NM"));
 				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setCreateDate(rs.getString("CREATE_DT"));
-				
+
 				contentList.add(board);
 			}
-			
+
 		}finally {
 			close(rs);
 			close(pstmt);
@@ -337,20 +333,20 @@ public class BoardDAO {
 	 */
 	public int bookmarkCount(Connection conn, Member loginMember) throws Exception{
 		int listCount = 0;
-		
+
 		try {
 			String sql = prop.getProperty("bookmarkCount");
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, loginMember.getMemberNo());
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.next()) {
 				listCount = rs.getInt(1);
 			}
-			
-			
+
+
 		}finally {
 			close(rs);
 			close(pstmt);
@@ -368,41 +364,41 @@ public class BoardDAO {
 	 */
 	public List<MyBoard> bookmarkList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
 		List<MyBoard> bookmarkList = new ArrayList<MyBoard>();
-		
+
 		try {
 			String sql = prop.getProperty("bookmarkList");
 
 			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
-			
+
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, loginMember.getMemberNo());
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				MyBoard board = new MyBoard();
-				
+
 				board.setBoardNo(rs.getInt("BOARD_NO"));
 				board.setBoardTitle(rs.getString("BOARD_TITLE"));
 				board.setMemberNickname(rs.getString("MEMBER_NICK"));
 				board.setCreateDate(rs.getString("CREATE_DT"));
-				
+
 				bookmarkList.add(board);
 			}
-			
+
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		
+
 		return bookmarkList;
 	}
-	
-	
+
+
 
 
 
