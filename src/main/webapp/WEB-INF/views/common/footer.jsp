@@ -17,7 +17,7 @@
     </footer>
 	<c:if test="${ !empty sessionScope.message }">
     	<script>	
-			alert(${message});
+			alert("${message}");
     	</script>
 	    <c:remove var="message" scope="session"/>
 	</c:if>

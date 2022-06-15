@@ -36,5 +36,4 @@ public class BoardDetailServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-	
 }

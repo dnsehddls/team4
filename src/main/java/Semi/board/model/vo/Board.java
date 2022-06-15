@@ -3,11 +3,14 @@ package Semi.board.model.vo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 public class Board {
+
 	
 	private int boardNo;
 	private String boardTitle;
@@ -21,4 +24,5 @@ public class Board {
 	private String boardType;
 	private String goodCount; // 좋아요 갯수
 	
+	private String boardFlag;
 }
