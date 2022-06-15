@@ -46,8 +46,6 @@ public class BoardDAO {
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setInt(1, 0);
 //			rs = pstmt.executeQuery();
-//			占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占� 占쌩곤옙占쏙옙 占쏙옙 pstmt
-
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -155,7 +153,6 @@ public class BoardDAO {
 
 		try {
 			String sql = prop.getProperty("selectBoardList");
-
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 
@@ -221,7 +218,6 @@ public class BoardDAO {
 			String sql = prop.getProperty("searchBoardList1")
 					   + condition
 					   + prop.getProperty("searchBoardList2");
-
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
 
@@ -265,7 +261,6 @@ public class BoardDAO {
 	 */
 	public List<MyBoard> myContent(Connection conn, int memberNo) throws Exception{
 		List<MyBoard> clist = null;
-		
 		try {
 
 			String sql = prop.getProperty("myContent");

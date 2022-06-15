@@ -24,30 +24,29 @@
 		SELECT MEMBER_NO, MEMBER_ID, REG_DATE, SECESSION_FL
 		FROM MEMBER
 		WHERE MEMBER_EMAIL = ?
-		AND SECESSION_FL = 'N'
 	</entry>
 	
 	<!-- 관리자 정보 수정 -->
 	<entry key="updateAdmin">
-		UPDATE MEMBER SET
-		MEMBER_NICK = ?,
-		MEMBER_TEL = ?,
-		
-		WHERE GRADE_CODE = 99	
+      UPDATE MEMBER SET
+      MEMBER_PW = ?
+      MEMBER_NICK = ?
+      MEMBER_TEL = ?
+      MEMBER_EMAIL = ?
+      WHERE MEMBER_NO = ?
 	</entry>
 	
 	<!-- 관리자 비밀번호 수정 -->
 	<entry key="adminChangePw">
 		UPDATE MEMBER SET
 		MEMBER_PW = ?
-		WHERE GRADE_CODE = 99
+		WHERE MEMBER_NO = ?
 		AND MEMBER_PW = ?
 	</entry>
 	
 	<!-- 전체 회원 수 조회 -->
 	<entry key="getListCount">
 		SELECT COUNT(*)FROM MEMBER
-		WHERE SECESSION_FL = 'N'
 	</entry>
 	
 	
@@ -61,7 +60,6 @@
 	<!-- 조건을 만족하는 회원의 수 조회 -->
 	<entry key="searchListCount">
 		SELECT COUNT(*) FROM MEMBER
-		WHERE SECESSION_FL = 'N'	
 	</entry>
 	
 	<!-- 조건을 만족하는 회원 목록 조회 -->
