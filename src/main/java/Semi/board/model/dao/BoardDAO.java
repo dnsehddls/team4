@@ -20,7 +20,6 @@ import Semi.board.model.vo.ShowWindowInfo;
 
 public class BoardDAO {
 
-
 	private PreparedStatement pstmt;
 	private Statement stmt;
 	private ResultSet rs;
@@ -29,7 +28,7 @@ public class BoardDAO {
 	public BoardDAO() {
 		try {
 			prop = new Properties();
-			String filePath = BoardDAO.class.getResource("/Semi/sql/Board-sql.xml").getPath();
+			String filePath = BoardDAO.class.getResource("/Semi/sql/Board_sql.xml").getPath();
 			
 			prop.loadFromXML(new FileInputStream(filePath));
 
