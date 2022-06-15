@@ -26,7 +26,9 @@
             <!-- /community/member/myPage/secession -->
             <li><a href="${contextPath}/admin/memberList">회원 목록</a></li>
 
-            <li><a href="${contextPath}/admin/reported">신고된 게시글</a></li>
+            <li><a href="${contextPath}/admin/reported">신고 게시글</a></li>
+
+
         </ul>
     </section>
 </body>

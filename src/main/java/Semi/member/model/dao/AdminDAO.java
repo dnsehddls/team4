@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import Semi.member.model.vo.Pagination;
+import Semi.board.model.vo.Report;
 import Semi.member.model.vo.Member;
 
 
@@ -355,6 +356,156 @@ public class AdminDAO {
 		
 		return result;
 		
+	}
+
+
+	/** 신고 게시글 전체 조회
+	 * @param conn
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int reportedListCount(Connection conn) throws Exception {
+		
+		int listCount = 0;
+		
+		try {
+			String sql = prop.getProperty("reportedListCount");
+			
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}			
+			
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+
+	/** 신고 게시글 일정한 범위의 목록 조회
+	 * @param conn
+	 * @param pagination
+	 * @return reportList
+	 * @throws Exception
+	 */
+	public List<Report> reportList(Connection conn, Pagination pagination) throws Exception {
+		
+		List<Report> reportList = new ArrayList<Report>();
+		
+		try {
+			String sql = prop.getProperty("reportList");
+			
+			int start = (pagination.getCurrentPage() -1) * pagination.getLimit() +1;
+			int end = start + pagination.getLimit() -1;
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Report report = new Report();
+				
+				report.setReportNo(rs.getInt("REPORT_NO"));
+				report.setReportContent(rs.getString("REPORT_CONTENT"));
+				report.setBoardNo(rs.getInt("BOARD_NO"));
+				report.setMemberNo(rs.getInt("MEMBER_NO"));
+				
+				reportList.add(report);
+				
+			}
+	
+						
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return reportList;
+	}
+
+
+	/** 조건을 만족하는 게시글 수 조회 
+	 * @param conn
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int searchReportedListCount(Connection conn, String condition) throws Exception {
+		
+		int listCount = 0;
+		
+		try {
+			String sql = prop.getProperty("searchReportedListCount") + condition;
+			
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}	
+			
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+
+	/** 조건을 만족하는 게시글 조회
+	 * @param conn
+	 * @param pagination
+	 * @param condition
+	 * @return searchReportedList
+	 * @throws Exception
+	 */
+	public List<Report> searchReportedList(Connection conn, Pagination pagination, String condition) throws Exception {
+		
+		List<Report> searchReportedList = new ArrayList<Report>();
+		
+		try {
+			String sql = prop.getProperty("searchReportedList1") + condition + prop.getProperty("searchReportedList2");
+			
+			int start = (pagination.getCurrentPage() -1) * pagination.getLimit() +1;
+			int end = start + pagination.getLimit() -1;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				Report report = new Report();
+				
+				report.setReportNo(rs.getInt("REPORT_NO"));
+				report.setReportContent(rs.getString("REPORT_CONTENT"));
+				report.setBoardNo(rs.getInt("BOARD_NO"));
+				report.setMemberNo(rs.getInt("MEMBER_NO"));
+				
+				searchReportedList.add(report);
+				
+			}			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return searchReportedList;
 	}
 
 }

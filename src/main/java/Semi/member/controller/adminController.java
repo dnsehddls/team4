@@ -38,13 +38,7 @@ public class adminController extends HttpServlet {
 			// cp 추가하기
 			// 회원목록 조회
 	    	if(command.equals("memberList")) {
-	    		
-//	    		List<Member> list = service.selectAll();
-	    		
-//	    		String path = "/WEB-INF/views/admin/admin-memberList.jsp";
-	    		
-
-	    		
+	    			    		
 	    		
 	    		int cp = 1;
 	    		
@@ -227,15 +221,42 @@ public class adminController extends HttpServlet {
 	    	}
 	    	
 	    	
+	
+	    	// 신고 게시글 조회
 	    	
-	    	
-	    	
-	    	
-	    	if(command.equals("reported")) {
+	    	if(command.equals("report")) {
 	    		
+	    		
+	    		int cp = 1;
+	    		
+	    		if(req.getParameter("cp") != null) {
+	    			cp = Integer.parseInt(req.getParameter("cp"));
+	    		}
+	    		
+	    		
+	    		Map<String, Object> map = null;
+	    		
+	    		if(req.getParameter("key") == null) { // 일반 회원 목록
+	    			
+	    			map = service.reportedList(cp);
+	    				    			
+	    		}else { // 검색 신고 게시글 목록
+	    			
+	    			String key = req.getParameter("key");
+	    			String query = req.getParameter("query");
+
+	    			
+	    			map = service.searchReported(key, query, cp);
+	    			
+	    		}
+	    		
+	    		req.setAttribute("map", map);	    			    		
+
 	    		String path = "/WEB-INF/views/admin/admin-reported.jsp";
 	    		
-	    		req.getRequestDispatcher(path).forward(req, resp);
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp);
 	    		
 	    	}
 	    

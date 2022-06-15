@@ -34,23 +34,33 @@
                         <table class="list-table">                   
                             <thead>
                                 <tr>
-                                    <th>글번호</th>
-                                    <th>글제목</th>
-                                    <th>작성일</th>
-                                    <th>신고 사유</th>
-                                    <th>신고 회원</th>
+                                    <th>신고번호</th>
+                                    <th>신고내용</th>
+                                    <th>신고게시글</th>
+                                    <th>신고자</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <a href="#">맛없어요</a>
-                                    </td>
-                                    <td>2022-5-23</td>
-                                    <td>욕설</td>
-                                    <td>user01</td>
-                                </tr>
+                                <c:choose>
+                                    <c:when test="${empty reportList}">
+                                        <tr>
+                                            <th colspan="5">신고 목록이 존재하지 않습니다</th>
+                                        </tr>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <c:forEach var="report" items="${reportList}">
+                                            <tr>
+                                                <td>${report.reportNo}</td>    
+                                                <td>${report.reportContent}</td> 
+                                                <td>
+                                                    <a href="#">${board.boardNo}</a>
+                                                </td>          
+                                                <td>${member.memberNo}</td>      
+                                            </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
 
                             </tbody>
                         </table>
@@ -59,7 +69,7 @@
         
                     <div class="pagination-area">
 
-                        <c:set var="url" value="list?cp="/>
+                        <c:set var="url" value="reportList?cp="/>
                         <ul class="pagination">
                             <!-- 첫 페이지로 이동 -->
                             <li><a href="${url}1${sURL}">&lt;&lt;</a></li>
@@ -90,18 +100,16 @@
         
                     <form action="#" method="get" id="memberSearch">
                         <select name="key">
-                            <option value="id">아이디</option>
-                            <option value="no">회원번호</option>
-                            <option value="registDate">가입 날짜</option>
-                            <option value="secession">탈퇴여부</option>
+                            <option value="rNo">신고번호</option>
+                            <option value="mNo">신고 회원번호</option>
+                            <option value="bNo">신고 게시글 번호</option>
                         </select>
 
-                        <form action="reported" method="get">
-                            <input type="text" name="query" placeholder="검색어를 입력해주세요.">
-            
-                            <button>검색</button>
-                        </form>
+
+                        <input type="text" name="query" placeholder="검색어를 입력해주세요.">
         
+                        <button>검색</button>
+
                     </form>
             </section>
 

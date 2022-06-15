@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import Semi.member.model.vo.Pagination;
+import Semi.board.model.vo.Report;
 import Semi.member.model.dao.AdminDAO;
 import Semi.member.model.vo.Member;
 
@@ -133,7 +134,7 @@ public class AdminService {
 		switch(key) {		
 		case "e" : condition = "AND MEMBER_EMAIL LIKE '%"+query+"%' "; break;
 		case "n" : condition = "AND MEMBER_NICK LIKE '%"+query+"%' "; break;
-		case "id" : condition = "AND SESSION_FL LIKE '%"+query+"%' "; break;	
+		case "id" : condition = "AND MEMBER_ID LIKE '%"+query+"%' "; break;	
 		}
 		
 		int listCount = dao.searchListCount(conn, condition);
@@ -190,6 +191,71 @@ public class AdminService {
 		close(conn);
 		
 		return result;
+	}
+
+
+	/** 신고 게시글 조회 Service
+	 * @param cp
+	 * @return map
+	 * @throws Exception
+	 */
+	public Map<String, Object> reportedList(int cp) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		// 신고된 게시글 수 조회
+		int listCount = dao.reportedListCount(conn);
+		
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		// 게시글, 댓글 목록 조회
+		List<Report> reportList = dao.reportList(conn, pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("reportList", reportList);
+		
+		close(conn);
+		
+		return map;
+	}
+
+
+	/** 신고 게시글 검색 조회
+	 * @param key
+	 * @param query
+	 * @param cp
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, Object> searchReported(String key, String query, int cp) throws Exception {
+
+		Connection conn = getConnection();
+		
+		String condition = null;
+		
+		switch(key) {		
+		case "rNo" : condition = "AND REPORT_NO LIKE '%"+query+"%' "; break;
+		case "mNo" : condition = "AND MEMBER_NO LIKE '%"+query+"%' "; break;
+		case "bNo" : condition = "AND BOARD_NO LIKE '%"+query+"%' "; break;	
+		}
+		
+		int listCount = dao.searchReportedListCount(conn, condition);
+		
+		Pagination pagination = new Pagination(cp, listCount);
+		
+		List<Report> reportedList = dao.searchReportedList(conn, pagination, condition);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pagination", pagination);
+		map.put("reportedList", reportedList);
+		
+		close(conn);
+		
+		return map;
+		
 	}
 
 

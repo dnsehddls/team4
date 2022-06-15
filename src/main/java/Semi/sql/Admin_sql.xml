@@ -94,6 +94,50 @@
 		SECESSION_FL = 'N'
 		WHERE MEMBER_EMAIL = ?
 	</entry>
+	
+	<!-- 신고 게시글/댓글 수 조회 -->
+	<entry key="reportedListCount">
+		SELECT COUNT(*)FROM REPORT
+	</entry>
+	
+	
+	<!-- 일정한 범위의 신고 게시글, 댓글 목록 조회 -->
+	<entry key="reportList">
+		SELECT * FROM(
+		   SELECT ROWNUM RNUM, A.* FROM(   
+		      SELECT REPOPT_NO, REPORT_CONTENT, BOARD_NO, MEMBER_NO
+
+		      FROM REPORT
+
+		      ORDER BY REPORT_NO DESC
+   			  ) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<!-- 조건을 만족하는 신고 게시글 수 조회 -->
+	<entry key="searchReportedListCount">
+		SELECT COUNT(*) FROM REPORT
+	</entry>
+	
+	
+	<!-- 조건을 만족하는 신고 게시글 조회 -->
+	<entry key="searchReportedList1">
+	SELECT * FROM(
+   		SELECT ROWNUM RNUM, A.* FROM(   
+     		SELECT REPORT_NO, REPORT_CONTENT, BOARD_NO, MEMBER_NO
+			FROM REPORT
+	</entry>
+	
+	<!-- 조건을 만족하는 신고 게시글 조회 -->
+	<entry key="searchReportedList2">
+		      ORDER BY REPORT_NO DESC
+        	 ) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
 
 
 </properties>
