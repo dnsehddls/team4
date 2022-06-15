@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import Semi.board.model.vo.Board;
+import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
 import Semi.board.model.dao.BoardDAO;
 
@@ -43,7 +44,7 @@ public class BoardDAO {
 //			pstmt = conn.prepareStatement(sql);
 //			pstmt.setInt(1, 0);
 //			rs = pstmt.executeQuery();
-//			관리자 페이지에 기능을 추가할 시 pstmt
+//			������ �������� ����� �߰��� �� pstmt
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -96,6 +97,160 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return boardDetail;
+	}
+		public String selectBoardName(Connection conn, int type) throws Exception {
+		String boardName = null;
+		
+		try {
+			String sql = prop.getProperty("selectBoardName");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, type);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				boardName = rs.getString(1);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return boardName;
+	}
+
+
+	public int getListCount(Connection conn, int type) throws Exception{
+		int listCount = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("getListCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, type);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	public List<Board> selectBoardList(Connection conn, Pagination pagination, int type) throws Exception {
+		
+		List<Board> boardList = new ArrayList<Board>();
+		
+		try {
+			String sql = prop.getProperty("selectBoardList");
+			
+			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
+			int end = start + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, type);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardNo( rs.getInt("BOARD_NO") );
+				board.setBoardTitle( rs.getString("BOARD_TITLE") );
+				board.setMemberNickname( rs.getString("MEMBER_NICK") );
+				board.setCreateDate( rs.getString("CREATE_DT") );
+				board.setReadCount( rs.getInt("READ_COUNT") );
+				
+				boardList.add(board);
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return boardList;
+	}
+	
+	
+	public int searchListCount(Connection conn, int type, String condition) throws Exception {
+		
+		int listCount = 0;
+		
+		try {
+			String sql = prop.getProperty("searchListCount")  + condition ;
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, type);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	
+	public List<Board> searchBoardList(
+			Connection conn, Pagination pagination, int type, String condition)
+					throws Exception{
+		
+		List<Board> boardList = new ArrayList<Board>();
+		
+		try {
+			String sql = prop.getProperty("searchBoardList1")
+					   + condition
+					   + prop.getProperty("searchBoardList2");
+			
+			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
+			int end = start + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, type);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board board = new Board();
+				
+				board.setBoardNo( rs.getInt("BOARD_NO") );
+				board.setBoardTitle( rs.getString("BOARD_TITLE") );
+				board.setMemberNickname( rs.getString("MEMBER_NICK") );
+				board.setCreateDate( rs.getString("CREATE_DT") );
+				board.setReadCount( rs.getInt("READ_COUNT") );
+				
+				boardList.add(board);
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return boardList;
 	}
 
 }
