@@ -8,6 +8,7 @@ import java.util.List;
 import Semi.board.model.dao.BoardDAO;
 import Semi.board.model.vo.Board;
 import Semi.board.model.vo.MyBoard;
+import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
 
 public class BoardService {
@@ -31,13 +32,20 @@ public class BoardService {
 	/**
 	 * 내 글 목록 조회 Service
 	 * @param memberNo
-	 * @return
+	 * @return clist
 	 * @throws Exception
 	 */
 	public List<MyBoard> myContent(int memberNo) throws Exception{
 		
+		Connection conn = getConnection();
 		
-		return null;
+		Pagination pagination = new Pagination(currentPage);
+		
+		List<MyBoard> clist = dao.myContent(conn, memberNo);
+		
+		close(conn);
+		
+		return clist;
 	}
 	
 }

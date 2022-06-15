@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import Semi.board.model.vo.Board;
+import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.ShowWindowInfo;
 
 public class BoardDAO {
@@ -27,7 +28,7 @@ public class BoardDAO {
 		try {
 			prop = new Properties();
 			String filePath = BoardDAO.class.getResource
-					("/Semi/sql/Board_sql.xml").getPath();
+					("/Semi/sql/board-sql.xml").getPath();
 			prop.loadFromXML(new FileInputStream(filePath));
 			
 		}catch(Exception e) {
@@ -95,6 +96,44 @@ public class BoardDAO {
 			close(pstmt);
 		}
 		return boardDetail;
+	}
+
+	/**
+	 * 내 글 목록 조회 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @return clist
+	 * @throws Exception
+	 */
+	public List<MyBoard> myContent(Connection conn, int memberNo) throws Exception{
+		List<MyBoard> clist = null;
+		
+		try {
+			
+			String sql = prop.getProperty("myContent");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MyBoard mb = new MyBoard();
+				
+				mb.setBoardNo(rs.getInt(1));
+				mb.setBoardName(rs.getString(2));
+				mb.setBoardTitle(rs.getString(3));
+				mb.setCreateDate(rs.getString(4));
+				
+				clist.add(mb);
+			}
+			
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return clist;
 	}
 
 }
