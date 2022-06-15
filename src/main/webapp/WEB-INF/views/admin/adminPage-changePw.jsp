@@ -7,66 +7,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Info</title>
+    <title>비밀번호 변경(관리자)</title>
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/member/myInfo.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
+
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin/adminPage.css">
 
 </head>
-<body>    
-    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<body>
+
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <main>
-        <section class="myPage-content">
 
+
+
+        <!-- 관리자 페이지  -->
+        <section class="adminPage-content">
+            
+            <!-- 왼쪽 사이드 메뉴 -->
             <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
-        
-            <section class="myPage-main">
-                <h2 class="title">
-                    <span>비밀번호 변경</span>
-                </h2>
-        
-                <div class="line"></div>
-                
-                <form action="changePw" method="POST" name="myPage-form" onsubmit="return changePwValidate()">
-                    <table name="signUp-form" class="tb" style="height: 150px;">
-                        
-                        <tr>
-                            <th>현재 비밀번호</th>
-                            <td>
-                                <input type="password" name="currentPw" id="currentPw" placeholder="현재 비밀번호를 입력해 주세요." autocomplete="off">
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <th>새 비밀번호</th>
-                            <td>
-                                <input type="password" name="newPw" id="newPw" placeholder="새 비밀번호를 입력해 주세요." autocomplete="off">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <th>새 비밀번호 확인</th>
-                            <td>
-                                <input type="password" name="newPw2" id="newPw2" placeholder="새 비밀번호를 한번 더 입력해 주세요" autocomplete="off">
-                            </td>
-                        </tr>
-        
+            <section class="adminPage-main">
 
-                        
-                    </table>
-        
-                    <button id="update">수정하기</button>
-                    
+                <h1 class="adminPage-title">비밀번호 변경</h1>
+                <span class="adminPage-explanation">현재 비밀번호가 일치하는 경우 새 비밀번호로 변경할 수 있습니다.</span>
+
+                <form action="changePw" method="POST" name="changePw-form" onsubmit="return changePwValidateValidate()">
+
+                    <div class="adminPage-row">
+                        <label>현재 비밀번호</label>
+                        <input type="password" name="currentPw" maxlength="30">
+                    </div>
+
+                    <div class="adminPage-row">
+                        <label>새 비밀번호</label>
+                        <input type="password" name="newPw" maxlength="30">
+                    </div>
+
+                    <div class="adminPage-row">
+                        <label>새 비밀번호 확인</label>
+                        <input type="password" name="newPwConfirm" maxlength="30">
+                    </div>
+
+                    <button id="info-update-btn">변경하기</button>
+
                 </form>
-        
-                <div class="line"></div>
+
             </section>
+
+
+
+
         </section>
+
+
     </main>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    <script src="${contextPath}/resources/js/member/myInfo.js"></script>
+    <script src="${contextPath}/resources/js/member/admin-info.js"></script>
 </body>
 </html>

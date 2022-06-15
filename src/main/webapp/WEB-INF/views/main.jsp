@@ -159,26 +159,14 @@
                     <c:if test="${!empty loginMember}">
                         <div>
                             <!-- <div>프로필 이미지</div> -->
-                            <div>${loginMember.memberNickname}</div>
-                            <div>${loginMember.memberEmail}</div>
+                            <div>닉네임</div>
+                            <div>이메일</div>
                             <div>
                                 <a href="#">내 쪽지함</a>
                             </div>
-
-                            <c:choose>
-                                <c:when test="${loginMember.grade eq '관리자'}">
-                                    <div>
-                                        <a href="${contextPath}/admin/info">내 정보</a>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div>
-                                        <a href="${contextPath}/member/myPage/info">내 정보</a>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-
-
+                            <div>
+                                <a href="#">내 정보</a>
+                            </div>
                             <div>
                             	<a href="#">로그아웃</a>
                             </div>

@@ -23,7 +23,7 @@ public class Member {
 	private int point;
 	private String grade;
 	private String registDate;
-	private String secessionFlag;
+	private char secessionFlag;
 	private String profileImage;
 	private int gradeCode;
 	private String regDate;

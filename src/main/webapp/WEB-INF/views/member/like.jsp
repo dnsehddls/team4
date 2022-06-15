@@ -21,7 +21,6 @@
             <section class="left-side">
                 <ul class="list-group">
                     <li><a href="info">내 정보</a></li>
-                    <li><a href="changePw">비밀번호 변경</a></li>
                     <li><a href="myContent">내 글 관리</a></li>
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>

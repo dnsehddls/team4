@@ -103,7 +103,7 @@ public class AdminDAO {
 				mem.setMemberEmail(rs.getString("MEMBER_EMAIL"));
 				mem.setMemberNickname(rs.getString("MEMBER_NICK"));
 				mem.setRegistDate(rs.getString("REG_DATE"));
-				mem.setSecessionFlag(rs.getString("SECESSION_FL"));
+				mem.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
 				
 				memberList.add(mem);
 				
@@ -209,7 +209,7 @@ public class AdminDAO {
 				memberDetail.setMemberID(rs.getString("MEMBER_ID"));
 				memberDetail.setMemberName(rs.getString("MEMBER_NAME"));
 				memberDetail.setMemberEmail(rs.getString("MEMBER_EMAIL"));
-				memberDetail.setSecessionFlag(rs.getString("SECESSION_FL"));
+				memberDetail.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
 				
 			}
 			
@@ -288,7 +288,7 @@ public class AdminDAO {
 				member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
 				member.setMemberNickname(rs.getString("MEMBER_NICK"));
 				member.setRegistDate(rs.getString("REG_DATE"));
-				member.setSecessionFlag(rs.getString("SECESSION_FL"));
+				member.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
 				
 				memberList.add(member);
 				
