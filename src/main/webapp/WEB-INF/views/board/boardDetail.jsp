@@ -86,8 +86,6 @@
 	<script>
         const contextPath = "${contextPath}";
 		const boardNo = "${boardDetail.boardNo}";
-        console.log(contextPath);
-        console.log(boardNo);
 		const loginMember = "${sessionScope.loginMember.memberNo}"
         </script>
     <script src="${contextPath}/resources/js/board/board.js"></script>
