@@ -34,6 +34,7 @@ public class BoardService {
 	public Map<String, Object> selectBoardList(int type, int cp) throws Exception{
 		
 		Connection conn = getConnection();
+		
 
 		String boardName = dao.selectBoardName(conn, type);
 		
