@@ -18,7 +18,8 @@ import Semi.common.wrapper.EncryptWrapper;
 // 필터가 적용될 url이 여러 개인 경우 : String 배열 초기화 형태 {}로 작성
 // ex) String[] aaa = {aa, bb, cc};
 @WebFilter(filterName = "encryptFilter",
-		   urlPatterns = {"/member/login", "/member/signUp", "/member/myPage/changePw", "/member/myPage/secession"})
+		   urlPatterns = {"/member/login", "/member/signUp", "/member/myPage/changePw", "/member/myPage/secession"
+			   		,"/admin/changePw"})
 
 public class EncryptFilter extends HttpFilter implements Filter {
 	

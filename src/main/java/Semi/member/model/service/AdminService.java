@@ -226,7 +226,7 @@ public class AdminService {
 	 * @param key
 	 * @param query
 	 * @param cp
-	 * @return
+	 * @return map
 	 * @throws Exception
 	 */
 	public Map<String, Object> searchReported(String key, String query, int cp) throws Exception {
@@ -257,6 +257,42 @@ public class AdminService {
 		return map;
 		
 	}
+
+
+	/** 좋아요 수 조회
+	 * @return standardNo
+	 * @throws Exception
+	 */
+	public int manageStandard() throws Exception {
+
+		Connection conn = getConnection();
+		
+		int standardNo = dao.manageStandard(conn);
+		
+		close(conn);
+		
+		return standardNo;
+	}
+
+
+	/** 좋아요 수 변경하기
+	 * @param changeNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int likeChange(int changeNo) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = dao.likeChange(conn, changeNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+
 
 
 
