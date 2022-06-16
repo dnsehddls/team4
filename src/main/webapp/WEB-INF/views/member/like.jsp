@@ -46,6 +46,7 @@
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
+                            <td></td>
                         </tr>
                     </thead>
             
@@ -64,6 +65,7 @@
                                         <td><a href="#">${like.boardTitle}</a></td>
                                         <td>${like.memberNickname}</td>
                                         <td>${like.createDate}</td>
+                                        <td><input type="checkbox"></td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>
@@ -71,6 +73,9 @@
                     </tbody>
 
                 </table>
+                <div class="btn-area">
+                    <button type="submit" id="deleteBtn">삭제</button>
+                </div>
         
                 <div class="pagination">
 
