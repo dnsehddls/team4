@@ -34,8 +34,8 @@
                     </h2>
             
                     <div class="line"></div>
-                    
 
+                    <form action="manageStandard" method="get">
 
                         <table name="signUp-form" class="tb">
                             <tr>
@@ -50,14 +50,12 @@
                                     <td>
                                         <input type="text" name="changeNo">
         
-                                        <button id="changeNo">변경</button>
+                                        <button>변경</button>
                                     </td>  
                             </tr>                        
                         </table>
 
-                    
-
-        
+                    </form>     
                         
 
             
@@ -70,7 +68,7 @@
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 
-        <script src="${contextPath}/resources/js/member/admin-standard.js"></script>
+
 
     </body>
 </html>
