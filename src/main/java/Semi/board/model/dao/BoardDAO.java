@@ -99,22 +99,32 @@ public class BoardDAO {
 		}
 		return boardDetail;
 	}
-		public String selectBoardName(Connection conn, int type) throws Exception {
+	public String selectBoardName(Connection conn, int type) throws Exception {
 		String boardName = null;
 
 		try {
 			String sql = prop.getProperty("selectBoardName");
-
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, type);
-
-			rs = pstmt.executeQuery();
-
-			if(rs.next()) {
-				boardName = rs.getString(1);
+			String queryAdd = "WHERE BOARD_CD = ?";
+			if(type<=4) {
+				//타입이 5 (인기 게시판) , 6 (최근 게시글)으로 쿼리로 나뉘여야함
+				pstmt = conn.prepareStatement(sql+queryAdd);
+				
+				pstmt.setInt(1, type);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					boardName = rs.getString(1);
+				}
+			}
+			if(type==5) {
+				boardName = "인기 게시판";
+			}
+			if(type==6) {
+				boardName = "최근 게시판";
 			}
 
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
@@ -129,10 +139,24 @@ public class BoardDAO {
 		try {
 
 			String sql = prop.getProperty("getListCount");
+			String queryAdd = "AND BOARD_CD = ?";
 
-			pstmt = conn.prepareStatement(sql);
+			if(type==5) {
+				queryAdd = " AND (SELECT COUNT(*) "
+						+ "      FROM LIKE_BOARD C "
+						+ "      WHERE C.BOARD_NO = A.BOARD_NO) >= 5";
+			}
 
-			pstmt.setInt(1, type);
+			if(type==6) {
+				queryAdd = "";
+			}
+			
+			pstmt = conn.prepareStatement(sql+queryAdd);
+			
+			if(queryAdd.equals("AND BOARD_CD = ?")){
+					pstmt.setInt(1, type);
+			}
+
 
 			rs = pstmt.executeQuery();
 
@@ -153,18 +177,43 @@ public class BoardDAO {
 		List<Board> boardList = new ArrayList<Board>();
 
 		try {
-			String sql = prop.getProperty("selectBoardList");
 			int start =  ( pagination.getCurrentPage() - 1 ) * pagination.getLimit() + 1;
 			int end = start + pagination.getLimit() - 1;
-
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setInt(1, type);
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
-
-			rs = pstmt.executeQuery();
-
+			
+			if(type <= 4) {
+				String sql = prop.getProperty("selectBoardList");
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, type);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				rs = pstmt.executeQuery();
+			}
+			
+			if(type == 5) {
+				String sql = prop.getProperty("hotBoardSelectList");
+				pstmt = conn.prepareStatement(sql);
+				
+				//관리자 머시기 머시기
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				rs = pstmt.executeQuery();
+			}
+			
+			if(type == 6) {
+				String sql = prop.getProperty("newBoardSelectList");
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				rs = pstmt.executeQuery();
+			}
+			
+			
 			while(rs.next()) {
 				Board board = new Board();
 
