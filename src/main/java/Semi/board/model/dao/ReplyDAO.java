@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import Semi.board.model.vo.MyBoard;
+import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.Reply;
+import Semi.member.model.vo.Member;
 
 public class ReplyDAO {
 	
@@ -106,6 +109,80 @@ public class ReplyDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	/**
+	 * 내가 쓴 댓글 수 조회 DAO
+	 * @param conn
+	 * @param loginMember
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int myrCount(Connection conn, Member loginMember) throws Exception{
+		int listCount = 0;
+		
+		try {
+			String sql = prop.getProperty("myrCount");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, loginMember.getMemberNo());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return listCount;
+	}
+
+	/**
+	 * 내 댓글 목록 조회
+	 * @param conn
+	 * @param pagination
+	 * @param loginMember
+	 * @return replyList
+	 * @throws Exception
+	 */
+	public List<MyBoard> myReplyList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
+		List<MyBoard> replyList = new ArrayList<MyBoard>();
+		
+		try {
+			String sql = prop.getProperty("replyContent");
+			
+			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
+			int end = start + pagination.getLimit() - 1;
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginMember.getMemberNo());
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				MyBoard board = new MyBoard();
+				
+				
+				board.setBoardNo(rs.getInt("BOARD_NO"));
+				board.setBoardTitle(rs.getString("BOARD_TITLE"));
+				board.setReplyContent(rs.getString("REPLY_CONTENT"));
+				board.setCreateReplyDate(rs.getString("CREATE_REPLY"));
+				board.setReplyNo(rs.getInt("REPLY_NO"));
+				
+				replyList.add(board);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return replyList;
 	}
 
 }

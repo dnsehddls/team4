@@ -262,7 +262,7 @@ WHERE MEMBER_NO = ?
 </entry>
 
 
-<!-- 북마크한 게시글 목록 조회 -->
+<!-- 좋아요한 게시글 목록 조회 -->
 <entry key="likeList">
 SELECT * FROM(
     SELECT ROWNUM RNUM, A.* FROM (
