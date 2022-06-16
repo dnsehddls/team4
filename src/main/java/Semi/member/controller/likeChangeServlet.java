@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import Semi.member.model.service.AdminService;
 
-@WebServlet("")
+@WebServlet("/admin/manageStandard")
 public class likeChangeServlet extends HttpServlet {
 	
 	@Override
@@ -28,15 +28,10 @@ public class likeChangeServlet extends HttpServlet {
 		
 		int changeNo = Integer.parseInt("changeNo");
 		
-		int standardNo = req.get
 		
 		try {
 			AdminService service = new AdminService();
-			
-			int standardNo = service.manageStandard();
-			
-			req.setAttribute("standardNo", standardNo);
-			
+					
 			int result = service.likeChange(changeNo);
 			
     		HttpSession session = req.getSession();
