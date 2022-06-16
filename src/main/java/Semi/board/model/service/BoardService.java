@@ -35,6 +35,7 @@ public class BoardService {
 		
 		Connection conn = getConnection();
 		
+		
 
 		String boardName = dao.selectBoardName(conn, type);
 		

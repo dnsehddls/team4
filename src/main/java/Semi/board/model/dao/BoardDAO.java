@@ -148,12 +148,13 @@ public class BoardDAO {
 			if(type==6) {
 				queryAdd = "";
 			}
+			
 			pstmt = conn.prepareStatement(sql+queryAdd);
+			
 			if(queryAdd.equals("AND BOARD_CD = ?")){
 					pstmt.setInt(1, type);
 			}
-			
-			
+
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
