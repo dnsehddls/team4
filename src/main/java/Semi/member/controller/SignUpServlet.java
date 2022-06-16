@@ -58,6 +58,8 @@ public class SignUpServlet extends HttpServlet{
 				session.setAttribute("message", "회원 가입 실패");
 			}
 			
+			resp.sendRedirect(req.getContextPath());
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

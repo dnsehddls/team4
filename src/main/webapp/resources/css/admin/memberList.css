@@ -75,7 +75,7 @@ main{
 /* 회원 목록 조회 */
 
 .member-list{
-    width: 800px;
+    width: 750px;
     margin: 50px auto;
 }
 
@@ -183,10 +183,9 @@ main{
     height: 30px;
 
     display: flex;
-    /* box-sizing: border-box; */
-    justify-content: center;
+    justify-content: space-between;
 
-    margin: 25px auto;
+    margin: 30px auto;
 }
 
 /* 검색 영역 공통 스타일 */

@@ -61,4 +61,43 @@ public class ReplyDAO {
 		return rList;
 	}
 
+
+	public int replyInsert(Connection conn, Reply reply) throws Exception{
+		int result = -10;
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("insertReply"));
+			pstmt.setInt(1, reply.getMemberNo());
+			pstmt.setString(2, reply.getReplyContent());
+			pstmt.setInt(3, reply.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int replyDelete(Connection conn, int replyNo) throws Exception{
+		int result = -10;
+		try {
+			
+		} finally {
+			
+		}
+		return 0;
+	}
+
+
+	public int replyUpdate(Connection conn, int replyNo) throws Exception{
+		int result = -10;
+		try {
+			
+		} finally {
+			
+		}
+		return 0;
+	}
+
 }

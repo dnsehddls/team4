@@ -28,7 +28,7 @@
 
 <entry key="sendMessage">
 	INSERT INTO MESSAGE VALUES
-	( 
+	( seq_ms_no.NEXTVAL
 	, ?
 	, SYSDATE
 	, ?
@@ -37,6 +37,17 @@
 	, null
 	, 'N'
 	)
+</entry>
+
+<!-- 쪽지 목록 조회 -->
+<entry key="messageList">
+SELECT *
+  FROM MESSAGE
+ WHERE 1=1
+   AND ((1 = ? AND SEND_DEL_ST = 'N')
+        OR (2 = ? AND RECEIVE_DEL_ST = 'N'))
+   AND ((1 = ? AND SEND_NO = ?)
+        OR (2 = ? AND RECEIVE_NO = ?))
 </entry>
 
 

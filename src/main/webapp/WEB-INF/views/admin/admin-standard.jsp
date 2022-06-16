@@ -22,7 +22,6 @@
         <main>
 
 
-
             <section class="myPage-content">
 
 
@@ -36,7 +35,7 @@
             
                     <div class="line"></div>
                     
-                    <form action="manageStandard" method="get">
+
 
                         <table name="signUp-form" class="tb">
                             <tr>
@@ -56,7 +55,7 @@
                             </tr>                        
                         </table>
 
-                    </form>
+                    
 
         
                         

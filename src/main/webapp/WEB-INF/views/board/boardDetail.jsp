@@ -23,7 +23,7 @@
                 </div>
                 <div class="board-header">
                     <div class="board-writer">
-                        <img src="../images/profile.png">
+                        <img src="#">
                         <span>${boardDetail.memberNickname}</span>
                     </div>
                     <div class="board-writeDate">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="board-content">
-                    <img src="../images/sample.jpg"><br>
+                    <img src="#"><br>
 					${boardDetail.boardContent}
                 </div>
     
@@ -59,10 +59,10 @@
                 </div>
 	
                 <div id="reply-area">
-                    <div class="reply-title">
+                    <div class="reply-title-main">
                         <h3>댓글</h3>
                     </div>
-                    <ul>
+                    <ul id="reply-main">
                         <c:if test="${!empty rList}">
                            	<jsp:include page="/WEB-INF/views/board/replyList.jsp"/>
                         </c:if>
@@ -82,12 +82,15 @@
         </section>
     </main>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-    <script src="${contextPath}/resources/js/board/board.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
-		const contextPath = "${contextPath}";
-		const boardNo = "${detail.boardNo}";
+        const contextPath = "${contextPath}";
+		const boardNo = "${boardDetail.boardNo}";
+        console.log(contextPath);
+        console.log(boardNo);
 		const loginMember = "${sessionScope.loginMember.memberNo}"
-	</script>
+        </script>
+    <script src="${contextPath}/resources/js/board/board.js"></script>
 	<script src="${contextPath}/resources/js/board/reply.js"></script>
 </body>
 </html>

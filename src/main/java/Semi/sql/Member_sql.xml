@@ -80,7 +80,6 @@
       MEMBER_EMAIL = ?
       WHERE MEMBER_NO = ?
    </entry>
-
    
 
 </properties>

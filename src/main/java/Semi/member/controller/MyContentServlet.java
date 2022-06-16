@@ -23,23 +23,24 @@ public class MyContentServlet extends HttpServlet{
 		try {
 			
 			BoardService service = new BoardService();
+			
 			HttpSession session = req.getSession();
+			
 			Member loginMember = (Member)(session.getAttribute("loginMember"));
+			
 			int memberNo = loginMember.getMemberNo();
 			
-			List<MyBoard> clist = service.myContent(memberNo);
-			
-			String path = "/WEB-INF/views/member/myContent.jsp";
-
-			req.getRequestDispatcher(path).forward(req, resp);
+			List<MyBoard> myContent = service.myContent(memberNo);
 			
 			
 		}catch(Exception e) {
-			e.printStackTrace();
+			
 		}
+		String path = "/WEB-INF/views/member/myContent.jsp";
 		
 		
 		
+		req.getRequestDispatcher(path).forward(req, resp);
 	}
 	
 

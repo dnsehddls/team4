@@ -29,6 +29,9 @@ public class MyPageInfoServlet extends HttpServlet{
 		
 		String memeberNickname = req.getParameter("memberNickname");
 		String memberTel = req.getParameter("memberTel");
+		String inputPw = req.getParameter("inputPw");
+		
+		System.out.println(inputPw);
 		
 		HttpSession session = req.getSession();
 		
@@ -44,19 +47,21 @@ public class MyPageInfoServlet extends HttpServlet{
 		
 		try {
 			
-			int result = new MemberService().updateMember(mem);
+			int result = new MemberService().updateMember(mem, inputPw);
 			
 			if(result > 0) {
 				loginMember.setMemberNickname(memeberNickname);
 				loginMember.setMemberTel(memberTel);
-				resp.sendRedirect(req.getContextPath());
+				
+				session.setAttribute("message", "회원정보가 수정되었습니다.");
+				resp.sendRedirect(req.getContextPath() + "/member/myPage/info");
+
 
 			}else {
-				session.setAttribute("message", "회원 정보 수정 실패");
+				session.setAttribute("message", "현재 비밀번호가 일치하지 않습니다");
 				resp.sendRedirect(req.getContextPath() + "/member/myPage/info");
 			}
 			
-//			resp.sendRedirect(req.getContextPath() + "/member/myPage/info");
 			
 		}catch(Exception e) {
 			e.printStackTrace();
