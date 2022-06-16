@@ -82,22 +82,30 @@ public class ReplyDAO {
 	public int replyDelete(Connection conn, int replyNo) throws Exception{
 		int result = -10;
 		try {
+			pstmt = conn.prepareStatement(prop.getProperty("replyDelete"));
+			pstmt.setInt(1, replyNo);
+			
+			result = pstmt.executeUpdate();
 			
 		} finally {
-			
+			close(pstmt);
 		}
-		return 0;
+		return result;
 	}
 
 
-	public int replyUpdate(Connection conn, int replyNo) throws Exception{
+	public int replyUpdate(Connection conn, int replyNo, String replyContent) throws Exception{
 		int result = -10;
 		try {
+			pstmt = conn.prepareStatement(prop.getProperty("replyUpdate"));
+			pstmt.setString(1, replyContent);
+			pstmt.setInt(2,replyNo);
+			result = pstmt.executeUpdate();
 			
 		} finally {
-			
+			close(pstmt);
 		}
-		return 0;
+		return result;
 	}
 
 }

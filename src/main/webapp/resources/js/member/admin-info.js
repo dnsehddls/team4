@@ -43,7 +43,7 @@ function infoValidate(){
 }
 
 // 비밀번호 변경 유효성 검사
-function changePwValidate(){
+function changeInfoValidate(){
 
     const currentPw = document.getElementsByName("currentPw")[0];
     const newPw = document.getElementsByName("newPw")[0];
