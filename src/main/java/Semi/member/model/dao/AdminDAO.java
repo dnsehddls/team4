@@ -103,7 +103,7 @@ public class AdminDAO {
 				mem.setMemberEmail(rs.getString("MEMBER_EMAIL"));
 				mem.setMemberNickname(rs.getString("MEMBER_NICK"));
 				mem.setRegistDate(rs.getString("REG_DATE"));
-				mem.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
+				mem.setSecessionFlag(rs.getString("SECESSION_FL"));
 				
 				memberList.add(mem);
 				
@@ -209,7 +209,7 @@ public class AdminDAO {
 				memberDetail.setMemberID(rs.getString("MEMBER_ID"));
 				memberDetail.setMemberName(rs.getString("MEMBER_NAME"));
 				memberDetail.setMemberEmail(rs.getString("MEMBER_EMAIL"));
-				memberDetail.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
+				memberDetail.setSecessionFlag(rs.getString("SECESSION_FL"));
 				
 			}
 			
@@ -288,7 +288,7 @@ public class AdminDAO {
 				member.setMemberEmail(rs.getString("MEMBER_EMAIL"));
 				member.setMemberNickname(rs.getString("MEMBER_NICK"));
 				member.setRegistDate(rs.getString("REG_DATE"));
-				member.setSecessionFlag(rs.getString("SECESSION_FL").charAt(0));
+				member.setSecessionFlag(rs.getString("SECESSION_FL"));
 				
 				memberList.add(member);
 				
@@ -506,6 +506,64 @@ public class AdminDAO {
 		}
 		
 		return searchReportedList;
+	}
+
+
+	/** 좋아요 수 조회 Service
+	 * @param conn
+	 * @return standardNo
+	 * @throws Exception
+	 */
+	public int manageStandard(Connection conn) throws Exception {
+
+		int standardNo = 0;
+		
+		try {
+			String sql = prop.getProperty("manageStandard");
+			
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				
+				standardNo = rs.getInt(1);
+				
+			}
+			
+		}finally {
+			close(rs);
+			close(stmt);			
+		}
+		
+		return standardNo;
+	}
+
+
+	/** 좋아요 수 변경하기
+	 * @param conn
+	 * @param changeNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int likeChange(Connection conn, int changeNo) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("likeChange");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, changeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
