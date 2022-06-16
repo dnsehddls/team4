@@ -64,10 +64,6 @@
                                     <tr>
                                         <td>${board.boardNo}</td>
                                         <td> 
-                                            <c:if test="${!empty board.thumbnail}">
-                                                <img class="list-thumbnail" src="${contextPath}${board.thumbnail}">
-                                            </c:if>  
-
                                             <a href="detail?no=${board.boardNo}&cp=${pagination.currentPage}&type=${param.type}${sURL}">${board.boardTitle}</a>                           
                                         </td>
                                         <td>${board.memberNickname}</td>
@@ -85,9 +81,7 @@
 
             <div class="btn-area">
 
-                <c:if test="${!empty loginMember}">
-                    <button id="insertBtn" onclick="location.href='write?mode=insert&type=${param.type}&cp=${param.cp}'">글쓰기</button>                     
-                </c:if>
+                    <button id="insertBtn" onclick="location.href='write?mode=insert&type=${param.type}&cp=${param.cp}'">글쓰기</button>                        
 
             </div>
 

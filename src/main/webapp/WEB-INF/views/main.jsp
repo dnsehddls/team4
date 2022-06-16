@@ -7,6 +7,13 @@
 <c:set var="exercise" value="${map.exercise}"></c:set>
 <c:set var="free" value="${map.free}"></c:set>
 <c:set var="met" value="${map.met}"></c:set>
+<style>
+    main li{
+    width: 400px;
+    margin: 14px 0;
+    line-height: 24px;
+}
+</style>
 
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -45,7 +52,8 @@
                         <ul>
                             <c:forEach var="hb" items="${hot}">
                                                 <!-- 링크주소 -->
-                                <li><a href="${contextPath}/board/detail?type=5&no=${hb.boardNo}">
+                                <li>
+                                    <a href="${contextPath}/board/detail?type=5&no=${hb.boardNo}">
                                         <span>${hb.boardTitle}</span>
                                     </a>
                                     <span>${hb.likeCount}</span>
@@ -68,7 +76,6 @@
                         <c:if test="${!empty recency}">
                         <ul>
                             <c:forEach var="nb" items="${recency}">
-                                                <!-- 링크주소 -->
                                 <li>
                                     <a href="${contextPath}/board/detail?type=6&no=${nb.boardNo}">
                                         <span>${nb.boardTitle}</span>
@@ -159,8 +166,8 @@
                     <c:if test="${!empty loginMember}">
                         <div>
                             <!-- <div>프로필 이미지</div> -->
-                            <div>닉네임</div>
-                            <div>이메일</div>
+                            <div>${loginMember.memberNickname}</div>
+                            <div>${loginMember.memberEmail}</div>
                             <div>
                                 <a href="#">내 쪽지함</a>
                             </div>
