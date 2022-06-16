@@ -35,27 +35,27 @@
             
                     <div class="line"></div>
 
-                    <form action="manageStandard" method="get">
-
-                        <table name="signUp-form" class="tb">
-                            <tr>
-                                <th>현재 좋아요 수</th>
-                                <td>
-                                    ${standardNo}
-                                </td>
-                            </tr>
-            
+                    
+                    <table name="signUp-form" class="tb">
+                        <tr>
+                            <th>현재 좋아요 수</th>
+                            <td>
+                                ${standardNo}
+                            </td>
+                        </tr>
+                        
+                        <form action="manageStandard" method="post">
                             <tr>
                                 <th>좋아요 수 변경하기</th>
                                     <td>
-                                        <input type="text" name="changeNo">
+                                        <input type="text" name="changeNo" id="input">
         
-                                        <button>변경</button>
+                                        <button id="changeNo">변경</button>
                                     </td>  
-                            </tr>                        
-                        </table>
-
-                    </form>     
+                                </tr>                        
+                        </form>     
+                    </table>
+                        
                         
 
             

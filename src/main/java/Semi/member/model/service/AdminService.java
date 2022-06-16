@@ -286,7 +286,13 @@ public class AdminService {
 		
 		int result = dao.likeChange(conn, changeNo);
 		
+		if(result > 0) commit(conn);
+		else		   rollback(conn);
+		
+
 		close(conn);
+		
+		
 		
 		return result;
 	}

@@ -62,6 +62,8 @@ public class adminController extends HttpServlet {
 	    			
 	    		}
 	    		
+	    		
+	    		
 	    		req.setAttribute("map", map);	    			    		
 
 	    		String path = "/WEB-INF/views/admin/memberList.jsp";
@@ -264,48 +266,44 @@ public class adminController extends HttpServlet {
 	    	
 	    	// 게시글 좋아요 수 조회 
 	    	if(command.equals("manageStandard")) {
+	    		    		
 	    		
-	    		
-	    		int standardNo = service.manageStandard();
-	    		
-	    		req.setAttribute("standardNo", standardNo);
-	    		
-	    		String path = "/WEB-INF/views/admin/admin-standard.jsp";
-	    		
-	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
-	    		
-	    		dispatcher.forward(req, resp); 		
-	    		
+	    		if(req.getParameter("changeNo") == null) {
+	    			
+	    			int standardNo = service.manageStandard();
+	    			
+	    			req.setAttribute("standardNo", standardNo);
+	    			
+	        		String path = "/WEB-INF/views/admin/admin-standard.jsp";
+		    		
+		    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+		    		
+		    		dispatcher.forward(req, resp); 	
+	    			
+	    		}else {	    			
+	    			
+	    			int changeNo = Integer.parseInt(req.getParameter("changeNo"));
+	    			
+	    			int result = service.likeChange(changeNo);
+
+	    			
+	    			HttpSession session = req.getSession();
+	    			
+	    			String message = null;
+	    			
+	    			if(result>0) {
+	    				message = "변경 성공";
+	    				
+	    			}else {
+	    				message = "변경 실패";
+	    			}
+	    			
+	    			session.setAttribute("message", message);
+	    			resp.sendRedirect("manageStandard");
+	    			
+	    		}
 	    		
 	    	}
-	    	
-	    	
-	    	// 좋아요 수 변경
-//	    	if(command.equals("changeNo")) {
-//	    		
-//	    		int changeNo = Integer.parseInt("changeNo");
-//	    		
-//	    		int result = service.likeChange(changeNo);
-//	    		
-//	    		HttpSession session = req.getSession();
-//	    		
-//	    		String message = null;
-//	    		
-//	    		if(result>0) {
-//	    			message = "변경 성공!";
-//	    		}else {
-//	    			message = "변경 실패";
-//	    		}
-//	    		
-//	    		session.setAttribute("message", message);
-//	    		
-//	    		resp.sendRedirect("manageStandard");
-//	    		
-//	    		
-//	    	}
-	    	
-	    	
-	    	
 	    
 	      	
 	    	
