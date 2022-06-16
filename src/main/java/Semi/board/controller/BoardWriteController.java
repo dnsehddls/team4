@@ -18,6 +18,7 @@ import Semi.board.model.service.BoardService;
 import Semi.board.model.vo.BoardDetail;
 import Semi.board.model.vo.BoardImage;
 import Semi.common.MyRenamePolicy;
+import Semi.member.model.vo.Member;
 
 
 // ��Ʈ�ѷ� : ��û�� ���� �˸��� Service�� ȣ���ϰ� ����� ���� ������ ����

@@ -35,7 +35,10 @@ public class MyContentServlet extends HttpServlet{
 						
 			req.setAttribute("map", map);
 			
+			List<MyBoard> myContent = service.myContent(memberNo); 
+
 			String path = "/WEB-INF/views/member/myContent.jsp";
+
 			
 			req.getRequestDispatcher(path).forward(req, resp);
 			
