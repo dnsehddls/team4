@@ -11,10 +11,12 @@ import Semi.board.model.dao.BoardDAO;
 import Semi.board.model.vo.Board;
 import Semi.board.model.vo.BoardDetail;
 import Semi.board.model.vo.BoardImage;
+import Semi.common.Util;
+
 import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
-import Semi.common.Util;
+import Semi.member.model.vo.Member;
 
 public class BoardService {
 
@@ -37,6 +39,7 @@ public class BoardService {
 	public Map<String, Object> selectBoardList(int type, int cp) throws Exception{
 
 		Connection conn = getConnection();
+
 
 		String boardName = dao.selectBoardName(conn, type);
 
@@ -61,12 +64,10 @@ public class BoardService {
 
 			Connection conn = getConnection();
 
-			// 占쏙옙占쏙옙 占쏙옙占� 占쏙옙회 Service, DAO, SQL占쏙옙 占쏙옙占쏙옙占싹면서 占쏙옙占쏙옙
-			// 1. 占쌉쏙옙占쏙옙 占싱몌옙 占쏙옙회 DAO 호占쏙옙
 			String boardName = dao.selectBoardName(conn, type);
 
-			// 2. SQL 占쏙옙占쏙옙占쏙옙占쏙옙 占쌩곤옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙(key, query 占쏙옙占�)
-			String condition = null;// 占쏙옙占쏙옙
+			// 2. SQL �������� �߰��� ���� ����(key, query ���)
+			String condition = null;// ����
 
 			switch(key) {
 						case "t"  : condition = " AND BOARD_TITLE LIKE '%"+query+"%' ";  break;
@@ -75,17 +76,19 @@ public class BoardService {
 						case "w"  : condition = " AND MEMBER_NICK LIKE '%"+query+"%' "; break;
 						}
 
-			// 3-1. 특占쏙옙 占쌉쏙옙占실울옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹댐옙 占쌉시깍옙 占쏙옙 占쏙옙회
+
+			// 3-1. Ư�� �Խ��ǿ��� ������ �����ϴ� �Խñ� �� ��ȸ
 			int listCount = dao.searchListCount(conn, type, condition);
 
-			// 3-2. listCount  + 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙(cp)占쏙옙 占싱울옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占싱쇽옙 占쏙옙체 占쏙옙占쏙옙
+			// 3-2. listCount  + ���� ������(cp)�� �̿��� ���������̼� ��ü ����
 			Pagination pagination = new Pagination(cp, listCount);
 
 
-			// 4. 특占쏙옙 占쌉쏙옙占실울옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹댐옙 占쌉시깍옙 占쏙옙占� 占쏙옙회
+			// 4. Ư�� �Խ��ǿ��� ������ �����ϴ� �Խñ� ��� ��ȸ
 			List<Board> boardList = dao.searchBoardList(conn, pagination, type, condition);
 
-			// 5. 占쏙옙占� 占쏙옙占쏙옙 占싹놂옙占쏙옙 Map占쏙옙 占쏙옙티占� 占쏙옙환
+			// 5. ��� ���� �ϳ��� Map�� ��Ƽ� ��ȯ
+
 			Map<String, Object> map = new HashMap<>();
 
 			map.put("boardName", boardName);
@@ -95,6 +98,63 @@ public class BoardService {
 			close(conn);
 
 			return map;
+	}
+
+
+	/**
+	 * 내 글 목록 조회
+	 * @param cp
+	 * @return map
+	 * @throws Exception
+	 */
+	public Map<String, Object> myc(int cp, Member loginMember) throws Exception{
+
+		Connection conn = getConnection();
+
+		// 내 글 게시글 수 조회
+		int listCount = dao.mycCount(conn, loginMember);
+
+		// 페이지네이션
+		Pagination pagination = new Pagination(cp, listCount);
+
+		// 게시글 목록 조회
+		List<MyBoard> contentList = dao.myContentList(conn, pagination, loginMember);
+
+		// Map에 저장
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("contentList", contentList);
+
+		close(conn);
+
+		return map;
+	}
+
+	/**
+	 * 북마크 목록 조회
+	 * @param cp
+	 * @param loginMember
+	 * @return map
+	 * @throws Exception
+	 */
+	public Map<String, Object> bookmarkList(int cp, Member loginMember) throws Exception{
+		Connection conn = getConnection();
+
+		int listCount = dao.bookmarkCount(conn, loginMember);
+
+		Pagination pagination = new Pagination(cp, listCount);
+
+		List<MyBoard> bookmarkList = dao.bookmarkList(conn, pagination, loginMember);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("bookmarkList", bookmarkList);
+
+		close(conn);
+
+		return map;
 	}
 
 	/**
@@ -123,7 +183,29 @@ public class BoardService {
 		
 
 		BoardDetail detail = dao.selectBoardDetail(conn, boardNo);
+
+	 * 좋아요 목록 조회
+	 * @param cp
+	 * @param loginMember
+	 * @return map
+	 * @throws Exception
+	 */
+	public Map<String, Object> likeList(int cp, Member loginMember) throws Exception{
+		Connection conn = getConnection();
+
+		int listCount = dao.likeCount(conn, loginMember);
+
+		Pagination pagination = new Pagination(cp, listCount);
+
 		
+		List<MyBoard> likeList = dao.likeList(conn, pagination, loginMember);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("pagination", pagination);
+		map.put("likeList", likeList);
+
+		close(conn);
 		
 		if(detail != null) { 
 	
@@ -227,6 +309,8 @@ public class BoardService {
 		return result;
 	}
 
+		return map;
+	}
 
 
 }

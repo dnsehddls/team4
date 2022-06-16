@@ -21,7 +21,7 @@ import Semi.common.MyRenamePolicy;
 import Semi.member.model.vo.Member;
 
 
-// ÄÁÆ®·Ñ·¯ : ¿äÃ»¿¡ µû¶ó ¾Ë¸ÂÀº Service¸¦ È£ÃâÇÏ°í °á°ú¿¡ µû¶ó ÀÀ´äÀ» Á¦¾î
+// ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ : ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ Serviceï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 @WebServlet("/board/write")
 public class BoardWriteController extends HttpServlet{
 
@@ -35,11 +35,11 @@ public class BoardWriteController extends HttpServlet{
 				
 				int boardNo =  Integer.parseInt( req.getParameter("no") );
 				
-				BoardDetail detail = new BoardService().selectBoardDetail(boardNo);
+				BoardDetail detail = new BoardService().boardDetail(boardNo);
 				
 				detail.setBoardContent(  detail.getBoardContent().replaceAll("<br>", "\n") );
 				
-				req.setAttribute("detail", detail); // jsp¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï req¿¡ °ª ¼¼ÆÃ
+				req.setAttribute("detail", detail); // jspï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ reqï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				
 			}
 			
@@ -62,10 +62,10 @@ public class BoardWriteController extends HttpServlet{
 			
 			HttpSession session = req.getSession(); 
 			String root = session.getServletContext().getRealPath("/"); 
-			String folderPath = "/resources/images/board/"; // ÆÄÀÏ ÀúÀå Æú´õ °æ·Î
+			String folderPath = "/resources/images/board/"; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			String filePath = root + folderPath;
 			
-			String encoding = "UTF-8"; // ÆÄ¶ó¹ÌÅÍ Áß ÆÄÀÏ Á¦¿Ü ÆÄ¶ó¹ÌÅÍ(¹®ÀÚ¿­)ÀÇ ÀÎÄÚµù ÁöÁ¤
+			String encoding = "UTF-8"; // ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ú¿ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 			MultipartRequest mpReq = new MultipartRequest(req, filePath, maxSize, encoding, new MyRenamePolicy());                
 			
@@ -73,15 +73,15 @@ public class BoardWriteController extends HttpServlet{
 			Enumeration<String> files = mpReq.getFileNames(); 
 			
 			
-			// * ¾÷·ÎµåµÈ ÀÌ¹ÌÁöÀÇ Á¤º¸¸¦ ¸ð¾ÆµÑ List »ý¼º
+			// * ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æµï¿½ List ï¿½ï¿½ï¿½ï¿½
 			List<BoardImage> imageList = new ArrayList<BoardImage>();
 			
 			
 			while(files.hasMoreElements()) { 
 				String name = files.nextElement(); 
 				
-				String rename = mpReq.getFilesystemName(name);   // º¯°æµÈ ÆÄÀÏ¸í
-				String original = mpReq.getOriginalFileName(name); // ¿øº» ÆÄÀÏ¸í
+				String rename = mpReq.getFilesystemName(name);   // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½
+				String original = mpReq.getOriginalFileName(name); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½
 				
 
 				
@@ -104,7 +104,7 @@ public class BoardWriteController extends HttpServlet{
 			
 			
 			Member loginMember = (Member)session.getAttribute("loginMember"); 
-			int memberNo = loginMember.getMemberNo(); // È¸¿ø ¹øÈ£
+			int memberNo = loginMember.getMemberNo(); // È¸ï¿½ï¿½ ï¿½ï¿½È£
 			BoardDetail detail = new BoardDetail();
 			
 			detail.setBoardTitle(boardTitle);
@@ -121,11 +121,11 @@ public class BoardWriteController extends HttpServlet{
 				
 				String path = null;
 				if(boardNo > 0) { 
-					session.setAttribute("message", "°Ô½Ã±ÛÀÌ µî·ÏµÇ¾ú½À´Ï´Ù.");
+					session.setAttribute("message", "ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 					path = "detail?no=" + boardNo + "&type=" + boardCode;
 					
 				}else { 
-					session.setAttribute("message", "°Ô½Ã±Û µî·Ï ½ÇÆÐ");
+					session.setAttribute("message", "ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 					path = "write?mode=" + mode + "&type=" + boardCode;
 				}
 				
@@ -152,11 +152,11 @@ public class BoardWriteController extends HttpServlet{
 				
 				if(result > 0) { 
 					path = "detail?no=" + boardNo + "&type=" + boardCode + "&cp=" + cp;
-					message = "°Ô½Ã±ÛÀÌ ¼öÁ¤µÇ¾ú½À´Ï´Ù.";
+					message = "ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.";
 					
 				}else { 
 					path = req.getHeader("referer");
-					message = "°Ô½Ã±Û ¼öÁ¤ ½ÇÆÐ";
+					message = "ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½";
 				}
 				
 				session.setAttribute("message", message);

@@ -37,7 +37,6 @@ public class AdminChangePwServlet extends HttpServlet {
 
 		int memberNo = loginMember.getMemberNo();
 
-		System.out.println(memberNo);
 
 		try {
 

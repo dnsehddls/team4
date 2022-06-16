@@ -20,9 +20,10 @@
             <ul>
                 <li><a href="${contextPath}/board/list?type=1">공지사항</a></li>
                 <li><a href="${contextPath}/board/list?type=5">인기게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=3">운동게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=4">자유게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=5">정모게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=2">운동게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=3">자유게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=4">정모게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=6">최근게시글</a></li>
             </ul>
         </div>
         <div>

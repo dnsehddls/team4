@@ -105,7 +105,7 @@
                         </ul>
                     </div>
         
-                    <form action="#" method="get" id="memberSearch">
+                    <form action="reportList" method="get" id="memberSearch">
                         <select name="key">
                             <option value="rNo">신고번호</option>
                             <option value="mNo">신고 회원번호</option>

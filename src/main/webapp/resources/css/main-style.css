@@ -63,7 +63,7 @@ nav{
 }
 nav *{font-family: '잘난체';}
 nav>div:first-child{
-    flex-basis: 720px;
+    flex-basis: 800px;
     height: 100%;
 }
 nav>div:last-child{
@@ -662,18 +662,15 @@ footer-div>span{
 .dept02>li:hover{
     margin: 12px;
 }
-main li{
-    width: 400px;
-    margin: 14px 0;
-}
+
 main .met-board li{
     width: 300px;
 }
-.hot-board>div>ul>li>span:first-child,
-.new-board>div>ul>li>span:first-child,
-.free-board>div>ul>li>span:first-child,
-.met-board>div>ul>li>span:first-child,
-.exercise-board>div>ul>li>span:first-child,
+.hot-board>div>ul>li>span:nth-child(3),
+.new-board>div>ul>li>span:nth-child(3),
+.free-board>div>ul>li>span:nth-child(3),
+.met-board>div>ul>li>span:nth-child(3),
+.exercise-board>div>ul>li>span:nth-child(3),
 .hot-board>div>ul>li>span:nth-child(2),
 .exercise-board>div>ul>li>span:nth-child(2),
 .new-board>div>ul>li>span:nth-child(2),
@@ -684,10 +681,10 @@ main .met-board li{
     text-align: center;
 }
 
-.hot-board>div>ul>li>span:first-child,
-.new-board>div>ul>li>span:first-child,
-.free-board>div>ul>li>span:first-child,
-.met-board>div>ul>li>span:first-child,
-.exercise-board>div>ul>li>span:first-child{
+.hot-board>div>ul>li>span:nth-child(3),
+.new-board>div>ul>li>span:nth-child(3),
+.free-board>div>ul>li>span:nth-child(3),
+.met-board>div>ul>li>span:nth-child(3),
+.exercise-board>div>ul>li>span:nth-child(3){
     color: blue;
 }
