@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import Semi.member.model.vo.Member;
 import Semi.message.model.service.MessageService;
+import Semi.message.model.vo.MessageDetail;
 
 
 // 닉네임 번호 + 내용
@@ -20,30 +21,38 @@ import Semi.message.model.service.MessageService;
 public class SendMessageController extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		HttpSession session = req.getSession(); // 세션 얻어오기
 		
-		Member loginMember = (Member)(session.getAttribute("loginMember"));
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		
-		int memberNo = loginMember.getMemberNo();
 		
 		try {
-			
-			String sendNick = loginMember.getMemberNickname();
-			String receiveNick = "테스트닉네임2";
-					//req.getParameter("receiveNickname");
+				
+			int myNo = loginMember.getMemberNo();
 			String inputMessage = req.getParameter("inputMessage");
+			int yourNo = Integer.parseInt(req.getParameter("receiveNo"));
+			String msDate = req.getParameter("msDate");
 			
-			System.out.println(sendNick + ", " + receiveNick + ", " + inputMessage);
+			System.out.println(myNo + ", " + inputMessage + ", " + yourNo);
+			
+			MessageDetail messageDetail = new MessageDetail();
+			messageDetail.setSendNo(myNo);
+			messageDetail.setMessageContent(inputMessage);
+			messageDetail.setReceiveNo(yourNo);
+			
 			MessageService service = new MessageService();
 			
-			int result = service.SendMessage(sendNick, receiveNick, inputMessage);
+			int result = service.SendMessage(myNo, inputMessage, yourNo);
 			
 			if(result > 0) {
-			
 				session.setAttribute("message", "쪽지 보내기 완료");
+				 req.setAttribute("", loginMember);
 				
+				
+			} else {
+				session.setAttribute("message", "쪽지 보내기 실패");				
 			}
 		
 			String path = "/WEB-INF/views/message/sendMessage.jsp";

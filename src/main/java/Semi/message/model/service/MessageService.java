@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import Semi.message.model.dao.MessageDAO;
+import Semi.message.model.vo.Message;
 
 public class MessageService {
 		 
@@ -40,13 +41,13 @@ public class MessageService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int SendMessage(String sendNick, String receiveNick, String inputMessage) throws Exception {
+	public int SendMessage(int myNo, String inputMessage, int yourNo) throws Exception {
 
 		Connection conn = getConnection();
 		
 		// 1. 다음 작성할 게시글 번호 얻어오기
 		// -> BOARD 테이블 INSERT  /  BOARD_IMG 테이블 INSERT  / 반환값 (상세조회 번호)
-		int result = dao.SendMessage(conn, sendNick, receiveNick, inputMessage);
+		int result = dao.SendMessage(conn, myNo, inputMessage, yourNo);
 		
 		// 트랜잭션 처리
 		if(result > 0) {
@@ -60,7 +61,25 @@ public class MessageService {
 		
 		return result;
 	}
- 	
+
+
+
+	/** 쪽지 목록 조회 Service
+	 * @param myNo
+	 * @param type
+	 * @return mList
+	 * @throws Exception
+	 */
+	public List<Message> MessageList(int myNo, String type) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		List<Message> mList = dao.MessageList(conn, myNo, type);
+		close(conn);
+		
+		return mList;
+
+	}
  }
 
 

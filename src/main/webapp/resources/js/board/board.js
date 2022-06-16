@@ -1,3 +1,4 @@
+
 (function(){
     const goToListBtn = document.getElementById("goToListBtn");
 
@@ -38,4 +39,7 @@
     }
 })();
 
+
+
+console.log("1");
 

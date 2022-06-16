@@ -64,6 +64,10 @@
                                     <tr>
                                         <td>${board.boardNo}</td>
                                         <td> 
+                                            <c:if test="${!empty board.thumbnail}">
+                                                <img class="list-thumbnail" src="${contextPath}${board.thumbnail}">
+                                            </c:if>  
+
                                             <a href="detail?no=${board.boardNo}&cp=${pagination.currentPage}&type=${param.type}${sURL}">${board.boardTitle}</a>                           
                                         </td>
                                         <td>${board.memberNickname}</td>

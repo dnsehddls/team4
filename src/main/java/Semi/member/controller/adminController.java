@@ -224,7 +224,7 @@ public class adminController extends HttpServlet {
 	
 	    	// 신고 게시글 조회
 	    	
-	    	if(command.equals("report")) {
+	    	if(command.equals("reportList")) {
 	    		
 	    		
 	    		int cp = 1;
@@ -259,6 +259,53 @@ public class adminController extends HttpServlet {
 	    		dispatcher.forward(req, resp);
 	    		
 	    	}
+	    	
+	    	
+	    	
+	    	// 게시글 좋아요 수 조회 
+	    	if(command.equals("manageStandard")) {
+	    		
+	    		
+	    		int standardNo = service.manageStandard();
+	    		
+	    		req.setAttribute("standardNo", standardNo);
+	    		
+	    		String path = "/WEB-INF/views/admin/admin-standard.jsp";
+	    		
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp); 		
+	    		
+	    		
+	    	}
+	    	
+	    	
+	    	// 좋아요 수 변경
+//	    	if(command.equals("changeNo")) {
+//	    		
+//	    		int changeNo = Integer.parseInt("changeNo");
+//	    		
+//	    		int result = service.likeChange(changeNo);
+//	    		
+//	    		HttpSession session = req.getSession();
+//	    		
+//	    		String message = null;
+//	    		
+//	    		if(result>0) {
+//	    			message = "변경 성공!";
+//	    		}else {
+//	    			message = "변경 실패";
+//	    		}
+//	    		
+//	    		session.setAttribute("message", message);
+//	    		
+//	    		resp.sendRedirect("manageStandard");
+//	    		
+//	    		
+//	    	}
+	    	
+	    	
+	    	
 	    
 	      	
 	    	

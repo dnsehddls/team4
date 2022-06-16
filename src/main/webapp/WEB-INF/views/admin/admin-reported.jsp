@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="pagination" value="${map.pagination}"/>
+<c:set var="reportList" value="${map.reportList}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +21,10 @@
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <main>
+
+        <c:if test="${!empty param.key}">
+            <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+        </c:if>
 
 
         <section class="adminPage-content">
@@ -54,9 +61,9 @@
                                                 <td>${report.reportNo}</td>    
                                                 <td>${report.reportContent}</td> 
                                                 <td>
-                                                    <a href="#">${board.boardNo}</a>
+                                                    <a href="#">${report.boardNo}</a>
                                                 </td>          
-                                                <td>${member.memberNo}</td>      
+                                                <td>${report.memberNo}</td>      
                                             </tr>
                                         </c:forEach>
                                     </c:otherwise>

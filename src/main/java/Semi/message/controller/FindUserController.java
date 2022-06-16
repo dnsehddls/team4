@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import Semi.member.model.vo.Member;
 import Semi.message.model.service.MessageService;
+import Semi.message.model.vo.MessageDetail;
 
 
 // 특정 회원 조회
@@ -111,10 +112,102 @@ public class FindUserController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
+		
+		
+//		try {
+//			
+//			if(command.equals("sendData")){
+//				
+//				HttpSession session = req.getSession(); // 세션 얻어오기
+//				
+//				Member loginMember = (Member)session.getAttribute("loginMember");
+//				
+//				int myNo = loginMember.getMemberNo();
+//				String inputMessage = req.getParameter("inputMessage");
+//				int yourNo = Integer.parseInt(req.getParameter("receiveNo"));
+//				
+//				System.out.println(myNo + ", " + inputMessage + ", " + yourNo);
+//				
+//				int result = service.SendMessage(myNo, inputMessage, yourNo);
+//				
+//				if(result > 0) {
+//					
+//					JSONObject obj = new JSONObject(); // Map 형식의 객체
+//					obj.put("myNo", myNo);
+//					obj.put("inputMessage", inputMessage);
+//					obj.put("yourNo", yourNo);
+//					
+//										
+//					// JSONObject의 toString() 메서드는
+//					// JSON 형태로 출력될 수 있도록 오버라이딩이 되어있다!
+//					resp.getWriter().print(obj.toString());			
+//				}
+//			}
+//			
+//				
+//
+//		
+//			String path = "/WEB-INF/views/message/sendMessage.jsp";
+//			
+//			RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+//			
+//			dispatcher.forward(req, resp);
+//			
+//			
+//		} catch(Exception e){
+//			e.printStackTrace();
+//		}
 	
+
+	
+//	@Override
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		
+//	String uri = req.getRequestURI();
+//	String contextPath = req.getContextPath();
+//	String command = uri.substring(  (contextPath + "/sendView/").length()  );
+//	System.out.println(uri);
+//	
+//	MessageService service = new MessageService();
+//
+//	try {
+//	
+//	if(command.equals("sendData")){
+//		
+//		HttpSession session = req.getSession(); // 세션 얻어오기
+//		
+//		Member loginMember = (Member)session.getAttribute("loginMember");
+//		
+//		int myNo = loginMember.getMemberNo();
+//		String inputMessage = req.getParameter("inputMessage");
+//		int yourNo = Integer.parseInt(req.getParameter("receiveNo"));
+//		
+//		System.out.println(myNo + ", " + inputMessage + ", " + yourNo);
+//		
+//		int result = service.SendMessage(myNo, inputMessage, yourNo);
+//		
+//		if(result > 0) {
+//			
+//			JSONObject obj = new JSONObject(); // Map 형식의 객체
+//			obj.put("myNo", myNo);
+//			obj.put("inputMessage", inputMessage);
+//			obj.put("yourNo", yourNo);
+//			
+//								
+//			// JSONObject의 toString() 메서드는
+//			// JSON 형태로 출력될 수 있도록 오버라이딩이 되어있다!
+//			resp.getWriter().print(obj.toString());			
+//			}
+//		}
+//	
+//		HttpSession session = req.getSession(); // 세션 얻어오기
+//		
+//		Member loginMember = (Member)session.getAttribute("loginMember");
+//				
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+
 }
-
-
-
-
-

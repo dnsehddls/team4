@@ -20,9 +20,9 @@
             <ul>
                 <li><a href="${contextPath}/board/list?type=1">공지사항</a></li>
                 <li><a href="${contextPath}/board/list?type=5">인기게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=2">운동게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=3">자유게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=4">정모게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=3">운동게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=4">자유게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=5">정모게시판</a></li>
             </ul>
         </div>
         <div>
@@ -30,7 +30,15 @@
             <c:if test="${!empty loginMember}">
                 <img src="" alt="등급이미지">
                 <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
-                <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                <c:choose>
+                    <c:when test="${loginMember.grade eq '관리자'}">
+                        <a href="${contextPath}/admin/info}"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                    </c:when>
+                    
+                    <c:otherwise>
+                        <a href="${contextPath}/member/myPage/info}"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                    </c:otherwise>
+                </c:choose>
             </c:if>
             <c:if test="${empty loginMember}">
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
@@ -47,10 +55,10 @@
                                 <a href="${contextPath}/sendView">쪽지 보내기</a>
                             </li>
                             <li id="Message1">
-                                <a href="${contextPath}/rMessageList">받은 쪽지함</a>
+                                <a href="${contextPath}/messageList?t=r">받은 쪽지함</a>
                             </li>
                             <li id="Message2">
-                                <a href="${contextPath}/sMessageList">보낸 쪽지함</a>
+                                <a href="${contextPath}/messageList?t=s">보낸 쪽지함</a>
                             </li>
                         </span>
                     </span>

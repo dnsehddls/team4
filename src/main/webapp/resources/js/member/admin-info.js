@@ -3,15 +3,12 @@ function infoValidate(){
 
     const memberNickname = document.getElementById("memberNickname");
     const memberTel = document.getElementById("memberTel");
-    const memberEmail = document.getElementById("memberEmail");
 
     // 닉네임 정규식
     const regExp1 = /^[a-zA-Z0-9가-힣]{2,10}$/;
 
     // 전화번호 정규식
     const regExp2 = /^0(1[01679]|2|[3-6][1-5]|70)\d{3,4}|\d{4}$/;
-
-    const regExp4 = /^[\w\-\_]{4,}@[\w\-\_]+(\.\w+){1,3}$/; // 이메일 정규식
 
 
     // 닉네임 유효성 검사
@@ -41,24 +38,12 @@ function infoValidate(){
         return false;
     }
 
-    if(memberEmail.value.length == 0){ // 미작성시
-        alert("이메일을 입력해주세요.");
-        memberEmail.focus();
-        return false;
-    }
-
-    if(!regExp4.test(memberEmail.value)){ // 유효하지 않은 경우
-        alert("이메일 형식이 올바르지 않습니다.");
-        memberEmail.focus();
-        return false;
-    }
-
     return true;
 
 }
 
 // 비밀번호 변경 유효성 검사
-function changePwValidate(){
+function changeInfoValidate(){
 
     const currentPw = document.getElementsByName("currentPw")[0];
     const newPw = document.getElementsByName("newPw")[0];

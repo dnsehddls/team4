@@ -35,8 +35,9 @@
             </form>
             
 
-            <form action="sendData" name="data-form" method="GET" >
+            <form action="sendData" name="data-form" method="POST" >
                 <input type="hidden" name="receiveNo">
+                <input type="hidden" name="msDate">
                 <div id="middle">
                     <textarea name="inputMessage" id="inputMessage" cols="70" rows="10"></textarea>
                 </div>
