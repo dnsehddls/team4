@@ -14,8 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import Semi.member.model.service.MemberService;
+import Semi.member.model.service.AdminService;
 import Semi.member.model.vo.Member;
+
+
+
 
 @WebServlet("/admin/*") // admin으로 시작하는 모든 요청
 public class adminController extends HttpServlet {
@@ -27,16 +30,15 @@ public class adminController extends HttpServlet {
 		String contextPath = req.getContextPath();
 		String command = uri.substring((contextPath + "/admin/").length());
 		
-		MemberService service = new MemberService();
+		AdminService service = new AdminService();
 		
 		try {
 			
 			
 			// cp 추가하기
 			// 회원목록 조회
-	    	if(command.equals("selectAll")) {
-	    		
-//	    		List<Member> list = service.selectAll();
+	    	if(command.equals("memberList")) {
+	    			    		
 	    		
 	    		int cp = 1;
 	    		
@@ -47,13 +49,22 @@ public class adminController extends HttpServlet {
 	    		
 	    		Map<String, Object> map = null;
 	    		
-	    		map = service.selectAll(cp);
+	    		if(req.getParameter("key") == null) { // 일반 회원 목록
+	    			
+	    			map = service.selectAll(cp);
+	    				    			
+	    		}else { // 검색 회원 목록
+	    			
+	    			String key = req.getParameter("key");
+	    			String query = req.getParameter("query");
+	    			
+	    			map = service.searchMember(key, query, cp);
+	    			
+	    		}
 	    		
-	    		new Gson().toJson(map, resp.getWriter());
-	    		
-	    		req.setAttribute("map", map);
-	    		
-	    		String path = "/WEB-INF/views/member/memberList.jsp";
+	    		req.setAttribute("map", map);	    			    		
+
+	    		String path = "/WEB-INF/views/admin/memberList.jsp";
 	    		
 	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
 	    		
@@ -61,27 +72,15 @@ public class adminController extends HttpServlet {
 	    		
 	    	}
 	    	
-	    	// 회원정보 조회
-	    	if(command.equals("selectOne")) {
-	    		
-	    		String memberEmail = req.getParameter("memberEmail");
-	    		
-	    		Member member = service.selectOne(memberEmail);
-	    		
-	    		new Gson().toJson(member, resp.getWriter());
-	    		
-	    	}
-	    	
 	    	
 	    	// 관리자 정보 수정
 	    	if(command.equals("info")) {
 	    		
-	    		String path = "/WEB-INF/views/member/adminPage-info.jsp";
+	    		String path = "/WEB-INF/views/admin/adminPage-info.jsp";
 	    		
 	    		req.getRequestDispatcher(path).forward(req, resp);
 	    		
 	    		String memberEmail = req.getParameter("memberEmail");
-	    		String memberPw = req.getParameter("memberPw");
 	    		String memberNickname = req.getParameter("memberNickname");
 	    		String memberTel = req.getParameter("memberTel");
 	    		
@@ -98,6 +97,7 @@ public class adminController extends HttpServlet {
 	    		mem.setMemberNo(memberNo);
 	    		mem.setMemberNickname(memberNickname);
 	    		mem.setMemberTel(memberTel);
+	    		mem.setMemberEmail(memberEmail);
 	    		
 	    		int result = service.updateAdmin(mem);
 	    		
@@ -116,7 +116,7 @@ public class adminController extends HttpServlet {
 	    	// 관리자 비밀번호 수정
 	    	if(command.equals("changePw")) {
 	    		
-	    		String path = "/WEB-INF/views/member/adminPage-changePw.jsp";
+	    		String path = "/WEB-INF/views/admin/adminPage-changePw.jsp";
 	    		
 	    		req.getRequestDispatcher(path).forward(req, resp);
 	    		
@@ -146,6 +146,168 @@ public class adminController extends HttpServlet {
 	    		
 	    	}
 	    	
+	    	
+	    	// 회원 상세 조회
+	    	if(command.equals("memberDetail")) {  		
+	    		
+	    		String memberEmail = req.getParameter("memberEmail");
+	    		
+	    		Member memberDetail = service.memberDetail(memberEmail);	    		
+	    		
+	    		
+	    		req.setAttribute("memberDetail", memberDetail);
+	    		
+	    		String path = "/WEB-INF/views/admin/memberDetail.jsp";
+    		
+	    		req.getRequestDispatcher(path).forward(req, resp);    		
+	    				    			    			    			    		
+	    	}
+	    	
+	    	
+	    	// 회원 탈퇴
+	    	if(command.equals("flagY")) {
+	    		
+	    		String memberEmail = req.getParameter("memberEmail");
+	    		
+	    		int result = service.memberFlagY(memberEmail);
+	    		
+	    		HttpSession session = req.getSession();
+	    		
+	    		String path = null;
+	    		String message = null;
+	    		
+	    		if(result>0) {
+	    			message = "회원 탈퇴 성공";
+	    			path = "memberDetail?memberEmail=" + memberEmail;	
+	    			
+	    		}else {
+	    			message = "회원 탈퇴 실패";
+	    			path = "memberList";		
+	    		}
+	    		
+	    		session.setAttribute("message", message);
+	    		
+	    		resp.sendRedirect(path);
+	    		
+	    	}
+	    	
+	    	
+	    	
+	    	// 탈퇴한 회원 복구
+	    	if(command.equals("flagN")) {
+	    		
+	    		String memberEmail = req.getParameter("memberEmail");
+	    		
+	    		int result = service.memberFlagN(memberEmail);
+	    		
+	    		HttpSession session = req.getSession();
+	    		
+	    		String path = null;
+	    		String message = null;
+	    		
+	    		if(result>0) {
+	    			message = "탈퇴 회원 복구 성공";
+	    			path = "memberDetail?memberEmail=" + memberEmail;	
+	    			
+	    		}else {
+	    			message = "탈퇴 회원 복구 실패";
+	    			path = "memberList";		
+	    		}
+	    		
+	    		session.setAttribute("message", message);
+	    		
+	    		resp.sendRedirect(path);
+	    		
+	    	}
+	    	
+	    	
+	
+	    	// 신고 게시글 조회
+	    	
+	    	if(command.equals("reportList")) {
+	    		
+	    		
+	    		int cp = 1;
+	    		
+	    		if(req.getParameter("cp") != null) {
+	    			cp = Integer.parseInt(req.getParameter("cp"));
+	    		}
+	    		
+	    		
+	    		Map<String, Object> map = null;
+	    		
+	    		if(req.getParameter("key") == null) { // 일반 회원 목록
+	    			
+	    			map = service.reportedList(cp);
+	    				    			
+	    		}else { // 검색 신고 게시글 목록
+	    			
+	    			String key = req.getParameter("key");
+	    			String query = req.getParameter("query");
+
+	    			
+	    			map = service.searchReported(key, query, cp);
+	    			
+	    		}
+	    		
+	    		req.setAttribute("map", map);	    			    		
+
+	    		String path = "/WEB-INF/views/admin/admin-reported.jsp";
+	    		
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp);
+	    		
+	    	}
+	    	
+	    	
+	    	
+	    	// 게시글 좋아요 수 조회 
+	    	if(command.equals("manageStandard")) {
+	    		
+	    		
+	    		int standardNo = service.manageStandard();
+	    		
+	    		req.setAttribute("standardNo", standardNo);
+	    		
+	    		String path = "/WEB-INF/views/admin/admin-standard.jsp";
+	    		
+	    		RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+	    		
+	    		dispatcher.forward(req, resp); 		
+	    		
+	    		
+	    	}
+	    	
+	    	
+	    	// 좋아요 수 변경
+	    	if(command.equals("changeNo")) {
+	    		
+	    		int changeNo = Integer.parseInt("changeNo");
+	    		
+	    		int result = service.likeChange(changeNo);
+	    		
+	    		HttpSession session = req.getSession();
+	    		
+	    		String message = null;
+	    		
+	    		if(result>0) {
+	    			message = "변경 성공!";
+	    		}else {
+	    			message = "변경 실패";
+	    		}
+	    		
+	    		session.setAttribute("message", message);
+	    		
+	    		resp.sendRedirect("manageStandard");
+	    		
+	    		
+	    	}
+	    	
+	    	
+	    	
+	    
+	      	
 	    	
 			
 		}catch(Exception e) {

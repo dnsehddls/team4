@@ -63,6 +63,15 @@ function changeInfoValidate(){
         return false;
     }  
 
+    const inputPw = document.getElementById("inputPw");
+
+    if(inputPw.value.trim().length == 0){
+        alert("현재 비밀번호를 입력해주세요.");
+        inputPw.focus();
+        return false;
+    }
+
+
 
     return true;
 
@@ -109,6 +118,7 @@ function changePwValidate(){
 
     return true;
 }
+
 
 
 

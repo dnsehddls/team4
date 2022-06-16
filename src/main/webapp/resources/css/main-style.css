@@ -499,12 +499,16 @@ li{
     width: 50%;
     height: 50%;
 }
-.login-container,
-.add-box{
+.login-container{
     height: 30%;
 }
+.add-box{
+    height: 20%;
+}
+
+
 .met-board{
-    height: 40%;
+    height: 60%;
 }
 .login-container{
     display: flex;
