@@ -29,7 +29,20 @@
 
             <c:if test="${!empty loginMember}">
                 <img src="" alt="등급이미지">
-                <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
+                <div class="messageSpan"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt="" id="messageIcon"></div>
+                    <span id="box">
+                        <span class="dept02">   
+                            <li id="sendMessage">
+                                <a href="${contextPath}/sendView">쪽지 보내기</a>
+                            </li>
+                            <li id="Message1">
+                                <a href="${contextPath}/messageList?t=r">받은 쪽지함</a>
+                            </li>
+                            <li id="Message2">
+                                <a href="${contextPath}/messageList?t=s">보낸 쪽지함</a>
+                            </li>
+                        </span>
+                    </span>
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
             </c:if>
             <c:if test="${empty loginMember}">
