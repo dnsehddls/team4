@@ -45,7 +45,8 @@
                         <ul>
                             <c:forEach var="hb" items="${hot}">
                                                 <!-- 링크주소 -->
-                                <li><a href="${contextPath}/board/detail?type=5&no=${hb.boardNo}">
+                                <li>
+                                    <a href="${contextPath}/board/detail?type=5&no=${hb.boardNo}">
                                         <span>${hb.boardTitle}</span>
                                     </a>
                                     <span>${hb.likeCount}</span>
@@ -68,7 +69,6 @@
                         <c:if test="${!empty recency}">
                         <ul>
                             <c:forEach var="nb" items="${recency}">
-                                                <!-- 링크주소 -->
                                 <li>
                                     <a href="${contextPath}/board/detail?type=6&no=${nb.boardNo}">
                                         <span>${nb.boardTitle}</span>

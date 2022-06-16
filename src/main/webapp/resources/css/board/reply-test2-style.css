@@ -4,6 +4,9 @@
     border-radius: 20px;
     margin-top: 12px;
 }
+.reply-title>.reply-nick{
+    margin-right: 8px;
+}
 .reply-container>.reply-title{
     display: inline;
     margin-left: 5px;
@@ -11,6 +14,8 @@
 .reply-container>.reply-title>.date{
     font-size: 12px;
     color: #848484;
+    margin-right: 10px;
+    font-family: '수성돋음체';
 }
 
 .reply-container>.goodBadBtnArea{
@@ -20,11 +25,13 @@
     width: 10%;
 }
 .reply-container>.goodBadBtnArea>span:first-child{
-    color: blue;
-    margin-right: 15px;
+    color: rgba(21, 21, 184, 0.742);
+    font-family: "잘난체";
+    margin-right: 20px;
 }
 .reply-container>.goodBadBtnArea>span:last-child{
-    color: red;
+    color: rgba(192, 6, 6, 0.748);
+    font-family: "잘난체";
 }
 .reply-container>.comment{
     margin-top: 10px;
@@ -38,4 +45,24 @@
 .reply-container>.bottom-area{
     width: 100%;
     height: 12px;
+    margin-bottom: 12px
+}
+
+.btn-area{
+    float: right;
+}
+
+.btn-area>button{
+    background-color: #fdc453d6;
+    width: 70px;
+    border: none;
+    font-family: "잘난체";
+    letter-spacing: -1px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+.ur{
+    height: 150px;
 }
