@@ -82,6 +82,11 @@
                             <th>이메일</th>
                             <td>${loginMember.memberEmail}</td>
                         </tr>
+
+                        <tr>
+                            <th>비밀번호</th>
+                            <td><input type="password" name="inputPw" id="inputPw" placeholder="정보 수정을 위해 현재 비밀번호를 입력해주세요."></td>
+                        </tr>
         
                         
                     </table>
