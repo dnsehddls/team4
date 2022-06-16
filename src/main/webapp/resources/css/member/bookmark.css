@@ -27,8 +27,7 @@ main{
 
 .tb{
     width: 815px;
-    min-height: 50px;
-    /* height: 440px; */
+    min-height: 100px;
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
@@ -72,23 +71,6 @@ thead th{
     background-color : #eaeaea;
 }
 
-
-.btn-area{
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-
-#deleteBtn{
-    width: 60px;
-    height: 25px;
-    border: none;
-    border-radius: 4px;
-    margin-right: 45px;
-    cursor: pointer;
-}
 
 /* 왼쪽 사이드 메뉴 */
 .left-side{

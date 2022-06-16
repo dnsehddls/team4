@@ -159,6 +159,7 @@ memberNickname.addEventListener("input", function(){
 });
 
 nicknameBtn.addEventListener("click",function(){
+
     const regExp = /^[a-zA-Z0-9가-힣]{2,10}$/;
 
     if(regExp.test(memberNickname.value) ){ // 유효한 경우
@@ -314,6 +315,14 @@ memberEmail.addEventListener("input", function(){
 
 // form태그 제출 시(회원가입 버튼 클릭 시) 유효성 검사가 완료되었는지 확인하는 함수
 function signUpValidate(){
+    
+    const agree = document.getElementById("agree");
+
+    if(!agree.checked){
+        alert("약관 동의 후 가입 가능합니다.");
+        return false;
+    }
+
     let str;
     for(let key in checkObj){ // 객체용 향상된 for문
         if(!checkObj[key]){ // 현재 접근 중인 key의 value가 false인 경우

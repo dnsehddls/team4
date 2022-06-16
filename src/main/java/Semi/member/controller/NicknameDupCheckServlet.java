@@ -34,7 +34,7 @@ public class NicknameDupCheckServlet extends HttpServlet{
 			int result = 0;
 			
 			// 회원가입 닉네임 중복확인
-			if(nick.equals("nicknameDupcheck")) {
+			if(nick.equals("nicknameDupCheck")) {
 				result = service.nicknameDupCheck(memberNickname);
 				resp.getWriter().print(result);
 			}

@@ -192,11 +192,11 @@ public class MemberService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateMember(Member mem) throws Exception{
+	public int updateMember(Member mem, String inputPw) throws Exception{
 		
 		Connection conn = getConnection();
 		
-		int result = dao.updateMember(conn, mem);
+		int result = dao.updateMember(conn, mem, inputPw);
 		
 		if(result > 0)	commit(conn);
 		else			rollback(conn);

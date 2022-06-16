@@ -73,16 +73,23 @@ main{
 .terms{
     display: flex;
     justify-content: center;
-    margin: 10px;
+    margin: 30px;
 }
 
 #terms{
-    width: 800px;
-    height: 100px;
+    width: 750px;
+    height: 150px;
     padding: 10px;
 
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.agree{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .confirm{
