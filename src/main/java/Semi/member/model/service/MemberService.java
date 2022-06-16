@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Semi.board.model.vo.Board;
 import Semi.board.model.vo.Pagination;
 import Semi.member.model.dao.MemberDAO;
 import Semi.member.model.vo.Member;
@@ -165,10 +166,36 @@ public class MemberService {
 		close(conn);
 		
 		return result;
+		
+		
 	}
+	
+	/**
+	 * 내정보 수정 닉네임 중복 검사 Service
+	 * @param memberNickname
+	 * @return result
+	 * @throws Exception
+	 */
+	public int infoNicknameDupCheck(String memberNickname, Member loginMember) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.nicknameDupCheck(conn, memberNickname);
+		
+		if(result == 1) {
+			if(memberNickname.equals(loginMember.getMemberNickname())) {
+				result = 0;
+			}
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 
 	/**
-	 * 아이디 중복 검사 Service
+	 * 회원가입 아이디 중복 검사 Service
 	 * @param memberId
 	 * @return result
 	 * @throws Exception
@@ -183,6 +210,8 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	
 
 	/**
 	 * 인증번호 DB 추가 Service
@@ -283,6 +312,38 @@ public class MemberService {
 		
 		return result;
 	}
+
+
+	/**
+	 * 비밀번호 변경 Service
+	 * @param currentPw
+	 * @param newPw
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changePw(String currentPw, String newPw, int memberNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.changePw(conn, currentPw, newPw, memberNo);
+		
+		if(result > 0) commit(conn);
+		else		   rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public List<Board> bookmarkList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
 
 	
 

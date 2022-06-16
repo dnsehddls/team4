@@ -37,6 +37,7 @@ SELECT * FROM
         JOIN MEMBER USING(MEMBER_NO)
         WHERE  (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) >= 5
+        AND BOARD_CD IN (2,3,4)
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -71,7 +72,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -91,7 +92,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -111,7 +112,7 @@ SELECT * FROM
                WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
-               MEMBER_NICK
+               MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
@@ -120,6 +121,93 @@ SELECT * FROM
     )D
 )
 WHERE RNUM BETWEEN 1 AND 5
+</entry>
+
+
+
+
+
+
+
+
+
+
+<!-- 게시글 조회 -->
+<entry key="boardDetail">
+SELECT BOARD_NO,BOARD_TITLE,BOARD_CONTENT,READ_COUNT,
+	   MEMBER_NICK,
+	   TO_CHAR(CREATE_DT,'YYYY-MM-DD hh:mm:ss') CREATE_DT,
+	   TO_CHAR(UPDATE_DT,'YYYY-MM-DD hh:mm:ss') UPDATE_DT,
+	   BOARD_NM
+FROM BOARD
+JOIN MEMBER USING(MEMBER_NO)
+JOIN BOARD_TYPE USING(BOARD_CD)
+WHERE BOARD_NO = ?
+AND BOARD_FL = 'N'
+</entry>
+
+<!-- 게시글 이름 -->
+<entry key="selectBoardName">
+SELECT BOARD_NM FROM BOARD_TYPE 
+WHERE BOARD_CD = ?
+</entry>
+
+<entry key="getListCount">
+SELECT COUNT(*) FROM BOARD
+WHERE BOARD_FL = 'N'
+AND BOARD_CD = ?
+</entry>
+
+<entry key="selectBoardList">
+SELECT * FROM(
+   SELECT ROWNUM RNUM, A.* FROM(
+      SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICK, 
+         TO_CHAR( CREATE_DT, 'YYYY-MM-DD' ) AS CREATE_DT, 
+         READ_COUNT ,
+         (SELECT IMG_RENAME FROM BOARD_IMG
+          WHERE IMG_LEVEL = 0
+          AND BOARD_IMG.BOARD_NO = BOARD.BOARD_NO) THUMBNAIL
+          
+      FROM BOARD
+      JOIN MEMBER USING(MEMBER_NO)
+      WHERE BOARD_CD = ?
+      AND BOARD_FL = 'N'
+      ORDER BY BOARD_NO DESC
+   ) A
+)
+WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="searchListCount">
+		SELECT COUNT(*) FROM BOARD 
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE BOARD_FL = 'N'
+		AND BOARD_CD = ?
+	</entry>
+
+
+
+<entry key="searchBoardList1">
+	SELECT * FROM(
+	   SELECT ROWNUM RNUM, A.* FROM(
+	      SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICK, 
+	         TO_CHAR( CREATE_DT, 'YYYY-MM-DD' ) AS CREATE_DT, 
+	         READ_COUNT ,
+	         (SELECT IMG_RENAME FROM BOARD_IMG
+	            WHERE IMG_LEVEL = 0
+	            AND BOARD_IMG.BOARD_NO = BOARD.BOARD_NO) THUMBNAIL
+	            
+	      FROM BOARD
+	      JOIN MEMBER USING(MEMBER_NO)
+	      WHERE BOARD_CD = ?
+	      AND BOARD_FL = 'N'
+</entry>
+
+<entry key="searchBoardList2">
+      	ORDER BY BOARD_NO DESC
+	   ) A
+	)
+	WHERE RNUM BETWEEN ? AND ? 
 </entry>
 
 </properties>

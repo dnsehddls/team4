@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.border.Border;
 
 import com.google.gson.Gson;
 
@@ -27,17 +29,43 @@ public class ReplyController extends HttpServlet{
 	    ReplyService service = new ReplyService();
 	    try {
 	    	
+	    	int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+	    	int result = -10;
+	    	
 	    	if(command.equals("replyList")) {
-	    		int boardNo = Integer.parseInt(req.getParameter("boardNo"));
 	    		List<Reply> rList = service.replyList(boardNo);
 	    		new Gson().toJson(rList,resp.getWriter());
 	    	}
 	    	
+	    	if(command.equals("updateReply")) {
+	    		int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+	    		result = service.replyUpdate(replyNo);
+	    	}
+	    	
+	    	if(command.equals("deleteReply")) {
+	    		int replyNo = Integer.parseInt(req.getParameter("replyNo"));
+	    		result = service.replyDelete(replyNo);
+	    	}
+	    	
+	    	if(command.equals("insertReply")) {
+	    		Reply reply = new Reply();
+	    		
+	    		int memberNo = Integer.parseInt(req.getParameter("memberNo"));
+	    		reply.setMemberNo(memberNo);
+	    		
+	    		String content = req.getParameter("replyContent");
+	    		reply.setReplyContent(content);
+	    		reply.setBoardNo(boardNo);
+	    		result = service.replyInsert(reply);
+	    	}
+	    	
+	    	if(!command.equals("replyList")) {
+	    		resp.getWriter().print(result);
+	    	}
 	    	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	    
 	}
 	
 	@Override

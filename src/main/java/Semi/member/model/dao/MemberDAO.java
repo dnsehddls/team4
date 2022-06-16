@@ -154,6 +154,8 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	
 
 	/**
 	 * 아이디 중복 검사 DAO
@@ -465,11 +467,9 @@ public class MemberDAO {
 
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, mem.getMemberPW());
-			pstmt.setString(2, mem.getMemberNickname());
-			pstmt.setString(3, mem.getMemberTel());
-			pstmt.setString(4, mem.getMemberEmail());
-			pstmt.setInt(5, mem.getMemberNo());
+			pstmt.setString(1, mem.getMemberNickname());
+			pstmt.setString(2, mem.getMemberTel());
+			pstmt.setInt(3, mem.getMemberNo());
 
 			result = pstmt.executeUpdate();
 
@@ -506,6 +506,39 @@ public class MemberDAO {
 		
 		return result;
 	}
+
+	/**
+	 * 비밀번호 변경 DAO
+	 * @param conn
+	 * @param currentPw
+	 * @param newPw
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changePw(Connection conn, String currentPw, String newPw, int memberNo) throws Exception{
+		
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("changePw");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, newPw);
+			pstmt.setInt(2, memberNo);
+			pstmt.setString(3, currentPw);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
 
 
 }
