@@ -278,7 +278,6 @@ public class MemberDAO {
 	      return result;
 	}
 
-
 	/** 회원 목록 조회 DAO
 	 * @param conn
 	 * @return list
@@ -541,7 +540,6 @@ public class MemberDAO {
 	}
 
 	
-
 
 
 }

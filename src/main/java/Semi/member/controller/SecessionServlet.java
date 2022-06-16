@@ -29,8 +29,11 @@ public class SecessionServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String inputPW = req.getParameter("inputPw");
-		HttpSession session = req.getSession();	
+		
+		HttpSession session = req.getSession();
+		
 		Member loginMember = (Member)(session.getAttribute("loginMember"));
+		
 		int memberNo = loginMember.getMemberNo();
 		
 		try {
@@ -41,11 +44,12 @@ public class SecessionServlet extends HttpServlet{
 			
 			if(result > 0) {
 				
-				session.invalidate(); // 세션 무효화
+				session.invalidate();
 				
-				session = req.getSession(); // 세션 다시 얻어오기
-								
+				session = req.getSession();
+				
 				session.setAttribute("message", "탈퇴되었습니다.");
+				
 				path = req.getContextPath();
 				
 				Cookie c = new Cookie("savedId", "");

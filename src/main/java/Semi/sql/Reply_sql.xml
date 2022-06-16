@@ -17,25 +17,9 @@ WHERE BOARD_NO = ?
 AND REPLY_FL = 'N'
 </entry>
 
-<!-- 내 댓글 수 조회 -->
-<entry key="myrCount">
-SELECT COUNT(*) FROM REPLY
-WHERE REPLY_FL = 'N'
-AND MEMBER_NO = ?
-</entry>
-
-
-<entry key="replyContent">
-SELECT * FROM(
-    SELECT ROWNUM RNUM, A.* FROM (
-        SELECT BOARD_NO,BOARD_TITLE,REPLY_CONTENT,CREATE_REPLY,REPLY_NO
-        FROM REPLY R
-        JOIN BOARD B USING(BOARD_NO)
-        WHERE R.MEMBER_NO = ?
-        ORDER BY REPLY_NO DESC
-    ) A
-)
-WHERE RNUM BETWEEN ? AND ?
+<entry key="insertReply">
+INSERT INTO REPLY 
+VALUES(SEQ_REPLY_NO.NEXTVAL,?,?,DEFAULT,DEFAULT,DEFAULT,?)
 </entry>
 
 </properties>

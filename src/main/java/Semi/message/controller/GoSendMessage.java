@@ -16,7 +16,8 @@ public class GoSendMessage extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
-			
+//			String aa = req.getParameter("mNo");
+//			req.setAttribute("mNo", aa);
 			System.out.println("send");
 			
 			// 화면만 띄어서 테스트
@@ -29,6 +30,5 @@ public class GoSendMessage extends HttpServlet{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 }

@@ -135,3 +135,27 @@ const datas = document.getElementsByName("data");
         deleteMessage.submit();
     }
 });*/
+
+// function goPage(param){
+
+//     document.form.xxx.value = param
+    
+//     document.form.xxx.action = xxx.do
+    
+//     document.form.submit
+    
+// }
+
+function goPage(i){
+
+    if(i==null){
+
+        i==1;
+
+        location.href="/article/articleList.do?num"+1; //처음 페이지를 선택 안했을때(첫페이지)
+
+    }
+
+    location.href="/article/articleList.do?num="+i; // 선택한 페이지로
+
+    }

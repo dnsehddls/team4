@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,52 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>신고 게시판</title>
 
-    <link rel="stylesheet" href="../resources/css/main-style.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
     
-    <link rel="stylesheet" href="../resources/css/memberList.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/memberList.css">
 </head>
 <body>
 
     <main>
-        <header>
-            <!-- 클릭 시 메인페이로 이동하는 로고 -->
-            <section>
-                <a href="#">
-                    <img src="../resources/images/main_logo.jpg" id="main-logo">
-                </a>
-            </section>
-             
-            <section>
-                <img src="../resources/images/banner_logo.jpg" id="banner-logo">
-            </section>
-                
 
-            <section></section>
-        </header>
-
-        <nav>
-            <ul>
-                <li><a href="#">공지사항</a>                
-                <li><a href="#">인기 게시판</a>                
-                <li><a href="#">운동 게시판</a>                
-                <li><a href="#">자유 게시판</a>                
-                <li><a href="#">정모 게시판</a>                
-                <li><a href="#">관리자 페이지</a>                
-            </ul>
-        </nav>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <section class="adminPage-content">
-            <section class="left-side">
-            
-                <ul class="list-group">
-                    <li><a href="#">프로필</a></li>
-                    <li><a href="#">관리자 정보</a></li>
-                    <li><a href="#">비밀번호 변경</a></li>
-                    <li><a href="#">회원 목록 관리</a></li>
-                    <li><a href="#">신고된 게시글</a></li>
-                    <li><a href="#">회원 탈퇴</a></li>
-                </ul>
-            </section>
+
+
+            <jsp:inclue page="/WEB-INF/views/memeber/admin-sideMenu.jsp"/>
 
             <section class="memberList">
                 <section class="member-list">
@@ -79,26 +50,6 @@
                                     <td>욕설</td>
                                     <td>user01</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <a href="#">맛없어요</a>
-                                    </td>
-                                    <td>2022-5-23</td>
-                                    <td>욕설</td>
-                                    <td>user01</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <a href="#">맛없어요</a>
-                                    </td>
-                                    <td>2022-5-23</td>
-                                    <td>욕설</td>
-                                    <td>user01</td>
-                                </tr>
-
-
 
                             </tbody>
                         </table>
@@ -137,22 +88,7 @@
         </section>
     </main>
     
-    <footer>
-        <p>Copyright © KH Information Educational Institute A-Class Group4 UndongIn</p>
-
-        <article>
-            <a href="#">프로젝트 소개</a>
-            <span>|</span>
-
-            <a href="#">이용약관</a>
-            <span>|</span>
-
-            <a href="#">개인정보처리방침</a>
-            <span>|</span>
-
-            <a href="#">고객센터</a>
-        </article>
-    </footer>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
 </body>
 </html>
