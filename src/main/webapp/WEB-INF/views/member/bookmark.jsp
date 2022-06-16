@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="bookmarkList" value="${map.bookmarkList}"/>
+<c:set var="pagination" value="${map.pagination}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +23,7 @@
             <section class="left-side">
                 <ul class="list-group">
                     <li><a href="info">내 정보</a></li>
+                    <li><a href="changePw">비밀번호 변경</a></li>
                     <li><a href="myContent">내 글 관리</a></li>
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
@@ -40,125 +44,33 @@
                 <table name="myContent" class="tb">
                     <thead>
                         <tr>
-                            <th>번호</th>
-                            <th>카테고리</th>
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
-                            <th></th>
+                            <td></td>
                         </tr>
                     </thead>
-            
+
                     <tbody>
-                        <tr>
-                            <td>10</td>
-                            <td>자유게시판</td>
-                            <td>게시글 10입니다.</td>
-                            <td>user9</td>
-                            <td>2022-05-06</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>9</td>
-                            <td>자유게시판</td>
-                            <td>게시글 9입니다.</td>
-                            <td>유저팔</td>
-                            <td>2022-05-06</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>8</td>
-                            <td>자유게시판</td>
-                            <td>게시글 8입니다.</td>
-                            <td>유저7</td>
-                            <td>2022-05-04</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>7</td>
-                            <td>자유게시판</td>
-                            <td>게시글 7입니다.</td>
-                            <td>user6</td>
-                            <td>2022-05-03</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>6</td>
-                            <td>자유게시판</td>
-                            <td>게시글 6입니다.</td>
-                            <td>유저오</td>
-                            <td>2022-05-03</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>5</td>
-                            <td>운동게시판</td>
-                            <td>게시글 5입니다.</td>
-                            <td>유저4</td>
-                            <td>2022-05-02</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>4</td>
-                            <td>운동게시판</td>
-                            <td>게시글 4입니다.</td>
-                            <td>user3</td>
-                            <td>2022-05-02</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>3</td>
-                            <td>운동게시판</td>
-                            <td>게시글 3입니다.</td>
-                            <td>유저이</td>
-                            <td>2022-05-02</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>2</td>
-                            <td>운동게시판</td>
-                            <td>게시글 2입니다.</td>
-                            <td>유저1</td>
-                            <td>2022-05-01</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <td>1</td>
-                            <td>운동게시판</td>
-                            <td>게시글 1입니다.</td>
-                            <td>user1</td>
-                            <td>2022-05-01</td>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                        </tr>
+                        <c:choose>
+                            <c:when test="${empty bookmarkList}">
+                                <!-- 내 게시글 조회결과가 비어있다면  -->
+                                <tr>
+                                    <th colspan="3">북마크한 게시글이 없습니다.</th>
+                                </tr>
+                            </c:when>
+
+                            <c:otherwise>
+                                <c:forEach var="bookmark" items="${bookmarkList}">
+                                    <tr>
+                                        <td><a href="#">${bookmark.boardTitle}</a></td>
+                                        <td>${bookmark.memberNickname}</td>
+                                        <td>${bookmark.createDate}</td>
+                                        <td><input type="checkbox"></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </tbody>
                 </table>
 
@@ -167,20 +79,36 @@
                 </div>
         
                 
-                <div class="pagination-area">
-                    <ul class="pagination">
-                        <li><a href="#">&lt;</a></li>
-                        <li><a class="current">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">10</a></li>
-                        <li><a href="#">&gt;</a></li>
+                <div class="pagination">
+
+                    <!--페이지네이션 a태그에 사용될 공통 주소를 저장한 변수 선언 -->
+                    <c:set var="url" value="bookmark?&cp="/>
+    
+                    <ul class="page">
+                        <!-- 첫페이지로 이동 -->
+                        <li><a href="${url}1${sURL}">&lt;&lt;</a></li> 
+                        
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="${url}${pagination.prevPage}${sURL}">&lt;</a></li>
+    
+                        <!-- 범위가 정해진 일반 for문 -->
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                            <c:choose>
+                                <c:when test="${i == pagination.currentPage}">
+                                    <li><a class="current">${i}</a></li>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <li><a href="${url}${i}${sURL}">${i}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+    
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="${url}${pagination.nextPage}${sURL}">&gt;</a></li>
+    
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="${url}${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
                     </ul>
                 </div>
                 
@@ -193,8 +121,6 @@
     <!-- jQuery 라이브러리 추가 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <!-- js -->
-    <script src="${contextPath}/resources/js/member/bookmark.js"></script>
     
 </body>
 </html>

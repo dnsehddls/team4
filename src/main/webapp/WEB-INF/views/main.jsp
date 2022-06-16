@@ -159,13 +159,13 @@
                     <c:if test="${!empty loginMember}">
                         <div>
                             <!-- <div>프로필 이미지</div> -->
-                            <div>닉네임</div>
-                            <div>이메일</div>
+                            <div>${loginMember.memberNickname}</div>
+                            <div>${loginMember.memberEmail}</div>
                             <div>
                                 <a href="#">내 쪽지함</a>
                             </div>
                             <div>
-                                <a href="#">내 정보</a>
+                                <a href="${contextPath}/member/myPage/info">내 정보</a>
                             </div>
                             <div>
                             	<a href="#">로그아웃</a>

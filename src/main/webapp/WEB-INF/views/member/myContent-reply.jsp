@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="contentList" value="${map.replyList}"/>
+<c:set var="pagination" value="${map.pagination}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +23,7 @@
             <section class="left-side">
                 <ul class="list-group">
                     <li><a href="info">내 정보</a></li>
+                    <li><a href="changePw">비밀번호 변경</a></li>
                     <li><a href="myContent">내 글 관리</a></li>
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
@@ -30,9 +34,11 @@
         
         
             <section class="myPage-main">
-                <h2 class="title">
+                <h2 class="title" style="margin-bottom : 5px;">
                     <span>내 댓글 관리</span>
                 </h2>
+                <h5 style="margin-top : 5px;">내가 쓴 댓글을 조회할 수 있습니다.</h5>
+        
                 
     
                 <!-- + 선택 시 버튼색 변화 -->
@@ -46,95 +52,65 @@
                     <table name="myContent" class="tb">
                         <thead>
                             <tr>
-                                <th>번호</th>
-                                <th>카테고리</th>
-                                <th>제목</th>
-                                <th>작성일</th>
+                                <th>댓글 작성일</th>
+                                <th>게시글 제목</th>
+                                <th>댓글 내용</th>
                             </tr>
                         </thead>
-                
+
                         <tbody>
-                            <tr>
-                                <td>10</td>
-                                <td>자유게시판</td>
-                                <td>게시글 10입니다.</td>
-                                <td>2022-05-06</td>
-                            </tr>
-            
-                            <tr>
-                                <td>9</td>
-                                <td>자유게시판</td>
-                                <td>게시글 9입니다.</td>
-                                <td>2022-05-05</td>
-                            </tr>
-            
-                            <tr>
-                                <td>8</td>
-                                <td>자유게시판</td>
-                                <td>게시글 8입니다.</td>
-                                <td>2022-05-04</td>
-                            </tr>
-            
-                            <tr>
-                                <td>7</td>
-                                <td>자유게시판</td>
-                                <td>게시글 7입니다.</td>
-                                <td>2022-05-03</td>
-                            </tr>
-            
-                            <tr>
-                                <td>6</td>
-                                <td>자유게시판</td>
-                                <td>게시글 6입니다.</td>
-                                <td>2022-05-02</td>
-                            </tr>
-            
-                            <tr>
-                                <td>5</td>
-                                <td>운동게시판</td>
-                                <td>게시글 5입니다.</td>
-                                <td>2022-05-02</td>
-                            </tr>
-            
-                            <tr>
-                                <td>4</td>
-                                <td>운동게시판</td>
-                                <td>게시글 4입니다.</td>
-                                <td>2022-05-01</td>
-                            </tr>
-            
-                            <tr>
-                                <td>3</td>
-                                <td>운동게시판</td>
-                                <td>게시글 3입니다.</td>
-                                <td>2022-04-29</td>
-                            </tr>
-            
-                            <tr>
-                                <td>2</td>
-                                <td>운동게시판</td>
-                                <td>게시글 2입니다.</td>
-                                <td>2022-04-29</td>
-                            </tr>
-            
-                            <tr>
-                                <td>1</td>
-                                <td>운동게시판</td>
-                                <td>게시글 1입니다.</td>
-                                <td>2022-04-28</td>
-                            </tr>
+                            <c:choose>
+                                <c:when test="${empty replyList}">
+                                    <tr>
+                                        <th colspan="3">작성한 댓글이 없습니다.</th>
+                                    </tr>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <c:forEach var="reply" items="${replyList}">
+                                        <td><a href="#">${reply.boardTitle}</a></td>
+                                        <td><a href="#">${reply.replyContent}</a></td>
+                                        <td>${reply.createReplyDate}</td>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
                         </tbody>
                     </table>
                 </div>
         
                 <div class="page">
-                    <div>&lt;</div>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>&gt;</div>
+
+                    <!--페이지네이션 a태그에 사용될 공통 주소를 저장한 변수 선언 -->
+                    <c:set var="url" value="myContent-reply?&cp="/>
+    
+                    <ul class="page">
+                        <!-- 첫페이지로 이동 -->
+                        <li><a href="${url}1${sURL}">&lt;&lt;</a></li> 
+                        
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="${url}${pagination.prevPage}${sURL}">&lt;</a></li>
+    
+                        <!-- 범위가 정해진 일반 for문 -->
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                            <c:choose>
+                                <c:when test="${i == pagination.currentPage}">
+                                    <li><a class="current">${i}</a></li>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <li><a href="${url}${i}${sURL}">${i}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+    
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="${url}${pagination.nextPage}${sURL}">&gt;</a></li>
+    
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="${url}${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                    </ul>
                 </div>
+
                 <div class="line"></div>
             </section>
         </section>
@@ -143,10 +119,5 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- jQuery 라이브러리 추가 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    
-    <script src="../../resources/js/member/myContent.js"></script>
-
-    <script src="${contextPath}/resources/js/member/myContent-reply.js"></script>
-
 </body>
 </html>

@@ -34,7 +34,6 @@ public class adminController extends HttpServlet {
 		
 		try {
 			
-			
 			// cp 추가하기
 			// 회원목록 조회
 	    	if(command.equals("memberList")) {
