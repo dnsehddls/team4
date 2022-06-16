@@ -47,7 +47,6 @@
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
-                            <td></td>
                         </tr>
                     </thead>
 
@@ -66,7 +65,6 @@
                                         <td><a href="#">${bookmark.boardTitle}</a></td>
                                         <td>${bookmark.memberNickname}</td>
                                         <td>${bookmark.createDate}</td>
-                                        <td><input type="checkbox"></td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>
@@ -74,9 +72,6 @@
                     </tbody>
                 </table>
 
-                <div class="btn-area">
-                    <button type="submit" id="deleteBtn">삭제</button>
-                </div>
         
                 
                 <div class="pagination">
@@ -121,6 +116,6 @@
     <!-- jQuery 라이브러리 추가 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    
+
 </body>
 </html>
