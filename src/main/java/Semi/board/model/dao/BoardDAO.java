@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import Semi.board.model.vo.Board;
+import Semi.board.model.vo.BoardDetail;
+import Semi.board.model.vo.BoardImage;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
 
@@ -250,6 +252,232 @@ public class BoardDAO {
 		
 		
 		return boardList;
+	}
+
+	
+	
+	public BoardDetail selectBoardDetail(Connection conn, int boardNo) throws Exception {
+		
+		BoardDetail detail = null;
+		
+		try {
+			String sql = prop.getProperty("selectBoardDetail");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				detail = new BoardDetail();
+				
+				detail.setBoardNo(rs.getInt(1));
+				detail.setBoardTitle(rs.getString(2));
+				detail.setBoardContent(rs.getString(3));
+				detail.setCreateDate(rs.getString(4));
+				detail.setUpdateDate(rs.getString(5));
+				detail.setReadCount(rs.getInt(6));
+				detail.setMemberNickname(rs.getString(7));
+				detail.setProfileImage(rs.getString(8));
+				detail.setMemberNo(rs.getInt(9));
+				detail.setBoardName(rs.getString(10));
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return detail;
+	}
+	
+	
+	public List<BoardImage> selectImageList(Connection conn, int boardNo) throws Exception {
+		List<BoardImage> imageList = new ArrayList<>();
+		
+		try {
+			String sql = prop.getProperty("selectImageList");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				BoardImage image = new BoardImage();
+				
+				image.setImageNo(rs.getInt(1));
+				image.setImageReName(rs.getString(2));
+				image.setImageOriginal(rs.getString(3));
+				image.setImageLevel(rs.getInt(4));
+				image.setBoardNo(rs.getInt(5));
+				
+				imageList.add(image);
+			}
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return imageList;
+	}
+	
+	
+	public int nextBoardNo(Connection conn) throws Exception{
+		int boardNo = 0;
+		
+		try {
+			String sql = prop.getProperty("nextBoardNo");
+			
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()) {
+				boardNo = rs.getInt(1);
+			}
+			
+		}finally {
+			close(rs);
+			close(stmt);
+		}
+		
+		return boardNo;
+	}
+	
+	public int insertBoard(Connection conn, BoardDetail detail, int boardCode) throws Exception {
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("insertBoard");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, detail.getBoardNo());
+			pstmt.setString(2, detail.getBoardTitle());
+			pstmt.setString(3, detail.getBoardContent());
+			pstmt.setInt(4, detail.getMemberNo());
+			pstmt.setInt(5, boardCode);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+	
+	public int insertBoardImage(Connection conn, BoardImage image) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("insertBoardImage");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, image.getImageReName());
+			pstmt.setString(2, image.getImageOriginal());
+			pstmt.setInt(3, image.getImageLevel());
+			pstmt.setInt(4, image.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	public int updateBoard(Connection conn, BoardDetail detail) throws Exception {
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateBoard");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, detail.getBoardTitle());
+			pstmt.setString(2, detail.getBoardContent());
+			pstmt.setInt(3, detail.getBoardNo());
+				
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int updateBoardImage(Connection conn, BoardImage img) throws Exception {
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateBoardImage");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, img.getImageReName());
+			pstmt.setString(2, img.getImageOriginal());
+			pstmt.setInt(3, img.getBoardNo());
+			pstmt.setInt(4, img.getImageLevel());
+		
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteBoardImage(Connection conn, String deleteList, int boardNo) throws Exception{
+
+		int result = 0;
+		
+		try {
+			// 							완성되지 않은 SQL
+			String sql = prop.getProperty("deleteBoardImage")  + deleteList  + ")";
+			// "DELETE FROM BOARD_IMG WHERE BOARD_NO = ? AND IMG_LEVEL IN ( 1,0 ) "
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int deleteBoard(Connection conn, int boardNo) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("deleteBoard");
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

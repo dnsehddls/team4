@@ -18,6 +18,7 @@ import Semi.board.model.service.BoardService;
 import Semi.board.model.vo.BoardDetail;
 import Semi.board.model.vo.BoardImage;
 import Semi.common.MyRenamePolicy;
+import Semi.member.model.vo.Member;
 
 
 // 컨트롤러 : 요청에 따라 알맞은 Service를 호출하고 결과에 따라 응답을 제어

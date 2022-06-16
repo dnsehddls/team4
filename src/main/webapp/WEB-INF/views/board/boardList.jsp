@@ -15,7 +15,6 @@
 
 
     <link rel="stylesheet" href="${contextPath}/resources/css/board/boardList-style.css">
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
 
     <script src="https://kit.fontawesome.com/296924b572.js" crossorigin="anonymous"></script>
 </head>
@@ -64,10 +63,6 @@
                                     <tr>
                                         <td>${board.boardNo}</td>
                                         <td> 
-                                            <c:if test="${!empty board.thumbnail}">
-                                                <img class="list-thumbnail" src="${contextPath}${board.thumbnail}">
-                                            </c:if>  
-
                                             <a href="detail?no=${board.boardNo}&cp=${pagination.currentPage}&type=${param.type}${sURL}">${board.boardTitle}</a>                           
                                         </td>
                                         <td>${board.memberNickname}</td>

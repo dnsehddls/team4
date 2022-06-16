@@ -30,7 +30,7 @@ public class MyContentServlet extends HttpServlet{
 			
 			int memberNo = loginMember.getMemberNo();
 			
-			List<MyBoard> myContent = service.myContent(memberNo);
+			/* List<MyBoard> myContent = service.myContent(memberNo); */
 			
 			
 		}catch(Exception e) {

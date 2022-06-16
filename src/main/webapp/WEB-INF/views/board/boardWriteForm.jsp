@@ -11,9 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 등록</title>
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/boardWriteForm-style.css">
-
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/board/boardWriteForm-style.css">
 
     <script src="https://kit.fontawesome.com/296924b572.js" crossorigin="anonymous"></script>
 </head>
@@ -31,36 +29,6 @@
                 </h1>
     
     
-                <%-- imageList에 존재하는 이미지 레벨을 이용하여 변수 생성 --%>
-                <c:forEach items="${detail.imageList}" var="boardImage">
-    
-                    <c:choose>
-                        <c:when test="${boardImage.imageLevel == 0}">
-                            <%-- c:set 변수는 page scope가 기본값 (조건문이 끝나도 사용 가능)  --%>
-                            <c:set var="img0"  value="${contextPath}${boardImage.imageReName}" />
-                        </c:when>
-    
-                        <c:when test="${boardImage.imageLevel == 1}">
-                            <c:set var="img1"  value="${contextPath}${boardImage.imageReName}" />
-                        </c:when>
-                    </c:choose>
-                </c:forEach>
-    
-    
-                <!-- 썸네일 -->
-                <h5>썸네일</h5>
-                <div class="img-box">
-                    <div class="boardImg thumbnail">
-                        <label for="img0">
-                            <img class="preview" src="${img0}">
-                        </label>
-                        <input type="file" class="inputImage" id="img0" name="0" accept="image/*">
-                        <span class="delete-image">&times;</span>
-                        <!-- &times;  :  x 모양의 문자 -->
-                    </div>
-                </div>
-
-    
                 <!-- 내용 -->
                 <div class="board-content">
     
@@ -76,7 +44,7 @@
                 <h3>
                     <td><input type="text" id="SearchMap" placeholder="주소" name="map" maxlength="50" readonly></td>
                 </h3>
-                <button type="button" id="SearchMapBtn" onclick="goPopup();">주소검색</button>
+                <button type="button" id="address" onclick="goPopup();">주소검색</button>
 
     
                 <!-- 버튼 영역 -->
@@ -126,7 +94,6 @@
     
         <script src="${contextPath}/resources/js/board/board.js"></script>
         <script src="${contextPath}/resources/js/board/boardWriteForm.js"></script>
-    
     
     </body>
     </html>
