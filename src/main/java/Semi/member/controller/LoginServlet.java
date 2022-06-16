@@ -22,6 +22,7 @@ public class LoginServlet extends HttpServlet{
 		Member memberCheck = new Member();
 		memberCheck.setMemberID(id);
 		memberCheck.setMemberPW(pw);
+		
 		try {
 			MemberService service = new MemberService();
 			Member loginMember = service.login(memberCheck);

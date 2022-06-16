@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class MessageDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int SendMessage(Connection conn, String sendNick, String receiveNick, String inputMessage) throws Exception{
+	public int SendMessage(Connection conn, int myNo, String inputMessage, int yourNo) throws Exception{
 		
 		int result = 0;
 		
@@ -88,18 +89,97 @@ public class MessageDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, sendNick);
-			pstmt.setString(2, inputMessage);
-			pstmt.setString(3, receiveNick);
-			
-			rs = pstmt.executeQuery();
-			
-		}finally {
-			close(pstmt);
-		}
+	        pstmt.setInt(1, myNo);
+	        pstmt.setString(2, inputMessage);
+	        pstmt.setInt(3, yourNo);
+	
+			result = pstmt.executeUpdate();
+
+	    	}finally {
+	 	  	close(pstmt);
+		    }
 		
 		return result;
 	}
+
+
+	/** 쪽지 목록 조회 DAO
+	 * @param conn
+	 * @param myNo
+	 * @param type
+	 * @return mList
+	 * @throws Exception 
+	 */
+	public List<Message> MessageList(Connection conn, int myNo, String type) throws SQLException {
+		
+		List<Message> mList = new ArrayList<Message>();
+		
+		try {
+			System.out.println("type : " + type);
+			System.out.println("myNo : " + myNo);
+			
+			int convType = 0;
+			if(type.equals("s")) convType = 1;
+			else convType = 2;
+			
+			System.out.println("convType : " + convType);
+			
+			String sql = prop.getProperty("messageList");
+			
+			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, type);
+//			pstmt.setString(2, type);
+//			pstmt.setString(3, type);
+//			pstmt.setInt(4, myNo);
+//			pstmt.setString(5, type);
+//			pstmt.setInt(6, myNo);
+			
+			
+			pstmt.setInt(1, convType);
+			pstmt.setInt(2, convType);
+			pstmt.setInt(3, convType);
+			pstmt.setInt(4, myNo);
+			pstmt.setInt(5, convType);
+			pstmt.setInt(6, myNo);
+			
+			rs = pstmt.executeQuery();
+			
+			System.out.println("rs.next() " + rs.next());
+			while(rs.next()) {
+				
+				Message m = new Message();
+				
+				m.setMessageNo(rs.getInt(1));
+				m.setSendNo(rs.getInt(2));
+				m.setMessageDate(rs.getString(3));
+				m.setMessageContent(rs.getString(4));
+				m.setSendDelete(rs.getString(5).charAt(0));
+				m.setReceiveNo(rs.getInt(6));
+				m.setReceiveDate(rs.getString(7));
+				m.setReceiveDelete(rs.getString(8).charAt(0));
+				
+//				m.setMessageNo(rs.getInt("MS_NO"));
+//				m.setSendNo(rs.getInt("SEND_NO"));
+//				m.setMessageDate(rs.getString("MS_DT"));
+//				m.setMessageContent(rs.getString("MS_CONTENT");
+//				m.setSendDelete(rs.getString("SEND_DEL_ST");
+//				m.setReceiveNo(rs.getInt("RECEIVE_NO"));
+//				m.setReceiveDate(rs.getString("RECEIVE_DATE"));
+//				m.setReceiveDelete(rs.getString("RECEIVE_DEL_ST");
+
+				System.out.println("rs.getint : " + rs.getInt(1));
+				
+				mList.add(m);
+			}
+			System.out.println("count : " + mList.size());
+			
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return mList;
+	}
+
 }
 	
  		

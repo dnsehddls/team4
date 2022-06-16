@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Board {
 
-
+	
 	private int boardNo;
 	private String boardTitle;
 	private String memberNickname;
@@ -23,6 +23,6 @@ public class Board {
 	private int boardCode;
 	private String boardType;
 	private String goodCount; // 좋아요 갯수
-
+	
 	private String boardFlag;
 }

@@ -15,20 +15,24 @@
 <body>
     <section class="entire">
 
-            	<jsp:include page="/WEB-INF/views/message/sideMenu.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/views/message/sideMenu.jsp"></jsp:include>
 
         <section class="right-side">
-            <div>받는 사람<span>누구누구</span></div>
+            <c:if test="${param.t == 's'}">
+            <div>받는 사람<span>누구누구</span></div>  
             <div>보낸 날짜<span>2010년 01월 05일</span></div>
-            
+            </c:if>
+
+            <c:if test="${param.t == 'r'}">
             <div>보낸 사람<span>누구누구</span></div>
             <div>받은 날짜<span>2010년 01월 05일</span></div>
-            <div>내용</div>
+            </c:if>
+
             <textarea name="" id="" cols="70" rows="10"></textarea>
 
             <section class="bottom">
                 <div class="btn-area">
-                    <button id="goToListBtn">목록으로</button>
+                    <button id="goToListBtn" onclick="history.back()">목록으로</button>
                 </div>
             </section>
         </section>

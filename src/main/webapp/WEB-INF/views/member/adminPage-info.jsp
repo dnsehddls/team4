@@ -9,21 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 페이지</title>
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin/adminPage.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/adminPage.css">
 
     <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    
     <main>
 
+        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <section class="adminPage-content">
             
             <!-- 왼쪽 사이드 메뉴 -->
-            <jsp:include page="/WEB-INF/views/admin/admin-sideMenu.jsp"/>
+            <jsp:inclue page="/WEB-INF/views/memeber/admin-sideMenu.jsp"/>
 
 
             <section class="adminPage-main">
@@ -35,17 +34,12 @@
 
                     <div class="adminPage-row">
                         <label>닉네임</label>
-                        <input type="text" name="memberNickname" value="${loginMember.memberNickname}" id="memberNickname" maxlength="10">
-                    </div>
-
-                    <div class="adminPage-row">
-                        <label>이메일</label>
-                        <input type="text" name="memberEmail" value="${loginMember.memberEmail}" id="memberEmail" maxlength="11">
+                        <input type="text" name="memberNickname" value="${loginMember.memberNickname}" maxlength="10">
                     </div>
 
                     <div class="adminPage-row">
                         <label>전화번호</label>
-                        <input type="text" name="memberTel" value="${loginMember.memberTel}" id="memberTel" maxlength="11">
+                        <input type="text" name="memberTel" value="${loginMember.memberTel}" maxlength="11">
                     </div>
 
                     <!-- 주소

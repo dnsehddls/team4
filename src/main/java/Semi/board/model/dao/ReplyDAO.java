@@ -11,10 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import Semi.board.model.vo.MyBoard;
-import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.Reply;
-import Semi.member.model.vo.Member;
 
 public class ReplyDAO {
 	
@@ -65,78 +62,42 @@ public class ReplyDAO {
 	}
 
 
-	/**
-	 * 내가 쓴 댓글 수 조회 DAO
-	 * @param conn
-	 * @param loginMember
-	 * @return listCount
-	 * @throws Exception
-	 */
-	public int myrCount(Connection conn, Member loginMember) throws Exception{
-		int listCount = 0;
-		
+	public int replyInsert(Connection conn, Reply reply) throws Exception{
+		int result = -10;
 		try {
-			String sql = prop.getProperty("myrCount");
+			pstmt = conn.prepareStatement(prop.getProperty("insertReply"));
+			pstmt.setInt(1, reply.getMemberNo());
+			pstmt.setString(2, reply.getReplyContent());
+			pstmt.setInt(3, reply.getBoardNo());
 			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, loginMember.getMemberNo());
+			result = pstmt.executeUpdate();
 			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				listCount = rs.getInt(1);
-			}
-			
-		}finally {
-			close(rs);
+		} finally {
 			close(pstmt);
 		}
-		return listCount;
+		return result;
 	}
 
-	/**
-	 * 내 댓글 목록 조회
-	 * @param conn
-	 * @param pagination
-	 * @param loginMember
-	 * @return replyList
-	 * @throws Exception
-	 */
-	public List<MyBoard> myReplyList(Connection conn, Pagination pagination, Member loginMember) throws Exception{
-		List<MyBoard> replyList = new ArrayList<MyBoard>();
-		
-		try {
-			String sql = prop.getProperty("replyContent");
-			
-			int start = (pagination.getCurrentPage() - 1) * pagination.getLimit() + 1;
-			int end = start + pagination.getLimit() - 1;
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, loginMember.getMemberNo());
-			pstmt.setInt(2, start);
-			pstmt.setInt(3, end);
-			
-			rs = pstmt.executeQuery();
 
-			while(rs.next()) {
-				MyBoard board = new MyBoard();
-				
-				
-				board.setBoardNo(rs.getInt("BOARD_NO"));
-				board.setBoardTitle(rs.getString("BOARD_TITLE"));
-				board.setReplyContent(rs.getString("REPLY_CONTENT"));
-				board.setCreateReplyDate(rs.getString("CREATE_REPLY"));
-				board.setReplyNo(rs.getInt("REPLY_NO"));
-				
-				replyList.add(board);
-			}
+	public int replyDelete(Connection conn, int replyNo) throws Exception{
+		int result = -10;
+		try {
 			
-		}finally {
-			close(rs);
-			close(pstmt);
+		} finally {
+			
 		}
-		return replyList;
+		return 0;
+	}
+
+
+	public int replyUpdate(Connection conn, int replyNo) throws Exception{
+		int result = -10;
+		try {
+			
+		} finally {
+			
+		}
+		return 0;
 	}
 
 }

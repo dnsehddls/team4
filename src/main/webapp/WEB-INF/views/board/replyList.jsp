@@ -20,7 +20,9 @@
                         ${reply.replyContent}
                     </span>
                 </div>
-                <div class="bottom-area"></div>
+                <div class="bottom-area">
+                    <span style="display: none;">${reply.replyNo}</span>
+                </div>
             </div>
         </li> 
 	</c:forEach>
