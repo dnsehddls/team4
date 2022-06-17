@@ -29,7 +29,7 @@
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
                     <li><a href="secession">회원 탈퇴</a></li>
-                    <li><a href="#">쪽지</a></li>
+                    <li><a href="${contextPath}/sendView">쪽지</a></li>
                 </ul>
             </section>
         
@@ -61,7 +61,7 @@
                             <c:otherwise>
                                 <c:forEach var="like" items="${likeList}">
                                     <tr>
-                                        <td><a href="#">${like.boardTitle}</a></td>
+                                        <td><a href="${contextPath}/board/detail?no=${like.boardNo}&cp=${pagination.currentPage}&type=${param.type}${sURL}">${like.boardTitle}</a></td>
                                         <td>${like.memberNickname}</td>
                                         <td>${like.createDate}</td>
                                     </tr>
