@@ -189,6 +189,7 @@ AND MEMBER_NO = ?
 <entry key="bookmarkCount">
 SELECT COUNT(*) FROM BOOKMARK
 WHERE MEMBER_NO = ?
+AND BOARD_FL = 'N'
 </entry>
 
 
