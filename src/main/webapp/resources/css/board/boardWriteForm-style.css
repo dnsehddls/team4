@@ -1,3 +1,15 @@
+.board-detail{
+    width: 1000px;
+    min-height: 700px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.title-box{
+    background-color: #eaeaea;
+    border-top: 3px solid #CCC;
+}
+
 .board-write{
     width: 1000px;
     min-height: 700px;
@@ -10,20 +22,49 @@
     margin : 0;
     padding: 20px 0;
     border-bottom : 3px solid #ccc;
+    padding-left: 20px;
 }
 
 .board-title > input{
     width: 100%;
-    font-size: 24px;
+    font-size: 18px;
     padding : 5px 0;
     border: 0;
     outline: 0;
 }
 
 .board-title:focus-within{
-    border-bottom-color : #455ba8;
+    border-bottom-color : rgba(32, 30, 30, 0.747);
 }
 
+#searchMap {
+    display: flex;
+    align-items: center;
+}
+
+#SearchMapBtn {
+    width: 100px;
+    height: 50px;
+
+    font-weight: bold;
+    border: 0;
+    background-color: #FEC85C;
+    color : white;
+
+    cursor: pointer;
+}
+
+#SearchMapBtn:hover {
+
+    background-color: white;
+    color : #FEC85C;
+    border: 2px solid #FEC85C;
+    
+}
+
+textarea:hover:focus-within{
+    border: rgba(204, 204, 204, 0.26);
+}
 
 .img-box{
     display: flex;
@@ -73,11 +114,8 @@
     height: 300px;
 }
 
-.board-content{
-    padding: 30px 0;
-    margin: 30px 0;
-    border-top : 3px solid #ccc;
-    border-bottom : 3px solid #ccc;
+.board-content {
+    border-bottom: #CCC 2px solid;
 }
 
 .board-content > textarea{
@@ -85,11 +123,15 @@
     height: 400px;
     resize: none;
     font-size: 18px;
+    border: none;
+    padding: 20px;
 }
 
 
 .board-btn-area{
     text-align: right;
+    padding-top: 30px;
+    
 }
 
 .board-btn-area button{
@@ -98,7 +140,7 @@
 
     font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: #FEC85C;
     color : white;
 
     cursor: pointer;
@@ -106,6 +148,6 @@
 
 .board-btn-area button:hover{
     background-color: white;
-    color : #455ba8;
-    border: 2px solid #455ba8;
+    color : #FEC85C;
+    border: 2px solid #FEC85C;
 }

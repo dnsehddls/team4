@@ -93,6 +93,7 @@ public class BoardDAO {
 					boardDetail.setUpdateDate(rs.getString(7));
 				}
 				boardDetail.setBoardType(rs.getString(8));
+				boardDetail.setMemberNo(rs.getInt(9));
 			}
 
 		} finally {
@@ -525,7 +526,6 @@ public class BoardDAO {
 	}
 
 	
-	
 	public BoardDetail selectBoardDetail(Connection conn, int boardNo) throws Exception {
 		
 		BoardDetail detail = null;
@@ -708,6 +708,12 @@ public class BoardDAO {
 		return result;
 	}
 	
+	
+	
+	
+
+
+	
 	public int deleteBoardImage(Connection conn, String deleteList, int boardNo) throws Exception{
 
 		int result = 0;
@@ -750,7 +756,24 @@ public class BoardDAO {
 		return result;
 	}
 
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception {
+		
+		int result = 0;
 
+		try {
+			
+		 String sql = prop.getProperty("increaseReadCount");	
+			
+		 pstmt = conn.prepareStatement(sql);
+		 
+		 pstmt.setInt(1, boardNo);
+		 
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 
 
