@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:set var="MemberNickName" value="${nn.memberNickname}" />
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +17,9 @@
     
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <section class="entire">
         <jsp:include page="/WEB-INF/views/message/sideMenu.jsp"></jsp:include>
-
         <section class="right-side">
     
             <h1 class="name">쪽지 보내기</h1>
@@ -28,18 +31,18 @@
                     <fieldset>
                             <span>받는사람</span>
                             <input type="search" name="memberNickname" id="receiver"  autocomplete="off" placeholder="닉네임을 입력하세요">
-                            <button type="button" id="search-btn" class="fa-solid fa-magnifying-glass" onclick="btnClick()"></button>
+                            <button type="button" id="search-btn" class="fa-solid fa-magnifying-glass" onclick="return btnClick();"></button>
                         </fieldset>
                     <!-- </form> -->
                 </div>
             </form>
             
 
-            <form action="sendData" name="data-form" method="POST" >
+            <form action="sendData" id="sendForm" name="data-form" method="POST" >
                 <input type="hidden" name="receiveNo">
                 <input type="hidden" name="msDate">
                 <div id="middle">
-                    <textarea name="inputMessage" id="inputMessage" cols="70" rows="10"></textarea>
+                    <textarea name="inputMessage" id="inputMessage" cols="70" rows="10">${memberNickName}</textarea>
                 </div>
                 
                 <div id="bottom">
@@ -56,11 +59,10 @@
     <script>
         const contextPath = "${contextPath}";
     </script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+    
     <script src="${contextPath}/resources/js/message/sendMessage.js"></script>
     <script src="https://kit.fontawesome.com/9de911222f.js" crossorigin="anonymous"></script>
-
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>
