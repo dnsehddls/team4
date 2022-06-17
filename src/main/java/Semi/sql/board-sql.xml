@@ -9,7 +9,8 @@ SELECT * FROM
     SELECT ROWNUM RNUM, D.* FROM (
         SELECT BOARD_NO,BOARD_TITLE,
               (SELECT COUNT(*) FROM REPLY B
-               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+               WHERE B.BOARD_NO = A.BOARD_NO
+               AND REPLY_FL = 'N') AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
                MEMBER_NICK,BOARD_CD
@@ -17,6 +18,7 @@ SELECT * FROM
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
         WHERE BOARD_CD = 1
+        AND BOARD_FL = 'N'
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -29,7 +31,8 @@ SELECT * FROM
     SELECT ROWNUM RNUM, D.* FROM (
         SELECT BOARD_NO,BOARD_TITLE,
               (SELECT COUNT(*) FROM REPLY B
-               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+               WHERE B.BOARD_NO = A.BOARD_NO
+               AND REPLY_FL = 'N') AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
                MEMBER_NICK,BOARD_CD
@@ -39,6 +42,7 @@ SELECT * FROM
         WHERE  (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) >= 5
         AND BOARD_CD IN (2,3,4)
+        AND BOARD_FL = 'N'
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -51,13 +55,15 @@ SELECT * FROM
     SELECT ROWNUM RNUM, D.* FROM (
         SELECT BOARD_NO,BOARD_TITLE,
               (SELECT COUNT(*) FROM REPLY B
-               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+               WHERE B.BOARD_NO = A.BOARD_NO
+               AND REPLY_FL = 'N') AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
                MEMBER_NICK,BOARD_CD
                ,TO_CHAR(CREATE_DT,'YYYY-MM-DD') AS CREATE_DT
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
+        WHERE BOARD_FL = 'N'
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -70,7 +76,8 @@ SELECT * FROM
     SELECT ROWNUM RNUM, D.* FROM (
         SELECT BOARD_NO,BOARD_TITLE,
               (SELECT COUNT(*) FROM REPLY B
-               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+               WHERE B.BOARD_NO = A.BOARD_NO
+               AND REPLY_FL = 'N') AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
                MEMBER_NICK,BOARD_CD
@@ -78,6 +85,7 @@ SELECT * FROM
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
         WHERE BOARD_CD = 2
+        AND BOARD_FL = 'N'
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -90,7 +98,8 @@ SELECT * FROM
     SELECT ROWNUM RNUM, D.* FROM (
         SELECT BOARD_NO,BOARD_TITLE,
               (SELECT COUNT(*) FROM REPLY B
-               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+               WHERE B.BOARD_NO = A.BOARD_NO
+               AND REPLY_FL = 'N') AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
                MEMBER_NICK,BOARD_CD
@@ -98,6 +107,7 @@ SELECT * FROM
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
         WHERE BOARD_CD = 3
+        AND BOARD_FL = 'N'
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -110,7 +120,8 @@ SELECT * FROM
     SELECT ROWNUM RNUM, D.* FROM (
         SELECT BOARD_NO,BOARD_TITLE,
               (SELECT COUNT(*) FROM REPLY B
-               WHERE B.BOARD_NO = A.BOARD_NO) AS R_C,
+               WHERE B.BOARD_NO = A.BOARD_NO
+               AND REPLY_FL = 'N') AS R_C,
               (SELECT COUNT(*) FROM LIKE_BOARD C
                WHERE C.BOARD_NO = A.BOARD_NO) AS L_C,
                MEMBER_NICK,BOARD_CD
@@ -118,6 +129,7 @@ SELECT * FROM
         FROM BOARD A
         JOIN MEMBER USING(MEMBER_NO)
         WHERE BOARD_CD = 4
+        AND BOARD_FL = 'N'
         ORDER BY CREATE_DT DESC
     )D
 )
@@ -177,6 +189,7 @@ AND MEMBER_NO = ?
 <entry key="bookmarkCount">
 SELECT COUNT(*) FROM BOOKMARK
 WHERE MEMBER_NO = ?
+AND BOARD_FL = 'N'
 </entry>
 
 
@@ -190,6 +203,7 @@ SELECT * FROM(
         JOIN BOARD B USING(BOARD_NO)
         JOIN MEMBER C ON B.MEMBER_NO = C.MEMBER_NO
         WHERE A.MEMBER_NO = ?
+        AND BOARD_FL = 'N'
     ) A
 )
 WHERE RNUM BETWEEN ? AND ?
@@ -199,6 +213,7 @@ WHERE RNUM BETWEEN ? AND ?
 <entry key="likeCount">
 SELECT COUNT(*) FROM LIKE_BOARD
 WHERE MEMBER_NO = ?
+AND BOARD_FL = 'N'	
 </entry>
 
 
@@ -212,6 +227,7 @@ SELECT * FROM(
         JOIN BOARD B USING(BOARD_NO)
         JOIN MEMBER C ON B.MEMBER_NO = C.MEMBER_NO
         WHERE A.MEMBER_NO = ?
+        AND BOARD_FL = 'N'
     ) A
 )
 WHERE RNUM BETWEEN ? AND ?

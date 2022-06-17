@@ -133,10 +133,6 @@
             </form>
 
         </section>
-    <div class="modal">
-        <span id="modal-close">&times;</span>
-        <img id="modal-image" src="${contextPath}/resources/images/user.png">
-    </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
         <script src="${contextPath}/resources/js/board/board.js"></script>
