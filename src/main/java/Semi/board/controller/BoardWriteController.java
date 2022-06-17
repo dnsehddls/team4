@@ -57,48 +57,12 @@ public class BoardWriteController extends HttpServlet{
 
 		try {
 			
-			int maxSize = 1024 * 1024 * 100; 
 			
-			HttpSession session = req.getSession(); 
-			String root = session.getServletContext().getRealPath("/"); 
-			String folderPath = "/resources/images/board/"; 
-			String filePath = root + folderPath;
+			String boardTitle = req.getParameter("boardTitle");
+			String boardContent = req.getParameter("boardContent");
+			int boardCode = Integer.parseInt( req.getParameter("type") );
 			
-			String encoding = "UTF-8";
-			MultipartRequest mpReq = new MultipartRequest(req, filePath, maxSize, encoding, new MyRenamePolicy());                
-			
-		
-			Enumeration<String> files = mpReq.getFileNames(); 
-			
-			
-
-			List<BoardImage> imageList = new ArrayList<BoardImage>();
-			
-			
-			while(files.hasMoreElements()) { 
-				String name = files.nextElement(); 
-				
-				String rename = mpReq.getFilesystemName(name);   
-				String original = mpReq.getOriginalFileName(name); 
-				
-
-				
-				if(rename != null) { 
-					BoardImage image = new BoardImage();
-					
-					image.setImageOriginal(original); 
-					image.setImageReName(folderPath + rename); 
-					image.setImageLevel( Integer.parseInt(name) ); 
-				
-					imageList.add(image); 
-				
-				} 
-				
-			} 
-			
-			String boardTitle = mpReq.getParameter("boardTitle");
-			String boardContent = mpReq.getParameter("boardContent");
-			int boardCode = Integer.parseInt( mpReq.getParameter("type") );
+			HttpSession session = req.getSession();
 			
 			
 			Member loginMember = (Member)session.getAttribute("loginMember"); 
@@ -110,11 +74,11 @@ public class BoardWriteController extends HttpServlet{
 			detail.setMemberNo(memberNo);
 			
 			BoardService service = new BoardService();
-			String mode = mpReq.getParameter("mode") ; 
+			String mode = req.getParameter("mode") ; 
 			
 			if(mode.equals("insert")) { 
 				
-				int boardNo = service.insertBoard(detail, imageList, boardCode);
+				int boardNo = service.insertBoard(detail, boardCode);
 				
 				
 				String path = null;
@@ -135,26 +99,26 @@ public class BoardWriteController extends HttpServlet{
 			
 			if(mode.equals("update")) { 
 
-				int boardNo = Integer.parseInt( mpReq.getParameter("no") );
+				int boardNo = Integer.parseInt( req.getParameter("no") );
 				
-				int cp = Integer.parseInt( mpReq.getParameter("cp") );
+				int cp = Integer.parseInt( req.getParameter("cp") );
 				
-				String deleteList = mpReq.getParameter("deleteList"); 
+				String deleteList = req.getParameter("deleteList"); 
 				
 				detail.setBoardNo(boardNo);
 
-				int result = service.updateBoard(detail, imageList, deleteList);
+				int result = service.updateBoard(detail, deleteList);
 				
 				String path = null;
 				String message = null;
 				
 				if(result > 0) { 
 					path = "detail?no=" + boardNo + "&type=" + boardCode + "&cp=" + cp;
-					message = "�Խñ��� �����Ǿ����ϴ�.";
+					message = "수정이 완료되었습니다.";
 					
 				}else { 
 					path = req.getHeader("referer");
-					message = "�Խñ� ���� ����";
+					message = "수정실패";
 				}
 				
 				session.setAttribute("message", message);

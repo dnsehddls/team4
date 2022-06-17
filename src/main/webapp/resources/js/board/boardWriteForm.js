@@ -88,8 +88,7 @@ function writeValidate(){
 
     // * Set -> Array로 변경 -> deleteList.value에 대입
 
-    // Array.from(유사배열 | 컬렉션) : 유사배열 | 컬렉션을 배열로 변환해서 반환
-    deleteList.value = Array.from(deleteSet);
+    // Array.from(유사배열 | 컬렉션) : 유사배열 | 컬렉션을 배열로 변환해서 반
 
 
     return true;
