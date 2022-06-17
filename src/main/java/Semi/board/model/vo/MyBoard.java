@@ -21,4 +21,5 @@ public class MyBoard {
 	private String memberName;
 	private String memberNickname;
 	private int rNum;
+	private int boardType;
 }

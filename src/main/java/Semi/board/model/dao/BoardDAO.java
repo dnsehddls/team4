@@ -525,6 +525,7 @@ public class BoardDAO {
 		return likeList;
 	}
 
+	
 	public BoardDetail selectBoardDetail(Connection conn, int boardNo) throws Exception {
 		
 		BoardDetail detail = null;
@@ -706,6 +707,12 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	
+	
+	
+
+
 	
 	public int deleteBoardImage(Connection conn, String deleteList, int boardNo) throws Exception{
 

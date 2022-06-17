@@ -184,7 +184,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <div>
-                            	<a href="#">로그아웃</a>
+                                <a href="/team4/member/logout" id="logout-btn">로그아웃</a>
                             </div>
                         </div>
                     </c:if>
@@ -218,8 +218,7 @@
         </section>
         <div id="space"></div>
     </main>
+</body>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="${contextPath}/resources/js/main.js"></script>
-</body>
-</html>

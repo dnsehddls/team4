@@ -2,22 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="boardName" value="${map.boardName}" />
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 등록</title>
-
     <link rel="stylesheet" href="${contextPath}/resources/css/board/boardWriteForm-style.css">
 
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
-
-    <script src="https://kit.fontawesome.com/296924b572.js" crossorigin="anonymous"></script>
-</head>
-<body>
 
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -40,11 +26,13 @@
                     <button type="button" id="SearchMapBtn"  onclick = goPopup()>주소검색</button>
                 </h3>
     
+
+
                 <!-- 내용 -->
                 <div class="board-content">
                     <textarea name="boardContent" placeholder="글 내용"></textarea>
                 </div>
-    
+
                 <h3 class="board-title">
                     <input type="file" id="img1" name="1" accept="image/*">
                     <span class="delete-image">&times;</span>
@@ -83,6 +71,7 @@
          
 
     </main>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
     <script>
         function goPopup(){
@@ -100,9 +89,8 @@
             document.querySelectorAll("#address")
             document.form.roadFullAddr.value = roadFullAddr;
             
-        }
+        }                                   
     </script>
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
     <script src="${contextPath}/resources/js/board/board.js"></script>
     

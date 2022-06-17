@@ -20,7 +20,11 @@ function goPopup(){
 
 function jusoCallBack(roadFullAddr){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+<<<<<<< HEAD
 		document.querySelectorAll("#address")
+=======
+		document.getElementById("")
+>>>>>>> origin/BSH
 		document.form.roadFullAddr.value = roadFullAddr;
 		
 }
@@ -31,13 +35,13 @@ function jusoCallBack(roadFullAddr){
 <body>
 <form name="form" id="form" method="post">
 
-	<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
+<!-- 	<input type="button" onClick="goPopup();" value="팝업_domainChk"/>
 	<div id="list"></div>
 	<div id="callBackDiv">
 		<table>
 			<tr><td>도로명주소 전체(포멧)</td><td><input type="text"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" /></td></tr>
 		</table>
-	</div>
+	</div> -->
 
 </form>
 </body>

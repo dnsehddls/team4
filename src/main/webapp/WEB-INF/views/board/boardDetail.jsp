@@ -33,7 +33,7 @@
                     </div>
                     <div class="board-info">
                         <span>${boardDetail.readCount}</span>
-                        <span>${boardDetail.goodCount}</span> <!-- 이거아직안함 -->
+                       <%--  <span>${boardDetail.likeCount}</span> --%> <!-- 이거아직안함 -->
                     </div>
                 </div>
 

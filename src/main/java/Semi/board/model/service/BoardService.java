@@ -11,6 +11,8 @@ import Semi.board.model.dao.BoardDAO;
 import Semi.board.model.vo.Board;
 import Semi.board.model.vo.BoardDetail;
 import Semi.board.model.vo.BoardImage;
+import Semi.common.Util;
+
 import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
@@ -28,18 +30,17 @@ public class BoardService {
 		return showList ;
 	}
 
-
 	public Board boardDetail(int boardNo) throws Exception{
 		Connection conn = getConnection();
 		Board result = dao.boardDetail(conn,boardNo);
 		close(conn);
 		return result;
 }
+	
 	public Map<String, Object> selectBoardList(int type, int cp) throws Exception{
 
 		Connection conn = getConnection();
-		
-		
+
 
 		String boardName = dao.selectBoardName(conn, type);
 
@@ -64,8 +65,6 @@ public class BoardService {
 
 			Connection conn = getConnection();
 
-			// ���� ��� ��ȸ Service, DAO, SQL�� �����ϸ鼭 ����
-			// 1. �Խ��� �̸� ��ȸ DAO ȣ��
 			String boardName = dao.selectBoardName(conn, type);
 
 			// 2. SQL �������� �߰��� ���� ����(key, query ���)
@@ -78,6 +77,7 @@ public class BoardService {
 						case "w"  : condition = " AND MEMBER_NICK LIKE '%"+query+"%' "; break;
 						}
 
+
 			// 3-1. Ư�� �Խ��ǿ��� ������ �����ϴ� �Խñ� �� ��ȸ
 			int listCount = dao.searchListCount(conn, type, condition);
 
@@ -89,6 +89,7 @@ public class BoardService {
 			List<Board> boardList = dao.searchBoardList(conn, pagination, type, condition);
 
 			// 5. ��� ���� �ϳ��� Map�� ��Ƽ� ��ȯ
+
 			Map<String, Object> map = new HashMap<>();
 
 			map.put("boardName", boardName);
@@ -157,19 +158,15 @@ public class BoardService {
 		return map;
 	}
 
-	/**
-	 * 좋아요 목록 조회
-	 * @param cp
-	 * @param loginMember
-	 * @return map
-	 * @throws Exception
-	 */
+
+	
 	public Map<String, Object> likeList(int cp, Member loginMember) throws Exception{
 		Connection conn = getConnection();
 
 		int listCount = dao.likeCount(conn, loginMember);
 
 		Pagination pagination = new Pagination(cp, listCount);
+
 		
 		List<MyBoard> likeList = dao.likeList(conn, pagination, loginMember);
 
@@ -180,8 +177,54 @@ public class BoardService {
 
 		close(conn);
 		
+		
 		return map;
 	}
+	
+	
+	public int insertBoard(BoardDetail detail, List<BoardImage> imageList, int boardCode) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int boardNo = dao.nextBoardNo(conn);
+		
+		detail.setBoardNo(boardNo);
+		
+		detail.setBoardTitle(  Util.XSSHandling( detail.getBoardTitle()   )  );
+		detail.setBoardContent(  Util.XSSHandling( detail.getBoardContent()   )  );
+		
+		detail.setBoardContent(  Util.newLineHandling( detail.getBoardContent()   )  );
+		
+		int result = dao.insertBoard(conn, detail, boardCode);
+		
+		
+		if(result > 0) {
+			
+			for(BoardImage image : imageList) {
+				image.setBoardNo(boardNo); 
+				
+				result = dao.insertBoardImage(conn, image);
+				
+				if(result == 0) { 
+					break;
+				}
+			}
+			
+		}
+		
+		if(result > 0) {
+			commit(conn);
+	
+		}else { 
+			rollback(conn);
+			boardNo = 0; 
+		}
+		
+		close(conn);
+		
+		return boardNo;
+	}
+	
 	
 	public BoardDetail selectBoardDetail(int boardNo) throws Exception{
 		
@@ -208,53 +251,8 @@ public class BoardService {
 	}
 	
 	
-	public int insertBoard(BoardDetail detail, List<BoardImage> imageList, int boardCode) throws Exception{
-		
-		Connection conn = getConnection();
-		
-		int boardNo = dao.nextBoardNo(conn);
-		
-
-		detail.setBoardNo(boardNo); 
-		
-
-		detail.setBoardTitle(  Util.XSSHandling( detail.getBoardTitle()   )  );
-		detail.setBoardContent(  Util.XSSHandling( detail.getBoardContent()   )  );
-		
-
-		detail.setBoardContent(  Util.newLineHandling( detail.getBoardContent()   )  );
-		
-		int result = dao.insertBoard(conn, detail, boardCode);
-		
-		
-		if(result > 0) {
-			
-			for(BoardImage image : imageList) { 
-				image.setBoardNo(boardNo); 
-				
-				result = dao.insertBoardImage(conn, image);
-				
-				if(result == 0) {
-					break;
-				}
-			} 
-			
-		}
-		if(result > 0) {
-			commit(conn);
 	
-		}else { 
-			rollback(conn);
-			boardNo = 0; 
-		}
-		
-		close(conn);
-		
-		return boardNo;
-	}
-	
-	
-public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String deleteList) throws Exception {
+	public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String deleteList) throws Exception {
 		
 		Connection conn = getConnection();
 		
@@ -309,5 +307,6 @@ public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String de
 		close(conn);
 		return result;
 	}
+
 
 }

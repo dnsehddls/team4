@@ -21,7 +21,6 @@ import Semi.common.MyRenamePolicy;
 import Semi.member.model.vo.Member;
 
 
-
 @WebServlet("/board/write")
 public class BoardWriteController extends HttpServlet{
 
