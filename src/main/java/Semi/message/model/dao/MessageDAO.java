@@ -211,7 +211,7 @@ public class MessageDAO {
 //				m.setSendDelete(rs.getString("SEND_DEL_ST").charAt(0));
 //				m.setReceiveDelete(rs.getString("RECEIVE_DEL_ST").charAt(0));
 				
-				mContent.setMessageDate(rs.getString("MS_DT"));
+				mContent.setMessageDate(rs.getString("MESSAGE_DT"));
 				mContent.setMessageContent(rs.getString("MS_CONTENT"));
 				mContent.setReceiveDate(rs.getString("RECEIVE_DATE"));
 				mContent.setMemberNickname(rs.getString("MEMBER_NICK"));

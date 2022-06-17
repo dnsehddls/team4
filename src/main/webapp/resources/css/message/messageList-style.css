@@ -1,0 +1,170 @@
+ /* 오른쪽 메뉴 */
+ 
+ .entire{
+
+        width: 1100px;
+        height: 700px;
+         display: flex;
+     }
+     
+     .name{
+
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 30px;
+        font-weight: bold;
+        border-bottom: 1px solid #ddd;
+     }
+    
+     .right-side{
+        width: 75%;
+        display: inline-block;
+        margin-left: 30px
+    }
+    
+    .list-table *{
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .list-table {
+        border: 1px solid #ddd;
+        margin-right: 20px;
+    }
+
+     
+     .top-buttons>button{
+
+        width: 75px;
+        height: 30px;
+        border: 1px solid #FEC85C;
+        background-color: white;
+        color: black;
+        border-radius: 10px;
+    }
+
+    .top-buttons>button:hover{
+        cursor: pointer;
+        color: white;
+        background-color: #FEC85C;
+    }
+    
+    #td1{
+        width: 10px;
+    }
+
+    td>input{
+        width: 30px;
+        text-align: center;
+        height: auto;
+    }
+    
+    
+    
+    .list-wrapper{
+        margin-top: 20px;
+        /* min-height: 350px; */
+    }
+    
+    .r{
+        font-size: 20px;
+    }
+    
+    #td2{
+        width: 20%;
+        text-align: center;
+    }
+    
+    .tda{
+        border: none;
+    }
+    
+    .r:nth-child(3){
+        width: 68%;
+    }
+    
+    
+        /* width: 58%;
+    } */
+
+   
+    
+    .s:nth-child(4){
+        width: 11%;
+    }
+    .s:nth-child(5){
+        width: 11%;
+    }
+    
+    .s{
+        font-size: 20px;
+     }
+     
+     td:nth-child(4){
+        font-size: 12%;
+        text-align: center;
+     }
+
+     td:nth-child(5){
+
+        font-size: 12%;
+        text-align: center;
+        border-left: 1px solid #ddd;
+     }
+     
+     td>a{
+        display: flex;
+        justify-content: center;
+        margin: 10px 10px;
+    }
+    
+    #pArea{
+        height: 10px;
+    }
+    
+    .list-table{
+        border: none;
+        text-decoration: none;
+        margin-top: 20px;
+       
+    }
+    
+    #emptyM2{
+        border: none;
+        margin-left: 100px;
+    }
+
+    .pagination-area{
+        flex-direction: column;
+        margin: 150px 150px;
+
+    }
+
+    /* 페이지네이션(Pagination) */
+.pagination{
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+}
+
+.pagination > li{
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a{
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* letter-spacing : -2px; */
+}
+
+/* 현재 페이지 번호 */
+.pagination .current{
+    background-color: #455ba8;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+}
