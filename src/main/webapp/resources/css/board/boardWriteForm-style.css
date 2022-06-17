@@ -1,4 +1,15 @@
-/* 게시글 작성 전체 영역 */
+.board-detail{
+    width: 1000px;
+    min-height: 700px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.title-box{
+    background-color: #eaeaea;
+    border-top: 3px solid #CCC;
+}
+
 .board-write{
     width: 1000px;
     min-height: 700px;
@@ -7,37 +18,60 @@
     padding: 20px;
 }
 
-/* 게시글 제목 */
 .board-title{
     margin : 0;
     padding: 20px 0;
     border-bottom : 3px solid #ccc;
+    padding-left: 20px;
 }
 
-/* 게시글 제목 input */
 .board-title > input{
     width: 100%;
-    font-size: 24px;
+    font-size: 18px;
     padding : 5px 0;
     border: 0;
     outline: 0;
 }
 
-/* 게시글 제목 input에 포커스가 맞춰 졌을 때 */
-/* :focus-within  : 자식 input요소에 포커스가 맞춰 졌을 때 */
 .board-title:focus-within{
-    border-bottom-color : #455ba8;
+    border-bottom-color : rgba(32, 30, 30, 0.747);
 }
 
+#searchMap {
+    display: flex;
+    align-items: center;
+}
 
-/* 이미지 영역 */
+#SearchMapBtn {
+    width: 100px;
+    height: 50px;
+
+    font-weight: bold;
+    border: 0;
+    background-color: #FEC85C;
+    color : white;
+
+    cursor: pointer;
+}
+
+#SearchMapBtn:hover {
+
+    background-color: white;
+    color : #FEC85C;
+    border: 2px solid #FEC85C;
+    
+}
+
+textarea:hover:focus-within{
+    border: rgba(204, 204, 204, 0.26);
+}
+
 .img-box{
     display: flex;
     justify-content: space-between;
 }
 
 
-/* 이미지를 감싸는 div */
 .boardImg{
     width: 230px;
     height: 230px;
@@ -47,7 +81,6 @@
     position : relative;
 }
 
-/* 미리보기 영역 */
 .boardImg > label{
     width: 100%;
     height: 100%;
@@ -60,17 +93,13 @@
     cursor: pointer;
 }
 
-/* file타입 input */
 .inputImage{ display: none; }
 
-/* 미리보기 이미지 */
 .preview{
     max-width: 100%;
     max-height: 100%;
-    /* 지정된 칸 내부에 비율을 변경하지 않고 이미지 배치 */
 }
 
-/* 이미지 미리보기 삭제 */
 .delete-image{
     position: absolute;
     top: 0;
@@ -80,18 +109,13 @@
 }
 
 
-/* 썸네일만 영역 크기 증가 */
 .thumbnail{
     width: 300px;   
     height: 300px;
 }
 
-/* 내용 */
-.board-content{
-    padding: 30px 0;
-    margin: 30px 0;
-    border-top : 3px solid #ccc;
-    border-bottom : 3px solid #ccc;
+.board-content {
+    border-bottom: #CCC 2px solid;
 }
 
 .board-content > textarea{
@@ -99,22 +123,24 @@
     height: 400px;
     resize: none;
     font-size: 18px;
+    border: none;
+    padding: 20px;
 }
 
 
-/* 버튼 영역 */
 .board-btn-area{
     text-align: right;
+    padding-top: 30px;
+    
 }
 
-/* 버튼 */
 .board-btn-area button{
     width: 80px;
     height: 30px;
 
     font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: #FEC85C;
     color : white;
 
     cursor: pointer;
@@ -122,6 +148,6 @@
 
 .board-btn-area button:hover{
     background-color: white;
-    color : #455ba8;
-    border: 2px solid #455ba8;
+    color : #FEC85C;
+    border: 2px solid #FEC85C;
 }

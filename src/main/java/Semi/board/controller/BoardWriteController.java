@@ -18,9 +18,10 @@ import Semi.board.model.service.BoardService;
 import Semi.board.model.vo.BoardDetail;
 import Semi.board.model.vo.BoardImage;
 import Semi.common.MyRenamePolicy;
+import Semi.member.model.vo.Member;
 
 
-// ��Ʈ�ѷ� : ��û�� ���� �˸��� Service�� ȣ���ϰ� ����� ���� ������ ����
+
 @WebServlet("/board/write")
 public class BoardWriteController extends HttpServlet{
 
@@ -34,11 +35,11 @@ public class BoardWriteController extends HttpServlet{
 				
 				int boardNo =  Integer.parseInt( req.getParameter("no") );
 				
-				BoardDetail detail = new BoardService().boardDetail(boardNo);
+				BoardDetail detail = new BoardService().selectBoardDetail(boardNo);
 				
 				detail.setBoardContent(  detail.getBoardContent().replaceAll("<br>", "\n") );
 				
-				req.setAttribute("detail", detail); // jsp���� ����� �� �ֵ��� req�� �� ����
+				req.setAttribute("detail", detail); 
 				
 			}
 			
@@ -61,26 +62,25 @@ public class BoardWriteController extends HttpServlet{
 			
 			HttpSession session = req.getSession(); 
 			String root = session.getServletContext().getRealPath("/"); 
-			String folderPath = "/resources/images/board/"; // ���� ���� ���� ���
+			String folderPath = "/resources/images/board/"; 
 			String filePath = root + folderPath;
 			
-			String encoding = "UTF-8"; // �Ķ���� �� ���� ���� �Ķ����(���ڿ�)�� ���ڵ� ����
-			
+			String encoding = "UTF-8";
 			MultipartRequest mpReq = new MultipartRequest(req, filePath, maxSize, encoding, new MyRenamePolicy());                
 			
 		
 			Enumeration<String> files = mpReq.getFileNames(); 
 			
 			
-			// * ���ε�� �̹����� ������ ��Ƶ� List ����
+
 			List<BoardImage> imageList = new ArrayList<BoardImage>();
 			
 			
 			while(files.hasMoreElements()) { 
 				String name = files.nextElement(); 
 				
-				String rename = mpReq.getFilesystemName(name);   // ����� ���ϸ�
-				String original = mpReq.getOriginalFileName(name); // ���� ���ϸ�
+				String rename = mpReq.getFilesystemName(name);   
+				String original = mpReq.getOriginalFileName(name); 
 				
 
 				
@@ -103,7 +103,7 @@ public class BoardWriteController extends HttpServlet{
 			
 			
 			Member loginMember = (Member)session.getAttribute("loginMember"); 
-			int memberNo = loginMember.getMemberNo(); // ȸ�� ��ȣ
+			int memberNo = loginMember.getMemberNo();
 			BoardDetail detail = new BoardDetail();
 			
 			detail.setBoardTitle(boardTitle);
@@ -120,11 +120,11 @@ public class BoardWriteController extends HttpServlet{
 				
 				String path = null;
 				if(boardNo > 0) { 
-					session.setAttribute("message", "�Խñ��� ��ϵǾ����ϴ�.");
+					session.setAttribute("message", "게시글이 작성되었습니다.");
 					path = "detail?no=" + boardNo + "&type=" + boardCode;
 					
 				}else { 
-					session.setAttribute("message", "�Խñ� ��� ����");
+					session.setAttribute("message", "게시글 등록이 취소되었습니다.");
 					path = "write?mode=" + mode + "&type=" + boardCode;
 				}
 				

@@ -9,9 +9,12 @@ import java.util.Map;
 
 import Semi.board.model.dao.BoardDAO;
 import Semi.board.model.vo.Board;
+import Semi.board.model.vo.BoardDetail;
+import Semi.board.model.vo.BoardImage;
 import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
+import Semi.common.Util;
 import Semi.member.model.vo.Member;
 
 public class BoardService {
@@ -178,6 +181,133 @@ public class BoardService {
 		close(conn);
 		
 		return map;
+	}
+	
+	public BoardDetail selectBoardDetail(int boardNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		// 1) 게시글(BOARD 테이블) 관련 내용만 조회
+		BoardDetail detail = dao.selectBoardDetail(conn, boardNo);
+		
+		
+		if(detail != null) { // 게시글 상세 조회 결과가 있을 경우
+			
+			// 2) 게시글에 첨부된 이미지(BOARD_IMG 테이블) 조회
+			List<BoardImage> imageList = dao.selectImageList(conn, boardNo);
+			
+			// -> 조회된 imageList를 BoardDetail 객체에 세팅
+			
+			detail.setImageList(imageList);
+			
+		}
+
+		close(conn);
+		
+		return detail;
+	}
+	
+	
+	public int insertBoard(BoardDetail detail, List<BoardImage> imageList, int boardCode) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int boardNo = dao.nextBoardNo(conn);
+		
+
+		detail.setBoardNo(boardNo); 
+		
+
+		detail.setBoardTitle(  Util.XSSHandling( detail.getBoardTitle()   )  );
+		detail.setBoardContent(  Util.XSSHandling( detail.getBoardContent()   )  );
+		
+
+		detail.setBoardContent(  Util.newLineHandling( detail.getBoardContent()   )  );
+		
+		int result = dao.insertBoard(conn, detail, boardCode);
+		
+		
+		if(result > 0) {
+			
+			for(BoardImage image : imageList) { 
+				image.setBoardNo(boardNo); 
+				
+				result = dao.insertBoardImage(conn, image);
+				
+				if(result == 0) {
+					break;
+				}
+			} 
+			
+		}
+		if(result > 0) {
+			commit(conn);
+	
+		}else { 
+			rollback(conn);
+			boardNo = 0; 
+		}
+		
+		close(conn);
+		
+		return boardNo;
+	}
+	
+	
+public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String deleteList) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		detail.setBoardTitle( Util.XSSHandling( detail.getBoardTitle() ) );
+		detail.setBoardContent( Util.XSSHandling( detail.getBoardContent() ) );
+		
+		detail.setBoardContent( Util.newLineHandling( detail.getBoardContent() ) );
+		
+		int result = dao.updateBoard(conn, detail);
+		
+		if(result > 0) { 
+			
+			for( BoardImage img : imageList ) {
+				
+				img.setBoardNo(detail.getBoardNo()); 
+				result = dao.updateBoardImage(conn, img);
+	
+				if(result == 0) {
+					result = dao.insertBoardImage(conn, img);
+				}
+				
+			} 
+			
+
+			if( !deleteList.equals("") ) {
+				result = dao.deleteBoardImage(conn, deleteList, detail.getBoardNo());
+			}
+			
+		
+		}
+		
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public int deleteBoard(int boardNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.deleteBoard(conn, boardNo);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		return result;
 	}
 
 }

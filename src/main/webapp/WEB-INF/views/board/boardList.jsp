@@ -15,7 +15,6 @@
 
 
     <link rel="stylesheet" href="${contextPath}/resources/css/board/boardList-style.css">
-    <link rel="stylesheet" href="${contextPath}/resources/css/main-style.css">
 
     <script src="https://kit.fontawesome.com/296924b572.js" crossorigin="anonymous"></script>
 </head>

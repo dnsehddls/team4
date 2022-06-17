@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +24,7 @@
                 </div>
                 <div class="board-header">
                     <div class="board-writer">
-                        <img src="${contextPath}/resources/images/profile.png">
+                        <img src="${contextPath}/resources/images/idIcon.png">
 
                         <span>${boardDetail.memberNickname}</span>
                     </div>
@@ -37,9 +38,6 @@
                 </div>
 
                 <div class="board-content">
-                  
-                    <img src="${contextPath}/resources/images/sample.jpg"><br>
-
 					${boardDetail.boardContent}
                 </div>
     
@@ -54,8 +52,20 @@
                     </p>
                 </div>
                 <div class="board-btn-area">
-                    <button id="updateBtn" onsubmit="retrun ">수정</button>
-                    <button id="deleteBtn">삭제</button>
+
+                    <c:if test="${loginMember.memberNo == boardDetail.memberNo}">
+                        
+                        <c:if test="${empty param.cp}">
+                            <c:set var="cp" value="1" />
+                        </c:if>
+                        <c:if test="${!empty param.cp}">
+                            <c:set var="cp" value="${param.cp}" />
+                        </c:if>
+
+
+                        <button id="updateBtn" onclick="location.href='write?mode=update&type=${param.type}&cp=${cp}&no=${detail.boardNo}'">수정</button>                       
+                        <button id="deleteBtn">삭제</button>
+                    </c:if>
                     <button id="goToListBtn">목록</button>
                 </div>
 	
@@ -89,7 +99,7 @@
         const contextPath = "${contextPath}";
 		const boardNo = "${boardDetail.boardNo}";
 		const loginMember = "${sessionScope.loginMember.memberNo}"
-        </script>
+    </script>
     <script src="${contextPath}/resources/js/board/board.js"></script>
 	<script src="${contextPath}/resources/js/board/reply.js"></script>
 </body>
