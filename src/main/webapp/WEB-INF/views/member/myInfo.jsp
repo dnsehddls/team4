@@ -26,7 +26,7 @@
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
                     <li><a href="secession">회원 탈퇴</a></li>
-                    <li><a href="#">쪽지</a></li>
+                    <li><a href="${contextPath}/sendView">쪽지</a></li>
                 </ul>
             </section>
         
@@ -48,20 +48,6 @@
                             <th>이름</th>
                             <td>${loginMember.memberName}</td>
                         </tr>
-        
-                        <!-- <tr>
-                            <th>새 비밀번호</th>
-                            <td>
-                                <input type="password" name="newPw" value="${loginMember.memberPW}" id="newPw" placeholder="비밀번호를 입력해 주세요." autocomplete="off">
-                            </td>
-                        </tr>
-        
-                        <tr>
-                            <th>새 비밀번호 확인</th>
-                            <td>
-                                <input type="password" name="newPw2" value="${loginMember.memberPW}" id="newPw2" placeholder="비밀번호를 한번 더 입력해 주세요" autocomplete="off">
-                            </td>
-                        </tr> -->
         
                         <tr>
                             <th>닉네임</th>

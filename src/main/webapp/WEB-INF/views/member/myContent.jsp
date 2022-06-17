@@ -30,7 +30,7 @@
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
                     <li><a href="secession">회원 탈퇴</a></li>
-                    <li><a href="#">쪽지</a></li>
+                    <li><a href="${contextPath}/sendView">쪽지</a></li>
                 </ul>
             </section>
         
@@ -73,7 +73,7 @@
                                     <c:forEach var="content" items="${contentList}">
                                         <tr>
                                             <td>${content.boardNo}</td>
-                                            <td><a href="#">${content.boardName}</a></td>
+                                            <td><a href="${contextPath}/board/detail?no=${content.boardNo}&cp=${pagination.currentPage}&type=${param.type}${sURL}">${content.boardTitle}</a></td>
                                             <td>${content.boardTitle}</td>
                                             <td>${content.createDate}</td>
                                         </tr>
