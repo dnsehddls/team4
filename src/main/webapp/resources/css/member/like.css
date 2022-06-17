@@ -27,7 +27,7 @@ main{
 
 .tb{
     width: 815px;
-    height: 440px;
+    min-height: 100px;
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
@@ -72,23 +72,6 @@ thead th{
 }
 
 
-.btn-area{
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-
-#deleteBtn{
-    width: 60px;
-    height: 25px;
-    border: none;
-    border-radius: 4px;
-    margin-right: 45px;
-    cursor: pointer;
-}
-
 /* 왼쪽 사이드 메뉴 */
 .left-side{
     width: 200px;
@@ -126,7 +109,7 @@ thead th{
 }
 
 /* 페이지네이션 */
-.pagination{
+.page{
     padding: 0;
     list-style: none;
 
@@ -134,19 +117,19 @@ thead th{
     justify-content: center;
 }
 
-.pagination > li{
+.page > li{
     width: 20px;
     margin: 0 5px;
     text-align: center;
 }
 
-.pagination a{
+.page a{
     width: 100%;
     height: 100%;
     display: block;
 }
 
-.pagination .current{
+.page .current{
     background-color: rgb(254, 200, 92);
     border-radius: 50%;
     /* color: white; */

@@ -9,6 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Member {
 	
@@ -23,7 +24,7 @@ public class Member {
 	private int point;
 	private String grade;
 	private String registDate;
-	private char secessionFlag;
+	private String secessionFlag;
 	private String profileImage;
 	private int gradeCode;
 	private String regDate;

@@ -63,7 +63,7 @@ nav{
 }
 nav *{font-family: '잘난체';}
 nav>div:first-child{
-    flex-basis: 720px;
+    flex-basis: 800px;
     height: 100%;
 }
 nav>div:last-child{
@@ -238,15 +238,52 @@ nav>div:last-child>button:hover{
 .hot-board>div>ul>li{
     display: flex;
     justify-content: space-between;
-    padding-left: 30px;
     margin-top: 11px;
-    margin-left: 30px;
-    margin-right: 40px;
     border-bottom: 1px dotted #ccc;
 }
 .hot-board>div>ul>li>a{
     font-family: '수성돋움체';
     font-size: 18px;
+}
+.hot-board>div>ul>li>span{
+    font-size: 12px;
+    color: #6d6d6dc8;
+    /* margin: 10px 0; */
+}
+/* .hot-board>div>ul>li>span:first-child,
+.hot-board>div>ul>li>span:nth-child(2),
+.new-board>div>ul>li>span:first-child,
+.new-board>div>ul>li>span:nth-child(2),
+.free-board>div>ul>li>span:first-child,
+.free-board>div>ul>li>span:nth-child(2),
+.exercise-board>div>ul>li>span:first-child,
+.exercise-board>div>ul>li>span:nth-child(),
+.met-board>div>ul>li>span:first-child,
+.met-board>div>ul>li>span:nth-child(2){
+    display: flex;
+    width: 20px;
+} */
+
+
+
+
+
+.new-board>div>ul>li>span{
+    font-size: 12px;
+    color: #6d6d6dc8;
+    margin: 0px 12px;
+}
+.free-board>div>ul>li>span{
+    font-size: 12px;
+    color: #6d6d6dc8;
+}
+.exercise-board>div>ul>li>span{
+    font-size: 12px;
+    color: #6d6d6dc8;
+}
+.met-board>div>ul>li>span{
+    font-size: 12px;
+    color: #6d6d6dc8;
 }
 .hot-board>div:last-child{
     display: flex;
@@ -285,10 +322,7 @@ nav>div:last-child>button:hover{
 .new-board>div>ul>li{
     display: flex;
     justify-content: space-between;
-    padding-left: 30px;
     margin-top: 11px;
-    margin-left: 30px;
-    margin-right: 40px;
     border-bottom: 1px dotted #ccc;
 }
 .new-board>div>ul>li>a{
@@ -337,10 +371,7 @@ li{
 .exercise-board>div>ul>li{
     display: flex;
     justify-content: space-between;
-    padding-left: 30px;
     margin-top: 11px;
-    margin-left: 30px;
-    margin-right: 40px;
     border-bottom: 1px dotted #ccc;
 }
 .exercise-board>div>ul>li>a{
@@ -384,10 +415,7 @@ li{
 .free-board>div>ul>li{
     display: flex;
     justify-content: space-between;
-    padding-left: 30px;
     margin-top: 11px;
-    margin-left: 30px;
-    margin-right: 40px;
     border-bottom: 1px dotted #ccc;
 }
 .free-board>div>ul>li>a{
@@ -434,8 +462,6 @@ li{
 .met-board>div:last-child>ul>li{
     display: flex;
     justify-content: space-between;
-    padding-left: 30px;
-    margin-right: 40px;
     margin-bottom: 9px;
     border-bottom: 1px dotted #ccc;
 }
@@ -473,12 +499,16 @@ li{
     width: 50%;
     height: 50%;
 }
-.login-container,
-.add-box{
+.login-container{
     height: 30%;
 }
+.add-box{
+    height: 20%;
+}
+
+
 .met-board{
-    height: 40%;
+    height: 60%;
 }
 .login-container{
     display: flex;
@@ -633,3 +663,28 @@ footer-div>span{
     margin: 12px;
 }
 
+main .met-board li{
+    width: 300px;
+}
+.hot-board>div>ul>li>span:nth-child(3),
+.new-board>div>ul>li>span:nth-child(3),
+.free-board>div>ul>li>span:nth-child(3),
+.met-board>div>ul>li>span:nth-child(3),
+.exercise-board>div>ul>li>span:nth-child(3),
+.hot-board>div>ul>li>span:nth-child(2),
+.exercise-board>div>ul>li>span:nth-child(2),
+.new-board>div>ul>li>span:nth-child(2),
+.free-board>div>ul>li>span:nth-child(2),
+.met-board>div>ul>li>span:nth-child(2){
+    display: block;
+    width: 20px;
+    text-align: center;
+}
+
+.hot-board>div>ul>li>span:nth-child(3),
+.new-board>div>ul>li>span:nth-child(3),
+.free-board>div>ul>li>span:nth-child(3),
+.met-board>div>ul>li>span:nth-child(3),
+.exercise-board>div>ul>li>span:nth-child(3){
+    color: blue;
+}

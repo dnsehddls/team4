@@ -20,9 +20,10 @@
             <ul>
                 <li><a href="${contextPath}/board/list?type=1">공지사항</a></li>
                 <li><a href="${contextPath}/board/list?type=5">인기게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=3">운동게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=4">자유게시판</a></li>
-                <li><a href="${contextPath}/board/list?type=5">정모게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=2">운동게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=3">자유게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=4">정모게시판</a></li>
+                <li><a href="${contextPath}/board/list?type=6">최근게시글</a></li>
             </ul>
         </div>
         <div>
@@ -44,6 +45,17 @@
                         </span>
                     </span>
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                <%-- <a href="#"><img src="${contextPath}/resources/images/letter-removebg-preview_negative.png" alt=""></a>
+                <c:choose>
+                    <c:when test="${loginMember.grade eq '관리자'}">
+                        <a href="${contextPath}/admin/info}"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                    </c:when>
+                    
+                    <c:otherwise>
+                        <a href="${contextPath}/member/myPage/info}"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                    </c:otherwise>
+                </c:choose> --%>
+                
             </c:if>
             <c:if test="${empty loginMember}">
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>

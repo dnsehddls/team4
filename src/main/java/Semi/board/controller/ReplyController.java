@@ -28,8 +28,10 @@ public class ReplyController extends HttpServlet{
 	    
 	    ReplyService service = new ReplyService();
 	    try {
-	    	
-	    	int boardNo = Integer.parseInt(req.getParameter("boardNo"));
+	    	int boardNo = -10;
+	    	if(req.getParameter("boardNo") != null) {
+	    		boardNo = Integer.parseInt(req.getParameter("boardNo"));
+	    	}
 	    	int result = -10;
 	    	
 	    	if(command.equals("replyList")) {
@@ -39,7 +41,8 @@ public class ReplyController extends HttpServlet{
 	    	
 	    	if(command.equals("updateReply")) {
 	    		int replyNo = Integer.parseInt(req.getParameter("replyNo"));
-	    		result = service.replyUpdate(replyNo);
+	    		String replyContent = req.getParameter("replyContent");
+	    		result = service.replyUpdate(replyNo,replyContent);
 	    	}
 	    	
 	    	if(command.equals("deleteReply")) {

@@ -23,7 +23,8 @@
                 </div>
                 <div class="board-header">
                     <div class="board-writer">
-                        <img src="#">
+                        <img src="${contextPath}/resources/images/profile.png">
+
                         <span>${boardDetail.memberNickname}</span>
                     </div>
                     <div class="board-writeDate">
@@ -36,7 +37,9 @@
                 </div>
 
                 <div class="board-content">
-                    <img src="#"><br>
+                  
+                    <img src="${contextPath}/resources/images/sample.jpg"><br>
+
 					${boardDetail.boardContent}
                 </div>
     
@@ -51,10 +54,8 @@
                     </p>
                 </div>
                 <div class="board-btn-area">
-    			<c:if test="${loginMember.memberNickname == boardDetail.memberNickname }">
-                    <button id="updateBtn">수정</button>
+                    <button id="updateBtn" onsubmit="retrun ">수정</button>
                     <button id="deleteBtn">삭제</button>
-    			</c:if>
                     <button id="goToListBtn">목록</button>
                 </div>
 	
@@ -81,13 +82,12 @@
                 </div>
         </section>
     </main>
+
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
         const contextPath = "${contextPath}";
 		const boardNo = "${boardDetail.boardNo}";
-        console.log(contextPath);
-        console.log(boardNo);
 		const loginMember = "${sessionScope.loginMember.memberNo}"
         </script>
     <script src="${contextPath}/resources/js/board/board.js"></script>
