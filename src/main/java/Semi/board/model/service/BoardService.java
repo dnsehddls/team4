@@ -182,7 +182,7 @@ public class BoardService {
 	}
 	
 	
-	public int insertBoard(BoardDetail detail, List<BoardImage> imageList, int boardCode) throws Exception{
+	public int insertBoard(BoardDetail detail, int boardCode) throws Exception{
 		
 		Connection conn = getConnection();
 		
@@ -197,20 +197,6 @@ public class BoardService {
 		
 		int result = dao.insertBoard(conn, detail, boardCode);
 		
-		
-		if(result > 0) {
-			
-			for(BoardImage image : imageList) {
-				image.setBoardNo(boardNo); 
-				
-				result = dao.insertBoardImage(conn, image);
-				
-				if(result == 0) { 
-					break;
-				}
-			}
-			
-		}
 		
 		if(result > 0) {
 			commit(conn);
@@ -233,17 +219,7 @@ public class BoardService {
 		// 1) 게시글(BOARD 테이블) 관련 내용만 조회
 		BoardDetail detail = dao.selectBoardDetail(conn, boardNo);
 		
-		
-		if(detail != null) { // 게시글 상세 조회 결과가 있을 경우
-			
-			// 2) 게시글에 첨부된 이미지(BOARD_IMG 테이블) 조회
-			List<BoardImage> imageList = dao.selectImageList(conn, boardNo);
-			
-			// -> 조회된 imageList를 BoardDetail 객체에 세팅
-			
-			detail.setImageList(imageList);
-			
-		}
+
 
 		close(conn);
 		
@@ -252,7 +228,7 @@ public class BoardService {
 	
 	
 	
-	public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String deleteList) throws Exception {
+	public int updateBoard(BoardDetail detail,  String deleteList) throws Exception {
 		
 		Connection conn = getConnection();
 		
@@ -264,22 +240,6 @@ public class BoardService {
 		int result = dao.updateBoard(conn, detail);
 		
 		if(result > 0) { 
-			
-			for( BoardImage img : imageList ) {
-				
-				img.setBoardNo(detail.getBoardNo()); 
-				result = dao.updateBoardImage(conn, img);
-	
-				if(result == 0) {
-					result = dao.insertBoardImage(conn, img);
-				}
-				
-			} 
-			
-
-			if( !deleteList.equals("") ) {
-				result = dao.deleteBoardImage(conn, deleteList, detail.getBoardNo());
-			}
 			
 		
 		}
