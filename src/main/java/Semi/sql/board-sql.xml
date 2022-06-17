@@ -185,6 +185,8 @@ WHERE BOARD_FL = 'N'
 AND MEMBER_NO = ?
 </entry>
 
+
+
 <!-- 북마크한 게시글 수 조회 -->
 <entry key="bookmarkCount">
 SELECT COUNT(*) FROM BOOKMARK
