@@ -2,10 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="pagination" value="${map.pagination}" />
-<c:set var="memberNickname" value="${map.memberNickname}" />
-<c:set var="memberNickname" value="${map.messageContent}" />
-<c:set var="memberNickname" value="${map.messageDate}" />
-<c:set var="rMessageList" value="${map.rmessageList}" />
 
 
 <!DOCTYPE html>
@@ -19,19 +15,18 @@
    <link rel="stylesheet" href="${contextPath}/resources/css/message/side-menu.css">
    <link rel="stylesheet" href="${contextPath}/resources/css/message/messageList-style.css">
    <script>
-        console.log("${mList.size()}");
         
     </script>
 </head>
 <body>
     
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <section class="entire">
+        <jsp:include page="/WEB-INF/views/message/sideMenu.jsp"></jsp:include>
     
-	<jsp:include page="/WEB-INF/views/message/sideMenu.jsp"></jsp:include>
-
         <section class="right-side">
             
-            <form action="messageList" method="POST" name="rMessageList">
+            <form action="messageList" method="GET" name="rMessageList">
             
                 <c:if test="${param.t == 'r'}">
                     <h1 class="name">받은 쪽지함</h1>
@@ -41,71 +36,11 @@
                     <h1 class="name">보낸 쪽지함</h1>
                 </c:if>
                 
-                
-                
                 <div class="list-wrapper">
                     <table class="list-table">
-                            <thead>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="data" onclick="checkAll1(this)">
-                                    </td>
-                                    <c:if test="${param.t == 'r'}">
-                                        <th id="sender" class="r">보낸 사람</th>
-                                        <th class="r">내용</th>
-                                        <th class="r">날짜</th>
-                                    </c:if>
-                                    
-                                    <c:if test="${param.t == 's'}">
-                                        <th id="sender" class="s">받은 사람</th>
-                                        <th class="s">내용</th>
-                                        <th class="s">날짜</th>
-                                        <th class="s">확인</th>
-                                    </c:if>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <input type="hidden" name="messageNo" value="${message.messageNo}">
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="data" >
-                                    </td>
-                                    <td>${message.memberNickname}</td>
-                                    <td><a href="#">${message.messageContent}</a></td>
-                                    <td>${message.messageDate}</td>
-                                    <c:if test="${param.t == 's'}">
-                                        <td>${message.receiveDate}</td>
-                                    </c:if>
-                                </tr>
-                                
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="data">
-                                    </td>
-                                    <td>성태킴</td>
-                                    <td><a href="${contextPath}/messageDetail"}>내asd용</a></td>
-                                    <td>2022년 05월 01일</td>
-                                    <c:if test="${param.t == 's'}">
-                                        <td>읽지않음</td>
-                                    </c:if>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="data">
-                                    </td>
-                                    <td>성태킴</td>
-                                    <td><a href="">내용</a></td>
-                                    <td>2022년 05월 01일</td>
-                                    <c:if test="${param.t == 's'}">
-                                        <td>2022년 06월 21일</td>
-                                    </c:if>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <table id="emptyM1">
+                        <thead>
                             <c:choose>
-                                <c:when test="${empty messagList}">
+                                <c:when test="${empty mList}">
                                     <th id="emptyM2" colspan="5">쪽지가 존재하지 않습니다.</th>
                                 </c:when>
 
@@ -122,79 +57,59 @@
                                             <button id="delete-btn">삭제</button>
                                         </div>
                                     </c:if>
+                                
                             
-                            
-                                    <thead>
-                                        <tr>
-                                            <td>
-                                                <input type="hidden" name="messageNo" value="${message.messageNo}">
-                                                <input type="checkbox" name="data" onclick="checkAll1(this)">
-                                            </td>
-                                            <c:if test="${param.t == 'r'}">
-                                                <th id="sender">보낸 사람</th>
-                                            </c:if>
+
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="data" onclick="checkAll1(this)">
                                         </td>
-                                            <c:if test="${param.t == 's'}">
-                                            <th id="sender">받은 사람</th>
-                                            </c:if>
-                                            <th>내용</th>
-                                            <th>날짜</th>
-                                            <c:if test="${param.t == 's'}">
-                                            <th>수신확인</th>
-                                            </c:if>
-                                        </tr>
-                                    </thead>
-                                    
-                                    
-                                    <tbody>
-                                        <input type="hidden" name="messageNo" value="${message.messageNo}">
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="checkbox">
-                                            </td>
-                                            <td>${member.memberNickname}</td>
-                                            <td><a href="#">${message.messageContent}</a></td>
-                                            <td>${message.messageDate}</td>
-                                            <c:if test="${param.t == 's'}">
-                                            <td>${message.receiveDate}</td>
-                                            </c:if>
-                                        </tr>
+                                        <c:if test="${param.t == 'r'}">
+                                            <th id="sender" class="r">보낸 사람</th>
+                                            <th class="r">내용</th>
+                                            <th class="r">날짜</th>
+                                        </c:if>
                                         
+                                        <c:if test="${param.t == 's'}">
+                                            <th id="sender" class="s">받은 사람</th>
+                                            <th class="s">내용</th>
+                                            <th class="s">날짜</th>
+                                            <th class="s">확인</th>
+                                        </c:if>
+                                    </tr>
+                                    <c:forEach var="m" items="${mList}">
                                         <tr>
                                             <td>
-                                                <input type="checkbox" name="data">
+                                                <input type="checkbox" class="checkbox" name="data" value="${m.memberNickname}">
                                             </td>
-                                            <td>성태킴</td>
-                                            <td><a href="${contextPath}/messageDetail"}>내용</a></td>
-                                            <td>2022년 05월 01일</td>
+                                           
+                                                <td>${m.memberNickname}</td>
+                                            
+                                        
+                                            <td><a href="${contextPath}/messageContent?messageNo=${m.messageNo}&t=${param.t}" class="tda">${m.messageContent}</a></td>
+                                            
+                                            <td>${m.messageDate}</td>
+
                                             <c:if test="${param.t == 's'}">
-                                                <td>읽지않음</td>
+                                                <td>${m.receiveDate}</td>
                                             </c:if>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="data">
-                                            </td>
-                                            <td>성태킴</td>
-                                            <td><a href="">내용</a></td>
-                                            <td>2022년 05월 01일</td>
-                                            <c:if test="${param.t == 's'}">
-                                                <td>2022년 06월 21일</td>
-                                            </c:if>
-                                        </tr>
-                                    </tbody>
+                                    </c:forEach>
                                 </c:otherwise>
                             </c:choose>
-                        </table>
-                
+                        </thead>
+                    </table>
+                        
+                </div>
             </form>
 
-
-
+            <c:if test="${param.t == 's' || param.t == 'r'}">
+                <div id="pArea"></div>
+            </c:if>
             <div class="pagination-area">
 
                 <!-- 페이지네이션 a태그에 사용될 공통 주소를 저장한 변수 선언 -->
-                <c:set var="url" value="list?type=${param.type}&cp="/>
+                <c:set var="url" value="list?c=${param.c}&cp="/>
     
     
                 <ul class="pagination">
@@ -234,8 +149,7 @@
     <script>
         const contextPath = "${contextPath}";
     </script>
-
-    <script src="${contextPath}/resources/js/message/rMessageList.js"></script>
-    			 
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+<script src="${contextPath}/resources/js/message/rMessageList.js"></script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<script>
+    // console.log("mContent : " + $(mContent.messageNo));
+    // console.log("param.t : " + $(param.t));
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,22 +17,24 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/message/messageContent-style.css">
 </head>
 <body>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
     <section class="entire">
 
         <jsp:include page="/WEB-INF/views/message/sideMenu.jsp"></jsp:include>
 
         <section class="right-side">
             <c:if test="${param.t == 's'}">
-            <div>받는 사람<span>누구누구</span></div>  
-            <div>보낸 날짜<span>2010년 01월 05일</span></div>
+            <div class="topdiv">받는 사람<span>${mContent.memberNickname}</span></div>
+            <div class="topdiv">보낸 날짜<span>${mContent.messageDate}</span></div>
             </c:if>
 
             <c:if test="${param.t == 'r'}">
-            <div>보낸 사람<span>누구누구</span></div>
-            <div>받은 날짜<span>2010년 01월 05일</span></div>
+            <div class="topdiv">보낸 사람<span>${mContent.memberNickname}</span></div>
+            <div class="topdiv">받은 날짜<span>${mContent.messageDate}</span></div>
             </c:if>
 
-            <textarea name="" id="" cols="70" rows="10"></textarea>
+            <textarea name="" id="textarae" cols="70" rows="10" readonly>${mContent.messageContent}</textarea>
 
             <section class="bottom">
                 <div class="btn-area">
@@ -38,7 +44,8 @@
         </section>
     </section>
     
-        <script src="${contextPath}/resources/js/messageContent.js"></script>
-    
+        <!-- <script src="${contextPath}/resources/js/messageContent.js"></script> -->
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
 </body>
 </html>

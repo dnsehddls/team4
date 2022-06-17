@@ -48,19 +48,16 @@ public class SendMessageController extends HttpServlet {
 			
 			if(result > 0) {
 				session.setAttribute("message", "쪽지 보내기 완료");
-				 req.setAttribute("", loginMember);
+				req.setAttribute("", loginMember);
 				
 				
 			} else {
 				session.setAttribute("message", "쪽지 보내기 실패");				
 			}
 		
-			String path = "/WEB-INF/views/message/sendMessage.jsp";
+			String path = "sendView";
 			
-			RequestDispatcher dispatcher = req.getRequestDispatcher(path);
-			
-			dispatcher.forward(req, resp);
-			
+			resp.sendRedirect(path);
 			
 		} catch(Exception e){
 			e.printStackTrace();

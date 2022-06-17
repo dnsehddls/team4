@@ -75,11 +75,72 @@ public class MessageService {
 		Connection conn = getConnection();
 		
 		List<Message> mList = dao.MessageList(conn, myNo, type);
+		
 		close(conn);
 		
 		return mList;
-
 	}
+
+
+
+	/** 쪽지 detail 조회
+	 * @param messageNo
+	 * @return m
+	 * @throws Exception
+	 */
+	public Message MessageDetail(int messageNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		Message mContent = dao.MessageDetail(conn, messageNo);
+		
+		close(conn);
+		
+		return mContent;
+	}
+	
+	
+	
+//	/** 받은 쪽지 삭제 Service
+//	 * @param boardNo
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	public int deleteMessage1(int messageNo) throws Exception{
+//		
+//		Connection conn = getConnection();
+//		
+//		int result = dao.deleteMessage1(conn, messageNo);
+//		
+//		if(result > 0)	commit(conn);
+//		else			rollback(conn);
+//		
+//		close(conn);
+//		return result;
+//	}
+//	
+//	/** 보낸 쪽지 삭제 Service
+//	 * @param boardNo
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	public int deleteMessage2(int messageNo) throws Exception{
+//		
+//		Connection conn = getConnection();
+//		
+//		int result = dao.deleteMessage2(conn, messageNo);
+//		
+//		if(result > 0)	commit(conn);
+//		else			rollback(conn);
+//		
+//		close(conn);
+//		return result;
+//	}
+//	
+	
  }
+
+
+
 
 

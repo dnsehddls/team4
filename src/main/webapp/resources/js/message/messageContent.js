@@ -58,6 +58,38 @@
 // })();
 
 
-function goToListBtn(){
-    
-}
+// 쪽지 내용 조회
+function btnClick(){
+//     const goToListBtn = document.getElementById("goToListBtn");
+
+//         goToListBtn.addEventListener("click", function(){
+
+	$.ajax({
+		url : contextPath + "/messageDetail",  // 필수 작성 속성
+		data : { "messageNo" : messageNo }, // 서버로 전달할 값(파라미터)
+		type : "GET", // 데이터 전달 방식(기본값 GET)
+	
+		success : function(res){ // 비동기 통신 성공 시(에러 발생 X)
+
+			var nn = JSON.parse(res);
+			console.log(nn.memberNickname);
+			console.log(nn.receiveNo);
+
+			// 닉네임 미입력시
+			if(receiver.value.trim().length == 0){
+				alert("닉네임을 입력해주세요.");
+				receiver.value = "";
+				receiver.focus();
+				return;
+			};
+			
+			// 없는 회원일 경우
+			if(nn.memberNickname == undefined){
+				alert("일치하는 회원이 없습니다.");
+				receiver.focus();
+				return;
+			}
+			receiveNo.value = nn.receiveNo;
+		}
+	})
+};
