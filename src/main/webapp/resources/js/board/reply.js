@@ -7,6 +7,12 @@ function selectReplyList(){
         success : function(rList){
             const replyList = document.getElementById("reply-main");
             replyList.innerHTML = "";
+            if($.isEmptyObject(rList)){
+                const b = document.createElement("h2");
+                replyList.append(b);
+                b.innerText = "현재 댓글이 존재하지 않습니다.";
+                return;
+            }
             for(let reply of rList){
                 const replyRow = document.createElement("li");
 
