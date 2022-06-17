@@ -37,7 +37,7 @@
                     </c:when>
                     
                     <c:otherwise>
-                        <a href="${contextPath}/member/myPage/info}"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
+                        <a href="${contextPath}/member/myPage/info"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
                     </c:otherwise>
                 </c:choose>
             </c:if>

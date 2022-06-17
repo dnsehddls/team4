@@ -547,9 +547,8 @@ public class BoardDAO {
 				detail.setUpdateDate(rs.getString(5));
 				detail.setReadCount(rs.getInt(6));
 				detail.setMemberNickname(rs.getString(7));
-				detail.setProfileImage(rs.getString(8));
-				detail.setMemberNo(rs.getInt(9));
-				detail.setBoardName(rs.getString(10));
+				detail.setMemberNo(rs.getInt(8));
+				detail.setBoardName(rs.getString(9));
 			}
 			
 		}finally {
@@ -625,9 +624,9 @@ public class BoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, detail.getBoardNo());
-			pstmt.setString(2, detail.getBoardTitle());
-			pstmt.setString(3, detail.getBoardContent());
-			pstmt.setInt(4, detail.getMemberNo());
+			pstmt.setInt(2, detail.getMemberNo());
+			pstmt.setString(3, detail.getBoardTitle());
+			pstmt.setString(4, detail.getBoardContent());
 			pstmt.setInt(5, boardCode);
 			
 			result = pstmt.executeUpdate();

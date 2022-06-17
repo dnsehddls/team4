@@ -368,7 +368,7 @@ WHERE RNUM BETWEEN ? AND ?
 	<!-- 게시글 삽입 -->
 	<entry key="insertBoard">
 		INSERT INTO BOARD
-		VALUES(?, ?, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?, ?)
+		VALUES(?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ?, DEFAULT, DEFAULT)
 	</entry>
 	
 	
