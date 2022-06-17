@@ -189,7 +189,6 @@ AND MEMBER_NO = ?
 <entry key="bookmarkCount">
 SELECT COUNT(*) FROM BOOKMARK
 WHERE MEMBER_NO = ?
-AND BOARD_FL = 'N'
 </entry>
 
 
@@ -213,7 +212,7 @@ WHERE RNUM BETWEEN ? AND ?
 <entry key="likeCount">
 SELECT COUNT(*) FROM LIKE_BOARD
 WHERE MEMBER_NO = ?
-AND BOARD_FL = 'N'	
+<!-- AND BOARD_FL = 'N'	 -->
 </entry>
 
 
