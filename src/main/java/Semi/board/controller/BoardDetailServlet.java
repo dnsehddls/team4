@@ -29,6 +29,7 @@ public class BoardDetailServlet extends HttpServlet{
 				List<Reply> rList = new ReplyService().replyList(boardNo);
 				req.setAttribute("rList", rList);
 			}
+			
 			req.setAttribute("boardDetail", boardDetail);
 			req.getRequestDispatcher("/WEB-INF/views/board/boardDetail.jsp").forward(req, resp);
 			

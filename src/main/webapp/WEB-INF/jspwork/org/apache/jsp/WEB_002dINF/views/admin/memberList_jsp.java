@@ -12,7 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class admin_002dreported_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class memberList_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent,
                  org.apache.jasper.runtime.JspSourceImports {
 
@@ -157,7 +157,7 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
       out.write("    <meta charset=\"UTF-8\">\n");
       out.write("    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n");
       out.write("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n");
-      out.write("    <title>신고 게시판</title>\n");
+      out.write("    <title>회원목록 관리</title>\n");
       out.write("\n");
       out.write("    <link rel=\"stylesheet\" href=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${contextPath}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
@@ -166,6 +166,7 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
       out.write("    <link rel=\"stylesheet\" href=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${contextPath}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
       out.write("/resources/css/admin/memberList.css\">\n");
+      out.write("\n");
       out.write("</head>\n");
       out.write("<body>\n");
       out.write("    \n");
@@ -180,10 +181,8 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
         return;
       out.write("\n");
       out.write("\n");
-      out.write("\n");
       out.write("        <section class=\"adminPage-content\">\n");
-      out.write("\n");
-      out.write("\n");
+      out.write("           \n");
       out.write("            ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/WEB-INF/views/admin/admin-sideMenu.jsp", out, false);
       out.write("\n");
@@ -191,25 +190,27 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
       out.write("            <section class=\"memberList\">\n");
       out.write("                <section class=\"member-list\">\n");
       out.write("\n");
-      out.write("                    <h1 class=\"member-name\">신고된 게시글</h1>\n");
+      out.write("                    <h1 class=\"member-name\">회원목록 조회</h1>\n");
       out.write("        \n");
       out.write("                    <div class=\"list-wrapper\">\n");
       out.write("                        <table class=\"list-table\">                   \n");
       out.write("                            <thead>\n");
       out.write("                                <tr>\n");
-      out.write("                                    <th>신고번호</th>\n");
-      out.write("                                    <th>신고내용</th>\n");
-      out.write("                                    <th>신고게시글</th>\n");
-      out.write("                                    <th>신고자</th>\n");
+      out.write("                                    <th>회원번호</th>\n");
+      out.write("                                    <th>이메일</th>\n");
+      out.write("                                    <th>닉네임</th>\n");
+      out.write("                                    <th>가입날짜</th>\n");
+      out.write("                                    <th>탈퇴여부</th>\n");
       out.write("                                </tr>\n");
       out.write("                            </thead>\n");
-      out.write("                            <tbody>\n");
+      out.write("\n");
+      out.write("                            <tbody id=\"memberList\">\n");
       out.write("                                ");
       if (_jspx_meth_c_005fchoose_005f0(_jspx_page_context))
         return;
       out.write("\n");
-      out.write("\n");
       out.write("                            </tbody>\n");
+      out.write("\n");
       out.write("                        </table>\n");
       out.write("                    </div>\n");
       out.write("        \n");
@@ -220,6 +221,7 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
       if (_jspx_meth_c_005fset_005f3(_jspx_page_context))
         return;
       out.write("\n");
+      out.write("                        \n");
       out.write("                        <ul class=\"pagination\">\n");
       out.write("                            <!-- 첫 페이지로 이동 -->\n");
       out.write("                            <li><a href=\"");
@@ -254,20 +256,22 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
       out.write("\">&gt;&gt;</a></li>\n");
       out.write("                        </ul>\n");
       out.write("                    </div>\n");
-      out.write("        \n");
-      out.write("                    <form action=\"reportList\" method=\"get\" id=\"memberSearch\">\n");
-      out.write("                        <select name=\"key\">\n");
-      out.write("                            <option value=\"rNo\">신고번호</option>\n");
-      out.write("                            <option value=\"mNo\">신고 회원번호</option>\n");
-      out.write("                            <option value=\"bNo\">신고 게시글 번호</option>\n");
+      out.write("\n");
+      out.write("                    <form action=\"memberList\" method=\"get\" id=\"memberSearch\">\n");
+      out.write("\n");
+      out.write("                        <select name=\"key\" id=\"search-key\">\n");
+      out.write("                            <option value=\"e\">이메일</option>\n");
+      out.write("                            <option value=\"n\">닉네임</option>\n");
+      out.write("                            <option value=\"id\">아이디</option>\n");
       out.write("                        </select>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("                        <input type=\"text\" name=\"query\" placeholder=\"검색어를 입력해주세요.\">\n");
-      out.write("        \n");
-      out.write("                        <button>검색</button>\n");
+      out.write("                        \n");
+      out.write("                        <input type=\"text\" name=\"query\" id=\"in1\" placeholder=\"검색어를 입력해주세요.\">\n");
+      out.write("    \n");
+      out.write("                        <button id=\"select1\">검색</button>\n");
+      out.write("                        \n");
       out.write("\n");
       out.write("                    </form>\n");
+      out.write("        \n");
       out.write("            </section>\n");
       out.write("\n");
       out.write("        </section>\n");
@@ -276,7 +280,7 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
       out.write("    ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "/WEB-INF/views/common/footer.jsp", out, false);
       out.write("\n");
-      out.write("    \n");
+      out.write("\n");
       out.write("</body>\n");
       out.write("</html>");
     } catch (java.lang.Throwable t) {
@@ -308,10 +312,10 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fset_005f0.setPageContext(_jspx_page_context);
       _jspx_th_c_005fset_005f0.setParent(null);
-      // /WEB-INF/views/admin/admin-reported.jsp(4,0) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-      _jspx_th_c_005fset_005f0.setVar("pagination");
-      // /WEB-INF/views/admin/admin-reported.jsp(4,0) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-      _jspx_th_c_005fset_005f0.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/admin-reported.jsp(4,0) '${map.pagination}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"${map.pagination}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+      // /WEB-INF/views/admin/memberList.jsp(4,0) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      _jspx_th_c_005fset_005f0.setVar("memberList");
+      // /WEB-INF/views/admin/memberList.jsp(4,0) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+      _jspx_th_c_005fset_005f0.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/memberList.jsp(4,0) '${map.memberList}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"${map.memberList}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
       int _jspx_eval_c_005fset_005f0 = _jspx_th_c_005fset_005f0.doStartTag();
       if (_jspx_th_c_005fset_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
         return true;
@@ -334,10 +338,10 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fset_005f1.setPageContext(_jspx_page_context);
       _jspx_th_c_005fset_005f1.setParent(null);
-      // /WEB-INF/views/admin/admin-reported.jsp(5,0) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-      _jspx_th_c_005fset_005f1.setVar("reportList");
-      // /WEB-INF/views/admin/admin-reported.jsp(5,0) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-      _jspx_th_c_005fset_005f1.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/admin-reported.jsp(5,0) '${map.reportList}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"${map.reportList}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+      // /WEB-INF/views/admin/memberList.jsp(5,0) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      _jspx_th_c_005fset_005f1.setVar("pagination");
+      // /WEB-INF/views/admin/memberList.jsp(5,0) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+      _jspx_th_c_005fset_005f1.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/memberList.jsp(5,0) '${map.pagination}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"${map.pagination}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
       int _jspx_eval_c_005fset_005f1 = _jspx_th_c_005fset_005f1.doStartTag();
       if (_jspx_th_c_005fset_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
         return true;
@@ -360,7 +364,7 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fif_005f0.setPageContext(_jspx_page_context);
       _jspx_th_c_005fif_005f0.setParent(null);
-      // /WEB-INF/views/admin/admin-reported.jsp(25,8) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(26,8) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fif_005f0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${!empty param.key}", boolean.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null)).booleanValue());
       int _jspx_eval_c_005fif_005f0 = _jspx_th_c_005fif_005f0.doStartTag();
       if (_jspx_eval_c_005fif_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
@@ -397,10 +401,10 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fset_005f2.setPageContext(_jspx_page_context);
       _jspx_th_c_005fset_005f2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fif_005f0);
-      // /WEB-INF/views/admin/admin-reported.jsp(26,12) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(27,12) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fset_005f2.setVar("sURL");
-      // /WEB-INF/views/admin/admin-reported.jsp(26,12) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-      _jspx_th_c_005fset_005f2.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/admin-reported.jsp(26,12) '&key=${param.key}&query=${param.query}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"&key=${param.key}&query=${param.query}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+      // /WEB-INF/views/admin/memberList.jsp(27,12) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+      _jspx_th_c_005fset_005f2.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/memberList.jsp(27,12) '&key=${param.key}&query=${param.query}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"&key=${param.key}&query=${param.query}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
       int _jspx_eval_c_005fset_005f2 = _jspx_th_c_005fset_005f2.doStartTag();
       if (_jspx_th_c_005fset_005f2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
         return true;
@@ -463,14 +467,14 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fwhen_005f0.setPageContext(_jspx_page_context);
       _jspx_th_c_005fwhen_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fchoose_005f0);
-      // /WEB-INF/views/admin/admin-reported.jsp(52,36) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-      _jspx_th_c_005fwhen_005f0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${empty reportList}", boolean.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null)).booleanValue());
+      // /WEB-INF/views/admin/memberList.jsp(53,36) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      _jspx_th_c_005fwhen_005f0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${empty memberList}", boolean.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null)).booleanValue());
       int _jspx_eval_c_005fwhen_005f0 = _jspx_th_c_005fwhen_005f0.doStartTag();
       if (_jspx_eval_c_005fwhen_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\n");
           out.write("                                        <tr>\n");
-          out.write("                                            <th colspan=\"5\">신고 목록이 존재하지 않습니다</th>\n");
+          out.write("                                            <th colspan=\"5\">회원 목록이 존재하지 않습니다</th>\n");
           out.write("                                        </tr>\n");
           out.write("                                    ");
           int evalDoAfterBody = _jspx_th_c_005fwhen_005f0.doAfterBody();
@@ -534,10 +538,10 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fforEach_005f0.setPageContext(_jspx_page_context);
       _jspx_th_c_005fforEach_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fotherwise_005f0);
-      // /WEB-INF/views/admin/admin-reported.jsp(59,40) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-      _jspx_th_c_005fforEach_005f0.setVar("report");
-      // /WEB-INF/views/admin/admin-reported.jsp(59,40) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-      _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/admin-reported.jsp(59,40) '${reportList}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"${reportList}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+      // /WEB-INF/views/admin/memberList.jsp(60,40) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      _jspx_th_c_005fforEach_005f0.setVar("member");
+      // /WEB-INF/views/admin/memberList.jsp(60,40) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+      _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/memberList.jsp(60,40) '${memberList}'",_jsp_getExpressionFactory().createValueExpression(_jspx_page_context.getELContext(),"${memberList}",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
       int[] _jspx_push_body_count_c_005fforEach_005f0 = new int[] { 0 };
       try {
         int _jspx_eval_c_005fforEach_005f0 = _jspx_th_c_005fforEach_005f0.doStartTag();
@@ -546,19 +550,27 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
             out.write("\n");
             out.write("                                            <tr>\n");
             out.write("                                                <td>");
-            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${report.reportNo}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${member.memberNo}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
             out.write("</td>    \n");
-            out.write("                                                <td>");
-            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${report.reportContent}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
-            out.write("</td> \n");
             out.write("                                                <td>\n");
-            out.write("                                                    <a href=\"#\">");
-            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${report.boardNo}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write("                                                    <a href=\"memberDetail?memberEmail=");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${member.memberEmail}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write("&cp=");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${pagination.currentPage}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write('"');
+            out.write('>');
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${member.memberEmail}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
             out.write("</a>\n");
-            out.write("                                                </td>          \n");
+            out.write("                                                </td>\n");
             out.write("                                                <td>");
-            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${report.memberNo}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
-            out.write("</td>      \n");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${member.memberNickname}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write("</td>            \n");
+            out.write("                                                <td>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${member.registDate}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write("</td>            \n");
+            out.write("                                                <td>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${member.secessionFlag}", java.lang.String.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null));
+            out.write("</td>\n");
             out.write("                                            </tr>\n");
             out.write("                                        ");
             int evalDoAfterBody = _jspx_th_c_005fforEach_005f0.doAfterBody();
@@ -594,10 +606,10 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fset_005f3.setPageContext(_jspx_page_context);
       _jspx_th_c_005fset_005f3.setParent(null);
-      // /WEB-INF/views/admin/admin-reported.jsp(79,24) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(81,24) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fset_005f3.setVar("url");
-      // /WEB-INF/views/admin/admin-reported.jsp(79,24) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-      _jspx_th_c_005fset_005f3.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/admin-reported.jsp(79,24) 'reportList?cp='",_jsp_getExpressionFactory().createValueExpression("reportList?cp=",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+      // /WEB-INF/views/admin/memberList.jsp(81,24) name = value type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+      _jspx_th_c_005fset_005f3.setValue(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/admin/memberList.jsp(81,24) 'memberList?cp='",_jsp_getExpressionFactory().createValueExpression("memberList?cp=",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
       int _jspx_eval_c_005fset_005f3 = _jspx_th_c_005fset_005f3.doStartTag();
       if (_jspx_th_c_005fset_005f3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
         return true;
@@ -620,13 +632,13 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fforEach_005f1.setPageContext(_jspx_page_context);
       _jspx_th_c_005fforEach_005f1.setParent(null);
-      // /WEB-INF/views/admin/admin-reported.jsp(89,28) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(92,28) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fforEach_005f1.setVar("i");
-      // /WEB-INF/views/admin/admin-reported.jsp(89,28) name = begin type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(92,28) name = begin type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fforEach_005f1.setBegin(((java.lang.Integer) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${pagination.startPage}", int.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null)).intValue());
-      // /WEB-INF/views/admin/admin-reported.jsp(89,28) name = end type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(92,28) name = end type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fforEach_005f1.setEnd(((java.lang.Integer) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${pagination.endPage}", int.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null)).intValue());
-      // /WEB-INF/views/admin/admin-reported.jsp(89,28) name = step type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(92,28) name = step type = int reqTime = true required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fforEach_005f1.setStep(1);
       int[] _jspx_push_body_count_c_005fforEach_005f1 = new int[] { 0 };
       try {
@@ -714,7 +726,7 @@ public final class admin_002dreported_jsp extends org.apache.jasper.runtime.Http
     try {
       _jspx_th_c_005fwhen_005f1.setPageContext(_jspx_page_context);
       _jspx_th_c_005fwhen_005f1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fchoose_005f1);
-      // /WEB-INF/views/admin/admin-reported.jsp(92,36) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+      // /WEB-INF/views/admin/memberList.jsp(95,36) name = test type = boolean reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
       _jspx_th_c_005fwhen_005f1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${i == pagination.currentPage}", boolean.class, (javax.servlet.jsp.PageContext)_jspx_page_context, null)).booleanValue());
       int _jspx_eval_c_005fwhen_005f1 = _jspx_th_c_005fwhen_005f1.doStartTag();
       if (_jspx_eval_c_005fwhen_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {

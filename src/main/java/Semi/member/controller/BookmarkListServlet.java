@@ -30,6 +30,10 @@ public class BookmarkListServlet extends HttpServlet{
 				cp = Integer.parseInt(req.getParameter("cp"));
 			}
 			
+			String type = req.getParameter("type");
+			System.out.println(cp);
+			System.out.println(type);
+			
 			HttpSession session = req.getSession();
 			
 			Member loginMember = (Member)(session.getAttribute("loginMember"));
