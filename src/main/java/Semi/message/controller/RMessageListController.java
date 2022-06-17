@@ -37,10 +37,16 @@ public class RMessageListController extends HttpServlet{
 			int myNo = loginMember.getMemberNo();
 			
 			List<Message> mList = service.MessageList(myNo, type);
-			System.out.println("sodyd : " + mList.get(0).getMessageContent());
-			System.out.println(mList.size());
-			new Gson().toJson(mList, resp.getWriter());
+			
+//			System.out.println("쪽지 내용 확인 : " + mList.get(0).getMessageContent());
+//			System.out.println(mList.size());
 			req.setAttribute("mList", mList);
+			
+			String path = "/WEB-INF/views/message/messageList.jsp";
+			
+			RequestDispatcher dispatcher = req.getRequestDispatcher(path);
+			
+			dispatcher.forward(req, resp);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

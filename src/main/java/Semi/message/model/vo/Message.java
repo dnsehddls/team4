@@ -19,5 +19,6 @@ public class Message {
 	private int receiveNo;
 	private String receiveDate;
  	private char receiveDelete;
-	
+	private String memberNickname;
+
 }
