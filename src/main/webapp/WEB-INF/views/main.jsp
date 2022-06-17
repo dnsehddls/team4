@@ -177,7 +177,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <div>
-                            	<a href="#">로그아웃</a>
+                                <a href="/team4/member/logout" id="logout-btn">로그아웃</a>
                             </div>
                         </div>
                     </c:if>

@@ -26,7 +26,7 @@
                     <li><a href="like">좋아요 관리</a></li>
                     <li><a href="bookmark">북마크 관리</a></li>
                     <li><a href="secession">회원 탈퇴</a></li>
-                    <li><a href="#">쪽지</a></li>
+                    <li><a href="${contextPath}/sendView">쪽지</a></li>
                 </ul>
             </section>
         
