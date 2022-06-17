@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/messageDetail")
+import Semi.message.model.service.MessageService;
+import Semi.message.model.vo.Message;
+
+@WebServlet("/messageContent")
 public class MessageDetailController extends HttpServlet {
 	
 	@Override
@@ -17,7 +20,18 @@ public class MessageDetailController extends HttpServlet {
 		
 		try {
 			
-			// 화면만 띄어서 테스트
+			String t = req.getParameter("t"); // r/s
+			System.out.println("tt : " + t);
+			
+			int messageNo = Integer.parseInt(req.getParameter("messageNo"));
+			
+			MessageService service = new MessageService();
+			
+			Message mContent = service.MessageDetail(messageNo);
+			
+			req.setAttribute("mContent", mContent);
+			req.setAttribute("t", t);
+			
 			String path = "/WEB-INF/views/message/messageContent.jsp";
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher(path);
