@@ -20,7 +20,11 @@ function goPopup(){
 
 function jusoCallBack(roadFullAddr){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+<<<<<<< HEAD
+		document.querySelectorAll("#address")
+=======
 		document.getElementById("")
+>>>>>>> origin/BSH
 		document.form.roadFullAddr.value = roadFullAddr;
 		
 }

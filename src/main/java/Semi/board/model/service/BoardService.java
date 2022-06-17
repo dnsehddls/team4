@@ -16,6 +16,7 @@ import Semi.common.Util;
 import Semi.board.model.vo.MyBoard;
 import Semi.board.model.vo.Pagination;
 import Semi.board.model.vo.ShowWindowInfo;
+import Semi.common.Util;
 import Semi.member.model.vo.Member;
 
 public class BoardService {
@@ -29,13 +30,13 @@ public class BoardService {
 		return showList ;
 	}
 
-
 	public Board boardDetail(int boardNo) throws Exception{
 		Connection conn = getConnection();
 		Board result = dao.boardDetail(conn,boardNo);
 		close(conn);
 		return result;
 }
+	
 	public Map<String, Object> selectBoardList(int type, int cp) throws Exception{
 
 		Connection conn = getConnection();
@@ -157,39 +158,8 @@ public class BoardService {
 		return map;
 	}
 
-	/**
-	 * �궡 湲� 紐⑸줉 議고쉶 Service
-	 * @param memberNo
-	 * @return clist
-	 * @throws Exception
-	 */
-	/*
-	 * public List<MyBoard> myContent(int memberNo) throws Exception{
-	 * 
-	 * Connection conn = getConnection();
-	 * 
-	 * // Pagination pagination = new Pagination(currentPage);
-	 * 
-	 * List<MyBoard> clist = dao.myContent(conn, memberNo);
-	 * 
-	 * close(conn);
-	 * 
-	 * return clist; }
-	 */
 
-	public BoardDetail selectBoardDetail(int boardNo) throws Exception{
-		
-		Connection conn = getConnection();
-		
-
-		BoardDetail detail = dao.selectBoardDetail(conn, boardNo);
-
-	 * 좋아요 목록 조회
-	 * @param cp
-	 * @param loginMember
-	 * @return map
-	 * @throws Exception
-	 */
+	
 	public Map<String, Object> likeList(int cp, Member loginMember) throws Exception{
 		Connection conn = getConnection();
 
@@ -207,18 +177,8 @@ public class BoardService {
 
 		close(conn);
 		
-		if(detail != null) { 
-	
-			List<BoardImage> imageList = dao.selectImageList(conn, boardNo);
-			
-			
-			detail.setImageList(imageList);
-			
-		}
-
-		close(conn);
 		
-		return detail;
+		return map;
 	}
 	
 	
@@ -266,38 +226,63 @@ public class BoardService {
 	}
 	
 	
+	public BoardDetail selectBoardDetail(int boardNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		// 1) 게시글(BOARD 테이블) 관련 내용만 조회
+		BoardDetail detail = dao.selectBoardDetail(conn, boardNo);
+		
+		
+		if(detail != null) { // 게시글 상세 조회 결과가 있을 경우
+			
+			// 2) 게시글에 첨부된 이미지(BOARD_IMG 테이블) 조회
+			List<BoardImage> imageList = dao.selectImageList(conn, boardNo);
+			
+			// -> 조회된 imageList를 BoardDetail 객체에 세팅
+			
+			detail.setImageList(imageList);
+			
+		}
+
+		close(conn);
+		
+		return detail;
+	}
+	
+	
+	
 	public int updateBoard(BoardDetail detail, List<BoardImage> imageList, String deleteList) throws Exception {
 		
 		Connection conn = getConnection();
-
+		
 		detail.setBoardTitle( Util.XSSHandling( detail.getBoardTitle() ) );
 		detail.setBoardContent( Util.XSSHandling( detail.getBoardContent() ) );
 		
 		detail.setBoardContent( Util.newLineHandling( detail.getBoardContent() ) );
-
+		
 		int result = dao.updateBoard(conn, detail);
 		
-		if(result > 0) {
+		if(result > 0) { 
 			
 			for( BoardImage img : imageList ) {
 				
-				img.setBoardNo(detail.getBoardNo());
-				
+				img.setBoardNo(detail.getBoardNo()); 
 				result = dao.updateBoardImage(conn, img);
-
+	
 				if(result == 0) {
 					result = dao.insertBoardImage(conn, img);
 				}
 				
 			} 
 			
-			
-			if( !deleteList.equals("") ) { 
+
+			if( !deleteList.equals("") ) {
 				result = dao.deleteBoardImage(conn, deleteList, detail.getBoardNo());
 			}
 			
 		
-		} 
+		}
 		
 		
 		if(result > 0)	commit(conn);
@@ -309,7 +294,18 @@ public class BoardService {
 		return result;
 	}
 
-		return map;
+
+	public int deleteBoard(int boardNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.deleteBoard(conn, boardNo);
+		
+		if(result > 0)	commit(conn);
+		else			rollback(conn);
+		
+		close(conn);
+		return result;
 	}
 
 

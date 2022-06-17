@@ -27,9 +27,11 @@ public class LoginServlet extends HttpServlet{
 			MemberService service = new MemberService();
 			Member loginMember = service.login(memberCheck);
 			HttpSession session = req.getSession();
-			
-			session.setAttribute("loginMember", loginMember);
-			
+			if(loginMember != null) {
+				session.setAttribute("loginMember", loginMember);
+			} else {
+				session.setAttribute("message", "해당 정보가 일치하지 않습니다.");
+			}
 			resp.sendRedirect(req.getContextPath());
 			
 			
