@@ -10,7 +10,7 @@
     <main>
         <div class="board-detail">
 
-            <form action="write" enctype="multipart/form-data" method="POST" class="board-Write" onsubmit="return writeValidate()">
+            <form action="write" method="POST" class="board-Write" onsubmit="return writeValidate()">
                 
                 <div class="title-box">
                     <h1 class="board-title">게시글 등록</h1>
