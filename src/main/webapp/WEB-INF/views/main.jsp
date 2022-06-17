@@ -7,6 +7,13 @@
 <c:set var="exercise" value="${map.exercise}"></c:set>
 <c:set var="free" value="${map.free}"></c:set>
 <c:set var="met" value="${map.met}"></c:set>
+<style>
+    main li{
+    width: 400px;
+    margin: 14px 0;
+    line-height: 24px;
+}
+</style>
 
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>

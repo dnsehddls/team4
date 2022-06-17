@@ -555,8 +555,8 @@ public class AdminDAO {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, changeNo);
-			
+			pstmt.setInt(1, changeNo);	
+						
 			result = pstmt.executeUpdate();
 			
 		}finally {

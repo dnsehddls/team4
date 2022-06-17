@@ -19,7 +19,7 @@ public class BoardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
-			int type =   Integer.parseInt( req.getParameter("type") );
+			int type = Integer.parseInt( req.getParameter("type") );
 	
 			int cp = 1;
 			
@@ -35,7 +35,7 @@ public class BoardListServlet extends HttpServlet {
 				
 				map = service.selectBoardList(type, cp);
 				
-			}else { // °Ë»ö ¸ñ·Ï Á¶È¸
+			}else { // ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 				String key = req.getParameter("key");
 				String query = req.getParameter("query");
 				
