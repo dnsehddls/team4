@@ -27,7 +27,11 @@ public class MessageDetailController extends HttpServlet {
 			
 			MessageService service = new MessageService();
 			
-			Message mContent = service.MessageDetail(messageNo);
+			Message mContent = service.MessageDetail(messageNo, t);
+			
+			if(mContent.getReceiveDate() == null) {
+				service.changeDate(messageNo);
+			}
 			
 			req.setAttribute("mContent", mContent);
 			req.setAttribute("t", t);

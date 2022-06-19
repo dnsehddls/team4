@@ -1,7 +1,7 @@
 console.log("load test");
 
 const deleteBtn = document.getElementById("delete-btn"); 
-const replyBtn = document.getElementById("reply-btn");
+const replyBtn = document.getElementsByClassName("reply-btn")[0];
 const checkAll = document.getElementById("checkAll");
 const checkbox = document.getElementsByClassName("checkbox");
 const checkData = document.getElementsByName("data");
@@ -13,6 +13,15 @@ const datas = document.getElementsByName("data");
         checkbox.checked = checkAll.checked;
     })
 }
+
+
+deleteBtn.addEventListener("click", function(){
+
+    if(checkbox.checked){
+        alert("정말 삭제 하겠습니까?");
+    }
+
+});
 
 
 

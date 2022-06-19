@@ -10,7 +10,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>받은 쪽지함</title>
+   <title>쪽지함</title>
    <link rel="stylesheet" href="">
    <link rel="stylesheet" href="${contextPath}/resources/css/message/side-menu.css">
    <link rel="stylesheet" href="${contextPath}/resources/css/message/messageList-style.css">
@@ -47,21 +47,21 @@
                                 <c:otherwise>
                                     <c:if test="${param.t == 'r'}">
                                         <div class="top-buttons">
-                                            <button id="delete-btn">삭제</button>
+                                            <button class="delete-btn">삭제</button>
                                             <button id="reply-btn">답장</button>
                                         </div>
                                     </c:if>
                             
                                     <c:if test="${param.t == 's'}">
                                         <div class="top-buttons">
-                                            <button id="delete-btn">삭제</button>
+                                            <button class="delete-btn">삭제</button>
                                         </div>
                                     </c:if>
                                 
                             
 
                                     <tr>
-                                        <td>
+                                        <td id="td1">
                                             <input type="checkbox" name="data" onclick="checkAll1(this)">
                                         </td>
                                         <c:if test="${param.t == 'r'}">
@@ -77,21 +77,31 @@
                                             <th class="s">확인</th>
                                         </c:if>
                                     </tr>
+                                    
                                     <c:forEach var="m" items="${mList}">
                                         <tr>
                                             <td>
                                                 <input type="checkbox" class="checkbox" name="data" value="${m.memberNickname}">
                                             </td>
                                            
-                                                <td>${m.memberNickname}</td>
+                                            <td>${m.memberNickname}</td>
                                             
                                         
-                                            <td><a href="${contextPath}/messageContent?messageNo=${m.messageNo}&t=${param.t}" class="tda">${m.messageContent}</a></td>
+                                            <td><a href="${contextPath}/messageContent?messageNo=${m.messageNo}&t=${param.t}" class="tda" maxlength="40">${m.messageContent}</a></td>
                                             
                                             <td>${m.messageDate}</td>
 
                                             <c:if test="${param.t == 's'}">
-                                                <td>${m.receiveDate}</td>
+                                                <c:choose>
+                                                    <c:when test = "${empty m.receiveDate}">
+                                                        <td>
+                                                            읽지않음
+                                                        </td>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <td>${m.receiveDate}</td>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </c:if>
                                         </tr>
                                     </c:forEach>

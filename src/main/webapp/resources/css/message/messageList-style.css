@@ -48,9 +48,9 @@
         background-color: #FEC85C;
     }
     
-    #td1{
+    /* #td1{
         width: 10px;
-    }
+    } */
 
     td>input{
         width: 30px;
@@ -69,10 +69,10 @@
         font-size: 20px;
     }
     
-    #td2{
+    /* #td2{
         width: 20%;
         text-align: center;
-    }
+    } */
     
     .tda{
         border: none;
@@ -85,21 +85,27 @@
     
         /* width: 58%;
     } */
+/* 
 
-   
-    
+   .s:nth-child(2){
+    width: 20%;
+   }    
+
+   /* .s:nth-child(3){
+    width: 40%;
+   } */
     .s:nth-child(4){
-        width: 11%;
+        width: 10%;
     }
     .s:nth-child(5){
-        width: 11%;
+        width: 10%;
     }
-    
+     */
     .s{
         font-size: 20px;
      }
      
-     td:nth-child(4){
+     /* td:nth-child(4){
         font-size: 12%;
         text-align: center;
      }
@@ -109,7 +115,7 @@
         font-size: 12%;
         text-align: center;
         border-left: 1px solid #ddd;
-     }
+     } */
      
      td>a{
         display: flex;

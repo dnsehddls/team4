@@ -88,15 +88,41 @@ public class MessageService {
 	 * @return m
 	 * @throws Exception
 	 */
-	public Message MessageDetail(int messageNo) throws Exception {
+	public Message MessageDetail(int messageNo, String t) throws Exception {
 		
 		Connection conn = getConnection();
 		
-		Message mContent = dao.MessageDetail(conn, messageNo);
+		Message mContent = dao.MessageDetail(conn, messageNo, t);
 		
 		close(conn);
 		
 		return mContent;
+	}
+
+
+
+	/** 수신 확인 변경
+	 * @param messageNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changeDate(int messageNo) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.changeDate(conn, messageNo);
+		
+		if(result > 0) {
+			commit(conn);
+	
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		
+		return result;
 	}
 	
 	
