@@ -76,7 +76,6 @@
                     </c:otherwise>
                 </c:choose> --%>
                 
-            </c:if>
             <c:if test="${empty loginMember}">
                 <a href="#"><img src="${contextPath}/resources/images/pngwing.com.png" alt="" id="people"></a>
             </c:if>
