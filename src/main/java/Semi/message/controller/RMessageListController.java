@@ -28,8 +28,6 @@ public class RMessageListController extends HttpServlet{
 			HttpSession session = req.getSession(); // 세션 얻어오기
 
 			Member loginMember = (Member)session.getAttribute("loginMember");
-
-			System.out.println(type);
 			
 			MessageService service = new MessageService();
 			

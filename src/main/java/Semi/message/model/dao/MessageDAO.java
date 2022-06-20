@@ -153,7 +153,12 @@ public class MessageDAO {
 				m.setMessageNo(rs.getInt(1));
 				m.setSendNo(rs.getInt(2));
 				m.setMessageDate(rs.getString(3));
-				m.setMessageContent(rs.getString(4));
+				System.out.println("len : " + rs.getString(4).length());
+				if(rs.getString(4).length() > 20) {
+					m.setMessageContent(rs.getString(4).substring(0, 19));
+				} else {
+					m.setMessageContent(rs.getString(4));
+				}
 				m.setSendDelete(rs.getString(5).charAt(0));
 				m.setReceiveNo(rs.getInt(6));
 				m.setReceiveDate(rs.getString(7));
@@ -169,7 +174,7 @@ public class MessageDAO {
 //				m.setReceiveDate(rs.getString("RECEIVE_DATE"));
 //				m.setReceiveDelete(rs.getString("RECEIVE_DEL_ST");
 
-				System.out.println("rs.getint : " + rs.getInt(1));
+				System.out.println("rs.getint : " + rs.getString(7));
 				
 				mList.add(m);
 			}
@@ -188,17 +193,23 @@ public class MessageDAO {
 	 * @return mContent
 	 * @throws Exception
 	 */
-	public Message MessageDetail(Connection conn, int messageNo) throws Exception {
+	public Message MessageDetail(Connection conn, int messageNo, String t) throws Exception {
 
 		Message mContent = new Message();
 		
 		try {
 			
+			int convType = 0;
+			if(t.equals("s")) convType = 1;
+			else convType = 2;
+			
 			String sql = prop.getProperty("messageDetail");
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, messageNo);
+			pstmt.setInt(1, convType);
+			pstmt.setInt(2, convType);
+			pstmt.setInt(3, messageNo);
 			
 			rs = pstmt.executeQuery();
 			
@@ -211,11 +222,12 @@ public class MessageDAO {
 //				m.setSendDelete(rs.getString("SEND_DEL_ST").charAt(0));
 //				m.setReceiveDelete(rs.getString("RECEIVE_DEL_ST").charAt(0));
 				
-				mContent.setMessageDate(rs.getString("MS_DT"));
+				mContent.setMessageDate(rs.getString("MESSAGE_DT"));
 				mContent.setMessageContent(rs.getString("MS_CONTENT"));
 				mContent.setReceiveDate(rs.getString("RECEIVE_DATE"));
 				mContent.setMemberNickname(rs.getString("MEMBER_NICK"));
-				System.out.println(mContent.getMessageContent());
+				
+				System.out.println(mContent.getReceiveDate());
 			}
 
 		} finally {
@@ -224,6 +236,36 @@ public class MessageDAO {
 		}
 		return mContent;
 		}
+
+
+	/** 수신확인 변경
+	 * @param conn
+	 * @param messageNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int changeDate(Connection conn, int messageNo) throws Exception {
+		
+		int result = 0;
+		
+		 try {
+			String sql = prop.getProperty("changeDate");
+				
+			pstmt = conn.prepareStatement(sql);
+			
+	        pstmt.setInt(1, messageNo);
+	
+			result = pstmt.executeUpdate();
+
+    	}finally {
+	    		
+	 	  	close(pstmt);
+		   
+    	}
+			
+		
+		return result;
+	}
 		
 	
 

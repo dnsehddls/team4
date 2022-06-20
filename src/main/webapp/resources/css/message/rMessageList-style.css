@@ -76,6 +76,10 @@ td>input{
     border: none;
 }
 
+s:nth-child(1){
+    width: 10%;
+}
+
 .r:nth-child(3){
     width: 68%;
 }

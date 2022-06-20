@@ -1,8 +1,10 @@
 console.log("load test");
 
 const deleteBtn = document.getElementById("delete-btn"); 
-const replyBtn = document.getElementById("reply-btn");
+const replyBtn = document.getElementsByClassName("reply-btn")[0];
 const checkAll = document.getElementById("checkAll");
+const checkbox = document.getElementsByClassName("checkbox");
+const checkData = document.getElementsByName("data");
 
 // 체크박스 - 전체 체크 / 해제
 function checkAll1(checkAll){ // 전체 체크 후 답장 클릭 시 ? -> 안되게? or 닉네임들 쪽지보내기 페이지로 전달??
@@ -11,6 +13,15 @@ const datas = document.getElementsByName("data");
         checkbox.checked = checkAll.checked;
     })
 }
+
+
+deleteBtn.addEventListener("click", function(){
+
+    if(checkbox.checked){
+        alert("정말 삭제 하겠습니까?");
+    }
+
+});
 
 
 
@@ -158,4 +169,63 @@ function goPage(i){
 
     location.href="/article/articleList.do?num="+i; // 선택한 페이지로
 
+}
+
+
+// 체크박스 체크 후 쪽지 삭제
+(function(){
+
+    deleteBtn.addEventListener("click", function(){
+    
+    for(let messageNo of data.value){
+        if(messageNo.value.checked){
+            
+            
+        }
     }
+
+    $.ajax({
+        url : contextPath + "/messageDelete",  // 필수 작성 속성
+        data : { "messageNo" : m.messageNo }, // 서버로 전달할 값(파라미터)
+        type : "GET", // 데이터 전달 방식(기본값 GET)
+    
+        success : function(res){ // 비동기 통신 성공 시(에러 발생 X)
+
+            // 매개변수 res : Servlet에서 응답으로 출력된 데이터가 저장
+
+        var nn = JSON.parse(res);
+    
+        m.messageNo.value = nn.receiveNo;
+        }
+    })
+
+
+
+        let url = "delete"; // 상대경로 형식으로 작성
+
+        // 주소에 작성된 쿼리스트링에서 필요한 파라미터만 얻어와서 사용
+
+        // 1) 쿼리스트링에 존재하는 파라미터 모두 얻어오기
+        const params = new URL(location.href).searchParams  ;
+
+        // 2) 원하는 파라미터만 얻어와 변수에 저장
+        const no = "?no=" + params.get("no");   // ?no=1508
+
+        const type = "&type=" + params.get("type"); // &type=1
+
+        // url에 쿼리스트링 추가
+        url += no + type; // delete?no=1508&type=1
+
+        if( confirm("정말로 삭제 하시겠습니까?") ){
+            location.href = url; // get방식으로 url에 요청
+        }
+    });
+})();
+
+
+
+
+// // 쪽지 내용 조회
+// function(){
+//     const 
+// }
