@@ -166,7 +166,6 @@ public class BoardService {
 		int listCount = dao.likeCount(conn, loginMember);
 
 		Pagination pagination = new Pagination(cp, listCount);
-
 		
 		List<MyBoard> likeList = dao.likeList(conn, pagination, loginMember);
 
@@ -176,7 +175,6 @@ public class BoardService {
 		map.put("likeList", likeList);
 
 		close(conn);
-		
 		
 		return map;
 	}
